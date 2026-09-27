@@ -14,7 +14,6 @@ data/raw/
 data/chroma/
 data/embeddings/
 data/corpus.jsonl
-data/chunks.jsonl
 data/chunk_stats.json
 data/quarantine.jsonl
 data/ingestion_log.jsonl
