@@ -1,0 +1,66 @@
+{
+  "_updated_at": "2026-09-27T06:57:31.922Z",
+  "amfi-mutual-fund-basics": {
+    "bytes": 226765,
+    "fetched_at": "2026-09-27T06:57:29.912Z",
+    "page_type": "amfi_page",
+    "publisher": "AMFI",
+    "sha256": "89fd00f348b56824c863b28c94a3ab4c1d4973db07ea04a5abe13fd63bab5b9e",
+    "url": "https://www.amfiindia.com/mutual-fund",
+    "visible_chars": 3973
+  },
+  "groww-help-statement-guides": {
+    "bytes": 116784,
+    "fetched_at": "2026-09-27T06:57:31.920Z",
+    "page_type": "guide_page",
+    "publisher": "Groww",
+    "sha256": "80cec95f46ac1204430c4d3eb69d6c3269039ba403565c36a053bf01aae08ce4",
+    "url": "https://groww.in/help",
+    "visible_chars": 7092
+  },
+  "hdfc-balanced-advantage-fund-direct-growth": {
+    "bytes": 815645,
+    "fetched_at": "2026-09-27T06:57:27.901Z",
+    "page_type": "scheme_page",
+    "publisher": "Groww",
+    "sha256": "a75393484800f7f2609e0425e53d258ad9fe65794520352906be2cb738718324",
+    "url": "https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
+    "visible_chars": 43873
+  },
+  "hdfc-elss-tax-saver-fund-direct-plan-growth": {
+    "bytes": 452551,
+    "fetched_at": "2026-09-27T06:57:23.846Z",
+    "page_type": "scheme_page",
+    "publisher": "Groww",
+    "sha256": "ace5d8e5226034c10283d7ea2aef3991331a6abf58f1ac11970bc263ff75eeb5",
+    "url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+    "visible_chars": 18100
+  },
+  "hdfc-equity-fund-direct-growth": {
+    "bytes": 494209,
+    "fetched_at": "2026-09-27T06:57:21.827Z",
+    "page_type": "scheme_page",
+    "publisher": "Groww",
+    "sha256": "78615f7c8af7af40be1971b9907873f6b0f87d90238302493eb825bbefacd66c",
+    "url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+    "visible_chars": 19771
+  },
+  "hdfc-large-cap-fund-direct-growth": {
+    "bytes": 453890,
+    "fetched_at": "2026-09-27T06:57:19.809Z",
+    "page_type": "scheme_page",
+    "publisher": "Groww",
+    "sha256": "f8b8fa3f539695c746684d086343f72146b7ccc65e70ef4816fb68724bd837be",
+    "url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+    "visible_chars": 17907
+  },
+  "hdfc-small-cap-fund-direct-growth": {
+    "bytes": 496884,
+    "fetched_at": "2026-09-27T06:57:25.868Z",
+    "page_type": "scheme_page",
+    "publisher": "Groww",
+    "sha256": "457091c7ed86b790c81e70a85fae9b911af1d49eeefbcbcba07496a4396941e2",
+    "url": "https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
+    "visible_chars": 20065
+  }
+}

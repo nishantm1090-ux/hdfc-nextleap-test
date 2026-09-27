@@ -1,0 +1,460 @@
+# config/app.yaml
+# ---------------------------------------------------------------------------
+# Every tunable number in the pipeline. Implemented in phases 1-4.
+# Values trace directly to PRD.md S6 / S6.1 / S7 and ADR-001 (S20).
+# ---------------------------------------------------------------------------
+
+project:
+  name: "HDFC Mutual Fund FAQ Assistant"
+  amc: "HDFC Asset Management Company"
+  plan_scope: "Direct Growth"
+  disclaimer_path: "docs/DISCLAIMER.md"
+
+paths:
+  data_dir: "data"
+  raw_dir: "data/raw"
+  corpus_file: "data/corpus.jsonl"
+  chunks_file: "data/chunks.jsonl"
+  chunk_stats_file: "data/chunk_stats.json"
+  embeddings_dir: "data/embeddings"
+  embed_stats_file: "data/embed_stats.json"
+  embed_index_file: "data/embed_index.jsonl"
+  chroma_dir: "data/chroma"
+  chroma_stats_file: "data/chroma_stats.json"
+  quarantine_file: "data/quarantine.jsonl"
+  ingestion_log: "data/ingestion_log.jsonl"
+  snapshot_file: "data/source_snapshot.json"
+
+# --- STAGE 2 : CHUNKING (ADR-001, PRD S6) --------------------------------
+chunking:
+  strategy: "structure_first_hybrid"   # recursive | semantic | structure_first_hybrid
+  prose_target_tokens: 1000
+  prose_max_tokens: 1100
+  prose_min_tokens: 40
+  prose_overlap_tokens: 135
+  fact_max_tokens: 120                 # one fact + its label, hard cap
+  # Below this a chunk is chrome, not retrievable text ("Exit load", "All").
+  min_chunk_tokens: 4
+  # A label with no value ("Exit load") is a badge, not an answerable fact.
+  min_fact_tokens: 4
+  # Corpus quality gate: a page with zero fact chunks AND nodes averaging under
+  # this many characters is a JS shell / nav menu and is not indexed.
+  min_mean_node_chars: 80
+  # Semantic merge pass: only merges UNDERSIZED adjacent prose chunks.
+  semantic_merge:
+    enabled: true
+    cosine_threshold: 0.62
+    max_merge_tokens: 1100
+  # Atomic fact extraction: which tables/lists become one-fact-per-chunk.
+  fact_keys:                           # canonical keys we care about (PRD FR-7)
+    - expense_ratio
+    - exit_load
+    - minimum_sip
+    - minimum_investment
+    - lock_in_period
+    - riskometer_level
+    - benchmark
+    - fund_objective
+    - fund_category
+    - aum
+    - nav
+    - statement_download
+  # Boilerplate selectors removed BEFORE chunking (PRD FR-1.3)
+  strip_selectors:
+    - "nav"
+    - "header"
+    - "footer"
+    - "aside"
+    - "script"
+    - "style"
+    - "noscript"
+    - "[role='navigation']"
+    - "[role='banner']"
+    - "[role='contentinfo']"
+    - ".cookie"
+    - ".cookie-banner"
+    - ".advertisement"
+    - ".ad-slot"
+    - ".breadcrumb"
+    - ".breadcrumbs"
+    - ".related-funds"
+    - ".sidebar"
+    - ".app-store-badge"
+    - "#app-store-badge"
+
+  # High-noise widgets dropped wholesale. On a Groww scheme page these three are
+  # ~1,700 nodes of pure retrieval noise (stock names, cross-scheme comparison
+  # rows, manager bios) and carry no scheme fact we answer with. They are
+  # stripped by class-substring selectors in ingest/clean.py
+  # (EXTRA_STRIP_SELECTORS) rather than by heading proximity - the fundDetails
+  # block's nearest preceding heading is only the page h1, so heading-based
+  # skipping would wrongly discard the expense-ratio and SIP facts.
+  #   verified counts: 1826 nodes before -> 257 after
+  #
+  # <table> rows are also excluded by default. On these pages every <table> is
+  # either a returns table (which the brief forbids us to report) or a holdings
+  # table. Every fact we actually answer with lives in a div-based label/value
+  # block or in the JSON-LD FAQPage block. Flip to true only if a real fact
+  # is ever lost.
+  include_table_rows: false
+
+  # Short "badge"/chip leaves that state a fact outright, e.g. "ELSS - 3Y
+  # Lock-in". These are below the prose floor but are exactly what a user asks
+  # about, so they are promoted to fact nodes.
+  fact_badge_max_chars: 40
+
+# --- STAGE 3 : EMBEDDING (PRD FR-3) ---------------------------------------
+embedding:
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"
+  dimension: 384
+  pooling: "mean"
+  normalize: true
+  batch_size: 64
+  # MiniLM degrades past ~256 tokens, so we embed a metadata prefix + the
+  # LEAD of the chunk rather than the whole thing (PRD S6 "Budget rationale").
+  # The prefix is what stops "Expense ratio: 1.03%" from embedding almost
+  # identically to the other four schemes' expense-ratio rows. `{aliases}` adds
+  # the fund's other public names (HDFC Flexi Cap vs HDFC Equity Fund), so a
+  # question using either name reaches the same chunks.
+  embed_prefix_template: "{scheme_name}{aliases} ({category}) - {section_heading}: "
+  embed_lead_tokens: 200
+  # The cache key is a hash of the EMBEDDED text (prefix + lead), NOT the raw
+  # chunk's content_hash. Raw text collides across schemes - "Min. for SIP: 100"
+  # is byte-identical in four of the five - and caching on it would hand one
+  # scheme another scheme's vector.
+  cache_by: "embed_hash"
+
+# --- STAGE 4 : VECTOR STORE (PRD FR-4) ------------------------------------
+vector_store:
+  backend: "chromadb"
+  # The collection NAME (not a path). It lives here rather than under paths:
+  # path_for() resolves a paths.* value against the project root, which would
+  # turn "hdfc_mf_faq" into a directory name.
+  collection_name: "hdfc_mf_faq"
+  metadata: {"hdim": 384, "space": "cosine"}
+
+# --- GUARDRAILS (PRD FR-7) -------------------------------------------------
+guardrails:
+  pii:
+    enabled: true
+    log_raw_text: false                 # NEVER store PII, only a hash
+  advice_keywords:
+    - "should i"
+    - "should i buy"
+    - "should i sell"
+    - "which is better"
+    - "which one is better"
+    - "best scheme"
+    - "best fund"
+    - "worth buying"
+    - "worth investing"
+    - "is it safe"
+    - "safe to invest"
+    - "suggest"
+    - "recommend"
+    - "advise"
+    - "allocate"
+    - "allocation"
+    - "my portfolio"
+    - "good investment"
+    - "can i afford"
+    # Advice-seeking phrasings that retrieval alone cannot catch.
+    # "stock market tip for tomorrow" matches 2 of its 4 content words against a
+    # P/E-and-P/B chunk, so it clears the 0.5 coverage gate. The guardrail runs
+    # BEFORE retrieval, which is the only layer that can refuse it.
+    - "tip"
+    - "tips"
+    - "stock tip"
+    - "market tip"
+    - "any advice"
+    - "opinion on"
+    - "what do you think about"
+    - "tell me what to"
+  # Shapes a keyword list cannot express.
+  #
+  # "which is better" is in advice_keywords, but a user writes "Which fund is
+  # better, HDFC Large Cap or HDFC Small Cap?" - five words between the two
+  # halves - and the phrase check misses it. The words are all there; only the
+  # SHAPE identifies it. A pattern is the only thing that can match that.
+  #
+  # Each is anchored so it cannot fire on a factual question:
+  #   "which" must be followed by something and then "better" (a superlative
+  #   comparison), and "compare"/"vs" must be a request, not a noun.
+  advice_patterns:
+    - "\\bwhich\\b[^?]{0,60}\\bbetter\\b"
+    - "\\bcompare\\b|\\bcomparison\\b|\\bhow do they compare\\b"
+    - "\\bwhich\\s+(?:one|scheme|fund|of them)\\b"
+    - "\\bworth it\\b|\\bis it worth\\b"
+    - "\\bmost suitable\\b|\\bshould i choose\\b|\\bwhich should i\\b"
+    - "\\bpros and cons\\b|\\bpros or cons\\b"
+    - "\\bwhich has a lower\\b|\\bwhich has a higher\\b"
+    # Risk judgements. "Is HDFC ELSS a safe scheme?" is a request for a
+    # verdict on risk, which is advice, and "safe" appears 0 times in all 121
+    # chunks - so retrieval finds nothing and used to fall through to
+    # out_of_corpus, which reads as "I don't know" rather than "I won't say".
+    - "\\bis\\b[^?]{0,40}\\b(?:safe|risky|riskier|safer)\\b"
+    - "\\bhow risky\\b|\\brisk level of\\b|\\bsafe (?:to|for)\\b|\\btoo risky\\b"
+    - "\\bsafety\\b"
+    # Market timing. "Is now a good time to invest in HDFC Balanced
+    # Advantage?" is the single most common way a real user asks for advice
+    # without using the word "advice". It also retrieved nothing, so it was
+    # landing in out_of_corpus for the wrong reason.
+    - "\\b(?:right|good|best|wrong|bad) time to (?:invest|buy|enter|start)\\b"
+    - "\\btime to (?:invest|buy|enter) the market\\b"
+    - "\\b(?:invest|buy|start investing) (?:now|today|this week|this month)\\b"
+    - "\\bmarket timing\\b|\\bshould i wait\\b"
+  # Shapes a keyword list cannot express for PERFORMANCE.
+  #
+  # "growth" cannot go in performance_keywords: it occurs in "Direct Growth",
+  # in all five scheme names, in every chunk. A list entry of "growth" would
+  # refuse the golden questions F01-F30. The phrases below are the unambiguous
+  # ones, and all were measured at 0 occurrences across the 121 chunks:
+  # "since inception" 0, "nav growth" 0, "cagr" 0, "xirr" 0, "sharpe" 0.
+  #
+  # Golden row P05 - "What is the NAV growth of HDFC ELSS since inception?" -
+  # was answered with the plain NAV, which is a performance number wearing a
+  # factual costume. These patterns are what refuse it.
+  performance_patterns:
+    - "\\bsince inception\\b"
+    - "\\bnav growth\\b|\\bgrowth of (?:the )?(?:nav|price|fund|scheme)\\b"
+    - "\\bhow much has\\b[^?]{0,50}\\b(?:grown|risen|earned|returned)\\b"
+    - "\\babsolute returns?\\b|\\brolling returns?\\b|\\birr\\b"
+    - "\\bcagr\\b|\\bxirr\\b|\\bsharpe\\b|\\bsortino\\b|\\btreynor\\b"
+    - "\\bstandard deviation\\b|\\bvolatility\\b|\\bdrawdown\\b"
+    - "\\b\\w+ year returns?\\b|\\breturns? over\\b"
+  # Concepts that are real mutual-fund facts, absent from THIS corpus, and
+  # dangerous precisely because the question sounds perfectly in scope.
+  #
+  # Measured at 0 occurrences across all 121 chunks before being added. These
+  # are NOT refusals: the assistant has simply never read them. The retrieval
+  # gate is term-coverage based, so "What is the riskometer level of HDFC
+  # Large Cap?" cleared the gate on the words "level" and "large cap" and was
+  # confidently answered with the expense ratio - a cited, wrong answer, which
+  # is the worst failure this system can produce. When a question names one of
+  # these and no retrieved chunk contains it, the answer is out_of_corpus.
+  #
+  # Kept deliberately narrow. "regular plan" is also absent, but the corpus
+  # DOES answer the Direct-vs-Regular question from scheme metadata, so adding
+  # it would refuse a question we can answer. Every entry must be measured.
+  known_absent_terms:
+    - "riskometer"
+    - "exit score"
+    - "fund of funds"
+    - "nav history"
+  performance_keywords:
+    - "return"
+    - "returns"
+    - "cagr"
+    - "xirr"
+    - "performance"
+    - "performed"
+    - "growth rate"
+    - "how much did it give"
+    - "how much money will i make"
+    - "profit"
+    - "loss percentage"
+  # Query synonyms for retrieval (PRD FR-5.1)
+  synonym_expansions:
+    ter: "expense ratio total expense ratio charges"
+    "expense ratio": "ter total expense ratio annual charges"
+    load: "exit load exit charge redemption charge penalty"
+    "exit load": "exit charge redemption penalty load slabs"
+    "lock in": "lock-in lockin minimum holding period"
+    "lock-in": "lock in period minimum holding"
+    "min sip": "minimum sip amount smallest investment"
+    "minimum sip": "min sip amount"
+    "riskometer": "risk level riskometer riskometer level risk category"
+    benchmark: "benchmark index reference index"
+    aum: "aum assets under management fund size"
+    nav: "nav net asset value"
+    statement: "statement download tax document capital gains statement"
+    "capital gains": "tax statement download cgt"
+    # "Who manages HDFC Small Cap Fund?" and the page's "dhruv muchhal is the
+    # current fund manager of hdfc small cap fund" share no content term, so the
+    # stat strip carrying the name failed Stage 5's term-coverage gate and was
+    # never retrieved - the ranker and the renderer had nothing to work with,
+    # and the answer came back as "the rating is 3". The question's verb and the
+    # page's noun do not match on word boundaries, so the bridge is declared
+    # here. It only fires when a manager is actually being asked about.
+    manages: "fund manager current fund manager managed by"
+    manager: "fund manager current fund manager manages managed by"
+    "who manages": "fund manager current fund manager"
+
+# --- RETRIEVAL (Stage 5, for reference) -----------------------------------
+retrieval:
+  dense_top_k: 20
+  bm25_top_k: 20
+  rrf_k: 60
+  # NOTE: the key was spelled `mmra_lambda` in an earlier draft. Corrected to
+  # `mmr_lambda`; a typo'd config key reads as 0.0 through dict.get() and silently
+  # disables diversification, which is the exact failure MMR exists to prevent.
+  mmr_lambda: 0.35
+  final_top_k: 5
+  min_cosine: 0.20
+  # TERM COVERAGE is the real out-of-corpus gate, not min_cosine.
+  #
+  # Measured on the real corpus, dense similarity does NOT separate in-corpus
+  # from out-of-corpus questions:
+  #     "exit load"                    best dense 0.159   <- genuinely in corpus
+  #     "lock-in period"               best dense 0.144   <- genuinely in corpus
+  #     "price of gold in Mumbai"      best dense 0.310   <- NOT in corpus
+  #     "mumbai flat price"            best dense 0.347   <- NOT in corpus
+  # A threshold anywhere in 0.14-0.35 either refuses real questions or accepts
+  # nonsense. The PRD's 0.35 was calibrated against a query vector carrying a
+  # scheme prefix; at query time the scheme is unknown, so the question vector
+  # sits in a different region of the space and scores systematically lower.
+  #
+  # What does separate them is COVERAGE - how much of the question's own content
+  # words actually appear in the chunk:
+  #     "price of gold in Mumbai" -> best chunk matches ['price']   = 1/3 = 0.33
+  #     "exit load"              -> best chunk matches ['exit','load'] = 2/2 = 1.0
+  # A chunk must cover min_coverage of the question's content terms to be
+  # allowed to count as an answer. 0.5 means "half the distinctive words".
+  min_coverage: 0.5
+  min_bm25: 1.0
+  # Ordering-only nudge toward chunks that actually state a figure. Two chunks
+  # on this corpus differ only in whether they carry the number -
+  # "nav: 25 sep '26" (rrf 0.0315) vs "nav: 25 sep '26 557.73" (rrf ~0.024).
+  # BM25's length normalisation prefers the shorter, and MMR then keeps the
+  # higher-scoring of the near-duplicate pair, so the row carrying the answer
+  # was the row discarded, and "what is the NAV" fell back to a FAQ restatement.
+  # 0.004 against a top RRF of ~0.032: large enough to flip that pair, far too
+  # small to change which chunks are retrieved. It does not touch rrf_score and
+  # does not touch clears(), so it cannot make an out-of-corpus question pass.
+  answer_bearing_boost: 0.004
+  # Chroma's HNSW post-filters a candidate window, so a `where`-filtered dense
+  # query can come back SHORT (measured: 23 rows for a 24-row filter). Stage 5
+  # therefore over-fetches by this factor and truncates locally, instead of
+  # trusting n_results to be filled. See store.chroma_store.query().
+  over_fetch: 3
+  # A scheme named in the question is a ranking refinement, not an existence
+  # check: a short filtered result set falls back to the unfiltered ranking
+  # rather than reporting the scheme as absent. See rag/retrieve.py.
+  scheme_filter_is_hint: true
+  rerank:
+    enabled: false                     # needs a cross-encoder; skipped silently
+    model_name: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+    top_n_in: 20
+    top_n_out: 5
+
+# --- GENERATION (Stage 6) --------------------------------------------------
+generation:
+  # The provider used when LLM_PROVIDER is unset in the environment. An env var
+  # always wins over this file, so swapping in an API key does not mean editing
+  # a tracked config - see .env.example.
+  provider: "stub"                     # stub | ollama | openai | groq
+  model: "llama3.1:8b"
+  temperature: 0.0
+  max_sentences: 3
+  context_chunks: 5
+  # Groq is read from GROQ_MODEL in the environment. It is deliberately not
+  # pinned here: a config value would silently win over the .env, and the .env
+  # is the surface the user is meant to be editing.
+  # groq_model: "llama-3.1-8b-instant"
+  # How many chunks to fetch when the question names a scheme, before narrowing
+  # to that scheme. The terse fact chunks ("expense ratio: 1.03%") lose to the
+  # verbose FAQ restatements of the same fact on both retrievers, because the
+  # FAQ text carries the scheme name and more words. Fetching only 5 and then
+  # filtering to a scheme routinely left no `fact` chunk of that scheme at all,
+  # so the answer was the wordy restatement when the crisp one was available.
+  named_scheme_over_fetch: 15
+  ollama_base_url: "http://localhost:11434"
+
+  # ANSWER-SIDE vocabulary. Deliberately separate from `guardrails.advice_keywords`
+  # above, because the two check different text and the query list cannot do this
+  # job.
+  #
+  # `advice_keywords` is phrased as QUESTIONS ("should i", "which is better") and
+  # must stay that way - it is matched against a user's typing. Run the same list
+  # against generated text and it matches nothing: "you should buy this scheme"
+  # contains neither "should i" nor "should i buy", so the check silently passes.
+  # The answer-side list is phrased as ASSERTIONS, which is how a language model
+  # actually produces advice.
+  #
+  # Every phrase below was measured against the 121 real chunks: 0 occurrences.
+  # That is the safety property that makes them usable as a validator - an
+  # answer-side phrase that appears in the corpus cannot be a reliable signal,
+  # because it would reject legitimate grounded answers.
+  advice_vocabulary:
+    - "you should"
+    - "you must"
+    - "we recommend"
+    - "i recommend"
+    - "i advise"
+    - "worth buying"
+    - "worth investing"
+    - "good buy"
+    - "bad buy"
+    - "must buy"
+    - "is safe"
+    - "safe to invest"
+    - "ideal for"
+    - "suitable for you"
+    - "right choice"
+    - "i would suggest"
+    - "we suggest"
+    - "my suggestion"
+    - "consider investing in"
+    - "go for"
+    - "look to invest"
+
+  # Performance CLAIMS, as distinct from the word "return".
+  #
+  # This distinction is forced by the data, not by taste. Four of the five
+  # benchmarks are named "... Total Return Index" (NIFTY 500, NIFTY 100, BSE 250
+  # SmallCap) - 12 chunks contain the literal phrase. The benchmark question is
+  # in the golden set, so "The benchmark is the NIFTY 500 Total Return Index" is
+  # a REQUIRED correct answer, and a validator that flags any occurrence of
+  # "return" rejects it.
+  #
+  # So a performance claim is a figure or a judgement, never the index's own
+  # name. All 20 phrases below: 0 occurrences in the corpus.
+  performance_claim_phrases:
+    - "outperform"
+    - "underperform"
+    - "top perform"
+    - "best perform"
+    - "good performer"
+    - "consistent performer"
+    - "beat the index"
+    - "annualised return"
+    - "annualized return"
+    - "cagr of"
+    - "xirr of"
+    - "absolute return"
+    - "year return"
+    - "since inception return"
+    - "returns of"
+    - "return of"
+    - "yielded"
+    - "gave a return"
+    - "delivered a return"
+    - "has returned"
+    - "generated a return"
+
+  # Phrases where the word "return" is part of a NAME and carries no claim.
+  # Used to exempt them from the performance check, on the QUERY side as well as
+  # the answer side. Every entry below was measured to occur in the corpus
+  # (12 occurrences of "total return index"), which is the point: these are the
+  # exact strings that would otherwise cause a false rejection. Entries that do
+  # not occur were removed, so the list stays exactly as long as the problem.
+  benchmark_name_allow:
+    - "total return index"
+    - "return index"
+
+# --- UI (Streamlit, Phase 5) ----------------------------------------------
+ui:
+  title: "HDFC Mutual Fund FAQ Assistant"
+  welcome_line: "Ask me factual questions about 5 HDFC mutual fund schemes. Every answer comes with a source link."
+  note: "Facts-only. No investment advice."
+  # PRD FR-8.3, verbatim. All three MUST answer with kind="answer" from the
+  # built corpus. An example chip that trips a refusal is the first thing a
+  # viewer sees and it reads as a broken demo, so this list is pinned by
+  # tests/test_ui.py against the live pipeline, not just against this file.
+  # The capital-gains question that used to sit here is correctly refused
+  # (out-of-corpus) - right behaviour for a typed question, wrong choice for
+  # a first-load chip. It stays in the golden set instead.
+  example_questions:
+    - "What is the expense ratio of HDFC Large Cap Direct Growth?"
+    - "Is there a lock-in period on HDFC ELSS Tax Saver?"
+    - "What is the minimum SIP for HDFC Flexi Cap Direct Growth?"

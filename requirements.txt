@@ -1,0 +1,34 @@
+# requirements.txt
+# ---------------------------------------------------------------------------
+# Phase 1-3 dependencies. Install with:
+#   python -m pip install -r requirements.txt
+# CPU-only. No GPU required. See README.md for the full setup walkthrough.
+# ---------------------------------------------------------------------------
+
+# --- Stage 1: Loading (HTTP + HTML parsing) --------------------------------
+httpx>=0.27,<0.29
+beautifulsoup4>=4.12,<5
+lxml>=5.2
+
+# --- Stage 2: Chunking (token counting) ------------------------------------
+tiktoken>=0.7
+
+# --- Config / IO / logging --------------------------------------------------
+PyYAML>=6.0
+tqdm>=4.66
+
+# --- Stage 3: Embedding (all-MiniLM-L6-v2, CPU) ----------------------------
+sentence-transformers>=6.0
+torch>=2.2            # pulled in by sentence-transformers; CPU wheel is fine
+
+# --- Stage 4: Vector store (ChromaDB) --------------------------------------
+chromadb>=1.5,<2
+
+# --- Stage 5: Lexical hybrid (BM25) -----------------------------------------
+rank-bm25>=0.2.2
+
+# --- Stage 6: UI ------------------------------------------------------------
+streamlit>=1.38
+
+# --- Dev / tests -----------------------------------------------------------
+pytest>=8.0

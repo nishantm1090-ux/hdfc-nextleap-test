@@ -1,0 +1,1500 @@
+====================================================================================================
+  STAGE 3 OUTPUT - WHAT WAS EMBEDDED, AND THE VECTORS
+====================================================================================================
+  121 chunks  |  121 rows in the embed index  |  cache dir E:\nextleap cursor project class\data\embeddings
+
+  `embed_text` is what MiniLM actually saw. It is NOT the chunk text: it is
+      scheme_name + aliases + (category) - section_heading:  +  first 200 tokens
+  The prefix is load-bearing. Without it, "min. for sip: 100" - byte-identical
+  in four schemes - would embed almost identically for all four, and a question
+  about Flexi Cap could be answered with Large Cap's row.
+
+  model   : sentence-transformers/all-MiniLM-L6-v2
+  dim     : 384   pooling None   max_seq_length 256
+  lead    : 200 tokens   |  cache_by: embed_hash (= sha256 of embed_text, NOT of the raw chunk)
+  norm    : mean 1.0  min 1.0  max 1.0  |  failed: 0
+  cache   : None hits / None misses   offline=None
+
+  Each vector below is truncated to 16 of 384 dimensions. Re-run with
+  --dims 384 for the full vector. The cache file is the sha256 of embed_text,
+  which is why two identical-looking facts still get two different files.
+
+====================================================================================================
+
+[  1] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__d801b3
+      embed_hash  : 48a87a19d9577861b7281994...
+      cache_file  : 48a87a19d9577861b7281994d68d8f79b524bc15f7ab3f2d0740be55deec1d38.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0016, -0.0283, -0.1145, -0.0033, +0.0697, +0.0610, +0.0368, +0.0432, -0.0299, +0.0057, -0.0459, -0.1040, -0.0689, -0.0328, -0.0040, -0.0351
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: min. for
+      sip: ₹100
+----------------------------------------------------------------------------------------------------
+[  2] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__083d74
+      embed_hash  : 212cbc912e480a6ef30ebe44...
+      cache_file  : 212cbc912e480a6ef30ebe442993dd280fb56cc88ceff6303c0490e13aeaf66c.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0561, -0.0352, -0.1366, +0.0464, +0.0760, +0.0565, +0.0196, +0.0445, -0.0589, +0.0365, -0.0375, -0.1299, -0.0826, -0.0695, -0.0311, +0.0005
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: fund size
+      (aum): ₹1,07,295.79 cr
+----------------------------------------------------------------------------------------------------
+[  3] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__2aeb3d
+      embed_hash  : 23aee27b1b70dcea104fa906...
+      cache_file  : 23aee27b1b70dcea104fa9066d69776e9505422a018a7ea40b8bd3c869f7d1cd.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0435, -0.0322, -0.1036, +0.0114, +0.1065, +0.0646, +0.0027, +0.0073, -0.0570, +0.0124, -0.0565, -0.1058, -0.0608, -0.0526, -0.0497, -0.0200
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: expense
+      ratio: 0.78%
+----------------------------------------------------------------------------------------------------
+[  4] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__e13ec1
+      embed_hash  : 3160aff8b5d90ffcc48a67f5...
+      cache_file  : 3160aff8b5d90ffcc48a67f593a1ba87bc57dc39d6d91646fbc2637c6b6ac026.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0207, -0.0466, -0.0993, +0.0167, +0.1013, +0.0920, -0.0030, +0.0064, -0.0650, +0.0066, -0.0656, -0.0921, -0.0530, -0.0546, -0.0504, -0.0031
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: rating: 5
+----------------------------------------------------------------------------------------------------
+[  5] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__38a531
+      embed_hash  : fe4c60a638d0b4d4d190a19e...
+      cache_file  : fe4c60a638d0b4d4d190a19ecad22869e689ac303675e980cf74152974ed69fc.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0120, -0.0427, -0.0648, +0.0039, +0.0978, +0.0740, -0.0160, +0.0047, -0.0913, +0.0161, -0.0396, -0.0706, -0.0540, -0.0770, -0.0185, +0.0120
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: exit
+      load, stamp duty and tax: stamp duty on investment: 0.005% (from july 1st, 2020)
+      from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[  6] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__c5360a
+      embed_hash  : 0c9855f3efcd41ef71355319...
+      cache_file  : 0c9855f3efcd41ef713553193aa4740742f31a740d71cee6466ea5a23e0db1c1.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0146, -0.0380, -0.0674, +0.0001, +0.0996, +0.0725, -0.0064, +0.0091, -0.0885, +0.0153, -0.0444, -0.0751, -0.0556, -0.0782, -0.0226, +0.0093
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: exit
+      load, stamp duty and tax: stamp duty on investment: 0.005% (from july 1st, 2020)
+----------------------------------------------------------------------------------------------------
+[  7] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__d29533
+      embed_hash  : 2cacf007f176e06e520a2e6e...
+      cache_file  : 2cacf007f176e06e520a2e6e516cea99ad2f40cea819bc1f2f1e5ae14b45914a.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0192, -0.0563, -0.0610, +0.0174, +0.1110, +0.0758, -0.0225, -0.0077, -0.0565, +0.0065, -0.0718, -0.0575, -0.0531, -0.0585, -0.0290, -0.0004
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: exit
+      load: from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[  8] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__fd6f14
+      embed_hash  : 843be51fd49307239c556465...
+      cache_file  : 843be51fd49307239c556465d54e2d4c7f606e876dacb2ff237ad4de759076ff.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0339, -0.0377, -0.1024, -0.0059, +0.0766, +0.0659, +0.0057, +0.0083, -0.0670, +0.0187, -0.0717, -0.0964, -0.0420, -0.0528, -0.0492, -0.0167
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio:
+      investment objective: fund benchmark nifty 50 hybrid composite debt 50:50 index
+----------------------------------------------------------------------------------------------------
+[  9] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__a0edfe
+      embed_hash  : 2c8cf322e381e74bdff466e1...
+      cache_file  : 2c8cf322e381e74bdff466e1210833590f7f5fd19720e8b7c89ebac236996453.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0342, -0.0380, -0.0913, +0.0082, +0.0891, +0.0660, +0.0038, -0.0003, -0.0726, +0.0091, -0.0833, -0.0887, -0.0478, -0.0482, -0.0520, -0.0264
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: fund
+      benchmark: nifty 50 hybrid composite debt 50:50 index
+----------------------------------------------------------------------------------------------------
+[ 10] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__59ea48
+      embed_hash  : 5ab4509b50438ce2e38bcdce...
+      cache_file  : 5ab4509b50438ce2e38bcdce9934e94caecd3561128feae619c8fb35f3db349d.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0192, -0.0276, -0.1042, +0.0108, +0.0921, +0.0732, +0.0133, +0.0114, -0.0628, +0.0245, -0.0595, -0.1067, -0.0467, -0.0717, -0.0280, -0.0311
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: nav: 25
+      sep '26 ₹557.73
+----------------------------------------------------------------------------------------------------
+[ 11] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__a24787
+      embed_hash  : db61fb404d888d28ff8b3e32...
+      cache_file  : db61fb404d888d28ff8b3e3233426a69f2061f187893c6105580461e2ef4ba74.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0203, -0.0413, -0.0865, -0.0019, +0.1059, +0.0834, -0.0047, -0.0050, -0.0696, +0.0170, -0.0562, -0.0881, -0.0413, -0.0691, -0.0359, -0.0205
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: nav: 25
+      sep '26
+----------------------------------------------------------------------------------------------------
+[ 12] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__080254
+      embed_hash  : 1a1b34e67adef116cd87105a...
+      cache_file  : 1a1b34e67adef116cd87105afaced27dd6b22b2f5b47116706904d2e43887d3f.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0098, -0.0233, -0.1173, -0.0022, +0.0735, +0.0729, +0.0122, +0.0472, -0.0600, +0.0113, -0.0375, -0.0978, -0.0474, -0.0502, -0.0160, -0.0107
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: min. for
+      1st investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 13] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__a3bc4d
+      embed_hash  : ea3cbd0e17acf5b538681c8f...
+      cache_file  : ea3cbd0e17acf5b538681c8f726c15697873f91a814abe20004c571215ff6076.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0353, -0.0512, -0.0926, -0.0043, +0.0834, +0.0720, -0.0047, +0.0230, -0.0565, +0.0134, -0.0444, -0.0799, -0.0561, -0.0536, -0.0316, -0.0110
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: min. for
+      1st investment
+----------------------------------------------------------------------------------------------------
+[ 14] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__5eef77
+      embed_hash  : e253d7fb0b55eea8e9d5997d...
+      cache_file  : e253d7fb0b55eea8e9d5997df334977717ea0b274e4a5106037aae03f2cedb32.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0116, -0.0211, -0.1159, -0.0035, +0.0745, +0.0716, +0.0107, +0.0530, -0.0551, +0.0069, -0.0332, -0.1000, -0.0456, -0.0504, -0.0130, -0.0104
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: min. for
+      2nd investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 15] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__48c88b
+      embed_hash  : c90d78f0f6ad91718e48073d...
+      cache_file  : c90d78f0f6ad91718e48073d7c16237a8287d7918d57e90772043eb57a653942.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0392, -0.0472, -0.0911, -0.0062, +0.0857, +0.0726, -0.0076, +0.0298, -0.0487, +0.0076, -0.0409, -0.0837, -0.0535, -0.0548, -0.0276, -0.0111
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: min. for
+      2nd investment
+----------------------------------------------------------------------------------------------------
+[ 16] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__0097e1
+      embed_hash  : 8011687ad910c92e3b082c8b...
+      cache_file  : 8011687ad910c92e3b082c8bc1d41d25215263cb30e946fd839dfe4cad924a6f.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        -0.0008, -0.0245, -0.1141, -0.0075, +0.0676, +0.0595, +0.0360, +0.0424, -0.0381, +0.0042, -0.0389, -0.0941, -0.0664, -0.0299, -0.0042, -0.0327
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - HDFC Balanced
+      Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio: min. for
+      sip ₹100
+----------------------------------------------------------------------------------------------------
+[ 17] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__about_hdfc_balanced_advantage_fund_direc__33f4bb
+      embed_hash  : 346d44c7edcbbb3e44bb94b0...
+      cache_file  : 346d44c7edcbbb3e44bb94b045ff1d7880f8dc5a1686fb97790374950200703e.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        -0.0034, -0.0496, -0.1348, -0.0195, +0.0695, +0.0478, +0.0128, +0.0743, -0.0604, +0.0151, -0.0136, -0.0622, -0.0668, -0.0585, +0.0172, -0.0247
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - About HDFC
+      Balanced Advantage Fund Direct Growth: nav: 25 sep '26 ₹557.73 min. for sip ₹100
+      fund size (aum) ₹1,07,295.79 cr expense ratio 0.78% rating 5
+
+    min. for 1st investment ₹100 min. for 2nd investment ₹100 min. for sip ₹100
+
+    exit load for units in excess of 15% of the investment,1% will be charged for
+      redemption within 1 year.
+
+    if you redeem within one year, returns are taxed at 20%. if you redeem after one
+      year, returns exceeding rs 1.25 lakh in a financial year are taxed at 12.5%.
+
+    hdfc balanced advantage fund direct growth is a hybrid mutual fund scheme launched
+      by hdfc mutual fund. this scheme was made available to investors on 10 dec 1999.
+      anil bamboli is
+----------------------------------------------------------------------------------------------------
+[ 18] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__fe1c6b
+      embed_hash  : 80a4590c124b87ed1fb24a39...
+      cache_file  : 80a4590c124b87ed1fb24a39b22f9f253acbec98128050d52129047d25987e57.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0464, -0.0478, -0.0820, -0.0087, +0.1277, +0.0584, +0.0130, +0.0198, -0.0345, +0.0167, -0.0373, -0.1051, -0.0368, -0.0336, -0.0469, -0.0115
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - Frequently asked
+      questions (page data): how much expense ratio is charged by hdfc balanced
+      advantage fund direct growth? the term expense ratio used for hdfc balanced
+      advantage fund direct growth or any other mutual fund is the annual charges one
+      needs to pay to the mutual fund company for managing your investments in that
+      fund. the expense ratio of hdfc balanced advantage fund direct growth is 0.78% as
+      of 27 sep 2026...
+----------------------------------------------------------------------------------------------------
+[ 19] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__28a8a8
+      embed_hash  : 66d780c5294ea2147fafc35f...
+      cache_file  : 66d780c5294ea2147fafc35f52177b114ef65a868b4b9d4150e6ad071b346661.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0706, -0.0688, -0.1086, +0.0341, +0.0789, +0.0409, -0.0003, +0.0735, -0.0634, +0.0530, -0.0140, -0.1069, -0.0638, -0.0658, -0.0130, +0.0316
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - Frequently asked
+      questions (page data): what is the aum of hdfc balanced advantage fund direct
+      growth? the aum, short for assets under management of hdfc balanced advantage fund
+      direct growth is ₹1,07,295.79cr as of 27 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 20] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__af4cf1
+      embed_hash  : 33fe31af3b606435611d2566...
+      cache_file  : 33fe31af3b606435611d25668c8292c2dab3a8612157f211a939528df04664ef.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        -0.0061, -0.0622, -0.0890, -0.0106, +0.0725, +0.0881, +0.0127, +0.0580, -0.0277, +0.0119, +0.0141, -0.0733, -0.0480, -0.0865, +0.0201, +0.0151
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - Frequently asked
+      questions (page data): how to redeem hdfc balanced advantage fund direct growth?
+      if you want to sell your hdfc balanced advantage fund direct growth holdings, go
+      to your holding on the app or web and simply click on it. you will get two options
+      - redeem & invest more; click on redeem and enter your desired amount or if you
+      wish to redeem the entire holding amount then select the 'redeem all' checkbox.
+----------------------------------------------------------------------------------------------------
+[ 21] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__95b737
+      embed_hash  : 1e79a45d2c7ba08a80083460...
+      cache_file  : 1e79a45d2c7ba08a80083460ce083953faeec404361ac9fa5a2ba2dc002bc553.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0565, -0.0714, -0.0691, -0.0442, +0.0838, +0.0692, +0.0396, +0.0333, -0.0510, +0.0170, -0.0319, -0.0671, -0.0165, -0.0373, +0.0186, -0.0085
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - Frequently asked
+      questions (page data): can i invest in sip and lump sum of hdfc balanced advantage
+      fund direct growth? you can select either sip or lumpsum investment of hdfc
+      balanced advantage fund direct growth based on your investment objective and risk
+      tolerance.
+----------------------------------------------------------------------------------------------------
+[ 22] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__0ce8be
+      embed_hash  : f9ea86efb9bdb802b710e7c7...
+      cache_file  : f9ea86efb9bdb802b710e7c7400717ea486b32d5f8a0dda803a8b42fb3295280.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0327, -0.0519, -0.0469, -0.0030, +0.0937, +0.0829, -0.0276, +0.0402, -0.0775, +0.0280, -0.0817, -0.0859, -0.0171, -0.0701, -0.0197, -0.0265
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - Frequently asked
+      questions (page data): what is the nav of hdfc balanced advantage fund direct
+      growth? the nav of hdfc balanced advantage fund direct growth is ₹557.73 as of 25
+      sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 23] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__aa1514
+      embed_hash  : 69067bd270ab830bcb51a8eb...
+      cache_file  : 69067bd270ab830bcb51a8eb0fe1216820dd6d62e343e29d01305369572e67b1.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0272, -0.0343, -0.0538, -0.0272, +0.0696, +0.0934, -0.0311, +0.0351, -0.0062, +0.0040, -0.0259, -0.0240, -0.0174, -0.0528, +0.0054, +0.0023
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - Frequently asked
+      questions (page data): what is the pe and pb ratio of hdfc balanced advantage fund
+      direct growth? the pe ratio ratio of hdfc balanced advantage fund direct growth is
+      determined by dividing the market price by its earnings per share and the pb ratio
+      of the same is evaluated by dividing the stock price per share by its book value
+      per share (bvps).
+----------------------------------------------------------------------------------------------------
+[ 24] chunk_id    : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__94bf84
+      embed_hash  : cbf88ba4baa3753e23322a86...
+      cache_file  : cbf88ba4baa3753e23322a86719cc8b9259791caff2fd8219ebefd8636ae4e28.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0293, -0.0935, -0.0730, +0.0004, +0.0660, +0.0513, -0.0119, +0.0545, -0.0897, +0.0149, -0.0175, -0.0751, -0.0363, -0.0643, -0.0160, -0.0174
+      embed_text  :
+    HDFC Balanced Advantage Fund - Direct Growth (Balanced Advantage) - Frequently asked
+      questions (page data): how to invest in hdfc balanced advantage fund direct
+      growth? you can easily invest in hdfc balanced advantage fund direct growth in a
+      hassle-free manner on groww. the process is extremely simple, quick and completely
+      paperless. invest in a few minutes with the following steps: log on to your groww
+      account search for hdfc balanced advantage fund direct growth from the search box
+      in order to invest, you will have to complete all the kyc formalities which are
+      completely online and paperless and take a few minutes to complete once you are
+      done with that, you can start investing in hdfc balanced advantage fund direct
+      growth as sip or lumpsum as per your investment objective and risk tolerance
+
+    what kind of returns does hdfc balanced advantage fund direct growth provide? the
+      hdfc balanced advantage fund direct growth has been there from 01 jan 2013 and the
+      average annual returns provided by this
+----------------------------------------------------------------------------------------------------
+[ 25] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__d10b49
+      embed_hash  : 1b36a890b7e54f8eb329fcc2...
+      cache_file  : 1b36a890b7e54f8eb329fcc2ce2fb59c10af92de1f3f70352199dcb9f0454e03.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0327, -0.0548, -0.0628, -0.0060, +0.1738, +0.0816, +0.0224, -0.0147, -0.0309, +0.0411, -0.0213, -0.0227, -0.0247, -0.1194, -0.0391, -0.0474
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: elss • 3y lock-in
+----------------------------------------------------------------------------------------------------
+[ 26] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__825e4a
+      embed_hash  : 5bf88e5fe1436eb5414d2ce9...
+      cache_file  : 5bf88e5fe1436eb5414d2ce91aafb89a2785cec48225dd8d29c792754bef1cc0.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0364, -0.0368, -0.0694, -0.0026, +0.1392, +0.0540, +0.0407, +0.0350, -0.0046, +0.0319, -0.0361, -0.0422, -0.0354, -0.0675, -0.0352, -0.0628
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: min. for sip: ₹500
+----------------------------------------------------------------------------------------------------
+[ 27] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__de2366
+      embed_hash  : b0e9610c9f642e632728504a...
+      cache_file  : b0e9610c9f642e632728504ac49e887fa45be55af1a46cfb04e5f2a2be8fc35f.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0868, -0.0319, -0.1040, +0.0318, +0.1445, +0.0474, +0.0272, +0.0561, -0.0343, +0.0595, -0.0185, -0.0811, -0.0516, -0.0849, -0.0587, -0.0352
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: fund size (aum):
+      ₹15,991.78 cr
+----------------------------------------------------------------------------------------------------
+[ 28] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__0856a2
+      embed_hash  : f5211ad00a5de34a037b4c8f...
+      cache_file  : f5211ad00a5de34a037b4c8fa042bcc375828ca96a738749f44f5d908dab8868.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0784, -0.0298, -0.0694, +0.0074, +0.1783, +0.0598, +0.0235, +0.0184, -0.0330, +0.0375, -0.0337, -0.0589, -0.0107, -0.0843, -0.0808, -0.0528
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: expense ratio:
+      1.21%
+----------------------------------------------------------------------------------------------------
+[ 29] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__e13ec1
+      embed_hash  : 50758838f08fe8854199b095...
+      cache_file  : 50758838f08fe8854199b095e4a4f5b842d11fd9c8c91d52d6083828638e84ce.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0490, -0.0488, -0.0650, +0.0133, +0.1629, +0.0873, +0.0157, +0.0168, -0.0410, +0.0348, -0.0433, -0.0470, -0.0168, -0.0889, -0.0770, -0.0368
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: rating: 5
+----------------------------------------------------------------------------------------------------
+[ 30] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__38a531
+      embed_hash  : dde441e21fdb8e93c8a4356d...
+      cache_file  : dde441e21fdb8e93c8a4356d60bce15ab8a089c53954d06d4476b3799072e6b5.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0528, -0.0415, -0.0353, +0.0037, +0.1561, +0.0574, -0.0044, +0.0132, -0.0564, +0.0396, -0.0066, -0.0346, -0.0264, -0.1129, -0.0572, -0.0233
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: exit load, stamp
+      duty and tax: stamp duty on investment: 0.005% (from july 1st, 2020) from july 1st
+      2020
+----------------------------------------------------------------------------------------------------
+[ 31] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__c5360a
+      embed_hash  : 999bdd00a1e9de960051efba...
+      cache_file  : 999bdd00a1e9de960051efba862a8a42d7431a64caa8ffe0f123a488202a2d91.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0552, -0.0350, -0.0406, +0.0012, +0.1582, +0.0554, +0.0054, +0.0186, -0.0546, +0.0380, -0.0122, -0.0393, -0.0264, -0.1133, -0.0607, -0.0248
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: exit load, stamp
+      duty and tax: stamp duty on investment: 0.005% (from july 1st, 2020)
+----------------------------------------------------------------------------------------------------
+[ 32] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__b3b5eb
+      embed_hash  : 8019fab7a27f1f7e63c09169...
+      cache_file  : 8019fab7a27f1f7e63c0916960ded8dc2aa2f31969a9bfd1cdd5cb27ff4ca0ad.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0390, -0.0438, -0.0342, +0.0096, +0.1640, +0.0664, -0.0039, -0.0058, -0.0350, +0.0271, -0.0454, -0.0217, -0.0331, -0.0975, -0.0564, -0.0339
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: exit load nil: from
+      july 1st 2020
+----------------------------------------------------------------------------------------------------
+[ 33] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__2d7bad
+      embed_hash  : 0d71c091c5ae8716c35fa98a...
+      cache_file  : 0d71c091c5ae8716c35fa98af24f5fcd2aa70b3d783052453fea4d359f6680c6.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0624, -0.0220, -0.0705, +0.0001, +0.1391, +0.0646, -0.0066, +0.0182, -0.0379, +0.0329, -0.0763, -0.0516, -0.0109, -0.1013, -0.0592, -0.0489
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: investment
+      objective: fund benchmark nifty 500 total return index scheme information
+      document(sid)
+----------------------------------------------------------------------------------------------------
+[ 34] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__d516a5
+      embed_hash  : b0c07c567b4480cdea595b08...
+      cache_file  : b0c07c567b4480cdea595b085de5a681e81fb9d6875689e7eff51cd57848296a.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0463, -0.0443, -0.0583, +0.0205, +0.1607, +0.0643, +0.0056, +0.0051, -0.0423, +0.0201, -0.0721, -0.0372, -0.0333, -0.0953, -0.0863, -0.0596
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: fund benchmark:
+      nifty 500 total return index
+----------------------------------------------------------------------------------------------------
+[ 35] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__302759
+      embed_hash  : f3884f6f81f5c7c3adaebf29...
+      cache_file  : f3884f6f81f5c7c3adaebf29c44896397f8ca332a780980007bc866e05098f28.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0497, -0.0361, -0.0764, +0.0045, +0.1535, +0.0605, +0.0322, +0.0234, -0.0234, +0.0409, -0.0318, -0.0664, -0.0117, -0.1077, -0.0621, -0.0633
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: nav: 25 sep '26
+      ₹1,447.38
+----------------------------------------------------------------------------------------------------
+[ 36] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__a24787
+      embed_hash  : 10ff2ffcc77bb257923ddfbc...
+      cache_file  : 10ff2ffcc77bb257923ddfbc545f2b12a9ba8273db85b2c7ba9e7898aedc7252.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0502, -0.0368, -0.0503, -0.0055, +0.1697, +0.0812, +0.0150, +0.0010, -0.0428, +0.0403, -0.0288, -0.0450, -0.0160, -0.1085, -0.0660, -0.0485
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: nav: 25 sep '26
+----------------------------------------------------------------------------------------------------
+[ 37] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__f46234
+      embed_hash  : 6a8b2e57cec4db24d9d73336...
+      cache_file  : 6a8b2e57cec4db24d9d73336279ba839999ba305dfcb10857af07a94a9078ef3.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0473, -0.0319, -0.0748, +0.0016, +0.1462, +0.0670, +0.0163, +0.0384, -0.0271, +0.0401, -0.0321, -0.0343, -0.0121, -0.0907, -0.0488, -0.0443
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: min. for 1st
+      investment ₹500
+----------------------------------------------------------------------------------------------------
+[ 38] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__a3bc4d
+      embed_hash  : 02e9e7725f1c8bc426f2ee9c...
+      cache_file  : 02e9e7725f1c8bc426f2ee9cadd2733b56ed3442a200768a3560e072461d6a24.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0564, -0.0380, -0.0587, -0.0110, +0.1554, +0.0759, +0.0135, +0.0290, -0.0301, +0.0390, -0.0243, -0.0302, -0.0178, -0.0927, -0.0570, -0.0463
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: min. for 1st
+      investment
+----------------------------------------------------------------------------------------------------
+[ 39] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__feadd3
+      embed_hash  : af37c04d7d0e45ea7ac9161f...
+      cache_file  : af37c04d7d0e45ea7ac9161f480c042f5645aa99a8825b7d1b99e64d19d40d12.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0493, -0.0318, -0.0742, +0.0013, +0.1449, +0.0649, +0.0147, +0.0449, -0.0257, +0.0374, -0.0296, -0.0372, -0.0113, -0.0918, -0.0458, -0.0447
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: min. for 2nd
+      investment ₹500
+----------------------------------------------------------------------------------------------------
+[ 40] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__48c88b
+      embed_hash  : 4502541b269dedf9e99b2f26...
+      cache_file  : 4502541b269dedf9e99b2f267702530d3e65d2c888bbb75b228a2483f4efbd2b.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0605, -0.0382, -0.0587, -0.0100, +0.1535, +0.0745, +0.0114, +0.0357, -0.0288, +0.0356, -0.0222, -0.0337, -0.0170, -0.0945, -0.0543, -0.0462
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: min. for 2nd
+      investment
+----------------------------------------------------------------------------------------------------
+[ 41] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__f1b9bb
+      embed_hash  : 2fafc82a844c331f52b76b50...
+      cache_file  : 2fafc82a844c331f52b76b500bf74ae6b4c08e72026cc53dcb0eb0ed0572a5ce.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0311, -0.0328, -0.0694, -0.0051, +0.1343, +0.0501, +0.0390, +0.0314, -0.0096, +0.0298, -0.0336, -0.0346, -0.0345, -0.0675, -0.0377, -0.0612
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - HDFC ELSS Tax Saver Fund
+      Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio: min. for sip ₹500
+----------------------------------------------------------------------------------------------------
+[ 42] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__about_hdfc_elss_tax_saver_fund_direct_pl__b7612b
+      embed_hash  : d8a1669525b53e9fe072241f...
+      cache_file  : d8a1669525b53e9fe072241f7b99533d45ef93df7a845ef10edeb45c13e9b0c9.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0282, -0.0503, -0.1062, -0.0190, +0.1315, +0.0595, +0.0311, +0.0575, -0.0177, +0.0416, -0.0062, -0.0312, -0.0510, -0.0796, -0.0218, -0.0485
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - About HDFC ELSS Tax Saver
+      Fund Direct Plan Growth: nav: 25 sep '26 ₹1,447.38 min. for sip ₹500 fund size
+      (aum) ₹15,991.78 cr expense ratio 1.21% rating 5
+
+    min. for 1st investment ₹500 min. for 2nd investment ₹500 min. for sip ₹500
+
+    if you redeem within one year, returns are taxed at 20%. if you redeem after one
+      year, returns exceeding rs 1.25 lakh in a financial year are taxed at 12.5%.
+
+    hdfc elss tax saver fund direct plan growth is a equity mutual fund scheme launched
+      by hdfc mutual fund. this scheme was made available to investors on 10 dec 1999.
+      amar kalkundrikar is the current fund manager of hdfc elss tax saver fund
+----------------------------------------------------------------------------------------------------
+[ 43] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__f5d460
+      embed_hash  : d5823a32b74ebffe59ddca08...
+      cache_file  : d5823a32b74ebffe59ddca08bd69eb8838610d1e64b680571b2c7da382f9e256.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0747, -0.0406, -0.0592, +0.0053, +0.1922, +0.0570, +0.0290, +0.0144, -0.0090, +0.0310, -0.0240, -0.0683, -0.0066, -0.0560, -0.0832, -0.0506
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - Frequently asked questions
+      (page data): how much expense ratio is charged by hdfc elss tax saver fund direct
+      plan growth? the term expense ratio used for hdfc elss tax saver fund direct plan
+      growth or any other mutual fund is the annual charges one needs to pay to the
+      mutual fund company for managing your investments in that fund. the expense ratio
+      of hdfc elss tax saver fund direct plan growth is 1.21% as of 27 sep 2026...
+----------------------------------------------------------------------------------------------------
+[ 44] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__3701ef
+      embed_hash  : 9921dea9b1bb1117798d869b...
+      cache_file  : 9921dea9b1bb1117798d869bc58aac3450818a52ccb654832e5832fdc99277d5.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0859, -0.0289, -0.0943, +0.0267, +0.1445, +0.0395, +0.0267, +0.0647, -0.0327, +0.0714, +0.0078, -0.0690, -0.0348, -0.0832, -0.0548, -0.0058
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - Frequently asked questions
+      (page data): what is the aum of hdfc elss tax saver fund direct plan growth? the
+      aum, short for assets under management of hdfc elss tax saver fund direct plan
+      growth is ₹15,991.78cr as of 27 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 45] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__150243
+      embed_hash  : e79934090c5f6ede38753ac3...
+      cache_file  : e79934090c5f6ede38753ac339dd6f9c4c3334da736aa0d999a54dec95d3b090.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0130, -0.0517, -0.0690, -0.0296, +0.1167, +0.0899, +0.0189, +0.0458, -0.0092, +0.0290, +0.0255, -0.0432, -0.0343, -0.1186, -0.0243, -0.0149
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - Frequently asked questions
+      (page data): how to redeem hdfc elss tax saver fund direct plan growth? if you
+      want to sell your hdfc elss tax saver fund direct plan growth holdings, go to your
+      holding on the app or web and simply click on it. you will get two options -
+      redeem & invest more; click on redeem and enter your desired amount or if you wish
+      to redeem the entire holding amount then select the 'redeem all' checkbox.
+----------------------------------------------------------------------------------------------------
+[ 46] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__61e905
+      embed_hash  : 07be0b0d0b305ed4107de3fd...
+      cache_file  : 07be0b0d0b305ed4107de3fdbac2583bea6241b6a9832b97fa7d0fbed11cd448.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0815, -0.0598, -0.0634, -0.0353, +0.1411, +0.0720, +0.0556, +0.0180, -0.0256, +0.0328, -0.0059, -0.0315, -0.0046, -0.0686, -0.0165, -0.0481
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - Frequently asked questions
+      (page data): can i invest in sip and lump sum of hdfc elss tax saver fund direct
+      plan growth? you can select either sip or lumpsum investment of hdfc elss tax
+      saver fund direct plan growth based on your investment objective and risk
+      tolerance.
+----------------------------------------------------------------------------------------------------
+[ 47] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__ed2e58
+      embed_hash  : 53aa13641999414fe5d603f6...
+      cache_file  : 53aa13641999414fe5d603f6853914d8882a59bc8f4b76f1ce7517ec2907f722.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0602, -0.0468, -0.0335, -0.0137, +0.1364, +0.0564, -0.0084, +0.0490, -0.0331, +0.0427, -0.0468, -0.0443, -0.0100, -0.0997, -0.0534, -0.0459
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - Frequently asked questions
+      (page data): what is the nav of hdfc elss tax saver fund direct plan growth? the
+      nav of hdfc elss tax saver fund direct plan growth is ₹1,447.38 as of 25 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 48] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__2fce85
+      embed_hash  : 32d659138af982e8de26de3f...
+      cache_file  : 32d659138af982e8de26de3f526884988ab9b4ac2fe1bda14b3ade923b52132c.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0556, -0.0270, -0.0469, -0.0181, +0.1177, +0.1016, -0.0100, +0.0320, +0.0072, +0.0195, -0.0199, +0.0044, +0.0055, -0.0833, -0.0292, -0.0324
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - Frequently asked questions
+      (page data): what is the pe and pb ratio of hdfc elss tax saver fund direct plan
+      growth? the pe ratio ratio of hdfc elss tax saver fund direct plan growth is
+      determined by dividing the market price by its earnings per share and the pb ratio
+      of the same is evaluated by dividing the stock price per share by its book value
+      per share (bvps).
+----------------------------------------------------------------------------------------------------
+[ 49] chunk_id    : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__1b0ac0
+      embed_hash  : 6f3ebcb74d778ca5f162e992...
+      cache_file  : 6f3ebcb74d778ca5f162e9920f11d7bf00d4c240170e91bdca5059f23357de10.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0506, -0.0926, -0.0542, -0.0015, +0.1195, +0.0627, -0.0033, +0.0495, -0.0861, +0.0398, +0.0092, -0.0495, -0.0193, -0.1022, -0.0425, -0.0463
+      embed_text  :
+    HDFC ELSS Tax Saver Fund - Direct Plan - Growth (ELSS) - Frequently asked questions
+      (page data): how to invest in hdfc elss tax saver fund direct plan growth? you can
+      easily invest in hdfc elss tax saver fund direct plan growth in a hassle-free
+      manner on groww. the process is extremely simple, quick and completely paperless.
+      invest in a few minutes with the following steps: log on to your groww account
+      search for hdfc elss tax saver fund direct plan growth from the search box in
+      order to invest, you will have to complete all the kyc formalities which are
+      completely online and paperless and take a few minutes to complete once you are
+      done with that, you can start investing in hdfc elss tax saver fund direct plan
+      growth as sip or lumpsum as per your investment objective and risk tolerance
+
+    what kind of returns does hdfc elss tax saver fund direct plan growth provide? the
+      hdfc elss tax saver
+----------------------------------------------------------------------------------------------------
+[ 50] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__d801b3
+      embed_hash  : 578f037db53c01e36ac5ea5a...
+      cache_file  : 578f037db53c01e36ac5ea5ae44179fec4c67e2530693504ae83f5cab60b3427.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0345, -0.0810, -0.1159, +0.0060, +0.0986, +0.0298, +0.0314, +0.0501, +0.0112, -0.0056, +0.0034, -0.0567, -0.0821, +0.0143, -0.0287, -0.0522
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for sip: ₹100
+----------------------------------------------------------------------------------------------------
+[ 51] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__9ae41c
+      embed_hash  : b6bdd3840e5294eda6bfb882...
+      cache_file  : b6bdd3840e5294eda6bfb8828c932f0805f1f927e295051b44b40a455df4e9cd.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0853, -0.0834, -0.1403, +0.0611, +0.1070, +0.0235, +0.0159, +0.0618, -0.0241, +0.0308, +0.0074, -0.0843, -0.1057, -0.0263, -0.0586, -0.0257
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: fund size (aum): ₹1,13,606.47 cr
+----------------------------------------------------------------------------------------------------
+[ 52] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__f450d3
+      embed_hash  : 4db3051f077587d563651fc7...
+      cache_file  : 4db3051f077587d563651fc724f6534bf5c5be2464eb32c0631199a1933a7d4d.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0695, -0.0819, -0.1142, +0.0296, +0.1375, +0.0278, +0.0165, +0.0183, -0.0177, +0.0023, -0.0097, -0.0580, -0.0825, -0.0100, -0.0790, -0.0469
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: expense ratio: 0.77%
+----------------------------------------------------------------------------------------------------
+[ 53] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__e13ec1
+      embed_hash  : e4e945239ee26c6883699efc...
+      cache_file  : e4e945239ee26c6883699efc26f96c03d2099c9ec37f3c51160a47a54495f9a7.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0434, -0.1006, -0.0975, +0.0369, +0.1342, +0.0567, +0.0059, +0.0156, -0.0282, +0.0022, -0.0242, -0.0440, -0.0720, -0.0072, -0.0750, -0.0287
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: rating: 5
+----------------------------------------------------------------------------------------------------
+[ 54] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__f187e9
+      embed_hash  : 2f754d89fa8406ab59fad7e3...
+      cache_file  : 2f754d89fa8406ab59fad7e39519cf6254626731a795d43a671e0f15e9b535b8.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0482, -0.0928, -0.0914, +0.0134, +0.1287, +0.0396, +0.0173, +0.0331, -0.0191, +0.0057, +0.0043, -0.0267, -0.0899, -0.0360, -0.0390, -0.0221
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: exit load, stamp duty and tax: exit
+      load exit load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[ 55] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__93a3f2
+      embed_hash  : ac00a661bd47012f8e4356b4...
+      cache_file  : ac00a661bd47012f8e4356b472ef9a317b68f3128e8ef8f3c79cf0d490fb15b2.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0486, -0.0977, -0.0920, +0.0131, +0.1316, +0.0383, +0.0161, +0.0312, -0.0198, +0.0091, +0.0107, -0.0297, -0.0897, -0.0288, -0.0379, -0.0225
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: exit load, stamp duty and tax: exit
+      load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[ 56] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__71e550
+      embed_hash  : 7293a7b70f7c51bbece92624...
+      cache_file  : 7293a7b70f7c51bbece926243af9b98ef6bf289920564bf36a3f694ab66281cd.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0519, -0.0950, -0.0850, +0.0285, +0.1242, +0.0265, -0.0102, +0.0187, -0.0279, +0.0096, -0.0004, -0.0282, -0.0888, -0.0249, -0.0521, -0.0153
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: exit load: stamp duty on investment:
+      0.005% (from july 1st, 2020) from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[ 57] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__2d7bad
+      embed_hash  : 0e14d987616f5058f018bf6f...
+      cache_file  : 0e14d987616f5058f018bf6fc05adcaa94dad080f81fcbcb0e638a4f03c2c830.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0649, -0.0602, -0.1090, +0.0151, +0.1041, +0.0403, -0.0131, +0.0257, -0.0225, +0.0107, -0.0582, -0.0520, -0.0459, -0.0332, -0.0612, -0.0432
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: investment objective: fund benchmark
+      nifty 500 total return index scheme information document(sid)
+----------------------------------------------------------------------------------------------------
+[ 58] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__d516a5
+      embed_hash  : c162db2dd046a05754b15b52...
+      cache_file  : c162db2dd046a05754b15b52fb4f7bb3996ab9b85121ac93c295356da7997634.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0501, -0.0953, -0.0959, +0.0330, +0.1255, +0.0325, +0.0056, +0.0112, -0.0294, -0.0103, -0.0414, -0.0356, -0.0795, -0.0195, -0.0796, -0.0520
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: fund benchmark: nifty 500 total return
+      index
+----------------------------------------------------------------------------------------------------
+[ 59] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__dd94b7
+      embed_hash  : aea9ea07a017661b779a3eef...
+      cache_file  : aea9ea07a017661b779a3eef6ed12c149271a2ee4755893a90fa499f14117a3b.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0464, -0.0876, -0.1129, +0.0202, +0.1136, +0.0350, +0.0085, +0.0258, -0.0128, +0.0104, -0.0176, -0.0682, -0.0627, -0.0313, -0.0606, -0.0563
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: nav: 25 sep '26 ₹2,214.57
+----------------------------------------------------------------------------------------------------
+[ 60] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__a24787
+      embed_hash  : 523c16354a9e731221f3e7e2...
+      cache_file  : 523c16354a9e731221f3e7e24e380aeef9c2acf1d7a6c3bfde590fa144798b0f.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0437, -0.0937, -0.0888, +0.0136, +0.1331, +0.0415, +0.0020, +0.0006, -0.0246, +0.0106, -0.0197, -0.0388, -0.0591, -0.0257, -0.0623, -0.0481
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: nav: 25 sep '26
+----------------------------------------------------------------------------------------------------
+[ 61] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__080254
+      embed_hash  : 5529e9030fc22a79e98b1f8e...
+      cache_file  : 5529e9030fc22a79e98b1f8e969ed367ad6778c6e13e5478d5a7eb217e38083c.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0521, -0.0813, -0.1162, +0.0186, +0.1097, +0.0388, +0.0103, +0.0502, -0.0116, +0.0022, +0.0032, -0.0508, -0.0637, -0.0022, -0.0413, -0.0355
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 1st investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 62] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__a3bc4d
+      embed_hash  : 33ecc2f02dce96dc0efcc4cb...
+      cache_file  : 33ecc2f02dce96dc0efcc4cb49a6ec79def49e15d97052c881782761669396d8.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0615, -0.0966, -0.0906, +0.0155, +0.1210, +0.0382, +0.0020, +0.0326, -0.0145, -0.0003, -0.0042, -0.0318, -0.0690, -0.0150, -0.0535, -0.0412
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 1st investment
+----------------------------------------------------------------------------------------------------
+[ 63] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__5eef77
+      embed_hash  : f083d2857f61799a2dc2e8a8...
+      cache_file  : f083d2857f61799a2dc2e8a8822c7c31a8c552c1e04990a83ef2f4e3ab5b7ea7.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0539, -0.0810, -0.1135, +0.0175, +0.1113, +0.0349, +0.0082, +0.0564, -0.0084, -0.0017, +0.0061, -0.0526, -0.0630, -0.0034, -0.0375, -0.0350
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 2nd investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 64] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__48c88b
+      embed_hash  : 16651fb23caaa96b8758b170...
+      cache_file  : 16651fb23caaa96b8758b170b1639d9c57bbe2e64e406a203ec2be7d0af1c9fd.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0642, -0.0955, -0.0888, +0.0152, +0.1220, +0.0355, +0.0006, +0.0398, -0.0101, -0.0032, -0.0011, -0.0345, -0.0687, -0.0169, -0.0509, -0.0406
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 2nd investment
+----------------------------------------------------------------------------------------------------
+[ 65] chunk_id    : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__0097e1
+      embed_hash  : 71ba1e5fda87daf67a5ba082...
+      cache_file  : 71ba1e5fda87daf67a5ba082947291132a4fa1aa3ded9164a2cd883a954ce203.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0280, -0.0760, -0.1145, +0.0029, +0.0980, +0.0310, +0.0320, +0.0472, +0.0076, -0.0076, +0.0085, -0.0506, -0.0787, +0.0193, -0.0289, -0.0517
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - HDFC Flexi Cap Direct Plan Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for sip ₹100
+----------------------------------------------------------------------------------------------------
+[ 66] chunk_id    : hdfc-equity-fund-direct-growth__about_hdfc_flexi_cap_direct_plan_growth__36c371
+      embed_hash  : dd5d3e583b669e37039de797...
+      cache_file  : dd5d3e583b669e37039de79775ee16a2a9a69e33e42ef5ef066d66eb4cf3e359.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0384, -0.0900, -0.1269, -0.0013, +0.0934, +0.0267, -0.0005, +0.0954, -0.0367, +0.0048, +0.0245, -0.0401, -0.1148, -0.0141, -0.0015, -0.0455
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - About HDFC Flexi Cap Direct Plan
+      Growth: nav: 25 sep '26 ₹2,214.57 min. for sip ₹100 fund size (aum) ₹1,13,606.47
+      cr expense ratio 0.77% rating 5
+
+    min. for 1st investment ₹100 min. for 2nd investment ₹100 min. for sip ₹100
+
+    if you redeem within one year, returns are taxed at 20%. if you redeem after one
+      year, returns exceeding rs 1.25 lakh in a financial year are taxed at 12.5%.
+
+    hdfc flexi cap direct plan growth is a equity mutual fund scheme launched by hdfc
+      mutual fund. this scheme was made available to investors on 10 dec 1999. dhruv
+      muchhal is
+----------------------------------------------------------------------------------------------------
+[ 67] chunk_id    : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__33f61b
+      embed_hash  : 73d60952005fdaa1d9a7280a...
+      cache_file  : 73d60952005fdaa1d9a7280a669d25b2bf8c5ed96f118d57304cdcec1b7b3196.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0835, -0.0808, -0.0868, +0.0314, +0.1480, +0.0221, +0.0101, +0.0319, -0.0026, -0.0000, +0.0072, -0.0706, -0.0755, +0.0008, -0.0773, -0.0543
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - Frequently asked questions (page
+      data): how much expense ratio is charged by hdfc flexi cap direct plan growth? the
+      term expense ratio used for hdfc flexi cap direct plan growth or any other mutual
+      fund is the annual charges one needs to pay to the mutual fund company for
+      managing your investments in that fund. the expense ratio of hdfc flexi cap direct
+      plan growth is 0.77% as of 27 sep 2026...
+----------------------------------------------------------------------------------------------------
+[ 68] chunk_id    : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__2ee59a
+      embed_hash  : b1bf1f2c6f5aed9f543717c9...
+      cache_file  : b1bf1f2c6f5aed9f543717c9d42f6272bc2ddb4f523cc28781949af82853158a.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0870, -0.1021, -0.1074, +0.0605, +0.1015, +0.0105, +0.0028, +0.0770, -0.0321, +0.0231, +0.0319, -0.0668, -0.0932, -0.0290, -0.0420, +0.0111
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - Frequently asked questions (page
+      data): what is the aum of hdfc flexi cap direct plan growth? the aum, short for
+      assets under management of hdfc flexi cap direct plan growth is ₹1,13,606.47cr as
+      of 27 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 69] chunk_id    : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__b311b5
+      embed_hash  : cbcea82f4b972fc96b38186a...
+      cache_file  : cbcea82f4b972fc96b38186a34b05209ae55992f7442dc58358b73b2a03aeda5.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0301, -0.1025, -0.0862, +0.0123, +0.0876, +0.0524, +0.0022, +0.0844, -0.0089, -0.0111, +0.0345, -0.0475, -0.0920, -0.0561, -0.0104, -0.0208
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - Frequently asked questions (page
+      data): how to redeem hdfc flexi cap direct plan growth? if you want to sell your
+      hdfc flexi cap direct plan growth holdings, go to your holding on the app or web
+      and simply click on it. you will get two options - redeem & invest more; click on
+      redeem and enter your desired amount or if you wish to redeem the entire holding
+      amount then select the 'redeem all' checkbox.
+----------------------------------------------------------------------------------------------------
+[ 70] chunk_id    : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__4bb594
+      embed_hash  : 6a906413af191ad20e6aa176...
+      cache_file  : 6a906413af191ad20e6aa176ad2a7cf194893cc5d9642147e207924eb71124b6.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0720, -0.1049, -0.0887, -0.0083, +0.1073, +0.0304, +0.0297, +0.0506, -0.0138, -0.0093, +0.0108, -0.0264, -0.0615, -0.0102, -0.0309, -0.0432
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - Frequently asked questions (page
+      data): can i invest in sip and lump sum of hdfc flexi cap direct plan growth? you
+      can select either sip or lumpsum investment of hdfc flexi cap direct plan growth
+      based on your investment objective and risk tolerance.
+----------------------------------------------------------------------------------------------------
+[ 71] chunk_id    : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__b335f1
+      embed_hash  : c7ddf15cf488fcad5566ee4a...
+      cache_file  : c7ddf15cf488fcad5566ee4a0311cb454c386331e096472adc81494672d294bb.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0640, -0.1036, -0.0704, +0.0182, +0.1133, +0.0243, -0.0292, +0.0706, -0.0261, -0.0079, -0.0180, -0.0512, -0.0570, -0.0244, -0.0560, -0.0344
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - Frequently asked questions (page
+      data): what is the nav of hdfc flexi cap direct plan growth? the nav of hdfc flexi
+      cap direct plan growth is ₹2,214.57 as of 25 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 72] chunk_id    : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__3b8f1c
+      embed_hash  : 665e9239e51070ed051c4484...
+      cache_file  : 665e9239e51070ed051c448458044954a0ffb04741fd07470ac829b6ae8a3de9.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0501, -0.0736, -0.0759, +0.0054, +0.0881, +0.0530, -0.0270, +0.0493, +0.0054, -0.0248, +0.0145, -0.0145, -0.0649, -0.0187, -0.0328, -0.0416
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - Frequently asked questions (page
+      data): what is the pe and pb ratio of hdfc flexi cap direct plan growth? the pe
+      ratio ratio of hdfc flexi cap direct plan growth is determined by dividing the
+      market price by its earnings per share and the pb ratio of the same is evaluated
+      by dividing the stock price per share by its book value per share (bvps).
+----------------------------------------------------------------------------------------------------
+[ 73] chunk_id    : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__894f73
+      embed_hash  : 73e1e232d61f853f55ee2788...
+      cache_file  : 73e1e232d61f853f55ee27885597e9fccb4e7ee24d77b96bcfef4fd3040f4931.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0472, -0.1262, -0.0684, +0.0179, +0.0614, +0.0465, -0.0277, +0.0737, -0.0811, +0.0271, +0.0247, -0.0343, -0.0651, -0.0493, -0.0476, -0.0562
+      embed_text  :
+    HDFC Equity Fund - Direct Growth (also called HDFC Flexi Cap Fund - Direct Growth,
+      HDFC Flexi Cap Direct Plan Growth) (Flexi Cap) - Frequently asked questions (page
+      data): how to invest in hdfc flexi cap direct plan growth? you can easily invest
+      in hdfc flexi cap direct plan growth in a hassle-free manner on groww. the process
+      is extremely simple, quick and completely paperless. invest in a few minutes with
+      the following steps: log on to your groww account search for hdfc flexi cap direct
+      plan growth from the search box in order to invest, you will have to complete all
+      the kyc formalities which are completely online and paperless and take a few
+      minutes to complete once you are done with that, you can start investing in hdfc
+      flexi cap direct plan growth as sip or lumpsum as per your investment objective
+      and risk tolerance
+
+    what kind of returns does hdfc flexi cap direct plan growth provide?
+----------------------------------------------------------------------------------------------------
+[ 74] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__d801b3
+      embed_hash  : 32a25f28d36f0db912c64133...
+      cache_file  : 32a25f28d36f0db912c6413314611d4963e8d862dc241ba11e4f4e4dc6fdaf7c.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0539, -0.0518, -0.0778, +0.0061, +0.0882, +0.0277, +0.0568, +0.0615, -0.0324, +0.0340, -0.0445, -0.0677, -0.0914, +0.0005, -0.0556, -0.0618
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for sip: ₹100
+----------------------------------------------------------------------------------------------------
+[ 75] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__ecd70a
+      embed_hash  : a9b3b62dfe014d528179cda9...
+      cache_file  : a9b3b62dfe014d528179cda9dc9cef5c4a6e838192574e71da6bf5ea1322c4fa.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1110, -0.0683, -0.0894, +0.0628, +0.1011, +0.0301, +0.0390, +0.0687, -0.0544, +0.0752, -0.0283, -0.0958, -0.1020, -0.0280, -0.0723, -0.0280
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: fund size (aum): ₹39,933.37 cr
+----------------------------------------------------------------------------------------------------
+[ 76] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__92f606
+      embed_hash  : cad8e97ac080537cc76465dc...
+      cache_file  : cad8e97ac080537cc76465dc334510913aecadf28e4eb4b544e5b992d6c22a88.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0992, -0.0633, -0.0578, +0.0250, +0.1357, +0.0240, +0.0321, +0.0256, -0.0541, +0.0451, -0.0564, -0.0568, -0.0823, -0.0165, -0.1014, -0.0498
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: expense ratio: 1.03%
+----------------------------------------------------------------------------------------------------
+[ 77] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__8c38a3
+      embed_hash  : c5ca36017bf2d3f386d3b3fa...
+      cache_file  : c5ca36017bf2d3f386d3b3fa86763ba653ebf96cebfea496a437266bf5230e06.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0878, -0.0715, -0.0572, +0.0328, +0.1152, +0.0633, +0.0200, +0.0230, -0.0611, +0.0324, -0.0608, -0.0561, -0.0688, -0.0213, -0.1091, -0.0333
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: rating: 4
+----------------------------------------------------------------------------------------------------
+[ 78] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__f187e9
+      embed_hash  : 05425e00207a8ded65c13ea7...
+      cache_file  : 05425e00207a8ded65c13ea713a9fa4b049414477b259a1646269404a01e2314.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0722, -0.0626, -0.0385, +0.0067, +0.1211, +0.0460, +0.0444, +0.0514, -0.0674, +0.0484, -0.0477, -0.0372, -0.0997, -0.0398, -0.0607, -0.0255
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: exit load, stamp duty and tax: exit
+      load exit load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[ 79] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__93a3f2
+      embed_hash  : 83ec6a69666b305bc7075e2e...
+      cache_file  : 83ec6a69666b305bc7075e2ec055aa3456d89ff246483d61e091f340abd16dfd.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0719, -0.0680, -0.0384, +0.0076, +0.1238, +0.0438, +0.0462, +0.0477, -0.0706, +0.0506, -0.0404, -0.0403, -0.1003, -0.0356, -0.0651, -0.0276
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: exit load, stamp duty and tax: exit
+      load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[ 80] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__71e550
+      embed_hash  : e1648204bdc7d4d6c3bcc187...
+      cache_file  : e1648204bdc7d4d6c3bcc18766d8673d00ba29a473f7e6b7345998dc504c5525.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0753, -0.0729, -0.0264, +0.0324, +0.1180, +0.0331, +0.0031, +0.0250, -0.0794, +0.0471, -0.0417, -0.0434, -0.0876, -0.0348, -0.0827, -0.0157
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: exit load: stamp duty on investment:
+      0.005% (from july 1st, 2020) from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[ 81] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__7efcbe
+      embed_hash  : 6295fd221dcef9a3387e26ba...
+      cache_file  : 6295fd221dcef9a3387e26baa98180a6b6379f5a8d565dbe979b6cb0b3c79aa6.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0872, -0.0515, -0.0570, +0.0145, +0.1073, +0.0398, +0.0152, +0.0294, -0.0527, +0.0400, -0.0929, -0.0681, -0.0627, -0.0317, -0.0880, -0.0561
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: investment objective: fund benchmark
+      nifty 100 total return index scheme information document(sid)
+----------------------------------------------------------------------------------------------------
+[ 82] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__4a6349
+      embed_hash  : 191542420fa94dbfab6c0ee8...
+      cache_file  : 191542420fa94dbfab6c0ee8462f1ef71390ddb7a4f228d657644f17ee16ff64.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0733, -0.0755, -0.0386, +0.0316, +0.1204, +0.0394, +0.0265, +0.0185, -0.0567, +0.0289, -0.0827, -0.0499, -0.0864, -0.0226, -0.1054, -0.0616
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: fund benchmark: nifty 100 total return
+      index
+----------------------------------------------------------------------------------------------------
+[ 83] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__0c85bc
+      embed_hash  : 4e197076a05cd7462f4e74fe...
+      cache_file  : 4e197076a05cd7462f4e74fe400a01b0f03e68d9ae40bdeb8600b8c9e4ecd827.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0733, -0.0685, -0.0563, +0.0203, +0.1175, +0.0265, +0.0373, +0.0336, -0.0500, +0.0449, -0.0537, -0.0594, -0.0714, -0.0472, -0.0802, -0.0658
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: nav: 25 sep '26 ₹1,189.08
+----------------------------------------------------------------------------------------------------
+[ 84] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__a24787
+      embed_hash  : 4fd5a46d3e7104162f27f2fb...
+      cache_file  : 4fd5a46d3e7104162f27f2fbb303f2ca327bcd276e29ae3119ce25d9e0a2adcc.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0775, -0.0738, -0.0344, +0.0127, +0.1301, +0.0391, +0.0176, +0.0123, -0.0699, +0.0439, -0.0550, -0.0412, -0.0614, -0.0398, -0.0846, -0.0467
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: nav: 25 sep '26
+----------------------------------------------------------------------------------------------------
+[ 85] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__080254
+      embed_hash  : fe6c2082104cc9618511cda0...
+      cache_file  : fe6c2082104cc9618511cda0537a9ca739f09cff64573f3895df12348bb632a4.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0701, -0.0487, -0.0723, +0.0111, +0.0988, +0.0379, +0.0364, +0.0696, -0.0641, +0.0445, -0.0382, -0.0606, -0.0686, -0.0139, -0.0704, -0.0418
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 1st investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 86] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__a3bc4d
+      embed_hash  : 7b134a9eed08494ead2f25a4...
+      cache_file  : 7b134a9eed08494ead2f25a4f725f65112ead868751d2f8e706c8a0d6276d4d7.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0902, -0.0763, -0.0445, +0.0140, +0.1071, +0.0406, +0.0187, +0.0427, -0.0570, +0.0413, -0.0479, -0.0390, -0.0783, -0.0239, -0.0858, -0.0427
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 1st investment
+----------------------------------------------------------------------------------------------------
+[ 87] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__5eef77
+      embed_hash  : 0365519289c61b2002a419f4...
+      cache_file  : 0365519289c61b2002a419f42b93be5dce4e52c74fc2fd8187b13f267a275f4b.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0721, -0.0492, -0.0689, +0.0105, +0.0989, +0.0340, +0.0329, +0.0776, -0.0581, +0.0381, -0.0340, -0.0651, -0.0666, -0.0129, -0.0646, -0.0422
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 2nd investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 88] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__48c88b
+      embed_hash  : 299330d09efb7751df3c8de8...
+      cache_file  : 299330d09efb7751df3c8de82ec94a284bd8115d4432a71a05663eff6c5ced67.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0950, -0.0747, -0.0405, +0.0133, +0.1077, +0.0372, +0.0138, +0.0529, -0.0482, +0.0340, -0.0436, -0.0451, -0.0758, -0.0228, -0.0787, -0.0438
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 2nd investment
+----------------------------------------------------------------------------------------------------
+[ 89] chunk_id    : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__0097e1
+      embed_hash  : 891aeda3ff4f9c5e0dd63f1e...
+      cache_file  : 891aeda3ff4f9c5e0dd63f1e3590b25fb44c1d2970af06fc0aa27face2a24c03.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0516, -0.0493, -0.0765, -0.0009, +0.0875, +0.0263, +0.0522, +0.0599, -0.0427, +0.0315, -0.0386, -0.0573, -0.0873, +0.0026, -0.0527, -0.0576
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - HDFC Large Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for sip ₹100
+----------------------------------------------------------------------------------------------------
+[ 90] chunk_id    : hdfc-large-cap-fund-direct-growth__about_hdfc_large_cap_fund_direct_growth__d2b9f4
+      embed_hash  : b6b7783334d983ddea67eb13...
+      cache_file  : b6b7783334d983ddea67eb13812614d46c20dbfb62f62574d8d05751a09e455e.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0671, -0.0722, -0.1048, +0.0082, +0.1221, +0.0104, +0.0373, +0.0616, -0.0400, +0.0373, -0.0036, -0.0570, -0.0820, +0.0008, -0.0199, -0.0416
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - About HDFC Large Cap Fund Direct
+      Growth: nav: 25 sep '26 ₹1,189.08 min. for sip ₹100 fund size (aum) ₹39,933.37 cr
+      expense ratio 1.03% rating 4
+
+    min. for 1st investment ₹100 min. for 2nd investment ₹100 min. for sip ₹100
+
+    if you redeem within one year, returns are taxed at 20%. if you redeem after one
+      year, returns exceeding rs 1.25 lakh in a financial year are taxed at 12.5%.
+
+    hdfc large cap fund direct growth is a equity mutual fund scheme launched by hdfc
+      mutual fund. this scheme was made available to investors on 10 dec 1999. rahul
+      baijal is the current fund manager of hdfc large cap fund direct growth fund. the
+      fund currently has an asset under management(aum)
+----------------------------------------------------------------------------------------------------
+[ 91] chunk_id    : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__c22436
+      embed_hash  : 6414af7dc1ac4d9f30910d8f...
+      cache_file  : 6414af7dc1ac4d9f30910d8fa665dec39b98b973e141ecf7daa1a0f8e1c84627.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1018, -0.0653, -0.0450, +0.0137, +0.1448, +0.0168, +0.0316, +0.0314, -0.0378, +0.0460, -0.0205, -0.0800, -0.0760, +0.0080, -0.0975, -0.0518
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - Frequently asked questions (page
+      data): how much expense ratio is charged by hdfc large cap fund direct growth? the
+      term expense ratio used for hdfc large cap fund direct growth or any other mutual
+      fund is the annual charges one needs to pay to the mutual fund company for
+      managing your investments in that fund. the expense ratio of hdfc large cap fund
+      direct growth is 1.03% as of 27 sep 2026...
+----------------------------------------------------------------------------------------------------
+[ 92] chunk_id    : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__221019
+      embed_hash  : 56332983a0a69e8c33c6dfb9...
+      cache_file  : 56332983a0a69e8c33c6dfb951d6c000bb493df4e44628a97674dd16b9615a2b.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1217, -0.0865, -0.0634, +0.0581, +0.1002, +0.0124, +0.0092, +0.1007, -0.0606, +0.0734, -0.0006, -0.0848, -0.0919, -0.0346, -0.0627, -0.0074
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - Frequently asked questions (page
+      data): what is the aum of hdfc large cap fund direct growth? the aum, short for
+      assets under management of hdfc large cap fund direct growth is ₹39,933.37cr as of
+      27 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 93] chunk_id    : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__80ba58
+      embed_hash  : f06fc968aabe7d29f84b3444...
+      cache_file  : f06fc968aabe7d29f84b3444422f27476c4aa42460f96fe53848be6c3fb218dd.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0408, -0.0859, -0.0574, -0.0010, +0.0847, +0.0415, +0.0262, +0.0880, -0.0291, +0.0423, +0.0146, -0.0498, -0.0855, -0.0547, -0.0355, -0.0201
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - Frequently asked questions (page
+      data): how to redeem hdfc large cap fund direct growth? if you want to sell your
+      hdfc large cap fund direct growth holdings, go to your holding on the app or web
+      and simply click on it. you will get two options - redeem & invest more; click on
+      redeem and enter your desired amount or if you wish to redeem the entire holding
+      amount then select the 'redeem all' checkbox.
+----------------------------------------------------------------------------------------------------
+[ 94] chunk_id    : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__9ac248
+      embed_hash  : d21067ad7d3bede76e3ef056...
+      cache_file  : d21067ad7d3bede76e3ef0563451c2e059d464fb3a06c1b55220e6bcd8822d27.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1104, -0.0895, -0.0431, -0.0271, +0.0958, +0.0352, +0.0502, +0.0507, -0.0536, +0.0448, -0.0279, -0.0346, -0.0486, -0.0048, -0.0306, -0.0407
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - Frequently asked questions (page
+      data): can i invest in sip and lump sum of hdfc large cap fund direct growth? you
+      can select either sip or lumpsum investment of hdfc large cap fund direct growth
+      based on your investment objective and risk tolerance.
+----------------------------------------------------------------------------------------------------
+[ 95] chunk_id    : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__8b8cd2
+      embed_hash  : 67b897bff5c096343e806e53...
+      cache_file  : 67b897bff5c096343e806e53133661c02b82e952c99d2047a0d0608abf87f3cb.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0912, -0.0972, -0.0092, +0.0133, +0.1122, +0.0099, -0.0184, +0.0723, -0.0525, +0.0408, -0.0581, -0.0375, -0.0559, -0.0405, -0.0726, -0.0625
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - Frequently asked questions (page
+      data): what is the nav of hdfc large cap fund direct growth? the nav of hdfc large
+      cap fund direct growth is ₹1,189.08 as of 25 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 96] chunk_id    : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__bbda4a
+      embed_hash  : 6643a16b84800e0cba55d00d...
+      cache_file  : 6643a16b84800e0cba55d00dcce710569ce3432a496fd5bd1a3852d4d76c6b6a.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0803, -0.0609, -0.0276, -0.0042, +0.0848, +0.0449, -0.0201, +0.0493, -0.0006, +0.0334, -0.0133, -0.0068, -0.0539, -0.0140, -0.0430, -0.0400
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - Frequently asked questions (page
+      data): what is the pe and pb ratio of hdfc large cap fund direct growth? the pe
+      ratio ratio of hdfc large cap fund direct growth is determined by dividing the
+      market price by its earnings per share and the pb ratio of the same is evaluated
+      by dividing the stock price per share by its book value per share (bvps).
+----------------------------------------------------------------------------------------------------
+[ 97] chunk_id    : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__be1db3
+      embed_hash  : 25e82146eb364d0d899482de...
+      cache_file  : 25e82146eb364d0d899482de34d18b55f1c28c2d934bf8c6bf51fe3e964c756d.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0766, -0.1191, -0.0490, +0.0205, +0.0820, +0.0233, -0.0118, +0.0696, -0.0867, +0.0449, -0.0107, -0.0553, -0.0721, -0.0293, -0.0608, -0.0592
+      embed_text  :
+    HDFC Large Cap Fund - Direct Growth (Large Cap) - Frequently asked questions (page
+      data): how to invest in hdfc large cap fund direct growth? you can easily invest
+      in hdfc large cap fund direct growth in a hassle-free manner on groww. the process
+      is extremely simple, quick and completely paperless. invest in a few minutes with
+      the following steps: log on to your groww account search for hdfc large cap fund
+      direct growth from the search box in order to invest, you will have to complete
+      all the kyc formalities which are completely online and paperless and take a few
+      minutes to complete once you are done with that, you can start investing in hdfc
+      large cap fund direct growth as sip or lumpsum as per your investment objective
+      and risk tolerance
+
+    what kind of returns does hdfc large cap fund direct growth provide? the hdfc large
+      cap fund direct growth has been there from 01 jan 2013 and the average annual
+      returns provided by this fund
+----------------------------------------------------------------------------------------------------
+[ 98] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__d801b3
+      embed_hash  : 7cfe1cde8f0f439065a95016...
+      cache_file  : 7cfe1cde8f0f439065a950169e33fe34639d2c8975e4a5ac4a7e64b14317d3a5.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0633, -0.0315, -0.0780, +0.0180, +0.1006, +0.0408, +0.0656, +0.0724, -0.0288, +0.0411, -0.0182, -0.0833, -0.0908, -0.0001, -0.0553, -0.0580
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for sip: ₹100
+----------------------------------------------------------------------------------------------------
+[ 99] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__2eefe6
+      embed_hash  : 355eed04f9e863bec76b8df6...
+      cache_file  : 355eed04f9e863bec76b8df69872602e66b13e73642c34ffbc8f36c95be415fc.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1307, -0.0341, -0.0882, +0.0763, +0.1072, +0.0371, +0.0469, +0.0844, -0.0560, +0.0685, -0.0138, -0.1021, -0.1122, -0.0261, -0.0731, -0.0283
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: fund size (aum): ₹41,890.86 cr
+----------------------------------------------------------------------------------------------------
+[100] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__2aeb3d
+      embed_hash  : 87e8eb19ce0c6cbdd08b2945...
+      cache_file  : 87e8eb19ce0c6cbdd08b29451b6984e2aa552e3fde2a0ac486471398f1f044f3.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1173, -0.0351, -0.0615, +0.0406, +0.1495, +0.0391, +0.0378, +0.0343, -0.0488, +0.0516, -0.0238, -0.0794, -0.0805, -0.0100, -0.1039, -0.0492
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: expense ratio: 0.78%
+----------------------------------------------------------------------------------------------------
+[101] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__98d3bb
+      embed_hash  : 65ad003b77d8211c148cff78...
+      cache_file  : 65ad003b77d8211c148cff78d08a2083792cdb99bf809929b070b61b190f9711.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0892, -0.0579, -0.0654, +0.0490, +0.1332, +0.0726, +0.0308, +0.0348, -0.0540, +0.0401, -0.0311, -0.0726, -0.0697, -0.0256, -0.1010, -0.0357
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: rating: 3
+----------------------------------------------------------------------------------------------------
+[102] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__f187e9
+      embed_hash  : e4b3ecad51689b3c211fd55b...
+      cache_file  : e4b3ecad51689b3c211fd55b9a804733810f70725d532a55104f4f0ce27569db.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0847, -0.0438, -0.0400, +0.0198, +0.1354, +0.0592, +0.0493, +0.0587, -0.0610, +0.0570, -0.0169, -0.0490, -0.0970, -0.0413, -0.0617, -0.0205
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: exit load, stamp duty and tax: exit
+      load exit load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[103] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__93a3f2
+      embed_hash  : 90f7769e7ddd3194740f7887...
+      cache_file  : 90f7769e7ddd3194740f78877a27419c3ce309774f1a2f284b7ccd5586d4c45a.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0842, -0.0485, -0.0403, +0.0205, +0.1386, +0.0572, +0.0510, +0.0553, -0.0638, +0.0588, -0.0093, -0.0526, -0.0972, -0.0371, -0.0660, -0.0233
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: exit load, stamp duty and tax: exit
+      load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[104] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__71e550
+      embed_hash  : a5cbe0c170b5877ad01d7bd3...
+      cache_file  : a5cbe0c170b5877ad01d7bd337769831abd34935a9c5a0bd5220754a8fac2fcb.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0871, -0.0553, -0.0295, +0.0443, +0.1325, +0.0482, +0.0096, +0.0356, -0.0730, +0.0533, -0.0125, -0.0580, -0.0876, -0.0340, -0.0828, -0.0123
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: exit load: stamp duty on investment:
+      0.005% (from july 1st, 2020) from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[105] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__56fec8
+      embed_hash  : 8d4a7aaf2a290e814d121ce6...
+      cache_file  : 8d4a7aaf2a290e814d121ce6b3a09160ddf8a90c04193319e1ef2f5f42542a0f.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0993, -0.0436, -0.0402, +0.0460, +0.1234, +0.0547, +0.0348, +0.0480, -0.0571, +0.0507, -0.0623, -0.0791, -0.0728, -0.0461, -0.1028, -0.0391
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: investment objective: fund benchmark
+      bse 250 smallcap total return index
+----------------------------------------------------------------------------------------------------
+[106] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__aba082
+      embed_hash  : 89f69eb7686083e69ed3c83d...
+      cache_file  : 89f69eb7686083e69ed3c83d7cac69f3e8166accc976b5f50a95be678c948224.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0884, -0.0542, -0.0279, +0.0599, +0.1317, +0.0552, +0.0266, +0.0414, -0.0655, +0.0433, -0.0788, -0.0727, -0.0749, -0.0428, -0.1034, -0.0473
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: fund benchmark: bse 250 smallcap total
+      return index
+----------------------------------------------------------------------------------------------------
+[107] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__52fe9d
+      embed_hash  : 0d654cb23ad357a74df89a7e...
+      cache_file  : 0d654cb23ad357a74df89a7e17fb2a0036783ac0ddcbfa90c5f839b0113241fd.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0801, -0.0325, -0.0608, +0.0254, +0.1344, +0.0428, +0.0450, +0.0450, -0.0530, +0.0565, -0.0199, -0.0872, -0.0725, -0.0356, -0.0793, -0.0568
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: nav: 25 sep '26 ₹159.82
+----------------------------------------------------------------------------------------------------
+[108] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__a24787
+      embed_hash  : d38adb28e3ef04a8c7db56a2...
+      cache_file  : d38adb28e3ef04a8c7db56a24de67175326a62c2d578cfe14747c0aab7e80be6.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0917, -0.0501, -0.0391, +0.0263, +0.1419, +0.0575, +0.0256, +0.0259, -0.0663, +0.0544, -0.0288, -0.0589, -0.0635, -0.0386, -0.0850, -0.0437
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: nav: 25 sep '26
+----------------------------------------------------------------------------------------------------
+[109] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__080254
+      embed_hash  : 1da9aef6c3086e27c5f3b540...
+      cache_file  : 1da9aef6c3086e27c5f3b54077c0bc9f738abf101fc63cacf9da6a422cd08df7.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0792, -0.0263, -0.0754, +0.0232, +0.1111, +0.0540, +0.0432, +0.0817, -0.0593, +0.0507, -0.0091, -0.0760, -0.0676, -0.0128, -0.0706, -0.0400
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 1st investment ₹100
+----------------------------------------------------------------------------------------------------
+[110] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__a3bc4d
+      embed_hash  : 8024c15573cfe34cbac93e5f...
+      cache_file  : 8024c15573cfe34cbac93e5f6c5a26e1e104197d4c3b801d92fb8e8a09aa710b.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1022, -0.0522, -0.0492, +0.0257, +0.1199, +0.0558, +0.0253, +0.0552, -0.0519, +0.0507, -0.0203, -0.0511, -0.0768, -0.0225, -0.0827, -0.0398
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 1st investment
+----------------------------------------------------------------------------------------------------
+[111] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__5eef77
+      embed_hash  : 97451fb5301a28c9138e4965...
+      cache_file  : 97451fb5301a28c9138e4965af695d7e00beac852d674b649cf11b05580fca96.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0808, -0.0272, -0.0735, +0.0215, +0.1121, +0.0493, +0.0411, +0.0885, -0.0540, +0.0469, -0.0062, -0.0781, -0.0663, -0.0129, -0.0657, -0.0389
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 2nd investment ₹100
+----------------------------------------------------------------------------------------------------
+[112] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__48c88b
+      embed_hash  : 5c56f2777d7326d79316d70b...
+      cache_file  : 5c56f2777d7326d79316d70bb5f596574472cd667cd99f3cd82dd82f4c29ff38.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1061, -0.0523, -0.0473, +0.0242, +0.1216, +0.0517, +0.0222, +0.0635, -0.0442, +0.0461, -0.0177, -0.0545, -0.0750, -0.0224, -0.0774, -0.0389
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for 2nd investment
+----------------------------------------------------------------------------------------------------
+[113] chunk_id    : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__0097e1
+      embed_hash  : d4564c582977bebf1c9d35d9...
+      cache_file  : d4564c582977bebf1c9d35d90353f89f673b8409b456bbff4b7f5352b0bd695b.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0607, -0.0279, -0.0770, +0.0108, +0.0999, +0.0406, +0.0610, +0.0723, -0.0394, +0.0391, -0.0116, -0.0733, -0.0866, +0.0024, -0.0525, -0.0536
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - HDFC Small Cap Fund Direct Growth
+      - NAV, Mutual Fund Performance & Portfolio: min. for sip ₹100
+----------------------------------------------------------------------------------------------------
+[114] chunk_id    : hdfc-small-cap-fund-direct-growth__about_hdfc_small_cap_fund_direct_growth__22094c
+      embed_hash  : 5942ecaa59baff1562aa5b28...
+      cache_file  : 5942ecaa59baff1562aa5b28efe2d4eda1404da7e0f04c3f76496db80425b80e.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0775, -0.0473, -0.0955, +0.0091, +0.1249, +0.0184, +0.0425, +0.0700, -0.0463, +0.0517, +0.0237, -0.0641, -0.0926, +0.0116, -0.0248, -0.0385
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - About HDFC Small Cap Fund Direct
+      Growth: nav: 25 sep '26 ₹159.82 min. for sip ₹100 fund size (aum) ₹41,890.86 cr
+      expense ratio 0.78% rating 3
+
+    min. for 1st investment ₹100 min. for 2nd investment ₹100 min. for sip ₹100
+
+    if you redeem within one year, returns are taxed at 20%. if you redeem after one
+      year, returns exceeding rs 1.25 lakh in a financial year are taxed at 12.5%.
+
+    hdfc small cap fund direct growth is a equity mutual fund scheme launched by hdfc
+      mutual fund. this scheme was made available to investors on 10 dec 1999. dhruv
+      muchhal is the current fund manager of hdfc small cap fund direct growth fund. the
+      fund currently has an asset under management(aum) of ₹9
+----------------------------------------------------------------------------------------------------
+[115] chunk_id    : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__793b29
+      embed_hash  : 50a2e119a4f8d072a7e24b11...
+      cache_file  : 50a2e119a4f8d072a7e24b11c7c9871db5d0eb93ee56a5878a53449ec85056a7.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1140, -0.0445, -0.0491, +0.0355, +0.1590, +0.0395, +0.0355, +0.0439, -0.0273, +0.0518, +0.0129, -0.1067, -0.0694, +0.0129, -0.1008, -0.0541
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - Frequently asked questions (page
+      data): how much expense ratio is charged by hdfc small cap fund direct growth? the
+      term expense ratio used for hdfc small cap fund direct growth or any other mutual
+      fund is the annual charges one needs to pay to the mutual fund company for
+      managing your investments in that fund. the expense ratio of hdfc small cap fund
+      direct growth is 0.78% as of 27 sep 2026...
+----------------------------------------------------------------------------------------------------
+[116] chunk_id    : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__04b720
+      embed_hash  : 9a3db596bdbecc93889230b9...
+      cache_file  : 9a3db596bdbecc93889230b95d7270e9d6ade12bf0ac4f79b48ac9ec2a399abc.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1398, -0.0477, -0.0697, +0.0803, +0.1114, +0.0230, +0.0152, +0.1150, -0.0515, +0.0681, +0.0243, -0.0877, -0.0879, -0.0212, -0.0645, -0.0091
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - Frequently asked questions (page
+      data): what is the aum of hdfc small cap fund direct growth? the aum, short for
+      assets under management of hdfc small cap fund direct growth is ₹41,890.86cr as of
+      27 sep 2026.
+----------------------------------------------------------------------------------------------------
+[117] chunk_id    : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__b239be
+      embed_hash  : 7c15e9d02ddc898bff228fe9...
+      cache_file  : 7c15e9d02ddc898bff228fe91b2eaf7c3e6359b57dffdac8ea11450520c378e3.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0560, -0.0725, -0.0562, +0.0184, +0.1045, +0.0604, +0.0346, +0.0923, -0.0196, +0.0464, +0.0337, -0.0655, -0.0805, -0.0495, -0.0353, -0.0236
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - Frequently asked questions (page
+      data): how to redeem hdfc small cap fund direct growth? if you want to sell your
+      hdfc small cap fund direct growth holdings, go to your holding on the app or web
+      and simply click on it. you will get two options - redeem & invest more; click on
+      redeem and enter your desired amount or if you wish to redeem the entire holding
+      amount then select the 'redeem all' checkbox.
+----------------------------------------------------------------------------------------------------
+[118] chunk_id    : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__d49147
+      embed_hash  : 13f5139472dd0369b9eaa8b7...
+      cache_file  : 13f5139472dd0369b9eaa8b7ada4ddacd2757b02eb4c026c0f7dbf691dfd752a.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.1189, -0.0762, -0.0457, -0.0090, +0.1086, +0.0520, +0.0570, +0.0596, -0.0426, +0.0465, -0.0071, -0.0530, -0.0446, +0.0014, -0.0280, -0.0400
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - Frequently asked questions (page
+      data): can i invest in sip and lump sum of hdfc small cap fund direct growth? you
+      can select either sip or lumpsum investment of hdfc small cap fund direct growth
+      based on your investment objective and risk tolerance.
+----------------------------------------------------------------------------------------------------
+[119] chunk_id    : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__947255
+      embed_hash  : 674d65a4b0823c26cae5bb39...
+      cache_file  : 674d65a4b0823c26cae5bb39c10f479b9a775244dce48704ab1a778e0dec85ec.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0964, -0.0495, -0.0183, +0.0206, +0.1474, +0.0446, -0.0016, +0.0871, -0.0575, +0.0599, -0.0216, -0.0790, -0.0495, -0.0233, -0.0707, -0.0469
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - Frequently asked questions (page
+      data): what is the nav of hdfc small cap fund direct growth? the nav of hdfc small
+      cap fund direct growth is ₹159.82 as of 25 sep 2026.
+----------------------------------------------------------------------------------------------------
+[120] chunk_id    : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__ac1f52
+      embed_hash  : f778e9d9e7ddf04f34034de3...
+      cache_file  : f778e9d9e7ddf04f34034de34032b6158e1cb97f30a9059b27f89360d81f7c91.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0957, -0.0382, -0.0298, +0.0143, +0.0949, +0.0660, -0.0105, +0.0590, +0.0064, +0.0384, +0.0123, -0.0306, -0.0481, -0.0066, -0.0436, -0.0433
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - Frequently asked questions (page
+      data): what is the pe and pb ratio of hdfc small cap fund direct growth? the pe
+      ratio ratio of hdfc small cap fund direct growth is determined by dividing the
+      market price by its earnings per share and the pb ratio of the same is evaluated
+      by dividing the stock price per share by its book value per share (bvps).
+----------------------------------------------------------------------------------------------------
+[121] chunk_id    : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__196a00
+      embed_hash  : ece32936b4d5a1310a9fcedf...
+      cache_file  : ece32936b4d5a1310a9fcedf00a636bc92a0e1d9d258ba2068bc060829565b9b.npy
+      vector_dim  : 384   norm: 1.000000
+      vector[:16]:
+        +0.0840, -0.1078, -0.0507, +0.0349, +0.0980, +0.0374, -0.0053, +0.0777, -0.0775, +0.0463, +0.0103, -0.0645, -0.0680, -0.0249, -0.0587, -0.0568
+      embed_text  :
+    HDFC Small Cap Fund - Direct Growth (Small Cap) - Frequently asked questions (page
+      data): how to invest in hdfc small cap fund direct growth? you can easily invest
+      in hdfc small cap fund direct growth in a hassle-free manner on groww. the process
+      is extremely simple, quick and completely paperless. invest in a few minutes with
+      the following steps: log on to your groww account search for hdfc small cap fund
+      direct growth from the search box in order to invest, you will have to complete
+      all the kyc formalities which are completely online and paperless and take a few
+      minutes to complete once you are done with that, you can start investing in hdfc
+      small cap fund direct growth as sip or lumpsum as per your investment objective
+      and risk tolerance
+
+    what kind of returns does hdfc small cap fund direct growth provide? the hdfc small
+      cap fund direct growth has been there from 01 jan 2013 and the average annual
+      returns provided by this fund
+----------------------------------------------------------------------------------------------------

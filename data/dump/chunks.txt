@@ -1,0 +1,1734 @@
+====================================================================================================
+  STAGE 2 OUTPUT - THE 121 CHUNKS
+====================================================================================================
+  121 chunks total  |  source: E:\nextleap cursor project class\data\chunks.jsonl
+
+  One chunk = one retrievable unit and one citable span. The header of each
+  block is the metadata the vector store filters on; the indented body is the
+  text that gets embedded and quoted.
+
+  by doc_type : {'fact': 81, 'prose': 10, 'faq': 30}
+  by scheme   : {'hdfc-balanced-advantage-fund-direct-growth': 24, 'hdfc-elss-tax-saver-fund-direct-plan-growth': 25, 'hdfc-equity-fund-direct-growth': 24, 'hdfc-large-cap-fund-direct-growth': 24, 'hdfc-small-cap-fund-direct-growth': 24}
+  tokens      : min 4 | median 14 | max 325
+  documents    : 5 kept, 2 dropped by the quality gate, 0 quarantined
+  ADR-001 ev   : fact_label_value_separated_pct=0.0  (must be 0.0)   prose_below_min_tokens_pct=0.0   semantic_merges=0
+  gate dropped  : amfi-mutual-fund-basics - no fact-bearing nodes and mean node is only 34 chars (< 80) - navigation/search shell, not content
+  gate dropped  : groww-help-statement-guides - no fact-bearing nodes and mean node is only 55 chars (< 80) - navigation/search shell, not content
+
+====================================================================================================
+
+[  1] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__d801b3
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_sip = ₹100
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-18
+      content_hash: d801b38f82d9607a79c9142f...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    min. for sip: ₹100
+----------------------------------------------------------------------------------------------------
+[  2] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__083d74
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: aum = ₹1,07,295.79 cr
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 15   chars 0-32
+      content_hash: 083d74bef35e4e3b97b9a870...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    fund size (aum): ₹1,07,295.79 cr
+----------------------------------------------------------------------------------------------------
+[  3] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__2aeb3d
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: expense_ratio = 0.78%
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 8   chars 0-20
+      content_hash: 2aeb3d61b0a00ea95e898399...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    expense ratio: 0.78%
+----------------------------------------------------------------------------------------------------
+[  4] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__e13ec1
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: rating = 5
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 4   chars 0-9
+      content_hash: e13ec190c7b4ab476d02c7df...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    rating: 5
+----------------------------------------------------------------------------------------------------
+[  5] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__38a531
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = stamp duty on investment: 0.005% (from july 1st, 2020) from july 1st 2020
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 39   chars 0-104
+      content_hash: 38a531511d5aedf95c6cadd9...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    exit load, stamp duty and tax: stamp duty on investment: 0.005% (from july 1st, 2020)
+      from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[  6] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__c5360a
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = stamp duty on investment: 0.005% (from july 1st, 2020)
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 30   chars 0-85
+      content_hash: c5360a3fa6dd01a4702202fc...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    exit load, stamp duty and tax: stamp duty on investment: 0.005% (from july 1st, 2020)
+----------------------------------------------------------------------------------------------------
+[  7] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__d29533
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = from july 1st 2020
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 12   chars 0-29
+      content_hash: d29533e23b57af97331fa368...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    exit load: from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[  8] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__fd6f14
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: fund_objective = fund benchmark nifty 50 hybrid composite debt 50:50 index
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 17   chars 0-79
+      content_hash: fd6f14605088b6ace202274e...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    investment objective: fund benchmark nifty 50 hybrid composite debt 50:50 index
+----------------------------------------------------------------------------------------------------
+[  9] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__a0edfe
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: benchmark = nifty 50 hybrid composite debt 50:50 index
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 15   chars 0-58
+      content_hash: a0edfed48abebdb291b0e037...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    fund benchmark: nifty 50 hybrid composite debt 50:50 index
+----------------------------------------------------------------------------------------------------
+[ 10] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__59ea48
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: nav = nav: 25 sep '26 ₹557.73
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 11   chars 0-23
+      content_hash: 59ea4894fde5cc1a89647285...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    nav: 25 sep '26 ₹557.73
+----------------------------------------------------------------------------------------------------
+[ 11] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__a24787
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: nav = nav: 25 sep '26
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-15
+      content_hash: a2478727c19e57213b8c7a40...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    nav: 25 sep '26
+----------------------------------------------------------------------------------------------------
+[ 12] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__080254
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 1st investment ₹100
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 9   chars 0-28
+      content_hash: 08025446b70df8766e109c88...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    min. for 1st investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 13] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__a3bc4d
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 1st investment
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-23
+      content_hash: a3bc4d9b31b251d914798049...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    min. for 1st investment
+----------------------------------------------------------------------------------------------------
+[ 14] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__5eef77
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 2nd investment ₹100
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 9   chars 0-28
+      content_hash: 5eef77b6457c4da6d876ed72...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    min. for 2nd investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 15] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__48c88b
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 2nd investment
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-23
+      content_hash: 48c88bb2eb3a820e6e28f30f...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    min. for 2nd investment
+----------------------------------------------------------------------------------------------------
+[ 16] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__hdfc_balanced_advantage_fund_direct_grow__0097e1
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_sip = min. for sip ₹100
+      section    : HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 6   chars 0-17
+      content_hash: 0097e1de075a9f8c5f51f7b5...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    min. for sip ₹100
+----------------------------------------------------------------------------------------------------
+[ 17] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__about_hdfc_balanced_advantage_fund_direc__33f4bb
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : prose   (no fact_key - prose)
+      section    : About HDFC Balanced Advantage Fund Direct Growth
+      tokens     : 325   chars 0-1285
+      content_hash: 33f4bb7f4f6e5ed39ffd119e...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    nav: 25 sep '26 ₹557.73 min. for sip ₹100 fund size (aum) ₹1,07,295.79 cr expense ratio
+      0.78% rating 5
+
+    min. for 1st investment ₹100 min. for 2nd investment ₹100 min. for sip ₹100
+
+    exit load for units in excess of 15% of the investment,1% will be charged for redemption
+      within 1 year.
+
+    if you redeem within one year, returns are taxed at 20%. if you redeem after one year,
+      returns exceeding rs 1.25 lakh in a financial year are taxed at 12.5%.
+
+    hdfc balanced advantage fund direct growth is a hybrid mutual fund scheme launched by
+      hdfc mutual fund. this scheme was made available to investors on 10 dec 1999. anil
+      bamboli is the current fund manager of hdfc balanced advantage fund direct growth
+      fund. the fund currently has an asset under management(aum) of ₹9,86,237 cr and the
+      latest nav as of 25 sep 2026 is ₹557.73. the hdfc balanced advantage fund direct
+      growth is rated very high risk. minimum sip investment is set to ₹100. minimum lumpsum
+      investment is ₹100. exit load for units in excess of 15% of the investment,1% will be
+      charged for redemption within 1 year. ;
+
+    the scheme seeks to provide long term capital appreciation / income from a dynamic mix
+      of equity and debt investments.
+
+    fund benchmark nifty 50 hybrid composite debt 50:50 index scheme information
+      document(sid)
+----------------------------------------------------------------------------------------------------
+[ 18] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__fe1c6b
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : faq   fact_key: expense_ratio = the term expense ratio used for hdfc balanced advantage fund direct growth or any other mutual fund is the annual charges one needs to pay to the mutual fund company for managing your investments in that fund. the expense ratio of hdfc balanced advantage fund direct growth is 0.78% as of 27 sep 2026...
+      section    : Frequently asked questions (page data)
+      tokens     : 80   chars 0-384
+      content_hash: fe1c6be62b66624f834bbd33...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    how much expense ratio is charged by hdfc balanced advantage fund direct growth? the
+      term expense ratio used for hdfc balanced advantage fund direct growth or any other
+      mutual fund is the annual charges one needs to pay to the mutual fund company for
+      managing your investments in that fund. the expense ratio of hdfc balanced advantage
+      fund direct growth is 0.78% as of 27 sep 2026...
+----------------------------------------------------------------------------------------------------
+[ 19] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__28a8a8
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : faq   fact_key: aum = the aum, short for assets under management of hdfc balanced advantage fund direct growth is ₹1,07,295.79cr as of 27 sep 2026.
+      section    : Frequently asked questions (page data)
+      tokens     : 50   chars 0-188
+      content_hash: 28a8a8f08bfe42304812cad0...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    what is the aum of hdfc balanced advantage fund direct growth? the aum, short for assets
+      under management of hdfc balanced advantage fund direct growth is ₹1,07,295.79cr as of
+      27 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 20] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__af4cf1
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : faq   fact_key: how_to_redeem = if you want to sell your hdfc balanced advantage fund direct growth holdings, go to your holding on the app or web and simply click on it. you will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox.
+      section    : Frequently asked questions (page data)
+      tokens     : 80   chars 0-381
+      content_hash: af4cf130cd45a116d3892752...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    how to redeem hdfc balanced advantage fund direct growth? if you want to sell your hdfc
+      balanced advantage fund direct growth holdings, go to your holding on the app or web
+      and simply click on it. you will get two options - redeem & invest more; click on
+      redeem and enter your desired amount or if you wish to redeem the entire holding
+      amount then select the 'redeem all' checkbox.
+----------------------------------------------------------------------------------------------------
+[ 21] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__95b737
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : faq   fact_key: sip_vs_lumpsum = you can select either sip or lumpsum investment of hdfc balanced advantage fund direct growth based on your investment objective and risk tolerance.
+      section    : Frequently asked questions (page data)
+      tokens     : 43   chars 0-228
+      content_hash: 95b7376ae70cb0f61426439f...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    can i invest in sip and lump sum of hdfc balanced advantage fund direct growth? you can
+      select either sip or lumpsum investment of hdfc balanced advantage fund direct growth
+      based on your investment objective and risk tolerance.
+----------------------------------------------------------------------------------------------------
+[ 22] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__0ce8be
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : faq   fact_key: nav = the nav of hdfc balanced advantage fund direct growth is ₹557.73 as of 25 sep 2026.
+      section    : Frequently asked questions (page data)
+      tokens     : 37   chars 0-146
+      content_hash: 0ce8be907b18f45669fdd4ae...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    what is the nav of hdfc balanced advantage fund direct growth? the nav of hdfc balanced
+      advantage fund direct growth is ₹557.73 as of 25 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 23] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__aa1514
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : faq   fact_key: pe_pb_ratio = the pe ratio ratio of hdfc balanced advantage fund direct growth is determined by dividing the market price by its earnings per share and the pb ratio of the same is evaluated by dividing the stock price per share by its book value per share (bvps).
+      section    : Frequently asked questions (page data)
+      tokens     : 66   chars 0-324
+      content_hash: aa1514bfb0afd02fdb0b87c2...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    what is the pe and pb ratio of hdfc balanced advantage fund direct growth? the pe ratio
+      ratio of hdfc balanced advantage fund direct growth is determined by dividing the
+      market price by its earnings per share and the pb ratio of the same is evaluated by
+      dividing the stock price per share by its book value per share (bvps).
+----------------------------------------------------------------------------------------------------
+[ 24] chunk_id   : hdfc-balanced-advantage-fund-direct-growth__frequently_asked_questions_page_data__94bf84
+      scheme     : HDFC Balanced Advantage Fund - Direct Growth  (hdfc-balanced-advantage-fund-direct-growth)
+      category   : Balanced Advantage   plan: Direct Growth
+      doc_type   : prose   (no fact_key - prose)
+      section    : Frequently asked questions (page data)
+      tokens     : 189   chars 0-938
+      content_hash: 94bf840ac1cbd160871f695e...
+      source     : https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:27.901Z
+      text       :
+    how to invest in hdfc balanced advantage fund direct growth? you can easily invest in
+      hdfc balanced advantage fund direct growth in a hassle-free manner on groww. the
+      process is extremely simple, quick and completely paperless. invest in a few minutes
+      with the following steps: log on to your groww account search for hdfc balanced
+      advantage fund direct growth from the search box in order to invest, you will have to
+      complete all the kyc formalities which are completely online and paperless and take a
+      few minutes to complete once you are done with that, you can start investing in hdfc
+      balanced advantage fund direct growth as sip or lumpsum as per your investment
+      objective and risk tolerance
+
+    what kind of returns does hdfc balanced advantage fund direct growth provide? the hdfc
+      balanced advantage fund direct growth has been there from 01 jan 2013 and the average
+      annual returns provided by this fund is 14.28% since its inception.
+----------------------------------------------------------------------------------------------------
+[ 25] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__d10b49
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: lock_in_period = elss • 3y lock-in
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 8   chars 0-17
+      content_hash: d10b49a544ff9194d53b5a44...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    elss • 3y lock-in
+----------------------------------------------------------------------------------------------------
+[ 26] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__825e4a
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_sip = ₹500
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-18
+      content_hash: 825e4a7dee7df433061d9363...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    min. for sip: ₹500
+----------------------------------------------------------------------------------------------------
+[ 27] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__de2366
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: aum = ₹15,991.78 cr
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 13   chars 0-30
+      content_hash: de2366f20ec1322d8beb35fd...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    fund size (aum): ₹15,991.78 cr
+----------------------------------------------------------------------------------------------------
+[ 28] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__0856a2
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: expense_ratio = 1.21%
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 8   chars 0-20
+      content_hash: 0856a22f36734c953f3c28fe...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    expense ratio: 1.21%
+----------------------------------------------------------------------------------------------------
+[ 29] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__e13ec1
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: rating = 5
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 4   chars 0-9
+      content_hash: e13ec190c7b4ab476d02c7df...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    rating: 5
+----------------------------------------------------------------------------------------------------
+[ 30] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__38a531
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = stamp duty on investment: 0.005% (from july 1st, 2020) from july 1st 2020
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 39   chars 0-104
+      content_hash: 38a531511d5aedf95c6cadd9...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    exit load, stamp duty and tax: stamp duty on investment: 0.005% (from july 1st, 2020)
+      from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[ 31] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__c5360a
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = stamp duty on investment: 0.005% (from july 1st, 2020)
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 30   chars 0-85
+      content_hash: c5360a3fa6dd01a4702202fc...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    exit load, stamp duty and tax: stamp duty on investment: 0.005% (from july 1st, 2020)
+----------------------------------------------------------------------------------------------------
+[ 32] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__b3b5eb
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = from july 1st 2020
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 13   chars 0-33
+      content_hash: b3b5eb40699f3c889ddef730...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    exit load nil: from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[ 33] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__2d7bad
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: fund_objective = fund benchmark nifty 500 total return index scheme information document(sid)
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 17   chars 0-98
+      content_hash: 2d7bad4ec6733af766fb77f3...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    investment objective: fund benchmark nifty 500 total return index scheme information
+      document(sid)
+----------------------------------------------------------------------------------------------------
+[ 34] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__d516a5
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: benchmark = nifty 500 total return index
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 10   chars 0-44
+      content_hash: d516a5217d0e1a89db853ba4...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    fund benchmark: nifty 500 total return index
+----------------------------------------------------------------------------------------------------
+[ 35] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__302759
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: nav = nav: 25 sep '26 ₹1,447.38
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 13   chars 0-25
+      content_hash: 302759173595373aede562d4...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    nav: 25 sep '26 ₹1,447.38
+----------------------------------------------------------------------------------------------------
+[ 36] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__a24787
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: nav = nav: 25 sep '26
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-15
+      content_hash: a2478727c19e57213b8c7a40...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    nav: 25 sep '26
+----------------------------------------------------------------------------------------------------
+[ 37] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__f46234
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 1st investment ₹500
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 9   chars 0-28
+      content_hash: f4623457ef886dc9cb3f8547...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    min. for 1st investment ₹500
+----------------------------------------------------------------------------------------------------
+[ 38] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__a3bc4d
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 1st investment
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-23
+      content_hash: a3bc4d9b31b251d914798049...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    min. for 1st investment
+----------------------------------------------------------------------------------------------------
+[ 39] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__feadd3
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 2nd investment ₹500
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 9   chars 0-28
+      content_hash: feadd3c0664d2f1d216114b6...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    min. for 2nd investment ₹500
+----------------------------------------------------------------------------------------------------
+[ 40] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__48c88b
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 2nd investment
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-23
+      content_hash: 48c88bb2eb3a820e6e28f30f...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    min. for 2nd investment
+----------------------------------------------------------------------------------------------------
+[ 41] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__hdfc_elss_tax_saver_fund_direct_plan_gro__f1b9bb
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_sip = min. for sip ₹500
+      section    : HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 6   chars 0-17
+      content_hash: f1b9bb078141f6f422e232b8...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    min. for sip ₹500
+----------------------------------------------------------------------------------------------------
+[ 42] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__about_hdfc_elss_tax_saver_fund_direct_pl__b7612b
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : prose   (no fact_key - prose)
+      section    : About HDFC ELSS Tax Saver Fund Direct Plan Growth
+      tokens     : 283   chars 0-1095
+      content_hash: b7612b0133d78bcfca0fbd9d...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    nav: 25 sep '26 ₹1,447.38 min. for sip ₹500 fund size (aum) ₹15,991.78 cr expense ratio
+      1.21% rating 5
+
+    min. for 1st investment ₹500 min. for 2nd investment ₹500 min. for sip ₹500
+
+    if you redeem within one year, returns are taxed at 20%. if you redeem after one year,
+      returns exceeding rs 1.25 lakh in a financial year are taxed at 12.5%.
+
+    hdfc elss tax saver fund direct plan growth is a equity mutual fund scheme launched by
+      hdfc mutual fund. this scheme was made available to investors on 10 dec 1999. amar
+      kalkundrikar is the current fund manager of hdfc elss tax saver fund direct plan
+      growth fund. the fund currently has an asset under management(aum) of ₹9,86,237 cr and
+      the latest nav as of 25 sep 2026 is ₹1,447.38. the hdfc elss tax saver fund direct
+      plan growth is rated very high risk. minimum sip investment is set to ₹500. minimum
+      lumpsum investment is ₹500. ;
+
+    the scheme seeks to generate capital appreciation / income from a portfolio, comprising
+      predominantly of equity & equity related instruments.
+
+    fund benchmark nifty 500 total return index scheme information document(sid)
+----------------------------------------------------------------------------------------------------
+[ 43] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__f5d460
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : faq   fact_key: expense_ratio = the term expense ratio used for hdfc elss tax saver fund direct plan growth or any other mutual fund is the annual charges one needs to pay to the mutual fund company for managing your investments in that fund. the expense ratio of hdfc elss tax saver fund direct plan growth is 1.21% as of 27 sep 2026...
+      section    : Frequently asked questions (page data)
+      tokens     : 89   chars 0-387
+      content_hash: f5d460b7e3c2848573158166...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    how much expense ratio is charged by hdfc elss tax saver fund direct plan growth? the
+      term expense ratio used for hdfc elss tax saver fund direct plan growth or any other
+      mutual fund is the annual charges one needs to pay to the mutual fund company for
+      managing your investments in that fund. the expense ratio of hdfc elss tax saver fund
+      direct plan growth is 1.21% as of 27 sep 2026...
+----------------------------------------------------------------------------------------------------
+[ 44] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__3701ef
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : faq   fact_key: aum = the aum, short for assets under management of hdfc elss tax saver fund direct plan growth is ₹15,991.78cr as of 27 sep 2026.
+      section    : Frequently asked questions (page data)
+      tokens     : 54   chars 0-188
+      content_hash: 3701efcf6c27c653b9b8c87c...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    what is the aum of hdfc elss tax saver fund direct plan growth? the aum, short for
+      assets under management of hdfc elss tax saver fund direct plan growth is ₹15,991.78cr
+      as of 27 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 45] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__150243
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : faq   fact_key: how_to_redeem = if you want to sell your hdfc elss tax saver fund direct plan growth holdings, go to your holding on the app or web and simply click on it. you will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox.
+      section    : Frequently asked questions (page data)
+      tokens     : 86   chars 0-383
+      content_hash: 15024338ab03e3cce130af72...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    how to redeem hdfc elss tax saver fund direct plan growth? if you want to sell your hdfc
+      elss tax saver fund direct plan growth holdings, go to your holding on the app or web
+      and simply click on it. you will get two options - redeem & invest more; click on
+      redeem and enter your desired amount or if you wish to redeem the entire holding
+      amount then select the 'redeem all' checkbox.
+----------------------------------------------------------------------------------------------------
+[ 46] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__61e905
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : faq   fact_key: sip_vs_lumpsum = you can select either sip or lumpsum investment of hdfc elss tax saver fund direct plan growth based on your investment objective and risk tolerance.
+      section    : Frequently asked questions (page data)
+      tokens     : 49   chars 0-230
+      content_hash: 61e90565ebfbe53de1a5935c...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    can i invest in sip and lump sum of hdfc elss tax saver fund direct plan growth? you can
+      select either sip or lumpsum investment of hdfc elss tax saver fund direct plan growth
+      based on your investment objective and risk tolerance.
+----------------------------------------------------------------------------------------------------
+[ 47] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__ed2e58
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : faq   fact_key: nav = the nav of hdfc elss tax saver fund direct plan growth is ₹1,447.38 as of 25 sep 2026.
+      section    : Frequently asked questions (page data)
+      tokens     : 45   chars 0-150
+      content_hash: ed2e58d8f7ab3595433fb791...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    what is the nav of hdfc elss tax saver fund direct plan growth? the nav of hdfc elss tax
+      saver fund direct plan growth is ₹1,447.38 as of 25 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 48] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__2fce85
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : faq   fact_key: pe_pb_ratio = the pe ratio ratio of hdfc elss tax saver fund direct plan growth is determined by dividing the market price by its earnings per share and the pb ratio of the same is evaluated by dividing the stock price per share by its book value per share (bvps).
+      section    : Frequently asked questions (page data)
+      tokens     : 72   chars 0-326
+      content_hash: 2fce85522ee480c86ce6cc19...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    what is the pe and pb ratio of hdfc elss tax saver fund direct plan growth? the pe ratio
+      ratio of hdfc elss tax saver fund direct plan growth is determined by dividing the
+      market price by its earnings per share and the pb ratio of the same is evaluated by
+      dividing the stock price per share by its book value per share (bvps).
+----------------------------------------------------------------------------------------------------
+[ 49] chunk_id   : hdfc-elss-tax-saver-fund-direct-plan-growth__frequently_asked_questions_page_data__1b0ac0
+      scheme     : HDFC ELSS Tax Saver Fund - Direct Plan - Growth  (hdfc-elss-tax-saver-fund-direct-plan-growth)
+      category   : ELSS   plan: Direct Growth
+      doc_type   : prose   (no fact_key - prose)
+      section    : Frequently asked questions (page data)
+      tokens     : 207   chars 0-944
+      content_hash: 1b0ac0c4d16701790388e0af...
+      source     : https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:23.846Z
+      text       :
+    how to invest in hdfc elss tax saver fund direct plan growth? you can easily invest in
+      hdfc elss tax saver fund direct plan growth in a hassle-free manner on groww. the
+      process is extremely simple, quick and completely paperless. invest in a few minutes
+      with the following steps: log on to your groww account search for hdfc elss tax saver
+      fund direct plan growth from the search box in order to invest, you will have to
+      complete all the kyc formalities which are completely online and paperless and take a
+      few minutes to complete once you are done with that, you can start investing in hdfc
+      elss tax saver fund direct plan growth as sip or lumpsum as per your investment
+      objective and risk tolerance
+
+    what kind of returns does hdfc elss tax saver fund direct plan growth provide? the hdfc
+      elss tax saver fund direct plan growth has been there from 01 jan 2013 and the average
+      annual returns provided by this fund is 13.75% since its inception.
+----------------------------------------------------------------------------------------------------
+[ 50] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__d801b3
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_sip = ₹100
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-18
+      content_hash: d801b38f82d9607a79c9142f...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    min. for sip: ₹100
+----------------------------------------------------------------------------------------------------
+[ 51] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__9ae41c
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: aum = ₹1,13,606.47 cr
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 15   chars 0-32
+      content_hash: 9ae41c18ac88e9b2b0ec65fd...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    fund size (aum): ₹1,13,606.47 cr
+----------------------------------------------------------------------------------------------------
+[ 52] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__f450d3
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: expense_ratio = 0.77%
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 8   chars 0-20
+      content_hash: f450d3bd3ef5ca5b1d88757a...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    expense ratio: 0.77%
+----------------------------------------------------------------------------------------------------
+[ 53] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__e13ec1
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: rating = 5
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 4   chars 0-9
+      content_hash: e13ec190c7b4ab476d02c7df...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    rating: 5
+----------------------------------------------------------------------------------------------------
+[ 54] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__f187e9
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = exit load exit load of 1% if redeemed within 1 year
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 22   chars 0-82
+      content_hash: f187e9b126d66dc959040026...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    exit load, stamp duty and tax: exit load exit load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[ 55] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__93a3f2
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = exit load of 1% if redeemed within 1 year
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 20   chars 0-72
+      content_hash: 93a3f25be00e90d94850189a...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    exit load, stamp duty and tax: exit load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[ 56] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__71e550
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = stamp duty on investment: 0.005% (from july 1st, 2020) from july 1st 2020
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 34   chars 0-84
+      content_hash: 71e5503f3e403d2254670445...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    exit load: stamp duty on investment: 0.005% (from july 1st, 2020) from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[ 57] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__2d7bad
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: fund_objective = fund benchmark nifty 500 total return index scheme information document(sid)
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 17   chars 0-98
+      content_hash: 2d7bad4ec6733af766fb77f3...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    investment objective: fund benchmark nifty 500 total return index scheme information
+      document(sid)
+----------------------------------------------------------------------------------------------------
+[ 58] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__d516a5
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: benchmark = nifty 500 total return index
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 10   chars 0-44
+      content_hash: d516a5217d0e1a89db853ba4...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    fund benchmark: nifty 500 total return index
+----------------------------------------------------------------------------------------------------
+[ 59] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__dd94b7
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: nav = nav: 25 sep '26 ₹2,214.57
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 13   chars 0-25
+      content_hash: dd94b7ab1035f0329c83438b...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    nav: 25 sep '26 ₹2,214.57
+----------------------------------------------------------------------------------------------------
+[ 60] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__a24787
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: nav = nav: 25 sep '26
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-15
+      content_hash: a2478727c19e57213b8c7a40...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    nav: 25 sep '26
+----------------------------------------------------------------------------------------------------
+[ 61] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__080254
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 1st investment ₹100
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 9   chars 0-28
+      content_hash: 08025446b70df8766e109c88...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    min. for 1st investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 62] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__a3bc4d
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 1st investment
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-23
+      content_hash: a3bc4d9b31b251d914798049...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    min. for 1st investment
+----------------------------------------------------------------------------------------------------
+[ 63] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__5eef77
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 2nd investment ₹100
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 9   chars 0-28
+      content_hash: 5eef77b6457c4da6d876ed72...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    min. for 2nd investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 64] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__48c88b
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 2nd investment
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-23
+      content_hash: 48c88bb2eb3a820e6e28f30f...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    min. for 2nd investment
+----------------------------------------------------------------------------------------------------
+[ 65] chunk_id   : hdfc-equity-fund-direct-growth__hdfc_flexi_cap_direct_plan_growth_nav_mu__0097e1
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_sip = min. for sip ₹100
+      section    : HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 6   chars 0-17
+      content_hash: 0097e1de075a9f8c5f51f7b5...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    min. for sip ₹100
+----------------------------------------------------------------------------------------------------
+[ 66] chunk_id   : hdfc-equity-fund-direct-growth__about_hdfc_flexi_cap_direct_plan_growth__36c371
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : prose   (no fact_key - prose)
+      section    : About HDFC Flexi Cap Direct Plan Growth
+      tokens     : 289   chars 0-1103
+      content_hash: 36c371686b12c149bebd051f...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    nav: 25 sep '26 ₹2,214.57 min. for sip ₹100 fund size (aum) ₹1,13,606.47 cr expense
+      ratio 0.77% rating 5
+
+    min. for 1st investment ₹100 min. for 2nd investment ₹100 min. for sip ₹100
+
+    if you redeem within one year, returns are taxed at 20%. if you redeem after one year,
+      returns exceeding rs 1.25 lakh in a financial year are taxed at 12.5%.
+
+    hdfc flexi cap direct plan growth is a equity mutual fund scheme launched by hdfc mutual
+      fund. this scheme was made available to investors on 10 dec 1999. dhruv muchhal is the
+      current fund manager of hdfc flexi cap direct plan growth fund. the fund currently has
+      an asset under management(aum) of ₹9,86,237 cr and the latest nav as of 25 sep 2026 is
+      ₹2,214.57. the hdfc flexi cap direct plan growth is rated very high risk. minimum sip
+      investment is set to ₹100. minimum lumpsum investment is ₹100. exit load of 1% if
+      redeemed within 1 year ;
+
+    the scheme seeks to generate capital appreciation / income from a portfolio,
+      predominantly invested in equity & equity related instruments.
+
+    fund benchmark nifty 500 total return index scheme information document(sid)
+----------------------------------------------------------------------------------------------------
+[ 67] chunk_id   : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__33f61b
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: expense_ratio = the term expense ratio used for hdfc flexi cap direct plan growth or any other mutual fund is the annual charges one needs to pay to the mutual fund company for managing your investments in that fund. the expense ratio of hdfc flexi cap direct plan growth is 0.77% as of 27 sep 2026...
+      section    : Frequently asked questions (page data)
+      tokens     : 83   chars 0-357
+      content_hash: 33f61bb84db305a2218b197c...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    how much expense ratio is charged by hdfc flexi cap direct plan growth? the term expense
+      ratio used for hdfc flexi cap direct plan growth or any other mutual fund is the
+      annual charges one needs to pay to the mutual fund company for managing your
+      investments in that fund. the expense ratio of hdfc flexi cap direct plan growth is
+      0.77% as of 27 sep 2026...
+----------------------------------------------------------------------------------------------------
+[ 68] chunk_id   : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__2ee59a
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: aum = the aum, short for assets under management of hdfc flexi cap direct plan growth is ₹1,13,606.47cr as of 27 sep 2026.
+      section    : Frequently asked questions (page data)
+      tokens     : 52   chars 0-170
+      content_hash: 2ee59add7bd2a982f5f9332b...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    what is the aum of hdfc flexi cap direct plan growth? the aum, short for assets under
+      management of hdfc flexi cap direct plan growth is ₹1,13,606.47cr as of 27 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 69] chunk_id   : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__b311b5
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: how_to_redeem = if you want to sell your hdfc flexi cap direct plan growth holdings, go to your holding on the app or web and simply click on it. you will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox.
+      section    : Frequently asked questions (page data)
+      tokens     : 82   chars 0-363
+      content_hash: b311b5293779f2a6dbc8f6dd...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    how to redeem hdfc flexi cap direct plan growth? if you want to sell your hdfc flexi cap
+      direct plan growth holdings, go to your holding on the app or web and simply click on
+      it. you will get two options - redeem & invest more; click on redeem and enter your
+      desired amount or if you wish to redeem the entire holding amount then select the
+      'redeem all' checkbox.
+----------------------------------------------------------------------------------------------------
+[ 70] chunk_id   : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__4bb594
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: sip_vs_lumpsum = you can select either sip or lumpsum investment of hdfc flexi cap direct plan growth based on your investment objective and risk tolerance.
+      section    : Frequently asked questions (page data)
+      tokens     : 45   chars 0-210
+      content_hash: 4bb5944eb083aa1ebc41662c...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    can i invest in sip and lump sum of hdfc flexi cap direct plan growth? you can select
+      either sip or lumpsum investment of hdfc flexi cap direct plan growth based on your
+      investment objective and risk tolerance.
+----------------------------------------------------------------------------------------------------
+[ 71] chunk_id   : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__b335f1
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: nav = the nav of hdfc flexi cap direct plan growth is ₹2,214.57 as of 25 sep 2026.
+      section    : Frequently asked questions (page data)
+      tokens     : 41   chars 0-130
+      content_hash: b335f1784cbc08acf47ec619...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    what is the nav of hdfc flexi cap direct plan growth? the nav of hdfc flexi cap direct
+      plan growth is ₹2,214.57 as of 25 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 72] chunk_id   : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__3b8f1c
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: pe_pb_ratio = the pe ratio ratio of hdfc flexi cap direct plan growth is determined by dividing the market price by its earnings per share and the pb ratio of the same is evaluated by dividing the stock price per share by its book value per share (bvps).
+      section    : Frequently asked questions (page data)
+      tokens     : 68   chars 0-306
+      content_hash: 3b8f1c552870d31b793c1346...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    what is the pe and pb ratio of hdfc flexi cap direct plan growth? the pe ratio ratio of
+      hdfc flexi cap direct plan growth is determined by dividing the market price by its
+      earnings per share and the pb ratio of the same is evaluated by dividing the stock
+      price per share by its book value per share (bvps).
+----------------------------------------------------------------------------------------------------
+[ 73] chunk_id   : hdfc-equity-fund-direct-growth__frequently_asked_questions_page_data__894f73
+      scheme     : HDFC Equity Fund - Direct Growth  (hdfc-equity-fund-direct-growth)
+      category   : Flexi Cap   plan: Direct Growth
+      doc_type   : prose   (no fact_key - prose)
+      section    : Frequently asked questions (page data)
+      tokens     : 195   chars 0-884
+      content_hash: 894f73ab9b426fcbcc258236...
+      aliases    : HDFC Flexi Cap Fund - Direct Growth, HDFC Flexi Cap Direct Plan Growth
+      source     : https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:21.827Z
+      text       :
+    how to invest in hdfc flexi cap direct plan growth? you can easily invest in hdfc flexi
+      cap direct plan growth in a hassle-free manner on groww. the process is extremely
+      simple, quick and completely paperless. invest in a few minutes with the following
+      steps: log on to your groww account search for hdfc flexi cap direct plan growth from
+      the search box in order to invest, you will have to complete all the kyc formalities
+      which are completely online and paperless and take a few minutes to complete once you
+      are done with that, you can start investing in hdfc flexi cap direct plan growth as
+      sip or lumpsum as per your investment objective and risk tolerance
+
+    what kind of returns does hdfc flexi cap direct plan growth provide? the hdfc flexi cap
+      direct plan growth has been there from 01 jan 2013 and the average annual returns
+      provided by this fund is 15.75% since its inception.
+----------------------------------------------------------------------------------------------------
+[ 74] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__d801b3
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_sip = ₹100
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-18
+      content_hash: d801b38f82d9607a79c9142f...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    min. for sip: ₹100
+----------------------------------------------------------------------------------------------------
+[ 75] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__ecd70a
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: aum = ₹39,933.37 cr
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 13   chars 0-30
+      content_hash: ecd70a685bbc434f48ad07d9...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    fund size (aum): ₹39,933.37 cr
+----------------------------------------------------------------------------------------------------
+[ 76] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__92f606
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: expense_ratio = 1.03%
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 8   chars 0-20
+      content_hash: 92f6069faef7b62f2b98f9bb...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    expense ratio: 1.03%
+----------------------------------------------------------------------------------------------------
+[ 77] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__8c38a3
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: rating = 4
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 4   chars 0-9
+      content_hash: 8c38a3a41c908f921e13ff25...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    rating: 4
+----------------------------------------------------------------------------------------------------
+[ 78] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__f187e9
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = exit load exit load of 1% if redeemed within 1 year
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 22   chars 0-82
+      content_hash: f187e9b126d66dc959040026...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    exit load, stamp duty and tax: exit load exit load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[ 79] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__93a3f2
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = exit load of 1% if redeemed within 1 year
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 20   chars 0-72
+      content_hash: 93a3f25be00e90d94850189a...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    exit load, stamp duty and tax: exit load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[ 80] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__71e550
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = stamp duty on investment: 0.005% (from july 1st, 2020) from july 1st 2020
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 34   chars 0-84
+      content_hash: 71e5503f3e403d2254670445...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    exit load: stamp duty on investment: 0.005% (from july 1st, 2020) from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[ 81] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__7efcbe
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: fund_objective = fund benchmark nifty 100 total return index scheme information document(sid)
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 17   chars 0-98
+      content_hash: 7efcbe1dadb2ad81bec14a17...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    investment objective: fund benchmark nifty 100 total return index scheme information
+      document(sid)
+----------------------------------------------------------------------------------------------------
+[ 82] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__4a6349
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: benchmark = nifty 100 total return index
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 10   chars 0-44
+      content_hash: 4a6349a52443313efcd5c98b...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    fund benchmark: nifty 100 total return index
+----------------------------------------------------------------------------------------------------
+[ 83] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__0c85bc
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: nav = nav: 25 sep '26 ₹1,189.08
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 13   chars 0-25
+      content_hash: 0c85bc6666f2ceeb62d3f60a...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    nav: 25 sep '26 ₹1,189.08
+----------------------------------------------------------------------------------------------------
+[ 84] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__a24787
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: nav = nav: 25 sep '26
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-15
+      content_hash: a2478727c19e57213b8c7a40...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    nav: 25 sep '26
+----------------------------------------------------------------------------------------------------
+[ 85] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__080254
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 1st investment ₹100
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 9   chars 0-28
+      content_hash: 08025446b70df8766e109c88...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    min. for 1st investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 86] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__a3bc4d
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 1st investment
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-23
+      content_hash: a3bc4d9b31b251d914798049...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    min. for 1st investment
+----------------------------------------------------------------------------------------------------
+[ 87] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__5eef77
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 2nd investment ₹100
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 9   chars 0-28
+      content_hash: 5eef77b6457c4da6d876ed72...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    min. for 2nd investment ₹100
+----------------------------------------------------------------------------------------------------
+[ 88] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__48c88b
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 2nd investment
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-23
+      content_hash: 48c88bb2eb3a820e6e28f30f...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    min. for 2nd investment
+----------------------------------------------------------------------------------------------------
+[ 89] chunk_id   : hdfc-large-cap-fund-direct-growth__hdfc_large_cap_fund_direct_growth_nav_mu__0097e1
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_sip = min. for sip ₹100
+      section    : HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 6   chars 0-17
+      content_hash: 0097e1de075a9f8c5f51f7b5...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    min. for sip ₹100
+----------------------------------------------------------------------------------------------------
+[ 90] chunk_id   : hdfc-large-cap-fund-direct-growth__about_hdfc_large_cap_fund_direct_growth__d2b9f4
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : prose   (no fact_key - prose)
+      section    : About HDFC Large Cap Fund Direct Growth
+      tokens     : 282   chars 0-1077
+      content_hash: d2b9f4196973f9dfdeaeec5a...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    nav: 25 sep '26 ₹1,189.08 min. for sip ₹100 fund size (aum) ₹39,933.37 cr expense ratio
+      1.03% rating 4
+
+    min. for 1st investment ₹100 min. for 2nd investment ₹100 min. for sip ₹100
+
+    if you redeem within one year, returns are taxed at 20%. if you redeem after one year,
+      returns exceeding rs 1.25 lakh in a financial year are taxed at 12.5%.
+
+    hdfc large cap fund direct growth is a equity mutual fund scheme launched by hdfc mutual
+      fund. this scheme was made available to investors on 10 dec 1999. rahul baijal is the
+      current fund manager of hdfc large cap fund direct growth fund. the fund currently has
+      an asset under management(aum) of ₹9,86,237 cr and the latest nav as of 25 sep 2026 is
+      ₹1,189.08. the hdfc large cap fund direct growth is rated very high risk. minimum sip
+      investment is set to ₹100. minimum lumpsum investment is ₹100. exit load of 1% if
+      redeemed within 1 year ;
+
+    the scheme seeks to provide long-term capital appreciation/income by investing
+      predominantly in large-cap companies.
+
+    fund benchmark nifty 100 total return index scheme information document(sid)
+----------------------------------------------------------------------------------------------------
+[ 91] chunk_id   : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__c22436
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: expense_ratio = the term expense ratio used for hdfc large cap fund direct growth or any other mutual fund is the annual charges one needs to pay to the mutual fund company for managing your investments in that fund. the expense ratio of hdfc large cap fund direct growth is 1.03% as of 27 sep 2026...
+      section    : Frequently asked questions (page data)
+      tokens     : 80   chars 0-357
+      content_hash: c22436881aaa79872602ba3e...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    how much expense ratio is charged by hdfc large cap fund direct growth? the term expense
+      ratio used for hdfc large cap fund direct growth or any other mutual fund is the
+      annual charges one needs to pay to the mutual fund company for managing your
+      investments in that fund. the expense ratio of hdfc large cap fund direct growth is
+      1.03% as of 27 sep 2026...
+----------------------------------------------------------------------------------------------------
+[ 92] chunk_id   : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__221019
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: aum = the aum, short for assets under management of hdfc large cap fund direct growth is ₹39,933.37cr as of 27 sep 2026.
+      section    : Frequently asked questions (page data)
+      tokens     : 48   chars 0-168
+      content_hash: 2210195e62b5be1460b9b04b...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    what is the aum of hdfc large cap fund direct growth? the aum, short for assets under
+      management of hdfc large cap fund direct growth is ₹39,933.37cr as of 27 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 93] chunk_id   : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__80ba58
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: how_to_redeem = if you want to sell your hdfc large cap fund direct growth holdings, go to your holding on the app or web and simply click on it. you will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox.
+      section    : Frequently asked questions (page data)
+      tokens     : 80   chars 0-363
+      content_hash: 80ba58a625f4d66133f7cfe4...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    how to redeem hdfc large cap fund direct growth? if you want to sell your hdfc large cap
+      fund direct growth holdings, go to your holding on the app or web and simply click on
+      it. you will get two options - redeem & invest more; click on redeem and enter your
+      desired amount or if you wish to redeem the entire holding amount then select the
+      'redeem all' checkbox.
+----------------------------------------------------------------------------------------------------
+[ 94] chunk_id   : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__9ac248
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: sip_vs_lumpsum = you can select either sip or lumpsum investment of hdfc large cap fund direct growth based on your investment objective and risk tolerance.
+      section    : Frequently asked questions (page data)
+      tokens     : 43   chars 0-210
+      content_hash: 9ac2483d4fd67245cff3f653...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    can i invest in sip and lump sum of hdfc large cap fund direct growth? you can select
+      either sip or lumpsum investment of hdfc large cap fund direct growth based on your
+      investment objective and risk tolerance.
+----------------------------------------------------------------------------------------------------
+[ 95] chunk_id   : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__8b8cd2
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: nav = the nav of hdfc large cap fund direct growth is ₹1,189.08 as of 25 sep 2026.
+      section    : Frequently asked questions (page data)
+      tokens     : 39   chars 0-130
+      content_hash: 8b8cd2a0496cc6f9f3a8baab...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    what is the nav of hdfc large cap fund direct growth? the nav of hdfc large cap fund
+      direct growth is ₹1,189.08 as of 25 sep 2026.
+----------------------------------------------------------------------------------------------------
+[ 96] chunk_id   : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__bbda4a
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: pe_pb_ratio = the pe ratio ratio of hdfc large cap fund direct growth is determined by dividing the market price by its earnings per share and the pb ratio of the same is evaluated by dividing the stock price per share by its book value per share (bvps).
+      section    : Frequently asked questions (page data)
+      tokens     : 66   chars 0-306
+      content_hash: bbda4a642aaebd7f3df73055...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    what is the pe and pb ratio of hdfc large cap fund direct growth? the pe ratio ratio of
+      hdfc large cap fund direct growth is determined by dividing the market price by its
+      earnings per share and the pb ratio of the same is evaluated by dividing the stock
+      price per share by its book value per share (bvps).
+----------------------------------------------------------------------------------------------------
+[ 97] chunk_id   : hdfc-large-cap-fund-direct-growth__frequently_asked_questions_page_data__be1db3
+      scheme     : HDFC Large Cap Fund - Direct Growth  (hdfc-large-cap-fund-direct-growth)
+      category   : Large Cap   plan: Direct Growth
+      doc_type   : prose   (no fact_key - prose)
+      section    : Frequently asked questions (page data)
+      tokens     : 189   chars 0-884
+      content_hash: be1db3a02ff6938014620f2d...
+      source     : https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:19.809Z
+      text       :
+    how to invest in hdfc large cap fund direct growth? you can easily invest in hdfc large
+      cap fund direct growth in a hassle-free manner on groww. the process is extremely
+      simple, quick and completely paperless. invest in a few minutes with the following
+      steps: log on to your groww account search for hdfc large cap fund direct growth from
+      the search box in order to invest, you will have to complete all the kyc formalities
+      which are completely online and paperless and take a few minutes to complete once you
+      are done with that, you can start investing in hdfc large cap fund direct growth as
+      sip or lumpsum as per your investment objective and risk tolerance
+
+    what kind of returns does hdfc large cap fund direct growth provide? the hdfc large cap
+      fund direct growth has been there from 01 jan 2013 and the average annual returns
+      provided by this fund is 12.74% since its inception.
+----------------------------------------------------------------------------------------------------
+[ 98] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__d801b3
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_sip = ₹100
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-18
+      content_hash: d801b38f82d9607a79c9142f...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    min. for sip: ₹100
+----------------------------------------------------------------------------------------------------
+[ 99] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__2eefe6
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: aum = ₹41,890.86 cr
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 13   chars 0-30
+      content_hash: 2eefe631cc167e336999a308...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    fund size (aum): ₹41,890.86 cr
+----------------------------------------------------------------------------------------------------
+[100] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__2aeb3d
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: expense_ratio = 0.78%
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 8   chars 0-20
+      content_hash: 2aeb3d61b0a00ea95e898399...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    expense ratio: 0.78%
+----------------------------------------------------------------------------------------------------
+[101] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__98d3bb
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: rating = 3
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 4   chars 0-9
+      content_hash: 98d3bbec4876c3f3a458bf9c...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    rating: 3
+----------------------------------------------------------------------------------------------------
+[102] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__f187e9
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = exit load exit load of 1% if redeemed within 1 year
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 22   chars 0-82
+      content_hash: f187e9b126d66dc959040026...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    exit load, stamp duty and tax: exit load exit load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[103] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__93a3f2
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = exit load of 1% if redeemed within 1 year
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 20   chars 0-72
+      content_hash: 93a3f25be00e90d94850189a...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    exit load, stamp duty and tax: exit load of 1% if redeemed within 1 year
+----------------------------------------------------------------------------------------------------
+[104] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__71e550
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: exit_load = stamp duty on investment: 0.005% (from july 1st, 2020) from july 1st 2020
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 34   chars 0-84
+      content_hash: 71e5503f3e403d2254670445...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    exit load: stamp duty on investment: 0.005% (from july 1st, 2020) from july 1st 2020
+----------------------------------------------------------------------------------------------------
+[105] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__56fec8
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: fund_objective = fund benchmark bse 250 smallcap total return index
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 14   chars 0-72
+      content_hash: 56fec86406a17c6ee774d55c...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    investment objective: fund benchmark bse 250 smallcap total return index
+----------------------------------------------------------------------------------------------------
+[106] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__aba082
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: benchmark = bse 250 smallcap total return index
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 12   chars 0-51
+      content_hash: aba082ca745b3b79a5db38fd...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    fund benchmark: bse 250 smallcap total return index
+----------------------------------------------------------------------------------------------------
+[107] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__52fe9d
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: nav = nav: 25 sep '26 ₹159.82
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 11   chars 0-23
+      content_hash: 52fe9df38df812d298a88ed5...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    nav: 25 sep '26 ₹159.82
+----------------------------------------------------------------------------------------------------
+[108] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__a24787
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: nav = nav: 25 sep '26
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-15
+      content_hash: a2478727c19e57213b8c7a40...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    nav: 25 sep '26
+----------------------------------------------------------------------------------------------------
+[109] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__080254
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 1st investment ₹100
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 9   chars 0-28
+      content_hash: 08025446b70df8766e109c88...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    min. for 1st investment ₹100
+----------------------------------------------------------------------------------------------------
+[110] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__a3bc4d
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 1st investment
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-23
+      content_hash: a3bc4d9b31b251d914798049...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    min. for 1st investment
+----------------------------------------------------------------------------------------------------
+[111] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__5eef77
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 2nd investment ₹100
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 9   chars 0-28
+      content_hash: 5eef77b6457c4da6d876ed72...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    min. for 2nd investment ₹100
+----------------------------------------------------------------------------------------------------
+[112] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__48c88b
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_investment = min. for 2nd investment
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 7   chars 0-23
+      content_hash: 48c88bb2eb3a820e6e28f30f...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    min. for 2nd investment
+----------------------------------------------------------------------------------------------------
+[113] chunk_id   : hdfc-small-cap-fund-direct-growth__hdfc_small_cap_fund_direct_growth_nav_mu__0097e1
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : fact   fact_key: minimum_sip = min. for sip ₹100
+      section    : HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio
+      tokens     : 6   chars 0-17
+      content_hash: 0097e1de075a9f8c5f51f7b5...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    min. for sip ₹100
+----------------------------------------------------------------------------------------------------
+[114] chunk_id   : hdfc-small-cap-fund-direct-growth__about_hdfc_small_cap_fund_direct_growth__22094c
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : prose   (no fact_key - prose)
+      section    : About HDFC Small Cap Fund Direct Growth
+      tokens     : 279   chars 0-1082
+      content_hash: 22094c64ce6aa45d45ec3818...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    nav: 25 sep '26 ₹159.82 min. for sip ₹100 fund size (aum) ₹41,890.86 cr expense ratio
+      0.78% rating 3
+
+    min. for 1st investment ₹100 min. for 2nd investment ₹100 min. for sip ₹100
+
+    if you redeem within one year, returns are taxed at 20%. if you redeem after one year,
+      returns exceeding rs 1.25 lakh in a financial year are taxed at 12.5%.
+
+    hdfc small cap fund direct growth is a equity mutual fund scheme launched by hdfc mutual
+      fund. this scheme was made available to investors on 10 dec 1999. dhruv muchhal is the
+      current fund manager of hdfc small cap fund direct growth fund. the fund currently has
+      an asset under management(aum) of ₹9,86,237 cr and the latest nav as of 25 sep 2026 is
+      ₹159.82. the hdfc small cap fund direct growth is rated very high risk. minimum sip
+      investment is set to ₹100. minimum lumpsum investment is ₹100. exit load of 1% if
+      redeemed within 1 year ;
+
+    the scheme seeks to provide long-term capital appreciation /income by investing
+      predominantly in small-cap companies.
+
+    fund benchmark bse 250 smallcap total return index scheme information document(sid)
+----------------------------------------------------------------------------------------------------
+[115] chunk_id   : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__793b29
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: expense_ratio = the term expense ratio used for hdfc small cap fund direct growth or any other mutual fund is the annual charges one needs to pay to the mutual fund company for managing your investments in that fund. the expense ratio of hdfc small cap fund direct growth is 0.78% as of 27 sep 2026...
+      section    : Frequently asked questions (page data)
+      tokens     : 80   chars 0-357
+      content_hash: 793b294ac89b0fc9c0e379fb...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    how much expense ratio is charged by hdfc small cap fund direct growth? the term expense
+      ratio used for hdfc small cap fund direct growth or any other mutual fund is the
+      annual charges one needs to pay to the mutual fund company for managing your
+      investments in that fund. the expense ratio of hdfc small cap fund direct growth is
+      0.78% as of 27 sep 2026...
+----------------------------------------------------------------------------------------------------
+[116] chunk_id   : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__04b720
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: aum = the aum, short for assets under management of hdfc small cap fund direct growth is ₹41,890.86cr as of 27 sep 2026.
+      section    : Frequently asked questions (page data)
+      tokens     : 48   chars 0-168
+      content_hash: 04b720aceb141cb63cb3ad54...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    what is the aum of hdfc small cap fund direct growth? the aum, short for assets under
+      management of hdfc small cap fund direct growth is ₹41,890.86cr as of 27 sep 2026.
+----------------------------------------------------------------------------------------------------
+[117] chunk_id   : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__b239be
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: how_to_redeem = if you want to sell your hdfc small cap fund direct growth holdings, go to your holding on the app or web and simply click on it. you will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox.
+      section    : Frequently asked questions (page data)
+      tokens     : 80   chars 0-363
+      content_hash: b239be6a8ea727bcee42c3ca...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    how to redeem hdfc small cap fund direct growth? if you want to sell your hdfc small cap
+      fund direct growth holdings, go to your holding on the app or web and simply click on
+      it. you will get two options - redeem & invest more; click on redeem and enter your
+      desired amount or if you wish to redeem the entire holding amount then select the
+      'redeem all' checkbox.
+----------------------------------------------------------------------------------------------------
+[118] chunk_id   : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__d49147
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: sip_vs_lumpsum = you can select either sip or lumpsum investment of hdfc small cap fund direct growth based on your investment objective and risk tolerance.
+      section    : Frequently asked questions (page data)
+      tokens     : 43   chars 0-210
+      content_hash: d49147ea35ecbe21ef9f9785...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    can i invest in sip and lump sum of hdfc small cap fund direct growth? you can select
+      either sip or lumpsum investment of hdfc small cap fund direct growth based on your
+      investment objective and risk tolerance.
+----------------------------------------------------------------------------------------------------
+[119] chunk_id   : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__947255
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: nav = the nav of hdfc small cap fund direct growth is ₹159.82 as of 25 sep 2026.
+      section    : Frequently asked questions (page data)
+      tokens     : 37   chars 0-128
+      content_hash: 9472559d60aaef3f0dcf6b96...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    what is the nav of hdfc small cap fund direct growth? the nav of hdfc small cap fund
+      direct growth is ₹159.82 as of 25 sep 2026.
+----------------------------------------------------------------------------------------------------
+[120] chunk_id   : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__ac1f52
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : faq   fact_key: pe_pb_ratio = the pe ratio ratio of hdfc small cap fund direct growth is determined by dividing the market price by its earnings per share and the pb ratio of the same is evaluated by dividing the stock price per share by its book value per share (bvps).
+      section    : Frequently asked questions (page data)
+      tokens     : 66   chars 0-306
+      content_hash: ac1f528a371a5e4c5b215f13...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    what is the pe and pb ratio of hdfc small cap fund direct growth? the pe ratio ratio of
+      hdfc small cap fund direct growth is determined by dividing the market price by its
+      earnings per share and the pb ratio of the same is evaluated by dividing the stock
+      price per share by its book value per share (bvps).
+----------------------------------------------------------------------------------------------------
+[121] chunk_id   : hdfc-small-cap-fund-direct-growth__frequently_asked_questions_page_data__196a00
+      scheme     : HDFC Small Cap Fund - Direct Growth  (hdfc-small-cap-fund-direct-growth)
+      category   : Small Cap   plan: Direct Growth
+      doc_type   : prose   (no fact_key - prose)
+      section    : Frequently asked questions (page data)
+      tokens     : 189   chars 0-884
+      content_hash: 196a008e334327bbc5704db1...
+      source     : https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+      publisher  : Groww / scheme_page   fetched 2026-09-27T06:57:25.868Z
+      text       :
+    how to invest in hdfc small cap fund direct growth? you can easily invest in hdfc small
+      cap fund direct growth in a hassle-free manner on groww. the process is extremely
+      simple, quick and completely paperless. invest in a few minutes with the following
+      steps: log on to your groww account search for hdfc small cap fund direct growth from
+      the search box in order to invest, you will have to complete all the kyc formalities
+      which are completely online and paperless and take a few minutes to complete once you
+      are done with that, you can start investing in hdfc small cap fund direct growth as
+      sip or lumpsum as per your investment objective and risk tolerance
+
+    what kind of returns does hdfc small cap fund direct growth provide? the hdfc small cap
+      fund direct growth has been there from 01 jan 2013 and the average annual returns
+      provided by this fund is 18.28% since its inception.
+----------------------------------------------------------------------------------------------------

@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-09-27T08:09:08.741Z",
+  "collection": "hdfc_mf_faq",
+  "count": 121,
+  "elapsed_seconds": 0.74,
+  "embedding_dim": 384,
+  "exists": true,
+  "generated_at": "2026-09-27T08:09:08.725Z",
+  "hnsw": {
+    "metadata": {
+      "embedding_dim": 384,
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "hnsw:space": "cosine"
+    }
+  },
+  "path": "E:\\nextleap cursor project class\\data\\chroma",
+  "per_doc_type": {
+    "fact": 81,
+    "faq": 30,
+    "prose": 10
+  },
+  "per_fact_key": {
+    "aum": 10,
+    "benchmark": 5,
+    "exit_load": 15,
+    "expense_ratio": 10,
+    "fund_objective": 5,
+    "how_to_redeem": 5,
+    "lock_in_period": 1,
+    "minimum_investment": 20,
+    "minimum_sip": 10,
+    "nav": 15,
+    "pe_pb_ratio": 5,
+    "rating": 5,
+    "sip_vs_lumpsum": 5
+  },
+  "per_scheme": {
+    "hdfc-balanced-advantage-fund-direct-growth": 24,
+    "hdfc-elss-tax-saver-fund-direct-plan-growth": 25,
+    "hdfc-equity-fund-direct-growth": 24,
+    "hdfc-large-cap-fund-direct-growth": 24,
+    "hdfc-small-cap-fund-direct-growth": 24
+  },
+  "rebuilt": true,
+  "written": 121
+}
