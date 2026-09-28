@@ -357,12 +357,10 @@ def semantic_merge(chunks: list[dict[str, Any]], *, threshold: float,
 
     if model is None:
         try:
-            from sentence_transformers import SentenceTransformer  # noqa: PLC0415
-            from common import load_config  # noqa: PLC0415
+            from embed.index import load_model  # noqa: PLC0415
 
-            name = load_config()["embedding"]["model_name"]
-            LOG.info("  semantic merge: loading %s", name)
-            model = SentenceTransformer(name, device="cpu")
+            LOG.info("  semantic merge: loading embedding model")
+            model = load_model()
         except Exception as exc:  # noqa: BLE001
             LOG.warning("  semantic merge skipped (%s: %s) - it is optional, "
                         "not a correctness requirement", type(exc).__name__, exc)

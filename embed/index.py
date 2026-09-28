@@ -150,14 +150,18 @@ def load_model(model_name: str | None = None, *, local_files_only: bool | None =
     measured cost of the uncached reload was ~0.6-1s per question (and ~16s for
     the very first load, when torch and sentence-transformers are imported).
 
-    With the default `model_name=None` the repo-local copy under models/ wins:
-    it is committed, so a fresh clone (or a Render image rebuilt from it) loads
-    the weights with zero network access. Only when that copy is absent does the
-    load fall back to the Hugging Face cache, and only if that is cold too does
-    it touch the Hub. An explicit `model_name` (tests) always uses the HF path.
-    """
-    from sentence_transformers import SentenceTransformer  # noqa: PLC0415
+    With the default `model_name=None` (and for every caller while a committed
+    copy exists) the repo-local ONNX export under models/ wins:
 
+      * it is committed, so a fresh clone (or a Render image rebuilt from it)
+        loads the weights with zero network access;
+      * it runs on onnxruntime, NOT PyTorch. Importing torch costs ~560 MB peak
+        RSS on a cold Render free-tier instance (512 MB cap), which OOM-kills
+        the process mid-question; onnxruntime is ~80-100 MB and imports in ~1s.
+
+    The torch-backed fallbacks below (`_local_model_present`, Hugging Face
+    cache/hub) only run on a checkout that predates the committed copy.
+    """
     # Any download that cannot reach the Hub must fail fast, not hang the first
     # question forever. huggingface_hub reads these env vars on every download.
     os.environ.setdefault("HF_HUB_DOWNLOAD_TIMEOUT", "30")
@@ -166,9 +170,20 @@ def load_model(model_name: str | None = None, *, local_files_only: bool | None =
 
     name = model_name or common.load_config()["embedding"]["model_name"]
 
-    # Committed repo-local copy: no network, no HF cache, no re-download on a
-    # woken Render instance. Measured: 0.5s to load, identical 384-dim vectors.
+    # Committed repo-local ONNX copy: no torch, no network, ~50 MB on disk.
+    if (LOCAL_MODEL_DIR / "model.onnx").is_file():
+        from embed.onnx_encoder import OnnxMiniLM  # noqa: PLC0415
+
+        model = OnnxMiniLM(LOCAL_MODEL_DIR)
+        LOG.info("  model %s (repo-local ONNX)  dim=%d  max_seq_length=%d  "
+                 "offline=True  runtime=onnxruntime",
+                 name, model.dimension, model.max_seq_length)
+        return model
+
+    # Committed repo-local torch copy (checkouts that predate the ONNX export).
     if model_name is None and _local_model_present():
+        from sentence_transformers import SentenceTransformer  # noqa: PLC0415
+
         model = SentenceTransformer(str(LOCAL_MODEL_DIR), device="cpu",
                                     local_files_only=True)
         dim = (model.get_embedding_dimension()
@@ -180,6 +195,8 @@ def load_model(model_name: str | None = None, *, local_files_only: bool | None =
 
     if local_files_only is None:
         local_files_only = model_is_cached(name)
+
+    from sentence_transformers import SentenceTransformer  # noqa: PLC0415
 
     try:
         model = SentenceTransformer(name, device="cpu", local_files_only=local_files_only)

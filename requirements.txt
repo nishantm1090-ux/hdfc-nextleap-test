@@ -17,9 +17,16 @@ tiktoken>=0.7
 PyYAML>=6.0
 tqdm>=4.66
 
-# --- Stage 3: Embedding (all-MiniLM-L6-v2, CPU) ----------------------------
-sentence-transformers>=6.0
-torch>=2.2            # pulled in by sentence-transformers; CPU wheel is fine
+# --- Stage 3: Embedding (all-MiniLM-L6-v2) ---------------------------------
+# Runs as an ONNX graph under onnxruntime (the committed
+# models/all-MiniLM-L6-v2/model.onnx + model.onnx.data), NOT PyTorch: importing
+# torch is ~560 MB peak RSS and 10-60 s on a cold Render free-tier instance
+# (512 MB cap), which OOM-kills the process mid-question. onnxruntime is ~80-100
+# MB, imports in ~1 s, and is already a ChromaDB dependency. Regenerate the
+# export with `python tools/export_onnx.py` (dev machine only - that tool pins
+# torch + sentence-transformers itself).
+onnxruntime>=1.16
+tokenizers>=0.19
 
 # --- Stage 4: Vector store (ChromaDB) --------------------------------------
 # Pinned to the exact version the committed data/chroma/ was built with. A

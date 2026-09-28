@@ -42,16 +42,15 @@ UI = CFG["ui"]
 PY = Path(sys.executable)
 
 
+@st.cache_resource(show_spinner=False)
 def _warm() -> None:
-    """No-op: warmup is deferred to the first question.
+    """No-op. Warmup is intentionally NOT done here.
 
-    The embed model is loadable from the repo-local copy (~0.5s once torch is
-    imported), so the price of the first question on a cold Render instance is
-    one bounded model load inside the 'Retrieving and checking…' spinner. A
-    background warm-up thread was tried and removed: it raced the first ask and
-    doubled the peak memory (model + store) on a 512 MB free instance, which
-    OOM-killed the process mid-question. Rendering does not need the model, so
-    the page still loads instantly.
+    The embed model is a committed ONNX export running on onnxruntime, so on a
+    cold Render instance the first question pays a single ~1-2s model load
+    inside the 'Retrieving and checking…' spinner (torch was ~560 MB RSS, which
+    OOM-killed the free-tier process; onnxruntime is ~135 MB). Rendering never
+    waits on the model, so the page still loads instantly.
     """
 
 # ---------------------------------------------------------------------------
@@ -248,7 +247,7 @@ def sidebar() -> None:
 
 def main() -> None:
     st.set_page_config(page_title=UI["title"], page_icon="📊", layout="wide")
-    _warm()  # heavy singletons are loaded on page load, not on the first question
+    _warm()  # background model+store warm-up; page renders without waiting on it
     sidebar()
 
     # FR-8.7 - disclaimer visible without scrolling, at the top and pinned at
