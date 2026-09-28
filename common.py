@@ -122,7 +122,11 @@ def utc_date() -> str:
 #: the generated sample Q&A - must strip it, or the one source appears twice
 #: (PRD FR-8.4: "the one source link"). It lives here rather than in app.py so
 #: there is one definition instead of one per renderer.
-_INLINE_SOURCE = re.compile(r"\s*Source:\s*https?://\S+\s*\.?\s*$", re.I)
+#:
+#: The `+` handles a generator that inlines the URL AND the pipeline appends
+#: the citation: both trailing copies are stripped, so the rendered answer
+#: shows the source exactly once - in the citation block.
+_INLINE_SOURCE = re.compile(r"(?:\s*Source:\s*https?://\S+\.?)*\s*$", re.I)
 
 
 def strip_inline_source(text: str) -> str:

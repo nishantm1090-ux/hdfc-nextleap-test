@@ -306,3 +306,27 @@ def test_pii_report_is_log_safe():
 
 def test_pii_report_of_empty_is_clean():
     assert common.pii_report([]) == "clean"
+
+
+# ---------------------------------------------------------------------------
+# strip_inline_source - PRD FR-8.4, the one source link
+# ---------------------------------------------------------------------------
+
+
+def test_strip_inline_source_removes_a_single_trailing_source():
+    text = "The expense ratio is 1.03%. Source: https://groww.in/f"
+    assert common.strip_inline_source(text) == "The expense ratio is 1.03%."
+
+
+def test_strip_inline_source_removes_both_trailing_copies_when_generator_inlines():
+    """A generator that inlines the URL AND step 9 appends the citation leaves
+    two trailing `Source:` tokens. Only one may ship - the citation block.
+    """
+    text = ("The expense ratio is 1.03%. Source: https://groww.in/f "
+            "Source: https://groww.in/f")
+    assert common.strip_inline_source(text) == "The expense ratio is 1.03%."
+
+
+def test_strip_inline_source_keeps_prose_that_mentions_source_mid_sentence():
+    text = "The Source: https://x link explains the scheme's benchmark 1.03%."
+    assert common.strip_inline_source(text) == text

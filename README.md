@@ -227,7 +227,7 @@ rejected and the next chunk is tried.
 ## Testing
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -q          # 575 tests
+.\.venv\Scripts\python.exe -m pytest -q          # 578 tests
 ```
 
 | Suite | Tests | What it pins |
@@ -235,7 +235,7 @@ rejected and the next chunk is tried.
 | `test_guardrails.py` | 86 | PII, advice, performance, groundedness |
 | `test_answer.py` | 83 | the `Answer` contract, extraction order, every refusal |
 | `test_retrieval.py` | 63 | the coverage gate, MMR, scheme filter, scope |
-| `test_common.py` | 49 | config, paths, PII masking, logging |
+| `test_common.py` | 52 | config, paths, PII masking, logging, inline-source stripping |
 | `test_store.py` | 45 | persistence, gap/orphan audit, segment purge |
 | `test_chunking.py` | 42 | chunk shapes, idempotence, the corpus gate |
 | `test_ui.py` | 36 | real `AppTest` script execution, 3 chips, one citation |
