@@ -19,6 +19,7 @@ import os
 import re
 import subprocess
 import sys
+import threading
 from pathlib import Path
 from typing import Any
 
@@ -42,14 +43,21 @@ UI = CFG["ui"]
 PY = Path(sys.executable)
 
 
-@st.cache_resource(show_spinner=False)
-def _warm() -> None:
+def _warm_work() -> None:
     from embed.index import load_model
     from store import chroma_store as cs
     try:  # best-effort: a model/store hiccup must not take the page down
         load_model()
         cs.get_collection(create=False)
     except Exception: pass
+
+
+@st.cache_resource(show_spinner=False)
+def _warm() -> None:
+    """Heavy singletons load on a daemon thread, so the first render is never
+    blocked on a cold model load; the first question pays for it if it arrives
+    before warmup lands."""
+    threading.Thread(target=_warm_work, daemon=True).start()
 
 # ---------------------------------------------------------------------------
 # Pure helpers - no Streamlit state, fully unit-testable.
@@ -208,8 +216,7 @@ def render_answer(answer: Answer) -> None:
     with st.expander("Why this answer?"):
         st.caption(f"kind = `{answer.kind}`  ·  provider = `{debug.get('provider', '—')}`  ·  "
                    f"named scheme = `{debug.get('named_scheme') or '—'}`  ·  guardrails = "
-                   + ("pass" if debug.get("final_valid") else "fail")
-                   + (f" ({', '.join(debug.get('final_reasons') or [])})" if debug.get("final_reasons") else ""))
+                   + ("pass" if debug.get("final_valid") else "fail"))
         rows = why_rows(debug)
         if rows:
             st.dataframe(rows, width="stretch", hide_index=True,
@@ -232,9 +239,8 @@ def sidebar() -> None:
     st.sidebar.subheader("Corpus")
     cs = corpus_stats()
     hit = f"  _(cache hit {cs['embed_hit_pct']}%)_" if cs.get("embed_hit_pct") is not None else ""
-    st.sidebar.markdown(f"- Schemes: **{cs['schemes']}**\n- Pages indexed: **{cs['pages']}**\n"
-                        f"- Chunks: **{cs['chunks']}**\n- Embeddings: **{cs['embeddings']}**{hit}\n"
-                        f"- Last ingest: `{cs['last_ingest']}`")
+    st.sidebar.markdown(f"- Schemes: **{cs['schemes']}**\n- Pages indexed: **{cs['pages']}**\n- "
+                        f"Chunks: **{cs['chunks']}**\n- Embeddings: **{cs['embeddings']}**{hit}\n- Last ingest: `{cs['last_ingest']}`")
 
     st.sidebar.subheader("Maintenance")
     if st.sidebar.button("Rebuild index", width="stretch"):
@@ -255,8 +261,7 @@ def main() -> None:
     # literal string is written once, not twice.
     st.caption(UI["note"])
 
-    st.title(UI["title"])
-    st.markdown(f"*{UI['welcome_line']}*")
+    st.title(UI["title"]); st.markdown(f"*{UI['welcome_line']}*")
 
     st.session_state.setdefault("messages", []); st.session_state.setdefault("pending", None)
 
