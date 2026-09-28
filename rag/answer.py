@@ -51,8 +51,9 @@ from common import LOG
 
 from rag import guardrails as G
 from rag import prompts as P
-from rag.retrieve import (OutOfCorpus, RetrievedChunk, detect_scheme,
-                          retrieve, with_memory_context)
+from rag.retrieve import (OutOfCorpus, RetrievedChunk, _scheme_display_name,
+                          detect_scheme, detect_schemes, retrieve,
+                          with_memory_context)
 
 # ---------------------------------------------------------------------------
 # The answer contract - PRD §11, verbatim field names
@@ -859,6 +860,26 @@ def ask(question: str, *, top_k: int | None = None,
     if memo:
         debug["memory_context"] = memo
 
+    # --- 4c. one scheme at a time ------------------------------------------
+    # The exactly-one-source contract (PRD §11) cannot be met by an answer that
+    # covers two funds. "What is the NAV of HDFC Small Cap and HDFC ELSS?"
+    # named both before; the generator answered both and shipped two inline
+    # sources - a contract violation - or coined one fund's page for both
+    # figures, which is worse. Neither is acceptable, so this refuses
+    # deterministically, naming the funds so the user knows exactly what to
+    # re-ask. `q2` (memory-resolved) is judged here, not `q`: a follow-up that
+    # remembers a scheme resolves to ONE fund, and must not be refused.
+    named_all = detect_schemes(q2, list(_corpus_metadata()))
+    if len(named_all) > 1:
+        debug["guardrail"] = "multi_scheme"
+        debug["named_schemes"] = named_all
+        corpus = list(_corpus_metadata())
+        funds = " and ".join(_scheme_display_name(s, corpus) for s in named_all)
+        return _refusal(
+            "out_of_corpus", G.MULTI_SCHEME_REFUSAL.format(funds=funds),
+            f"names {len(named_all)} schemes; the one-source contract allows "
+            "one fund per question", debug)
+
     # --- 5. retrieve --------------------------------------------------------
     # Over-fetch when the question names a scheme, then filter locally.
     #
@@ -884,13 +905,21 @@ def ask(question: str, *, top_k: int | None = None,
         debug["reason"] = str(exc)
         return _refusal("out_of_corpus", G.OUT_OF_CORPUS, str(exc), debug)
     except FileNotFoundError as exc:
+        # A missing index (fresh instance, build interrupted) is a recoverable
+        # condition, not a reason to show a filesystem path in the chat. The
+        # text stays human and actionable; the detail goes to debug only.
+        debug["guardrail"] = "retrieval_error"
         debug["error"] = str(exc)
-        return _refusal("error", str(exc), "the index is not built", debug)
+        return _refusal("error", G.INDEX_ERROR, "the index is not built", debug)
     except Exception as exc:  # noqa: BLE001 - a store/model hiccup must not
         # kill the whole page: it becomes an `error` refusal instead. "Never
-        # raises for user input" is a contract of this function.
+        # raises for user input" is a contract of this function. The viewer
+        # sees the friendly INDEX_ERROR, never the exception's raw message
+        # (which can carry an absolute path like /opt/render/.../data/chroma).
+        debug["guardrail"] = "retrieval_error"
         debug["error"] = f"{type(exc).__name__}: {exc}"
-        return _refusal("error", str(exc), f"retrieval failed: {exc}", debug)
+        return _refusal("error", G.INDEX_ERROR,
+                        f"retrieval failed: {type(exc).__name__}", debug)
 
     debug["retrieved"] = [c.to_dict() for c in chunks]
     debug["chunk_ids"] = [c.chunk_id for c in chunks]
@@ -928,7 +957,17 @@ def ask(question: str, *, top_k: int | None = None,
             f"retrieved; answering from another scheme's figures would be wrong",
             debug)
 
-    text, used, note = _generate(q2, chunks)
+    # A scheme named in the question is filtered at the PROMPT level, not just
+    # at the extraction level. `chunks` from `retrieve()` is unfiltered - when a
+    # scheme is named we over-fetched (named_scheme_over_fetch) precisely so a
+    # short filtered result set has something to work with - and handing all of
+    # it to an LLM lets it quote another scheme's figure from context with a
+    # grounded-sounding citation. `rank_for_extraction` drops every chunk that
+    # is not the named scheme (and says so, refusing, when none survive), so the
+    # generator literally cannot see a competing fund's numbers.
+    ranked = rank_for_extraction(q2, chunks)
+
+    text, used, note = _generate(q2, ranked)
     debug["provider"] = note
     debug["chunk_used"] = used.chunk_id if used else None
 

@@ -1,0 +1,17 @@
+# .streamlit/config.toml - the app pins its own visual theme.
+#
+# The editorial-luxury palette lives in assets/style.css. This pins the streamlit
+# *base* theme so the page is not at the mercy of the viewer's browser dark-mode
+# preference (Streamlit's dark base would fight the ivory-paper design). The
+# token values match the CSS so the pre-paint frame (font metrics, sidebar) is
+# right even before style.css loads.
+[theme]
+base = "light"
+primaryColor = "#9C7A2C"
+backgroundColor = "#F6F1E7"
+secondaryBackgroundColor = "#FCFAF4"
+textColor = "#1B2541"
+font = "sans serif"
+
+[server]
+headless = true

@@ -641,6 +641,42 @@ def detect_scheme(question: str, chunks: Sequence[dict[str, Any]]) -> str | None
             out.append(" ".join(words[:end]))
         return out
 
+    found = detect_schemes(question, chunks)
+    return found[0] if found else None
+
+
+def detect_schemes(question: str, chunks: Sequence[dict[str, Any]]) -> list[str]:
+    """Every scheme a question names, strongest match first.
+
+    The singular `detect_scheme` exists for callers that need "the one scheme"
+    (the scheme filter, memory resolution). This is the plural view, used to
+    catch a question that names two schemes at once ("What is the NAV of HDFC
+    Small Cap and HDFC ELSS?"), which the exactly-one-source contract cannot
+    answer honestly: whichever single page we cite, the other fund's figure
+    would ride in unsourced.
+
+    Match quality is the SAME measure as `detect_scheme` - the longest name
+    variant found in the question - so naming a scheme twice under different
+    aliases ("HDFC Flexi Cap Fund, also called HDFC Equity Fund") still counts
+    as ONE scheme: both resolve to the same slug, and the return is deduplicated
+    by slug.
+    """
+    q = normalise_query(question)
+    if not q:
+        return []
+
+    by_slug: dict[str, dict[str, Any]] = {}
+    for c in chunks:
+        by_slug.setdefault(c["scheme_slug"], c)
+
+    def _variants(name: str) -> list[str]:
+        """The name, then progressively shorter trailing-word trims."""
+        words = tokenize(name)
+        out = []
+        for end in range(len(words), 1, -1):
+            out.append(" ".join(words[:end]))
+        return out
+
     cands: list[tuple[int, str]] = []
     for slug, c in by_slug.items():
         names = [str(c.get("scheme_name", ""))]
@@ -658,9 +694,8 @@ def detect_scheme(question: str, chunks: Sequence[dict[str, Any]]) -> str | None
         if best:
             cands.append((best, slug))
 
-    if not cands:
-        return None
-    return max(cands)[1]
+    cands.sort(key=lambda t: (t[0], t[1]), reverse=True)
+    return [slug for _, slug in cands]
 
 
 _MEMORY_DEFAULT_MAX_MESSAGES = 10

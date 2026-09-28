@@ -247,6 +247,10 @@ def sidebar() -> None:
 
 def main() -> None:
     st.set_page_config(page_title=UI["title"], page_icon="📊", layout="wide")
+    # Premium theme (assets/style.css). st.html wraps a CSS file Path in
+    # <style> and routes style-only content to the event container, so the
+    # stylesheet applies page-wide without occupying layout space.
+    st.html(Path(__file__).resolve().parent / "assets" / "style.css")
     _warm()  # background model+store warm-up; page renders without waiting on it
     sidebar()
 

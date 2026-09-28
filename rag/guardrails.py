@@ -82,6 +82,25 @@ OUT_OF_SCOPE = (
     "SIP \u00b7 ELSS lock-in \u00b7 benchmark \u00b7 NAV and AUM \u00b7 investment objective."
 )
 
+# PRD §11 pins "exactly one source link" per answer. A question that names two
+# schemes ("What is the NAV of HDFC Small Cap and HDFC ELSS?") cannot be
+# answered honestly within that contract - citing either fund's page leaves the
+# other fund's figure unsourced, and a comparison is what the disclaimer rules
+# out. Refuse deterministically instead of letting the generator coin-flip.
+MULTI_SCHEME_REFUSAL = (
+    "That question names more than one scheme ({funds}). Every answer here "
+    "cites exactly one source link, so I can only handle one fund per question "
+    "\u2014 ask me about one scheme at a time."
+)
+
+# The one place a filesystem detail could reach a viewer. A store hiccup on the
+# hosting instance must read as a helpful, actionable message - never as a raw
+# `/opt/.../data/chroma` path in the chat.
+INDEX_ERROR = (
+    "I couldn't reach the search index just now. If this keeps happening, "
+    "press **Rebuild index** in the sidebar, then ask again."
+)
+
 REFUSALS = {
     "pii": PII_REFUSAL,
     "advice": ADVICE_REFUSAL,
@@ -638,6 +657,15 @@ def validate_answer(answer: dict[str, Any], corpus_urls_set: set[str] | None = N
         bad = [u for u in all_urls if u.rstrip(".,)") not in known]
         if bad:
             reasons.append(f"cites a URL that is not in the corpus: {bad}")
+
+    # PRD §11 is exactly ONE source. A generator that names two different URLs
+    # (e.g. "…X is ₹1,447.38 … Source: A … Source: B") inherits the multi-source
+    # failure no matter how well grounded each figure is. Deduplicate first: the
+    # pipeline itself appends the citation to the prose, so the same URL appears
+    # twice (once in text, once in sources) on every legitimately-sourced answer.
+    distinct_urls = {u.rstrip(".,)") for u in all_urls if u.rstrip(".,)")}
+    if len(distinct_urls) > 1:
+        reasons.append("cites more than one distinct source URL; PRD §11 is exactly one source")
 
     max_sentences = int(gcfg.get("max_sentences", 3))
     n = count_sentences(text)
