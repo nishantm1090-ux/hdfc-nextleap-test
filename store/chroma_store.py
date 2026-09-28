@@ -119,6 +119,23 @@ def coerce_metadata(chunk: dict[str, Any]) -> dict[str, str | int | float | bool
 # Client + collection
 # ---------------------------------------------------------------------------
 
+# The real (default-path) client and collection, cached at module scope.
+# `get_collection` is called on EVERY dense query and `ask()` runs one dense
+# query per question, and a fresh Chroma PersistentClient + HNSW open costs
+# ~0.5-1s. In Streamlit the module persists across reruns, so caching here cuts
+# that to zero after the first question. Only the default-path objects are
+# cached - a caller that passes an explicit `client=` (tests, rebuild) is
+# constructively saying "this one, right now", so it never touches the cache.
+_CLIENT_CACHE: Any = None
+_COLLECTION_CACHE: Any = None
+
+
+def invalidate_caches() -> None:
+    """Drop the cached client/collection. Called after the collection is wiped."""
+    global _CLIENT_CACHE, _COLLECTION_CACHE
+    _CLIENT_CACHE = None
+    _COLLECTION_CACHE = None
+
 
 def collection_name() -> str:
     """The Chroma collection name, from `vector_store.collection_name`.
@@ -132,12 +149,19 @@ def collection_name() -> str:
 
 
 def get_client():
-    """A persistent Chroma client rooted at ``paths.chroma_dir``."""
+    """A persistent Chroma client rooted at ``paths.chroma_dir``.
+
+    Cached at module scope - see the note above `_CLIENT_CACHE`.
+    """
+    global _CLIENT_CACHE
+    if _CLIENT_CACHE is not None:
+        return _CLIENT_CACHE
     import chromadb  # noqa: PLC0415
 
     path = common.path_for("chroma_dir")
     Path(path).parent.mkdir(parents=True, exist_ok=True)
-    return chromadb.PersistentClient(path=str(path))
+    _CLIENT_CACHE = chromadb.PersistentClient(path=str(path))
+    return _CLIENT_CACHE
 
 
 def _collection_kwargs() -> dict[str, Any]:
@@ -169,16 +193,31 @@ def _collection_kwargs() -> dict[str, Any]:
 def get_collection(*, create: bool = True, client: Any = None):
     """The ``hdfc_mf_faq`` collection, with cosine space and hdim recorded.
 
+    Cached at module scope for the default client - see `_COLLECTION_CACHE`. A
+    caller passing an explicit `client=` (rebuild, tests) bypasses the cache: an
+    explicit client is a particular store, and reusing a stale cached collection
+    against it would serve the wrong index.
+
     `_load_vector` is what actually pins the dimension; see `_collection_kwargs`.
     """
-    client = client or get_client()
+    global _COLLECTION_CACHE
+    if client is None:
+        if _COLLECTION_CACHE is not None:
+            return _COLLECTION_CACHE
+        client = get_client()
     name = collection_name()
     if create:
-        return client.get_or_create_collection(name=name, **_collection_kwargs())
-    try:
-        return client.get_collection(name=name)
-    except Exception:  # noqa: BLE001 - chroma raises its own collection-not-found type
-        return None
+        coll = client.get_or_create_collection(name=name, **_collection_kwargs())
+    else:
+        try:
+            coll = client.get_collection(name=name)
+        except Exception:  # noqa: BLE001 - chroma raises its own collection-not-found type
+            coll = None
+    # Cache only the default-client handle; an explicit scratch collection
+    # (tests, rebuild) must not leak into the web app's fast path.
+    if coll is not None and client is _CLIENT_CACHE:
+        _COLLECTION_CACHE = coll
+    return coll
 
 
 # ---------------------------------------------------------------------------
@@ -390,6 +429,7 @@ def rebuild(*, show_progress: bool = True) -> int:
     index" button calls. A rebuild is a full re-derivation from the corpus, so
     it is safe by construction - the corpus in data/ is the source of truth.
     """
+    invalidate_caches()  # the cached collection is about to be deleted
     client = get_client()
     name = collection_name()
     try:

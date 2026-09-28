@@ -478,6 +478,10 @@ def _get_reranker(model_name: str) -> Any:
 _BM25: BM25Index | None = None
 _CHUNKS: dict[str, dict[str, Any]] | None = None
 _EMBED_ROWS: dict[str, str] | None = None
+#: chunk_id -> vector, memoised across queries. Without this, MMR re-reads
+#: every chunk's `.npy` from disk on every question - a handful of 1.5 KB files,
+#: but per-question I/O that Streamlit reruns pay repeatedly.
+_EMBED_VEC_CACHE: dict[str, Any] = {}
 
 
 def get_index(*, rebuild_if_stale: bool = True) -> BM25Index:
@@ -520,18 +524,17 @@ def _embedding_lookup() -> Any:
         _EMBED_ROWS = {r["chunk_id"]: r["vector_file"] for r in rows}
 
     base = Path(common.path_for("embeddings_dir"))
-    cache: dict[str, Any] = {}
 
     def lookup(chunk_id: str) -> Any:
         name = _EMBED_ROWS.get(chunk_id)  # type: ignore[union-attr]
         if not name:
             return None
-        if name not in cache:
+        if name not in _EMBED_VEC_CACHE:
             f = base / name
             if not f.exists():
                 return None
-            cache[name] = np.load(f)
-        return cache[name]
+            _EMBED_VEC_CACHE[name] = np.load(f)
+        return _EMBED_VEC_CACHE[name]
 
     return lookup
 

@@ -38,6 +38,7 @@ import statistics
 import sys
 import time
 from dataclasses import asdict, dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Sequence
 
@@ -124,9 +125,17 @@ def embed_hash(chunk: dict[str, Any], cfg: dict[str, Any]) -> str:
 # ---------------------------------------------------------------------------
 
 
+@lru_cache(maxsize=4)
 def load_model(model_name: str | None = None, *, local_files_only: bool | None = None
                ) -> Any:
     """Load MiniLM on CPU. Never auto-select the GPU (it OOMs on tiny corpora).
+
+    Cached at module scope on (model_name, local_files_only). In the UI this is
+    the difference between a 1-2s model reload on EVERY question and one load per
+    process: `_embed_question` calls it per query, and a Streamlit rerun re-runs
+    the script but not the module, so the cache survives across questions. The
+    measured cost of the uncached reload was ~0.6-1s per question (and ~16s for
+    the very first load, when torch and sentence-transformers are imported).
 
     Once the model is in the Hugging Face cache we load it with
     `local_files_only=True`, so a re-run works with no network at all. Without

@@ -1,0 +1,94 @@
+{
+  "adr001_evidence": {
+    "fact_label_value_separated_pct": 0.0,
+    "note": "fact_label_value_separated_pct must be 0.0 - the ADR-001 acceptance test (PRD S20). Non-zero means re-open ADR-001.",
+    "prose_below_min_tokens_pct": 0.0,
+    "prose_median_tokens": 243,
+    "semantic_merges_applied": 0
+  },
+  "fact_key_histogram": {
+    "aum": 10,
+    "benchmark": 5,
+    "exit_load": 15,
+    "expense_ratio": 10,
+    "fund_objective": 5,
+    "how_to_redeem": 5,
+    "lock_in_period": 1,
+    "minimum_investment": 20,
+    "minimum_sip": 10,
+    "nav": 15,
+    "pe_pb_ratio": 5,
+    "rating": 5,
+    "sip_vs_lumpsum": 5
+  },
+  "generated_at": "2026-09-28T14:43:02.451Z",
+  "per_scheme": {
+    "hdfc-balanced-advantage-fund-direct-growth": {
+      "chunks": 24,
+      "facts": 22,
+      "max_tokens": 325,
+      "mean_tokens": 44.7,
+      "median_tokens": 15,
+      "min_tokens": 4,
+      "prose": 2
+    },
+    "hdfc-elss-tax-saver-fund-direct-plan-growth": {
+      "chunks": 25,
+      "facts": 23,
+      "max_tokens": 283,
+      "mean_tokens": 43.7,
+      "median_tokens": 13,
+      "min_tokens": 4,
+      "prose": 2
+    },
+    "hdfc-equity-fund-direct-growth": {
+      "chunks": 24,
+      "facts": 22,
+      "max_tokens": 289,
+      "mean_tokens": 43.8,
+      "median_tokens": 16,
+      "min_tokens": 4,
+      "prose": 2
+    },
+    "hdfc-large-cap-fund-direct-growth": {
+      "chunks": 24,
+      "facts": 22,
+      "max_tokens": 282,
+      "mean_tokens": 42.5,
+      "median_tokens": 15,
+      "min_tokens": 4,
+      "prose": 2
+    },
+    "hdfc-small-cap-fund-direct-growth": {
+      "chunks": 24,
+      "facts": 22,
+      "max_tokens": 279,
+      "mean_tokens": 42.2,
+      "median_tokens": 13,
+      "min_tokens": 4,
+      "prose": 2
+    }
+  },
+  "rejected_documents": {
+    "amfi-mutual-fund-basics": "no fact-bearing nodes and mean node is only 34 chars (< 80) - navigation/search shell, not content",
+    "groww-help-statement-guides": "no fact-bearing nodes and mean node is only 55 chars (< 80) - navigation/search shell, not content"
+  },
+  "strategy": "structure_first_hybrid",
+  "tokenizer": "tiktoken:cl100k_base",
+  "tokens": {
+    "cap": 1100,
+    "max": 325,
+    "mean": 43.4,
+    "median": 14,
+    "min": 4
+  },
+  "totals": {
+    "chunks": 121,
+    "documents_kept": 5,
+    "documents_rejected": 2,
+    "facts": 111,
+    "faq": 30,
+    "prose": 10,
+    "quarantined": 0
+  }
+}

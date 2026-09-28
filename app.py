@@ -41,6 +41,15 @@ CFG = common.load_config()
 UI = CFG["ui"]
 PY = Path(sys.executable)
 
+
+@st.cache_resource(show_spinner=False)
+def _warm() -> None:
+    from embed.index import load_model  # first ask pays torch+model cold (per process)
+    from store import chroma_store as cs
+
+    load_model()
+    cs.get_collection(create=False)
+
 # ---------------------------------------------------------------------------
 # Pure helpers - no Streamlit state, fully unit-testable.
 # ---------------------------------------------------------------------------
@@ -237,6 +246,7 @@ def sidebar() -> None:
 
 def main() -> None:
     st.set_page_config(page_title=UI["title"], page_icon="📊", layout="wide")
+    _warm()  # heavy singletons are loaded on page load, not on the first question
     sidebar()
 
     # FR-8.7 - disclaimer visible without scrolling, at the top and pinned at
@@ -247,8 +257,7 @@ def main() -> None:
     st.title(UI["title"])
     st.markdown(f"*{UI['welcome_line']}*")
 
-    st.session_state.setdefault("messages", [])
-    st.session_state.setdefault("pending", None)
+    st.session_state.setdefault("messages", []); st.session_state.setdefault("pending", None)
 
     # FR-8.3 - exactly 3 chips, shown only while the transcript is empty.
     if not st.session_state["messages"]:

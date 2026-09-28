@@ -10,13 +10,14 @@ venv/
 .env
 
 # --- Corpus + index artefacts (regenerate with `python -m ingest.fetch`) -----
+# The RUNTIME needs the built artefacts present on a fresh clone, because a
+# Render free-tier instance has an ephemeral disk - anything built at runtime
+# (model download, chunk/embed/store outputs) is lost on sleep, so a woken
+# instance would hit "collection does not exist" on the first question. The
+# built artefacts are tiny (~3 MB), so they are committed to the image and
+# gitignored only for the bulky, regenerable intermediates.
 data/raw/
-data/chroma/
-data/embeddings/
-data/corpus.jsonl
-data/chunk_stats.json
 data/quarantine.jsonl
-data/ingestion_log.jsonl
 
 # Keep the committed evidence files, ignore the bulky regenerable ones
 !data/*.md
