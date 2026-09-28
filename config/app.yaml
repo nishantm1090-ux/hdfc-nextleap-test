@@ -331,6 +331,11 @@ retrieval:
   # check: a short filtered result set falls back to the unfiltered ranking
   # rather than reporting the scheme as absent. See rag/retrieve.py.
   scheme_filter_is_hint: true
+  # Retrieval memory: how many recent UI transcript messages (user + assistant
+  # turns) are consulted to resolve a terse follow-up that omits its scheme
+  # ("…its expense ratio?"). 0 disables the feature. See
+  # rag/retrieve.with_memory_context.
+  memory_context_messages: 10
   rerank:
     enabled: false                     # needs a cross-encoder; skipped silently
     model_name: "cross-encoder/ms-marco-MiniLM-L-6-v2"

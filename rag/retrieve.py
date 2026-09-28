@@ -663,6 +663,95 @@ def detect_scheme(question: str, chunks: Sequence[dict[str, Any]]) -> str | None
     return max(cands)[1]
 
 
+_MEMORY_DEFAULT_MAX_MESSAGES = 10
+
+
+def _message_text(m: Any) -> str:
+    """The user-visible text of one UI transcript entry, whatever its shape.
+
+    The transcript stores user turns as {"role": "user", "text": str} and
+    assistant turns as {"role": "assistant", "answer": Answer}; a test or an
+    embedder may also hand us a bare str or a dataclass. One accessor for all
+    of them keeps `with_memory_context` independent of the UI layer.
+    """
+    if isinstance(m, dict):
+        if m.get("text"):
+            return str(m.get("text"))
+        ans = m.get("answer")
+        if ans is not None:
+            return str(getattr(ans, "text", "") or "")
+        return ""
+    if hasattr(m, "text"):
+        return str(getattr(m, "text", "") or "")
+    return str(m or "")
+
+
+def _scheme_display_name(slug: str, corpus: Sequence[dict[str, Any]]) -> str:
+    """The name users actually type for this scheme, minus the "- Direct …" tail.
+
+    ``scheme_name`` carries the market-gateway name ("HDFC Equity Fund") but
+    the project speaks Groww's alias ("HDFC Flexi Cap Fund"); the alias is what
+    a follow-up should be spliced with, so retrieval and ranking see the same
+    tokens the user used.
+    """
+    for c in corpus:
+        if c.get("scheme_slug") == slug:
+            aliases = c.get("scheme_aliases") or []
+            if isinstance(aliases, list) and aliases and str(aliases[0]).strip():
+                name = str(aliases[0])
+            else:
+                name = str(c.get("scheme_name") or "")
+            return re.sub(r"\s*[-–]\s*(Direct|Direct Plan|Plan).*$",
+                          "", name).strip() or slug
+    return slug.replace("-", " ").strip()
+
+
+def with_memory_context(question: str, history: Sequence[Any] | None,
+                        corpus: Sequence[dict[str, Any]],
+                        max_messages: int = _MEMORY_DEFAULT_MAX_MESSAGES
+                        ) -> tuple[str, dict[str, Any]]:
+    """Resolve a terse follow-up question against the recent conversation.
+
+    Returns ``(query_for_retrieval, memo)``. ``memo`` is ``{}`` when no
+    resolution happened - which is the common case, and must be indistinguishable
+    from the plain question so callers default to today's behaviour.
+
+    When the question already names a scheme, or no turn in the last
+    ``max_messages`` named one, the original question is returned unchanged.
+    Otherwise the most recent turn that named a scheme is found (scanning
+    newest-first) and its scheme is spliced into the query, so a follow-up like
+    "…its expense ratio?" becomes "…its expense ratio? HDFC Small Cap" for
+    retrieval, ranking and generation. The guardrail layer still judges only
+    what the user literally typed.
+    """
+    q = (question or "").strip()
+    if not history or not q:
+        return q, {}
+    recent = list(history)[-max_messages:]
+
+    # The question already names a scheme: no resolution needed.
+    if detect_scheme(q, corpus):
+        return q, {}
+
+    # Newest-first scan for the last turn that named one.
+    last_named: str | None = None
+    for m in reversed(recent):
+        s = detect_scheme(_message_text(m), corpus)
+        if s:
+            last_named = s
+            break
+    if not last_named:
+        return q, {}
+
+    display = _scheme_display_name(last_named, corpus)
+    resolved = f"{q}  {display}" if display else q
+    return resolved, {
+        "resolved_scheme": last_named,
+        "scheme_name": display,
+        "from_history": True,
+    }
+
+
 def retrieve(question: str, *, top_k: int | None = None, where: dict[str, Any] | None = None,
              with_debug: bool = False) -> list[RetrievedChunk]:
     """Rank the corpus for `question`.

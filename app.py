@@ -277,12 +277,13 @@ def main() -> None:
                 st.markdown(m["text"])
 
     if question:
+        history = list(st.session_state["messages"])  # turns BEFORE this one
         st.session_state["messages"].append({"role": "user", "text": question})
         with st.chat_message("user"):
             st.markdown(question)
         with st.chat_message("assistant"):
             with st.spinner("Retrieving and checking…"):
-                answer = ask(question)
+                answer = ask(question, history=history)
             render_answer(answer)
         st.session_state["messages"].append({"role": "assistant", "answer": answer})
 

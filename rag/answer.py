@@ -52,7 +52,7 @@ from common import LOG
 from rag import guardrails as G
 from rag import prompts as P
 from rag.retrieve import (OutOfCorpus, RetrievedChunk, detect_scheme,
-                          retrieve)
+                          retrieve, with_memory_context)
 
 # ---------------------------------------------------------------------------
 # The answer contract - PRD §11, verbatim field names
@@ -791,13 +791,19 @@ def _generate(question: str, chunks: Sequence[RetrievedChunk]
 
 
 def ask(question: str, *, top_k: int | None = None,
-        with_debug: bool = True) -> Answer:
+        with_debug: bool = True,
+        history: Sequence[Any] | None = None) -> Answer:
     """The whole assistant. Question in, Answer out. Never raises for user input.
 
     Steps 1-4 guardrails, 5 retrieve, 6-7 generate, 8 validate, 9 attach, 10
     re-validate. Each step's outcome lands in `Answer.debug` when
     `with_debug` is set, because "why did it refuse" is a question the UI has to
     be able to answer without a debugger.
+
+    `history` is the recent UI transcript (last user/assistant messages). It is
+    used ONLY to resolve terse follow-ups that omit a scheme name - the resolved
+    question drives retrieval, ranking and generation, while the guardrails
+    (steps 1-4) still judge what the user literally typed.
     """
     q = (question or "").strip()
     debug: dict[str, Any] = {"question": q, "provider": None}
@@ -840,6 +846,19 @@ def ask(question: str, *, top_k: int | None = None,
         return _refusal("out_of_corpus", G.OUT_OF_SCOPE,
                         "outside the 5 HDFC schemes' scope", debug)
 
+    # --- 4b. retrieval memory (context window of N messages) ----------------
+    # A follow-up can omit the scheme it is about ("…its expense ratio?"). The
+    # last `memory_context_messages` turns are consulted to resolve that
+    # referent, and the RESOLVED question is what retrieval, ranking and
+    # generation see. The guardrails above ran on the raw question, so injecting
+    # a scheme name here cannot unlock advice/perf/scope anything.
+    q2, memo = with_memory_context(
+        q, history, list(_corpus_metadata()),
+        max_messages=int((common.load_config().get("retrieval") or {}).get(
+            "memory_context_messages", 10)))
+    if memo:
+        debug["memory_context"] = memo
+
     # --- 5. retrieve --------------------------------------------------------
     # Over-fetch when the question names a scheme, then filter locally.
     #
@@ -851,7 +870,7 @@ def ask(question: str, *, top_k: int | None = None,
     # answer was the wordy restatement when the crisp one was available.
     # Fetching wide and narrowing locally is the same lesson as Stage 4's
     # over_fetch, applied one level up.
-    named_for_fetch = detect_scheme(q, list(_corpus_metadata()))
+    named_for_fetch = detect_scheme(q2, list(_corpus_metadata()))
     fetch_k = top_k
     if named_for_fetch:
         fetch_k = max(top_k or 0,
@@ -859,7 +878,7 @@ def ask(question: str, *, top_k: int | None = None,
                           "named_scheme_over_fetch", 15)))
 
     try:
-        chunks = retrieve(q, top_k=fetch_k)
+        chunks = retrieve(q2, top_k=fetch_k)
     except OutOfCorpus as exc:
         debug["guardrail"] = "out_of_corpus"
         debug["reason"] = str(exc)
@@ -882,7 +901,7 @@ def ask(question: str, *, top_k: int | None = None,
     # the riskometer level of HDFC Large Cap?" matched on "level" and "large
     # cap" and was answered with the expense ratio: a cited, confident, wrong
     # answer. Refuse when the concept is named and nothing retrieved has it.
-    absent = G.absent_concepts_in(q)
+    absent = G.absent_concepts_in(q2)
     if absent:
         debug["absent_concepts"] = absent
         if not any(G.corpus_has_concept(t, [c.text for c in chunks]) for t in absent):
@@ -898,10 +917,10 @@ def ask(question: str, *, top_k: int | None = None,
     # here, with its name, rather than as a generic "nothing quotable" - the
     # difference between "I have nothing for that fund" and "I have nothing"
     # matters to a user who asked about one specific scheme.
-    named = detect_scheme(q, list(_corpus_metadata()))
+    named = detect_scheme(q2, list(_corpus_metadata()))
     if named:
         debug["named_scheme"] = named
-    if named and not rank_for_extraction(q, chunks):
+    if named and not rank_for_extraction(q2, chunks):
         debug["guardrail"] = "named_scheme_not_retrieved"
         return _refusal(
             "out_of_corpus", G.OUT_OF_CORPUS,
@@ -909,7 +928,7 @@ def ask(question: str, *, top_k: int | None = None,
             f"retrieved; answering from another scheme's figures would be wrong",
             debug)
 
-    text, used, note = _generate(q, chunks)
+    text, used, note = _generate(q2, chunks)
     debug["provider"] = note
     debug["chunk_used"] = used.chunk_id if used else None
 
@@ -949,10 +968,10 @@ def ask(question: str, *, top_k: int | None = None,
     if not ok:
         # Try the next chunk down the EXTRACTION order, not the retriever's
         # order, so the fallback also prefers a chunk about the right subject.
-        for alt in rank_for_extraction(q, chunks):
+        for alt in rank_for_extraction(q2, chunks):
             if used is not None and alt.chunk_id == used.chunk_id:
                 continue
-            candidate = render_from_chunk(alt, q)
+            candidate = render_from_chunk(alt, q2)
             if not candidate:
                 continue
             # The fallback text is quoted from `alt` alone, so validating it

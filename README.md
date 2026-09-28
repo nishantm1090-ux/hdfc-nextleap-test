@@ -227,7 +227,7 @@ rejected and the next chunk is tried.
 ## Testing
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -q          # 548 tests
+.\.venv\Scripts\python.exe -m pytest -q          # 560 tests
 ```
 
 | Suite | Tests | What it pins |
@@ -243,6 +243,7 @@ rejected and the next chunk is tried.
 | `test_embedding.py` | 29 | dimensionality, cache hits, offline mode |
 | `test_ingest.py` | 23 | fetch, clean, PII scrub, quarantine |
 | `test_eval.py` | 23 | the harness, and the golden set against the corpus |
+| `test_memory_context.py` | 12 | retrieval memory: terse follow-ups resolve to the last-named scheme |
 
 `test_golden_regressions.py` is worth knowing about. All six bugs it covers were
 invisible to 420 unit tests, to the demo questions, and to reading the code.
