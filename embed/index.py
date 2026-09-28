@@ -34,6 +34,7 @@ Run:  python -m embed.index
 from __future__ import annotations
 
 import argparse
+import os
 import statistics
 import sys
 import time
@@ -156,6 +157,12 @@ def load_model(model_name: str | None = None, *, local_files_only: bool | None =
     it touch the Hub. An explicit `model_name` (tests) always uses the HF path.
     """
     from sentence_transformers import SentenceTransformer  # noqa: PLC0415
+
+    # Any download that cannot reach the Hub must fail fast, not hang the first
+    # question forever. huggingface_hub reads these env vars on every download.
+    os.environ.setdefault("HF_HUB_DOWNLOAD_TIMEOUT", "30")
+    os.environ.setdefault("HF_HUB_ETAG_TIMEOUT", "30")
+    os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
 
     name = model_name or common.load_config()["embedding"]["model_name"]
 

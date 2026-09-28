@@ -19,7 +19,6 @@ import os
 import re
 import subprocess
 import sys
-import threading
 from pathlib import Path
 from typing import Any
 
@@ -43,21 +42,17 @@ UI = CFG["ui"]
 PY = Path(sys.executable)
 
 
-def _warm_work() -> None:
-    from embed.index import load_model
-    from store import chroma_store as cs
-    try:  # best-effort: a model/store hiccup must not take the page down
-        load_model()
-        cs.get_collection(create=False)
-    except Exception: pass
-
-
-@st.cache_resource(show_spinner=False)
 def _warm() -> None:
-    """Heavy singletons load on a daemon thread, so the first render is never
-    blocked on a cold model load; the first question pays for it if it arrives
-    before warmup lands."""
-    threading.Thread(target=_warm_work, daemon=True).start()
+    """No-op: warmup is deferred to the first question.
+
+    The embed model is loadable from the repo-local copy (~0.5s once torch is
+    imported), so the price of the first question on a cold Render instance is
+    one bounded model load inside the 'Retrieving and checking…' spinner. A
+    background warm-up thread was tried and removed: it raced the first ask and
+    doubled the peak memory (model + store) on a 512 MB free instance, which
+    OOM-killed the process mid-question. Rendering does not need the model, so
+    the page still loads instantly.
+    """
 
 # ---------------------------------------------------------------------------
 # Pure helpers - no Streamlit state, fully unit-testable.
