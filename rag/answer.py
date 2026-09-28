@@ -594,7 +594,7 @@ def generate_ollama(question: str, chunks: Sequence[RetrievedChunk],
             "stream": False,
             "options": {"temperature": float(cfg.get("temperature", 0.0))},
         },
-        timeout=float(cfg.get("timeout_seconds", 90)),
+        timeout=float(cfg.get("timeout_seconds") or 25),
     )
     resp.raise_for_status()
     return str(resp.json().get("response", "")), f"ollama:{cfg.get('model')}"
@@ -628,7 +628,7 @@ def generate_openai(question: str, chunks: Sequence[RetrievedChunk],
                 {"role": "user", "content": prompt},
             ],
         },
-        timeout=float(cfg.get("timeout_seconds", 90)),
+        timeout=float(cfg.get("timeout_seconds") or 25),
     )
     resp.raise_for_status()
     body = resp.json()
@@ -716,7 +716,7 @@ def generate_groq(question: str, chunks: Sequence[RetrievedChunk],
                 {"role": "user", "content": prompt},
             ],
         },
-        timeout=float(cfg.get("timeout_seconds", 90)),
+        timeout=float(cfg.get("timeout_seconds") or 25),
     )
     resp.raise_for_status()
     body = resp.json()
@@ -867,6 +867,11 @@ def ask(question: str, *, top_k: int | None = None,
     except FileNotFoundError as exc:
         debug["error"] = str(exc)
         return _refusal("error", str(exc), "the index is not built", debug)
+    except Exception as exc:  # noqa: BLE001 - a store/model hiccup must not
+        # kill the whole page: it becomes an `error` refusal instead. "Never
+        # raises for user input" is a contract of this function.
+        debug["error"] = f"{type(exc).__name__}: {exc}"
+        return _refusal("error", str(exc), f"retrieval failed: {exc}", debug)
 
     debug["retrieved"] = [c.to_dict() for c in chunks]
     debug["chunk_ids"] = [c.chunk_id for c in chunks]

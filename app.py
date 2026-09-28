@@ -44,11 +44,12 @@ PY = Path(sys.executable)
 
 @st.cache_resource(show_spinner=False)
 def _warm() -> None:
-    from embed.index import load_model  # first ask pays torch+model cold (per process)
+    from embed.index import load_model
     from store import chroma_store as cs
-
-    load_model()
-    cs.get_collection(create=False)
+    try:  # best-effort: a model/store hiccup must not take the page down
+        load_model()
+        cs.get_collection(create=False)
+    except Exception: pass
 
 # ---------------------------------------------------------------------------
 # Pure helpers - no Streamlit state, fully unit-testable.
@@ -205,10 +206,10 @@ def render_answer(answer: Answer) -> None:
 
     debug = answer.debug or {}
     with st.expander("Why this answer?"):
-        verdict = "pass" if debug.get("final_valid") else "fail"
-        extra = f" ({', '.join(debug.get('final_reasons') or [])})" if debug.get("final_reasons") else ""
         st.caption(f"kind = `{answer.kind}`  ·  provider = `{debug.get('provider', '—')}`  ·  "
-                   f"named scheme = `{debug.get('named_scheme') or '—'}`  ·  guardrails = {verdict}{extra}")
+                   f"named scheme = `{debug.get('named_scheme') or '—'}`  ·  guardrails = "
+                   + ("pass" if debug.get("final_valid") else "fail")
+                   + (f" ({', '.join(debug.get('final_reasons') or [])})" if debug.get("final_reasons") else ""))
         rows = why_rows(debug)
         if rows:
             st.dataframe(rows, width="stretch", hide_index=True,
@@ -286,7 +287,6 @@ def main() -> None:
             render_answer(answer)
         st.session_state["messages"].append({"role": "assistant", "answer": answer})
 
-    st.divider()
     st.caption(UI["note"])
     st.caption(G.DISCLAIMER)
 

@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-09-27T19:47:29.066Z",
+  "checked_at": "2026-09-28T15:14:46.330Z",
   "collection": "hdfc_mf_faq",
   "count": 121,
-  "elapsed_seconds": 0.82,
+  "elapsed_seconds": 0.59,
   "embedding_dim": 384,
   "exists": true,
-  "generated_at": "2026-09-27T19:47:29.049Z",
+  "generated_at": "2026-09-28T15:14:46.318Z",
   "hnsw": {
     "metadata": {
       "embedding_dim": 384,

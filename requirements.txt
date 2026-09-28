@@ -22,7 +22,11 @@ sentence-transformers>=6.0
 torch>=2.2            # pulled in by sentence-transformers; CPU wheel is fine
 
 # --- Stage 4: Vector store (ChromaDB) --------------------------------------
-chromadb>=1.5,<2
+# Pinned to the exact version the committed data/chroma/ was built with. A
+# minor-version bump on Render can change the on-disk HNSW segment format and
+# make the shipped store fail to load - the pin keeps the image bit-for-bit
+# compatible with the index it ships.
+chromadb==1.5.9
 
 # --- Stage 5: Lexical hybrid (BM25) -----------------------------------------
 rank-bm25>=0.2.2

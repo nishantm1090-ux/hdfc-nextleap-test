@@ -25,7 +25,9 @@ data/quarantine.jsonl
 
 # --- Model cache ------------------------------------------------------------
 .cache/
-models/
+models/*
+!models/all-MiniLM-L6-v2/
+!models/all-MiniLM-L6-v2/**
 
 # --- Editors / OS -----------------------------------------------------------
 .vscode/
