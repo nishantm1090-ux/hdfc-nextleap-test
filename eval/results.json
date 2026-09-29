@@ -18,8 +18,8 @@
       "wrong_reason": []
     },
     "latency_ms": {
-      "mean": 114.5,
-      "max": 1031.1
+      "mean": 94.4,
+      "max": 1234.2
     },
     "by_category": {
       "advice": {
@@ -115,7 +115,7 @@
       "grounded_strict": true,
       "answer": "The total expense ratio (TER) for HDFC Large Cap Fund is 1.03%. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 1031.1,
+      "elapsed_ms": 1234.2,
       "provider": "stub (extractive)"
     },
     {
@@ -135,7 +135,7 @@
       "grounded_strict": true,
       "answer": "The total expense ratio (TER) for HDFC Flexi Cap Fund is 0.77%. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 65.4,
+      "elapsed_ms": 60.5,
       "provider": "stub (extractive)"
     },
     {
@@ -155,7 +155,7 @@
       "grounded_strict": true,
       "answer": "The total expense ratio (TER) for HDFC ELSS Tax Saver Fund is 1.21%. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 88.4,
+      "elapsed_ms": 63.2,
       "provider": "stub (extractive)"
     },
     {
@@ -175,7 +175,7 @@
       "grounded_strict": true,
       "answer": "The total expense ratio (TER) for HDFC Small Cap Fund is 0.78%. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 84.1,
+      "elapsed_ms": 63.1,
       "provider": "stub (extractive)"
     },
     {
@@ -195,7 +195,7 @@
       "grounded_strict": true,
       "answer": "The total expense ratio (TER) for HDFC Balanced Advantage Fund is 0.78%. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-balanced-advantage-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 63.1,
+      "elapsed_ms": 66.0,
       "provider": "stub (extractive)"
     },
     {
@@ -215,7 +215,7 @@
       "grounded_strict": true,
       "answer": "HDFC Large Cap Fund - Exit Load: In respect of each purchase/switch-in of Units, an Exit Load of 1.00% is payable if Units are redeemed/switched-out within 1 year from the date of allotment. No Exit Load is payable if Units are redeemed/switched-out after 1 year from the date of allotment. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 90.5,
+      "elapsed_ms": 61.3,
       "provider": "stub (extractive)"
     },
     {
@@ -235,7 +235,7 @@
       "grounded_strict": true,
       "answer": "HDFC Flexi Cap Fund - Exit Load: In respect of each purchase / switch-in of Units, an Exit Load of 1.00% is payable if Units are redeemed / switched-out within 1 year from the date of allotment. No Exit Load is payable if Units are redeemed / switched-out after 1 year from the date of allotment. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 95.3,
+      "elapsed_ms": 61.7,
       "provider": "stub (extractive)"
     },
     {
@@ -255,7 +255,7 @@
       "grounded_strict": true,
       "answer": "HDFC Small Cap Fund - Exit Load: In respect of each purchase / switch-in of Units, an Exit Load of 1.00% is payable if Units are redeemed / switched out within 1 year from the date of allotment. No Exit Load is payable if Units are redeemed / switched out after 1 year from the date of allotment. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 75.5,
+      "elapsed_ms": 55.3,
       "provider": "stub (extractive)"
     },
     {
@@ -275,7 +275,7 @@
       "grounded_strict": null,
       "answer": "The Exit Load for HDFC ELSS Tax Saver Fund is nil (stated as NIL). Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 84.7,
+      "elapsed_ms": 57.9,
       "provider": "stub (extractive)"
     },
     {
@@ -295,7 +295,7 @@
       "grounded_strict": null,
       "answer": "Exit Load: In respect of each purchase/switch-in of Units, 15% of the units (“the limit”) may be redeemed without any exit load from the date of allotment. Any redemption in excess of the limit shall be subject to the following exit load: Exit load of 1.00% is payable if Units are redeemed/switched-out within 1 year from thedate of allotment of units. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-balanced-advantage-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 60.5,
+      "elapsed_ms": 59.0,
       "provider": "stub (extractive)"
     },
     {
@@ -315,7 +315,7 @@
       "grounded_strict": null,
       "answer": "The minimum SIP for HDFC Large Cap Fund is ₹ 100. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 79.3,
+      "elapsed_ms": 71.5,
       "provider": "stub (extractive)"
     },
     {
@@ -335,7 +335,7 @@
       "grounded_strict": null,
       "answer": "The minimum SIP for HDFC Flexi Cap Fund is ₹ 100. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 88.6,
+      "elapsed_ms": 61.3,
       "provider": "stub (extractive)"
     },
     {
@@ -355,7 +355,7 @@
       "grounded_strict": null,
       "answer": "The minimum SIP for HDFC ELSS Tax Saver Fund is ₹ 500. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 71.0,
+      "elapsed_ms": 78.0,
       "provider": "stub (extractive)"
     },
     {
@@ -375,7 +375,7 @@
       "grounded_strict": null,
       "answer": "The minimum SIP for HDFC Small Cap Fund is ₹ 100. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 82.1,
+      "elapsed_ms": 70.3,
       "provider": "stub (extractive)"
     },
     {
@@ -395,7 +395,7 @@
       "grounded_strict": null,
       "answer": "The minimum SIP for HDFC Balanced Advantage Fund is ₹ 100. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-balanced-advantage-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 118.0,
+      "elapsed_ms": 60.6,
       "provider": "stub (extractive)"
     },
     {
@@ -415,7 +415,7 @@
       "grounded_strict": true,
       "answer": "The lock-in period for HDFC ELSS Tax Saver Fund is 3 years. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 70.7,
+      "elapsed_ms": 62.7,
       "provider": "stub (extractive)"
     },
     {
@@ -435,7 +435,7 @@
       "grounded_strict": true,
       "answer": "The lock-in period for HDFC ELSS Tax Saver Fund is 3 years. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 61.5,
+      "elapsed_ms": 57.7,
       "provider": "stub (extractive)"
     },
     {
@@ -455,7 +455,7 @@
       "grounded_strict": true,
       "answer": "The lock-in period for HDFC ELSS Tax Saver Fund is 3 years. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 75.0,
+      "elapsed_ms": 59.7,
       "provider": "stub (extractive)"
     },
     {
@@ -475,7 +475,7 @@
       "grounded_strict": true,
       "answer": "The lock-in period for HDFC ELSS Tax Saver Fund is 3 years. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 71.5,
+      "elapsed_ms": 64.0,
       "provider": "stub (extractive)"
     },
     {
@@ -495,7 +495,7 @@
       "grounded_strict": true,
       "answer": "The Benchmark for HDFC Large Cap Fund is NIFTY 100 (Total Return Index). Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 63.6,
+      "elapsed_ms": 68.4,
       "provider": "stub (extractive)"
     },
     {
@@ -515,7 +515,7 @@
       "grounded_strict": true,
       "answer": "The Benchmark for HDFC Flexi Cap Fund is NIFTY 500 Total Returns Index. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 71.7,
+      "elapsed_ms": 60.5,
       "provider": "stub (extractive)"
     },
     {
@@ -535,7 +535,7 @@
       "grounded_strict": true,
       "answer": "The Benchmark for HDFC ELSS Tax Saver Fund is NIFTY 500 Total Returns Index. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 65.4,
+      "elapsed_ms": 61.3,
       "provider": "stub (extractive)"
     },
     {
@@ -555,7 +555,7 @@
       "grounded_strict": true,
       "answer": "The Benchmark for HDFC Small Cap Fund is BSE 250 SmallCap Index (Total Returns Index). Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 66.7,
+      "elapsed_ms": 64.6,
       "provider": "stub (extractive)"
     },
     {
@@ -575,7 +575,7 @@
       "grounded_strict": true,
       "answer": "The Benchmark for HDFC Balanced Advantage Fund is NIFTY 50 Hybrid Composite Debt 50:50 Index. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-balanced-advantage-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 116.4,
+      "elapsed_ms": 62.7,
       "provider": "stub (extractive)"
     },
     {
@@ -595,7 +595,7 @@
       "grounded_strict": true,
       "answer": "The NAV for HDFC Small Cap Fund is ₹ 157.26. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 79.3,
+      "elapsed_ms": 80.1,
       "provider": "stub (extractive)"
     },
     {
@@ -615,7 +615,7 @@
       "grounded_strict": true,
       "answer": "The NAV for HDFC Large Cap Fund is ₹ 1,170.11. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 399.4,
+      "elapsed_ms": 68.3,
       "provider": "stub (extractive)"
     },
     {
@@ -635,7 +635,7 @@
       "grounded_strict": true,
       "answer": "The AUM (assets under management) for HDFC ELSS Tax Saver Fund is ₹15,991.78 Cr. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 463.6,
+      "elapsed_ms": 60.4,
       "provider": "stub (extractive)"
     },
     {
@@ -655,7 +655,7 @@
       "grounded_strict": true,
       "answer": "The AUM (assets under management) for HDFC Flexi Cap Fund is ₹113,606.47 Cr. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 525.9,
+      "elapsed_ms": 239.9,
       "provider": "stub (extractive)"
     },
     {
@@ -675,7 +675,7 @@
       "grounded_strict": true,
       "answer": "The Riskometer for HDFC Large Cap Fund is Very High. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 473.5,
+      "elapsed_ms": 552.0,
       "provider": "stub (extractive)"
     },
     {
@@ -695,7 +695,7 @@
       "grounded_strict": true,
       "answer": "The Riskometer for HDFC Flexi Cap Fund is Very High. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 513.2,
+      "elapsed_ms": 601.3,
       "provider": "stub (extractive)"
     },
     {
@@ -715,7 +715,7 @@
       "grounded_strict": null,
       "answer": "The Downloads for HDFC Flexi Cap Fund is SID - HDFC Flexi Cap Fund dated November 21, 2025. Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct",
       "refusal_reason": null,
-      "elapsed_ms": 500.9,
+      "elapsed_ms": 555.0,
       "provider": "stub (extractive)"
     },
     {
@@ -795,7 +795,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword '\\\\bis\\\\b[^?]{0,40}\\\\b(?:safe|risky|riskier|safer)\\\\b'",
-      "elapsed_ms": 0.2,
+      "elapsed_ms": 0.3,
       "provider": null
     },
     {
@@ -855,7 +855,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword 'my portfolio'",
-      "elapsed_ms": 2.3,
+      "elapsed_ms": 0.4,
       "provider": null
     },
     {
@@ -875,7 +875,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword 'recommend'",
-      "elapsed_ms": 0.5,
+      "elapsed_ms": 0.4,
       "provider": null
     },
     {
@@ -895,7 +895,7 @@
       "grounded_strict": null,
       "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).",
       "refusal_reason": "performance keyword 'return'",
-      "elapsed_ms": 0.6,
+      "elapsed_ms": 0.8,
       "provider": null
     },
     {
@@ -915,7 +915,7 @@
       "grounded_strict": null,
       "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).",
       "refusal_reason": "performance keyword 'return'",
-      "elapsed_ms": 2.5,
+      "elapsed_ms": 2.6,
       "provider": null
     },
     {
@@ -955,7 +955,7 @@
       "grounded_strict": null,
       "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).",
       "refusal_reason": "performance keyword 'return'",
-      "elapsed_ms": 2.4,
+      "elapsed_ms": 0.9,
       "provider": null
     },
     {
@@ -975,7 +975,7 @@
       "grounded_strict": null,
       "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).",
       "refusal_reason": "performance keyword '\\\\bsince inception\\\\b'",
-      "elapsed_ms": 0.6,
+      "elapsed_ms": 0.2,
       "provider": null
     },
     {
@@ -995,7 +995,7 @@
       "grounded_strict": null,
       "answer": "Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs, or contact details here — I can't accept, store, or use them. Scheme facts are all public; ask me anything about expense ratio, exit load, SIP, lock-in, or statements.",
       "refusal_reason": "PAN-like ********",
-      "elapsed_ms": 0.4,
+      "elapsed_ms": 0.3,
       "provider": null
     },
     {
@@ -1015,7 +1015,7 @@
       "grounded_strict": null,
       "answer": "Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs, or contact details here — I can't accept, store, or use them. Scheme facts are all public; ask me anything about expense ratio, exit load, SIP, lock-in, or statements.",
       "refusal_reason": "the word 'Aadhaar'",
-      "elapsed_ms": 2.6,
+      "elapsed_ms": 0.3,
       "provider": null
     },
     {
@@ -1035,7 +1035,7 @@
       "grounded_strict": null,
       "answer": "Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs, or contact details here — I can't accept, store, or use them. Scheme facts are all public; ask me anything about expense ratio, exit load, SIP, lock-in, or statements.",
       "refusal_reason": "an account number",
-      "elapsed_ms": 0.4,
+      "elapsed_ms": 0.2,
       "provider": null
     },
     {
@@ -1055,7 +1055,7 @@
       "grounded_strict": null,
       "answer": "Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs, or contact details here — I can't accept, store, or use them. Scheme facts are all public; ask me anything about expense ratio, exit load, SIP, lock-in, or statements.",
       "refusal_reason": "an email address",
-      "elapsed_ms": 0.3,
+      "elapsed_ms": 0.2,
       "provider": null
     },
     {
@@ -1095,7 +1095,7 @@
       "grounded_strict": null,
       "answer": "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "no chunk covers enough of the question. The best match scored coverage 0.33 of ['price', 'gold', 'mumbai'] (needs 0.5), dense 0.191 (floor 0.2), bm25 0.00 (floor 1.0). The corpus covers 5 HDFC schemes and nothing else.",
-      "elapsed_ms": 425.2,
+      "elapsed_ms": 294.8,
       "provider": null
     },
     {
@@ -1115,7 +1115,7 @@
       "grounded_strict": null,
       "answer": "That one's outside what this assistant does — it only answers factual questions about 5 HDFC mutual fund schemes (Direct Growth) from the official pages it has read. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "outside the 5 HDFC schemes' scope",
-      "elapsed_ms": 0.7,
+      "elapsed_ms": 2.9,
       "provider": null
     },
     {
@@ -1155,7 +1155,7 @@
       "grounded_strict": null,
       "answer": "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "no chunk covers enough of the question. The best match scored coverage 0.33 of ['nav', 'reliance', 'industries'] (needs 0.5), dense 0.376 (floor 0.2), bm25 1.02 (floor 1.0). The corpus covers 5 HDFC schemes and nothing else.",
-      "elapsed_ms": 378.6,
+      "elapsed_ms": 298.6,
       "provider": null
     },
     {
@@ -1175,7 +1175,7 @@
       "grounded_strict": null,
       "answer": "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "the question asks only about 'fund_manager', and no chunk in the corpus carries that fact_key",
-      "elapsed_ms": 3.3,
+      "elapsed_ms": 5.1,
       "provider": null
     },
     {
@@ -1195,7 +1195,7 @@
       "grounded_strict": null,
       "answer": "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "the question asks only about 'pe_pb_ratio', and no chunk in the corpus carries that fact_key",
-      "elapsed_ms": 4.1,
+      "elapsed_ms": 4.8,
       "provider": null
     },
     {
@@ -1215,7 +1215,7 @@
       "grounded_strict": null,
       "answer": "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "the question asks only about 'rating', and no chunk in the corpus carries that fact_key",
-      "elapsed_ms": 5.3,
+      "elapsed_ms": 4.2,
       "provider": null
     },
     {
@@ -1235,7 +1235,7 @@
       "grounded_strict": null,
       "answer": "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "the question asks only about 'fund_objective', and no chunk in the corpus carries that fact_key",
-      "elapsed_ms": 3.9,
+      "elapsed_ms": 4.8,
       "provider": null
     },
     {
@@ -1255,7 +1255,7 @@
       "grounded_strict": null,
       "answer": "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "the question asks only about 'plan_variant', and no chunk in the corpus carries that fact_key",
-      "elapsed_ms": 3.8,
+      "elapsed_ms": 4.5,
       "provider": null
     }
   ]

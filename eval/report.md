@@ -14,7 +14,7 @@ The two accuracy numbers below are deliberately not averaged. A system that answ
 | Answerable - correct figure (grounded) | 100.0% | 31 |
 | Answerable - correct figure (strict) | 100.0% | 23 |
 | Must-refuse - refused for the right reason | 100.0% | 27 |
-| Mean latency | 114.5 ms | 58 |
+| Mean latency | 94.4 ms | 58 |
 
 **Strict** groundedness drops expected values with fewer than 4 significant characters. `100` is a substring of `1,100` and `100.5`, so a substring check on a three-character figure proves much less than on a nine-character one. Both columns are shown; the strict one is the number to quote.
 
