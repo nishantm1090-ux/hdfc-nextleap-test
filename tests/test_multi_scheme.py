@@ -29,6 +29,7 @@ import rag.answer as A
 from rag import guardrails as G
 from rag.answer import ask
 from rag.retrieve import detect_scheme, detect_schemes
+from conftest import scheme_url
 
 
 @pytest.fixture(scope="module")
@@ -131,7 +132,8 @@ def test_a_memory_follow_up_resolves_to_one_scheme_and_answers():
     assert a.kind == "answer"
     assert a.debug.get("guardrail") != "multi_scheme"
     # The answer must be about FLEXI CAP, not a coin-flipped scheme.
-    assert a.sources[0].url.endswith("hdfc-equity-fund-direct-growth")
+    assert a.sources[0].url == scheme_url("hdfc-equity-fund-direct-growth"), \
+        f"cited the wrong scheme's page: {a.sources[0].url}"
 
 
 # ---------------------------------------------------------------------------

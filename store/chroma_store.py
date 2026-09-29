@@ -35,6 +35,7 @@ from __future__ import annotations
 import argparse
 import statistics
 import sys
+import threading
 import time
 import uuid
 from pathlib import Path
@@ -129,12 +130,25 @@ def coerce_metadata(chunk: dict[str, Any]) -> dict[str, str | int | float | bool
 _CLIENT_CACHE: Any = None
 _COLLECTION_CACHE: Any = None
 
+# `_CLIENT_CACHE` is a plain global, and a plain global is not enough here.
+# `warmup.start()` opens the Chroma client on a daemon thread while the
+# Streamlit script thread is already answering the first question, so both can
+# reach `chromadb.PersistentClient(path=...)` at the same instant. Chroma's
+# `SharedSystemClient` keys its singleton off the path, and constructing a
+# second client for an identifier that is still being initialised calls
+# `_release_system` on the half-built one - which surfaces to the user as
+# "Could not connect to tenant default_tenant" and an `error` refusal for a
+# question the corpus can answer. One lock around construction is the fix; the
+# loser of the race simply gets the winner's client.
+_CACHE_LOCK = threading.Lock()
+
 
 def invalidate_caches() -> None:
     """Drop the cached client/collection. Called after the collection is wiped."""
     global _CLIENT_CACHE, _COLLECTION_CACHE
-    _CLIENT_CACHE = None
-    _COLLECTION_CACHE = None
+    with _CACHE_LOCK:
+        _CLIENT_CACHE = None
+        _COLLECTION_CACHE = None
 
 
 def collection_name() -> str:
@@ -158,10 +172,16 @@ def get_client():
         return _CLIENT_CACHE
     import chromadb  # noqa: PLC0415
 
-    path = common.path_for("chroma_dir")
-    Path(path).parent.mkdir(parents=True, exist_ok=True)
-    _CLIENT_CACHE = chromadb.PersistentClient(path=str(path))
-    return _CLIENT_CACHE
+    with _CACHE_LOCK:
+        # Re-check inside the lock: the warm-up thread may have built it while
+        # this thread was blocked, and building a second PersistentClient for
+        # the same path is exactly what breaks Chroma's shared system.
+        if _CLIENT_CACHE is not None:
+            return _CLIENT_CACHE
+        path = common.path_for("chroma_dir")
+        Path(path).parent.mkdir(parents=True, exist_ok=True)
+        _CLIENT_CACHE = chromadb.PersistentClient(path=str(path))
+        return _CLIENT_CACHE
 
 
 def _collection_kwargs() -> dict[str, Any]:
@@ -205,19 +225,25 @@ def get_collection(*, create: bool = True, client: Any = None):
         if _COLLECTION_CACHE is not None:
             return _COLLECTION_CACHE
         client = get_client()
-    name = collection_name()
-    if create:
-        coll = client.get_or_create_collection(name=name, **_collection_kwargs())
-    else:
-        try:
-            coll = client.get_collection(name=name)
-        except Exception:  # noqa: BLE001 - chroma raises its own collection-not-found type
-            coll = None
-    # Cache only the default-client handle; an explicit scratch collection
-    # (tests, rebuild) must not leak into the web app's fast path.
-    if coll is not None and client is _CLIENT_CACHE:
-        _COLLECTION_CACHE = coll
-    return coll
+    with _CACHE_LOCK:
+        # Same double-checked lock as `get_client`, and for the same reason: two
+        # threads reaching `get_or_create_collection` on a cold process used to
+        # race, and the loser served an empty result rather than an error.
+        if client is _CLIENT_CACHE and _COLLECTION_CACHE is not None:
+            return _COLLECTION_CACHE
+        name = collection_name()
+        if create:
+            coll = client.get_or_create_collection(name=name, **_collection_kwargs())
+        else:
+            try:
+                coll = client.get_collection(name=name)
+            except Exception:  # noqa: BLE001 - chroma raises its own collection-not-found type
+                coll = None
+        # Cache only the default-client handle; an explicit scratch collection
+        # (tests, rebuild) must not leak into the web app's fast path.
+        if coll is not None and client is _CLIENT_CACHE:
+            _COLLECTION_CACHE = coll
+        return coll
 
 
 # ---------------------------------------------------------------------------

@@ -19,6 +19,7 @@ Run: .\\.venv\\Scripts\\python.exe -m pytest tests/test_official_copy.py -q
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -116,11 +117,39 @@ def test_a_tie_does_not_fire_when_the_question_names_a_scheme():
     assert a.debug.get("guardrail") != "ask_scheme"
 
 
-def test_a_single_scheme_subject_still_answers_without_a_scheme():
-    """Only one scheme has lock-in facts, so there is no tie and no ask."""
+def test_a_lock_in_question_is_genuinely_ambiguous_so_it_asks():
+    """Every AMC scheme page carries a "Lock-in period" row, so this ties.
+
+    Four state "NA" and HDFC ELSS states "3 years". The old corpus had the fact
+    on one page only and this question answered directly; on the AMC corpus the
+    same words cover five funds with two different answers, which is exactly the
+    case the ask-which-scheme guardrail exists for. The user is told the
+    universe rather than handed one fund's row.
+    """
     a = A.ask("Is there a lock-in period?")
-    assert a.kind == "answer"
-    assert a.debug.get("guardrail") != "ask_scheme"
+    assert a.kind == "out_of_corpus"
+    assert a.debug.get("guardrail") == "ask_scheme"
+
+
+def test_the_ask_scheme_list_never_names_a_document():
+    """The list of funds is the declared scheme universe, not chunk scope keys.
+
+    It was derived from chunk `scheme_slug`, and a chunk's slug is a SCOPE key:
+    the AMC's Consolidated Account Statement page is scoped under
+    `hdfc-consolidated-account-statement`, which the refusal then printed to the
+    user as though it were a sixth mutual fund.
+    """
+    a = A.ask("Is there a lock-in period?")
+    said = a.text
+    assert "hdfc-consolidated-account-statement" not in said, said
+    # Independently derived from config/sources.yaml rather than through the
+    # display-name helper, so the test cannot agree with the implementation by
+    # construction.
+    declared = [re.split(r"\s+[-\u2013]\s+", s["scheme_name"])[0]
+                for s in common.load_schemes()]
+    assert len(declared) == 5, declared
+    for name in declared:
+        assert name in said, f"{name} is missing from the fund list: {said}"
 
 
 # ---------------------------------------------------------------------------

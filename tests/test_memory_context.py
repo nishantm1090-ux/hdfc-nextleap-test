@@ -22,6 +22,7 @@ import pytest
 import common
 import rag.answer as A
 from rag.retrieve import with_memory_context
+from conftest import scheme_url
 
 SLUGS = {
     "hdfc-large-cap-fund-direct-growth": "HDFC Large Cap Fund",
@@ -125,7 +126,7 @@ def test_follow_up_answers_with_the_scheme_from_history(corpus):
     a = A.ask("And its expense ratio?", history=history)
     assert a.kind == "answer", f"refused instead of answered: {a.refusal_reason}"
     assert len(a.sources) == 1, f"expected exactly one source, got {len(a.sources)}"
-    assert a.sources[0].url.endswith("hdfc-equity-fund-direct-growth"), \
+    assert a.sources[0].url == scheme_url("hdfc-equity-fund-direct-growth"), \
         f"cited the wrong scheme's page: {a.sources[0].url}"
     assert a.debug.get("memory_context", {}).get("resolved_scheme") \
         == "hdfc-equity-fund-direct-growth"
@@ -137,17 +138,17 @@ def test_follow_up_with_a_proper_scheme_name_ignores_history(corpus):
     history = [_turn("user", "What is the NAV of HDFC Large Cap Fund?")]
     a = A.ask("What is the expense ratio of HDFC Small Cap Fund?", history=history)
     assert a.kind == "answer"
-    assert a.sources[0].url.endswith("hdfc-small-cap-fund-direct-growth")
+    assert a.sources[0].url == scheme_url("hdfc-small-cap-fund-direct-growth")
     assert "memory_context" not in a.debug
 
 
 def test_follow_up_about_the_small_cap_one(corpus):
     history = [_turn("user", "How do I stop my HDFC ELSS SIP?"),
-               _turn("assistant", "You can stop it from the Groww app."),
+               _turn("assistant", "You can stop it from the HDFC Mutual Fund app."),
                _turn("user", "What is the rating of HDFC Small Cap Fund?")]
     a = A.ask("And the exit load?", history=history)
     assert a.kind == "answer", f"refused: {a.refusal_reason}"
-    assert a.sources[0].url.endswith("hdfc-small-cap-fund-direct-growth")
+    assert a.sources[0].url == scheme_url("hdfc-small-cap-fund-direct-growth")
 
 
 def test_guardrails_judge_the_raw_text_not_the_resolved_memory(corpus):

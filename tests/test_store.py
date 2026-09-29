@@ -26,6 +26,7 @@ Run: .\\.venv\\Scripts\\python.exe -m pytest tests/test_store.py -q
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -538,35 +539,44 @@ def test_every_stored_row_keeps_its_full_citation(chunks, real_collection):
     dropped in coercion, that contract becomes unenforceable."""
     got = real_collection.get(include=["metadatas"])
     for meta in got["metadatas"]:
-        assert meta["source_url"].startswith("https://groww.in/")
+        assert re.match(r"https://(www\.)?(hdfcfund|amfiindia|sebi)\.\w+/",
+                        meta["source_url"]), meta["source_url"]
         assert meta["page_title"].strip()
         assert meta["source_fetched_at"]
-        assert meta["plan"] == "Direct Growth"
+        # Every scheme page is a Direct Growth plan; the AMC's account-statement
+        # page belongs to no plan, so its empty value is honest, not lost.
+        if meta["source_url"].endswith("/direct"):
+            assert meta["plan"] == "Direct Growth", meta["plan"]
 
 
 def test_publisher_and_source_type_survive_coercion(chunks, real_collection):
     """The real values, asserted so a provenance change is visible.
 
-    `publisher` is Groww, not HDFC AMC: the five pages in the corpus are Groww
-    scheme pages that republish the AMC's own figures. The source-of-truth
-    publisher is HDFC AMC, but the page a reader is pointed at - and the one the
-    citation link must resolve to - is Groww, so that is what is stored.
+    `publisher` is the AMC, because the pages in the corpus ARE the AMC's own
+    scheme pages. There is no intermediary republisher to name: the reader is
+    pointed straight at the source of truth, which is the only arrangement that
+    satisfies "one official source link per answer".
     """
-    assert {c["publisher"] for c in chunks} == {"Groww"}
+    assert {c["publisher"] for c in chunks} == {"HDFC AMC"}
     got = real_collection.get(include=["metadatas"])
-    assert {m["publisher"] for m in got["metadatas"]} == {"Groww"}
-    assert {m["source_type"] for m in got["metadatas"]} == {"scheme_page"}
+    assert {m["publisher"] for m in got["metadatas"]} == {"HDFC AMC"}
+    # Every scheme page is a `scheme_page`; the AMC's Consolidated Account
+    # Statement page is an `amc_page`. Both are the AMC, both are citable.
+    assert {m["source_type"] for m in got["metadatas"]} == {"scheme_page", "amc_page"}
+    assert all(m["source_type"] == "scheme_page"
+               for m in got["metadatas"] if m["source_url"].endswith("/direct")), \
+        "a scheme page lost its source_type in coercion"
 
 
 def test_aliases_are_present_exactly_where_a_scheme_defines_them(chunks,
                                                                  real_collection):
-    """Only HDFC Flexi Cap has a second public name.
+    """Only HDFC Flexi Cap has more than one public name.
 
-    The Flexi Cap page is titled "Flexi Cap" while its URL slug is
-    `hdfc-equity-fund-direct-growth`, so a user can reach it by either name. The
-    other four schemes have exactly one public name and correctly carry an empty
-    alias string. An empty alias is the honest value here, not a lost one - so
-    this asserts the split rather than demanding aliases everywhere.
+    The AMC renamed HDFC Equity Fund to HDFC Flexi Cap Fund without renaming its
+    URL, so both names are still in circulation and a user may ask for either.
+    The other four schemes have exactly one public name and correctly carry an
+    empty alias string. An empty alias is the honest value here, not a lost one -
+    so this asserts the split rather than demanding aliases everywhere.
     """
     by_slug: dict[str, set[str]] = {}
     for c in chunks:
@@ -575,7 +585,8 @@ def test_aliases_are_present_exactly_where_a_scheme_defines_them(chunks,
     assert list(named) == ["hdfc-equity-fund-direct-growth"], \
         f"unexpected schemes with aliases: { {s: sorted(a) for s, a in named.items()} }"
     assert named["hdfc-equity-fund-direct-growth"] == {
-        "HDFC Flexi Cap Fund - Direct Growth", "HDFC Flexi Cap Direct Plan Growth",
+        "HDFC Equity Fund - Direct Growth", "HDFC Equity Fund",
+        "HDFC Flexi Cap Direct Plan Growth",
     }
 
     got = real_collection.get(include=["metadatas"])

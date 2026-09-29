@@ -31,6 +31,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import common
+from conftest import scheme_url
 from rag import answer as A
 from rag import guardrails as G
 from rag import prompts as P
@@ -63,15 +64,19 @@ GOLDEN = [
     ("What is the AUM of HDFC Large Cap Fund?",
      "39933.37", "hdfc-large-cap-fund-direct-growth"),
     ("What is the NAV of HDFC Balanced Advantage Fund?",
-     "557.73", "hdfc-balanced-advantage-fund-direct-growth"),
+     "551.04", "hdfc-balanced-advantage-fund-direct-growth"),
     ("What is the NAV of HDFC ELSS Tax Saver Fund?",
-     "1447.38", "hdfc-elss-tax-saver-fund-direct-plan-growth"),
+     "1426.93", "hdfc-elss-tax-saver-fund-direct-plan-growth"),
     ("What benchmark does HDFC Small Cap Fund Direct Growth use?",
      "bse 250 smallcap", "hdfc-small-cap-fund-direct-growth"),
     ("What benchmark does HDFC Large Cap Fund use?",
      "nifty 100", "hdfc-large-cap-fund-direct-growth"),
-    ("What is the rating of HDFC Balanced Advantage Fund?",
-     "5", "hdfc-balanced-advantage-fund-direct-growth"),
+    ("What is the riskometer level of HDFC Large Cap Fund?",
+     "very high", "hdfc-large-cap-fund-direct-growth"),
+    ("What is the lock-in period of HDFC ELSS Tax Saver Fund?",
+     "3 years", "hdfc-elss-tax-saver-fund-direct-plan-growth"),
+    ("What is the exit load of HDFC ELSS Tax Saver Fund?",
+     "nil", "hdfc-elss-tax-saver-fund-direct-plan-growth"),
 ]
 
 MUST_REFUSE = [
@@ -109,7 +114,7 @@ def test_a_named_scheme_never_gets_another_schemes_figure(question, needle, slug
     a = A.ask(question)
     assert a.kind == "answer", f"refused instead of answered: {a.refusal_reason}"
     assert len(a.sources) == 1, f"expected exactly one source, got {len(a.sources)}"
-    assert a.sources[0].url.endswith(slug), \
+    assert a.sources[0].url == scheme_url(slug), \
         f"cited the wrong scheme's page: {a.sources[0].url}"
     # Commas are stripped before matching: the corpus writes Indian grouping
     # (1,13,606.47) and the needles below are written without it.
@@ -139,7 +144,7 @@ def test_no_answer_ever_cites_a_scheme_the_question_did_not_name(chunks):
             a = A.ask(f"What is the {subject} of {name}?")
             if a.kind != "answer":
                 continue
-            if not a.sources or not a.sources[0].url.endswith(slug):
+            if not a.sources or a.sources[0].url != scheme_url(slug):
                 wrong.append(f"{name} / {subject} -> "
                              f"{a.sources[0].url if a.sources else 'no source'}")
     assert not wrong, "cross-scheme attribution failures:\n  " + "\n  ".join(wrong)
@@ -257,7 +262,7 @@ def test_the_stamp_uses_the_oldest_source_not_the_newest(chunks):
 def test_a_source_carries_its_publisher_and_fetch_date(chunks):
     a = A.ask("What is the expense ratio of HDFC Large Cap Direct Growth?")
     s = a.sources[0]
-    assert s.publisher == "Groww"
+    assert s.publisher == "HDFC AMC"
     assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", s.fetched_at[:10])
     assert s.title
     assert s.url.startswith("https://")
@@ -269,42 +274,71 @@ def test_a_source_carries_its_publisher_and_fetch_date(chunks):
 
 
 def test_no_fact_key_to_phrase_table_is_used():
-    """A table keyed on fact_key would mislabel the benchmark.
+    """The phrase table is keyed on the page's own label, never on fact_key.
 
-    Measured: the corpus's `fund_objective` key holds the benchmark line
-    ("fund benchmark nifty 50 hybrid composite debt 50:50 index"), so a table
-    mapping fact_key -> phrase would confidently answer "the investment objective
-    is <a benchmark name>". Quoting the chunk's own label cannot make that
-    mistake, which is why the stub has no such table.
+    A table keyed on fact_key could confidently answer with the wrong subject:
+    the previous publisher's `fund_objective` row held the benchmark line, so
+    "the investment objective is <a benchmark name>" would have read perfectly.
+    The map in rag/answer.py cannot do that, because its key is the label the
+    chunk carries and its output can only restate that label. This test holds
+    that line: the phrase in the answer must be derivable from the used chunk's
+    own label, and every figure in the answer must appear in that chunk.
     """
-    rows = [c for c in common.read_jsonl(common.path_for("chunks_file"))
-            if c.get("fact_key") == "fund_objective"]
-    assert rows, "premise broken: the fund_objective quirk is gone"
-    assert "benchmark" in rows[0]["fact_value"].lower(), \
-        "premise broken: fund_objective no longer holds the benchmark line"
+    a = A.ask("What is the expense ratio of HDFC Large Cap Direct Growth?")
+    used = next(c for c in common.read_jsonl(common.path_for("chunks_file"))
+                if c["chunk_id"] == a.debug["chunk_used"])
+    label = used["text"].split(":", 1)[0].strip()
+    phrase = A.friendly_label(label)
+    flat = lambda s: re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
+    assert flat(phrase) in flat(a.text), (
+        f"the answer does not carry the page's own label: {a.text!r}")
+    for figure in re.findall(r"\d[\d,]*\.?\d*", a.text):
+        assert figure in used["text"] or figure in used["text"].replace(",", ""), \
+            f"answer shows {figure!r}, which is not in the quoted chunk"
 
 
 def test_a_bare_date_row_does_not_answer_what_is_the_nav(chunks):
-    """"nav: 25 sep '26" is a real row - the page publishes the NAV as of a date -
-    and it carries the same fact_key as the row with the amount. Asking WHAT the
-    NAV is must not be answered with WHEN it was struck."""
+    """Asking WHAT the NAV is must be answered with an amount, not a date.
+
+    `is_bare_date` is the guard for a publisher that renders the NAV's as-on
+    date as the value. The AMC does not, so no such row exists in the corpus any
+    more - but the guard is still load-bearing for the answer layer, so it is
+    exercised directly rather than through a corpus shape that no longer exists,
+    and the corpus is checked for a regression back into the bad shape.
+    """
+    assert A.is_bare_date("25 Sep '26")
+    assert A.is_bare_date("28/09/2026")
+    assert not A.is_bare_date("551.04")
+    assert not A.is_bare_date("NIFTY 100 (Total Return Index)")
+
     rows = [c for c in common.read_jsonl(common.path_for("chunks_file"))
             if c.get("fact_key") == "nav" and c["doc_type"] == "fact"]
-    texts = {c["text"] for c in rows}
-    assert any(A.is_bare_date(A.value_half(t)) for t in texts), \
-        "premise broken: no date-only NAV row exists any more"
+    assert rows, "premise broken: the corpus carries no NAV facts at all"
+    for c in rows:
+        assert not A.is_bare_date(A.value_half(c["text"])), \
+            f"a date-only NAV row is back in the corpus: {c['text']!r}"
     a = A.ask("What is the NAV of HDFC Balanced Advantage Fund?")
     assert a.kind == "answer"
-    assert "557.73" in a.text, f"answered with a date, not the NAV: {a.text!r}"
+    assert "551.04" in a.text, f"answered with a date, not the NAV: {a.text!r}"
 
 
 def test_a_label_only_row_does_not_win_over_a_row_with_the_amount(chunks):
-    """"min. for 2nd investment" and "min. for 1st investment 100" share a
-    fact_key. The first answers a different question than "what is the minimum
-    investment"."""
-    a = A.ask("What is the minimum investment for HDFC Large Cap?")
-    assert a.kind == "answer"
+    """A bare heading must not be quoted as if it carried a figure.
+
+    Every AMC scheme page is full of headings with no value of their own:
+    "Ideal for", "Wealth Creation", "Exit Load", "Benchmark Riskometer". Only
+    one page states a minimum investment at all, and where it does the row that
+    carries the amount must beat every heading on the same page.
+    """
+    a = A.ask("What is the minimum investment for HDFC Small Cap Fund?")
+    assert a.kind == "answer", f"refused instead of answered: {a.refusal_reason}"
     assert "100" in a.text, a.text
+
+    # And where no page states it, the honest answer is that it cannot be
+    # verified - not the nearest other row on that fund's page.
+    gone = A.ask("What is the minimum investment for HDFC Large Cap?")
+    assert gone.kind == "out_of_corpus", \
+        f"invented a figure from another row: {gone.text!r}"
 
 
 def test_a_verbatim_quote_is_not_mangled_by_the_repeat_collapser():
@@ -316,10 +350,18 @@ def test_a_verbatim_quote_is_not_mangled_by_the_repeat_collapser():
 
 
 def test_the_stub_quotes_the_labels_the_page_used(chunks):
+    """The answer carries the page's own field name, in a readable form.
+
+    The AMC writes "TER" where a reader expects "expense ratio", so the answer
+    says "total expense ratio (TER)". The AMC's word is kept in the phrase, so
+    the answer can only be more explicit than the source, never different from
+    it - and the value is quoted with the source's own capitalisation.
+    """
     a = A.ask("What is the expense ratio of HDFC Large Cap Direct Growth?")
     used = next(c for c in chunks if c["chunk_id"] == a.debug["chunk_used"])
-    assert "expense ratio" in used["text"].lower()
-    assert "expense ratio" in a.text.lower()
+    assert "ter" in used["text"].lower()
+    assert "ter" in a.text.lower()
+    assert "1.03" in a.text
 
 
 def test_a_question_naming_a_scheme_with_no_retrieved_chunk_is_not_answered(

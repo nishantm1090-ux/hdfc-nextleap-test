@@ -24,16 +24,24 @@ GOLDEN = ROOT / "eval" / "golden_set.csv"
 REPORT = ROOT / "eval" / "report.md"
 RESULTS = ROOT / "eval" / "results.json"
 
-#: The PRD §15.1 split, plus one documented deviation: F31.
+#: The split, measured against the corpus rather than inherited from an older
+#: one. 31 answerable / 27 must-refuse, out of 58.
 #:
-#: The PRD's out-of-corpus examples are riskometer, capital-gains statement,
-#: gold price and "open my account" - NOT "fund manager". The manager's name
-#: is in fact in the corpus ("rahul baijal is the current fund manager of
-#: hdfc large cap fund direct growth fund"), so classifying that question as
-#: out-of-corpus would have been falsifying the golden set to make the score
-#: look better. It is a real answerable row instead.
+#: Two rows moved across the line when the corpus was rebuilt from the AMC's own
+#: site, and both moves are the point rather than an accident:
+#:
+#: - **Riskometer moved IN** (O01 -> F29/F30). On the old broker corpus the
+#:   riskometer was nowhere, so the question was unanswerable and - worse - was
+#:   answered with the expense ratio. The AMC publishes "Riskometer: Very High"
+#:   in the fact card of all five scheme pages, so it is now a real answerable
+#:   fact and refusing it would be the wrong answer.
+#: - **Fund manager and P/E moved IN as refusals** (O06/O07). They were
+#:   answerable on the old corpus - the manager's name sat in a run-on stat
+#:   strip, and P/E sat in a holdings table. Neither is on an AMC scheme page.
+#:   Keeping them as answerable would have meant expecting figures this corpus
+#:   does not contain, which is the exact fiction this file exists to prevent.
 EXPECT_ANSWERABLE = 31
-EXPECT_REFUSE = 23
+EXPECT_REFUSE = 27
 
 
 # ---------------------------------------------------------------------------
@@ -263,8 +271,28 @@ def test_the_five_schemes_are_all_exercised():
 
 
 def test_every_category_in_the_prd_table_is_present():
+    """The eval table's rows must be exercised by real questions.
+
+    Two categories the older set carried are gone, and their disappearance is
+    the finding, not an omission: `objective_pe_pb` and `plan_nuance` were
+    populated from facts the AMC does not publish on a scheme page (portfolio
+    P/E, and the Direct-vs-Regular distinction stated as a fact). Both still
+    appear in the golden set - as `out_of_corpus` rows O07 and O10 - so the
+    questions are still asked and the refusals are still scored; only the
+    category label changed, because there is no longer a category for "a fact
+    this corpus does not carry".
+    """
     cats = {r["category"] for r in R.load_rows()}
     for required in ("expense_ratio", "exit_load", "min_sip", "elss_lockin",
-                     "benchmark", "nav_aum", "objective_pe_pb", "plan_nuance",
+                     "benchmark", "nav_aum", "riskometer", "statement_download",
                      "advice", "performance", "pii", "out_of_corpus"):
         assert required in cats, f"category {required} is missing from the golden set"
+    assert "objective_pe_pb" not in cats and "plan_nuance" not in cats
+
+    # The two questions that lost their category must still be in the set, as
+    # rows that must refuse - otherwise a reader would take their absence as
+    # "we stopped asking".
+    questions = {r["question"] for r in R.load_rows()}
+    assert "What is the PE ratio of HDFC Small Cap Fund?" in questions
+    assert ("Is HDFC Large Cap Fund Direct Growth the Direct plan or the "
+            "Regular plan?") in questions

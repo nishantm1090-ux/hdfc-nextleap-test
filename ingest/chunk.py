@@ -64,6 +64,7 @@ from common import (
 FACT_LABELS: list[tuple[str, str]] = [
     ("expense_ratio",     r"expense\s*ratio|\bter\b|total\s+expense|ongoing\s+charge"),
     ("exit_load",         r"exit\s*load|exit\s*charge|load\s*on\s*redemption|redemption\s*charge"),
+    ("entry_load",        r"entry\s*load|load\s*on\s*purchase|purchase\s*load|front[-\s]?end\s*load"),
     ("minimum_sip",       r"min\.?\s*for\s*sip|minimum\s*sip|min\s*sip|sip\s*amount"),
     ("minimum_investment", r"min\.?\s*for\s*\d|minimum\s*(lump|investment|amount)|min\.?\s*for\s*1st|min\.?\s*for\s*2nd"),
     ("lock_in_period",    r"lock[-\s]?in|lockin|minimum\s*holding\s*period|\b3\s*y\s*lock"),
@@ -89,6 +90,23 @@ FACT_LABELS: list[tuple[str, str]] = [
 
 _FACT_COMPILED = [(key, re.compile(pat, re.I)) for key, pat in FACT_LABELS]
 
+#: A return-period chip is a UI control, not a fact value. The AMC's performance
+#: table pairs its column labels with these ("Benchmark Performance: 3Y"), and
+#: without this guard those pairs are classified as the scheme's BENCHMARK and
+#: NAV facts. A later, genuine question about the benchmark then retrieves a
+#: row reading "3Y" and answers it with a time frame. Period chips are already
+#: recognised as chips by ingest/clean.py's _UI_CHIP_RE; the same vocabulary is
+#: rejected here, where it would otherwise be promoted to a fact.
+_PERIOD_CHIP_RE = re.compile(
+    r"^\s*(?:1d|1w|1m|3m|6m|1y|2y|3y|5y|10y|all\s*time|ytd|since\s+inception)\s*$",
+    re.I,
+)
+
+
+def is_period_chip(value: str) -> bool:
+    """True if `value` is only a return-period selector ("3Y", "YTD")."""
+    return bool(_PERIOD_CHIP_RE.match(_squash(value)))
+
 SEPARATORS: list[str] = ["\n\n", "\n", ". ", "? ", "! ", "; ", ", ", " "]
 
 #: fact chunks get a much tighter cap than prose: a fact is short by nature
@@ -112,6 +130,46 @@ def canonical_fact_key(label: str) -> str | None:
 
 def _squash(text: str) -> str:
     return re.sub(r"\s+", " ", text or "").strip().lower()
+
+
+#: The leading clause of a node's text - up to the first sentence break.
+#: A hyphen is deliberately not a break: AMC labels are full of them
+#: ("Fund Facts - HDFC Large Cap Fund", "Click here to view ..."), and cutting at
+#: one truncated "KIM - HDFC ELSS Tax Saver" down to "KIM".
+_HEAD_CLAUSE_RE = re.compile(r"^(.{0,160}?)(?=[.?!]|$)")
+
+
+def _head_clause(text: str) -> str:
+    """The part of a node's text that says what the node is ABOUT.
+
+    Used only as the fallback when a node carries no usable label. Scanning the
+    whole text there classified by accident: the AMC's Flexi Cap FAQ "What is the
+    key advantage of a Flexi Cap Fund? ... the fund manager can shift allocation
+    between large, mid and small caps" mentions "fund manager" in its answer, so
+    the node was keyed `fund_managers` and became retrievable as though the page
+    published a manager. Keying off the leading clause - which is the question,
+    not the answer - keeps the classification on what the node is about.
+    """
+    flat = re.sub(r"\s+", " ", str(text or "")).strip()
+    if not flat:
+        return ""
+    m = _HEAD_CLAUSE_RE.match(flat)
+    return (m.group(1) if m else flat[:160]).strip()
+
+
+def _flatten(text: str) -> str:
+    """Whitespace-normalise WITHOUT touching case.
+
+    `_squash` lowercases, which is right for matching but wrong for anything a
+    reader will see. An index name ("NIFTY 500 Total Returns Index") and a
+    capitalised riskometer level ("Very High") are proper nouns on the AMC's
+    page; lowercasing them meant the answer quoted the corpus rather than the
+    source. Nothing downstream depends on case: canonical_fact_key() compiles
+    its patterns with re.I, the BM25 tokeniser lowercases at query time, and
+    fact-separation checks both sides with .lower(). So the chunk stores the
+    source's own casing and every match still behaves identically.
+    """
+    return re.sub(r"\s+", " ", text or "").strip()
 
 
 # ---------------------------------------------------------------------------
@@ -172,24 +230,38 @@ def split_facts(section: Section, doc: dict[str, Any], ck: dict[str, Any],
     for node in section.nodes:
         if node.get("type") not in ("table_row", "accordion"):
             continue
+        # `label` is squashed for matching only; everything stored keeps the
+        # source's casing (see _flatten).
         label = _squash(node.get("label") or "")
-        value = _squash(node.get("value") or "")
         if not label:
             continue
+        value = _flatten(node.get("value") or "")
 
-        fact_key = canonical_fact_key(label) or canonical_fact_key(node.get("text", "")[:120])
+        fact_key = canonical_fact_key(label) or canonical_fact_key(_head_clause(node.get("text", "")))
         if fact_key is None:
             continue                      # not a fact we track -> stays prose
 
-        text = _squash(node.get("text") or "")
+        text = _flatten(node.get("text") or "")
         if not text:
-            text = f"{label}: {value}" if value else label
+            text = f"{_flatten(node.get('label') or '')}: {value}" if value else _flatten(node.get("label") or "")
 
         if count_tokens(text) > max_tokens:
             continue                      # not atomic -> prose, never truncated
 
         # A bare label with no value ("exit load") is chrome, not a fact.
         if not value and count_tokens(text) < int(ck.get("min_fact_tokens", 4)):
+            continue
+
+        # A return-period chip is the value of a column selector, not of the
+        # fact. Keeping it emits "benchmark: 3y" as the scheme's benchmark.
+        if value and is_period_chip(value):
+            continue
+
+        # A value that is only an as-on date states no fact at all. See
+        # common.is_as_on_only - without this the AMC's section furniture is
+        # indexed as retrievable data under whichever fact_key its heading
+        # happened to match.
+        if value and common.is_as_on_only(value):
             continue
 
         consumed.add(int(node.get("order", -1)))
@@ -271,7 +343,7 @@ def split_prose(section: Section, doc: dict[str, Any], ck: dict[str, Any],
     floor = int(ck.get("min_chunk_tokens", 4))
 
     body = "\n\n".join(
-        _squash(n.get("text", ""))
+        _flatten(n.get("text", ""))
         for n in section.nodes
         if n.get("text") and int(n.get("order", -1)) not in skip
     ).strip()

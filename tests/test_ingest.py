@@ -136,13 +136,25 @@ def test_every_document_is_citable(corpus):
 
 
 def test_jsonld_faq_extracted_before_script_stripping(corpus):
-    """Groww's FAQ lives in a JSON-LD <script>; the 8 Q&As must survive."""
+    """The AMC's FAQ must survive `strip_boilerplate`.
+
+    "script" is in chunking.strip_selectors, so a FAQ that lives only in a
+    JSON-LD <script> block is destroyed before anything else looks at the page.
+    That is why `extract_jsonld_faq` runs first. The number of Q&As differs per
+    page (the AMC publishes 2 on Large Cap, 12 on Flexi Cap), so what is
+    asserted is that every scheme page yielded usable Q&A rather than a fixed
+    count, and that each one carries a question and a non-empty answer.
+    """
     for d in corpus["documents"]:
         if not d.get("scheme_slug"):
             continue
         accordions = [n for n in d["nodes"] if n.get("type") == "accordion"]
-        assert len(accordions) == 8, \
-            f"{d['doc_id']} has {len(accordions)} FAQ nodes, expected 8"
+        assert len(accordions) >= 2, \
+            f"{d['doc_id']} has {len(accordions)} FAQ nodes; the FAQ was stripped"
+        for n in accordions:
+            assert n.get("label"), f"{d['doc_id']}: FAQ node with no question"
+            assert (n.get("value") or "").strip(), \
+                f"{d['doc_id']}: FAQ node with no answer: {n.get('label')!r}"
 
 
 def test_elss_lock_in_pill_survives_header_stripping(corpus):
@@ -162,18 +174,19 @@ def test_elss_lock_in_pill_survives_header_stripping(corpus):
 @pytest.mark.parametrize("slug,expect", [
     ("hdfc-large-cap-fund-direct-growth", {"expense_ratio": "1.03", "aum": "39,933.37"}),
     ("hdfc-elss-tax-saver-fund-direct-plan-growth", {"expense_ratio": "1.21", "aum": "15,991.78"}),
-    ("hdfc-equity-fund-direct-growth", {"expense_ratio": "0.77", "aum": "1,13,606.47"}),
+    ("hdfc-equity-fund-direct-growth", {"expense_ratio": "0.77", "aum": "113,606.47"}),
     ("hdfc-small-cap-fund-direct-growth", {"expense_ratio": "0.78", "aum": "41,890.86"}),
-    ("hdfc-balanced-advantage-fund-direct-growth", {"expense_ratio": "0.78", "aum": "1,07,295.79"}),
+    ("hdfc-balanced-advantage-fund-direct-growth", {"expense_ratio": "0.78", "aum": "107,295.79"}),
 ])
 def test_live_fact_values_are_present(corpus, slug, expect):
     """Guard against inventing figures.
 
-    These are the values the live pages showed on 2026-09-27. If a re-fetch ever
-    changes them, this test FAILS ON PURPOSE - a changed source number must be
-    re-verified against the page, never silently absorbed. The test message says
-    so, because a "fix" that edits these numbers to match a new response is
-    exactly how fabricated figures enter an RAG demo.
+    These are the values the AMC's own scheme pages showed on 2026-09-29, read
+    off the captured snapshot in data/raw. If a re-fetch ever changes them, this
+    test FAILS ON PURPOSE - a changed source number must be re-verified against
+    the page, never silently absorbed. The test message says so, because a
+    "fix" that edits these numbers to match whatever came back is exactly how
+    fabricated figures enter an RAG demo.
     """
     doc = next(d for d in corpus["documents"] if d.get("scheme_slug") == slug)
     text = " ".join(n.get("text", "") for n in doc["nodes"])
@@ -187,7 +200,7 @@ def test_live_fact_values_are_present(corpus, slug, expect):
 
 
 def test_minimum_sip_values(corpus):
-    """Four schemes at Rs 100, ELSS at Rs 500 (live values, 2026-09-27)."""
+    """Four schemes at Rs 100, ELSS at Rs 500 (AMC pages, snapshot 2026-09-29)."""
     want = {
         "hdfc-large-cap-fund-direct-growth": "100",
         "hdfc-elss-tax-saver-fund-direct-plan-growth": "500",
@@ -197,12 +210,15 @@ def test_minimum_sip_values(corpus):
     }
     for slug, sip in want.items():
         doc = next(d for d in corpus["documents"] if d.get("scheme_slug") == slug)
-        pairs = {n.get("label", "").lower(): n.get("value", "")
-                 for n in doc["nodes"] if n.get("label")}
-        mips = [v for k, v in pairs.items() if "min" in k and "sip" in k]
-        assert mips, f"{slug}: no 'min. for sip' node"
-        assert any(f"₹{sip}" in v for v in mips), \
-            f"{slug}: expected min SIP ₹{sip}, found {mips}"
+        mips = [n.get("value", "") for n in doc["nodes"]
+                if "min" in (n.get("label") or "").lower()
+                and "sip" in (n.get("label") or "").lower()]
+        assert mips, f"{slug}: no 'Min. for SIP' node"
+        # The AMC writes the figure as "Rs 100" in its fact card and as
+        # "Rs.100/-" in its FAQ, and never as a bare digit run, so the
+        # assertion is on the digits and nothing else.
+        assert any(sip in v for v in mips), \
+            f"{slug}: expected min SIP {sip}, found {mips}"
 
 
 # ---------------------------------------------------------------------------
@@ -231,15 +247,22 @@ def test_no_return_figures_survive_cleaning(corpus):
 
 def test_no_holdings_listings(corpus):
     """A holdings table is ~850 stock names - pure retrieval noise."""
+    import re
     for d in corpus["documents"]:
         blob = " ".join(n.get("text", "") for n in d["nodes"])
         assert "holdings" not in blob.lower() or len(blob) < 200000
-        # No node may look like a ticker list.
+        # A holdings listing is a run of stock names, not merely a long string.
+        # Length alone is the wrong test on this corpus: the AMC states the exit
+        # load as a 500-character section body, and the Consolidated Account
+        # Statement page carries a 700-character FAQ. What makes a row a
+        # holdings row is how many separate items it lists.
         for n in d["nodes"]:
             if n.get("type") != "table_row":
                 continue
-            assert len(n.get("value", "")) < 400, \
-                f"{d['doc_id']}: suspiciously long table value, maybe a holdings row"
+            items = [p for p in re.split(r"[,;|\n]+", n.get("value", "")) if p.strip()]
+            assert len(items) < 40, (
+                f"{d['doc_id']}: {len(items)} comma-separated items in a row - "
+                f"that is a holdings listing, not a value")
 
 
 # ---------------------------------------------------------------------------

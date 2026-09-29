@@ -32,7 +32,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import common
 from rag import guardrails as G
 
-LARGE_CAP = "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth"
+LARGE_CAP = "https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct"
 
 
 @pytest.fixture(scope="module")
@@ -212,19 +212,20 @@ def test_advice_keywords_would_not_have_caught_generated_text(cfg):
 
 
 def test_a_corpus_performance_figure_is_still_refused():
-    """The corpus itself contains one, which grounding cannot catch.
+    """A figure the corpus really contains can still be an illegal claim.
 
-    The "how to invest in ..." FAQ chunk says "the average annual returns
-    provided by this fund is 18.28% since its inception". 18.28 IS on the page,
-    so the grounding check passes it - grounding asks "did the source say this?",
-    and the source did. PRD §12.3 forbids reporting it anyway, so the pairing of
-    return vocabulary with a percentage is what gets refused.
+    The AMC's captured scheme pages publish no returns at all - the returns
+    module is drawn client-side and never reaches the DOM snapshot - so there is
+    no real return figure to quote here. The guarantee being pinned does not need
+    one: grounding alone is never enough. Take a figure that IS on the page (the
+    1.00% exit load), dress it as a return, and grounding accepts it while the
+    performance check must not. A PRD §12.3 prohibition on reporting performance
+    is not defeated by "the page really does say 1.00%".
     """
     rows = [c for c in common.read_jsonl(common.path_for("chunks_file"))
-            if "18.28" in c["text"]]
-    assert rows, "premise broken: the corpus no longer contains the figure"
-    quote = ("The average annual returns provided by this fund is 18.28% "
-             "since its inception.")
+            if "Exit Load of 1.00%" in c["text"]]
+    assert rows, "premise broken: the corpus no longer contains the exit load"
+    quote = "The scheme has returned 1.00% since inception."
     assert not G.grounding_violations(quote, rows), \
         "premise broken: grounding no longer accepts the figure"
     assert G.performance_violations(quote), \

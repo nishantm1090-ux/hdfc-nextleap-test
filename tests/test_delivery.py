@@ -192,19 +192,44 @@ def test_the_pages_that_were_never_fetched_are_declared_not_just_omitted():
 
 
 def test_the_indexable_page_count_matches_the_chunked_corpus():
+    """Six indexable pages, not five.
+
+    The AMC's consolidated account statement page is a fetched page in its own
+    right and is what the statement-download and capital-gains refusals hand off
+    to, so it belongs in the corpus and in the count. The old `== 5` only held
+    while the sixth page did not exist.
+    """
     with (DOCS / "SOURCES.csv").open(newline="", encoding="utf-8") as fh:
         rows = list(csv.DictReader(fh))
     indexable = [r for r in rows if r["indexable"] == "yes"]
-    assert len(indexable) == 5
+    assert len(indexable) == 6, [r["source_id"] for r in indexable]
     assert sum(int(r["chunks"]) for r in indexable) == len(
         common.read_jsonl(common.path_for("chunks_file")))
 
 
-def test_no_source_is_a_blog_an_aggregator_or_a_forum():
-    """The brief excludes third-party commentary. Seven pages, all named."""
+def test_no_source_is_a_broker_a_blog_an_aggregator_or_a_forum():
+    """Every fetched page is the AMC's own site, plus one AMFI explainer.
+
+    The corpus swap moved this from a Groww set to an official one, so the
+    assertion is the whole point of the swap: `groww.in` appearing in this set
+    again is a regression, not a formatting change. The declared-but-never-
+    fetched SEBI/AMFI links are checked separately, in
+    `test_the_pages_that_were_never_fetched_are_declared_not_just_omitted`.
+    """
     with (DOCS / "SOURCES.csv").open(newline="", encoding="utf-8") as fh:
-        hosts = {re.sub(r"^https?://([^/]+).*$", r"\1", r["url"]) for r in csv.DictReader(fh)}
-    assert hosts <= {"groww.in", "www.amfiindia.com"}, hosts
+        rows = list(csv.DictReader(fh))
+    hosts = {re.sub(r"^https?://([^/]+).*$", r"\1", r["url"]) for r in rows}
+    assert hosts <= {"www.hdfcfund.com", "www.amfiindia.com"}, hosts
+    assert "groww.in" not in hosts
+    # The AMC's own site must carry the weight, not the one AMFI page.
+    amc = [r for r in rows if "hdfcfund.com" in r["url"]]
+    assert len(amc) == 6, [r["url"] for r in amc]
+    assert {r["publisher"] for r in amc} == {"HDFC AMC"}
+
+    # Nothing anywhere in the corpus may resolve to a host outside those two.
+    corpus_hosts = {re.sub(r"^https?://([^/]+).*$", r"\1", c["source_url"])
+                    for c in common.read_jsonl(common.path_for("chunks_file"))}
+    assert corpus_hosts <= {"www.hdfcfund.com"}, corpus_hosts
 
 
 # ---------------------------------------------------------------------------

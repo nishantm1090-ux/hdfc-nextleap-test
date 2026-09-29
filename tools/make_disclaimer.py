@@ -58,20 +58,42 @@ date and a price source, and choosing them is an act of authority. The refusal
 text hands over to the published factsheet instead, which has that authority.
 
 **"read all scheme-related documents carefully."** Not boilerplate. The corpus is
-121 chunks scraped from five web pages, and a scraped page is a snapshot: it can
-be stale, and it is not the scheme's own document. The dated
+__CHUNKS__ chunks scraped from __PAGES__ web pages, and a scraped page is a
+snapshot: it can be stale, and it is not the scheme's own document. The dated
 `Last updated from sources:` stamp on every answer exists so a reader can see
 how old the snapshot is, and this sentence is why the stamp is there.
 """
 
 
+def _corpus_shape() -> tuple[int, int]:
+    """Chunk count and distinct page count, read from the built corpus.
+
+    Interpolated rather than typed, because a hardcoded count in a compliance
+    document is exactly the drift this file exists to prevent: the previous
+    "121 chunks" was still here after the corpus was rebuilt to 68, and the
+    sentence about how stale a scraped snapshot can be was describing a corpus
+    that no longer exists.
+    """
+    import common
+
+    chunks = common.read_jsonl(common.path_for("chunks_file"))
+    pages = {c.get("source_url") for c in chunks if c.get("source_url")}
+    return len(chunks), len(pages)
+
+
 def main() -> int:
     from rag.guardrails import DISCLAIMER
 
+    n_chunks, n_pages = _corpus_shape()
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(PREAMBLE + DISCLAIMER + POSTAMBLE, encoding="utf-8")
+    OUT.write_text(
+        PREAMBLE + DISCLAIMER + POSTAMBLE.replace("__CHUNKS__", str(n_chunks))
+        .replace("__PAGES__", str(n_pages)),
+        encoding="utf-8",
+    )
     print(f"wrote {OUT.relative_to(ROOT)} ({OUT.stat().st_size} bytes, "
-          f"disclaimer {len(DISCLAIMER)} chars)")
+          f"disclaimer {len(DISCLAIMER)} chars, corpus {n_chunks} chunks / "
+          f"{n_pages} pages)")
     return 0
 
 

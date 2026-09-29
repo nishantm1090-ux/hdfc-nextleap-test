@@ -27,25 +27,29 @@ schemes:
     category: "Large Cap"
     asset_class: "Equity"
     plan: "Direct Growth"
-    url: "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth"
+    url: "https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct"
     page_type: scheme_page
-    publisher: Groww
+    publisher: HDFC AMC
 
   - scheme_slug: hdfc-equity-fund-direct-growth
-    scheme_name: "HDFC Equity Fund - Direct Growth"
+    scheme_name: "HDFC Flexi Cap Fund - Direct Growth"
     short_name: "HDFC Flexi Cap"
-    # Both names are in public use for this fund: the page title says "HDFC
-    # Flexi Cap Direct Plan Growth" and the canonical URL says
-    # hdfc-equity-fund-direct-growth.
+    # The AMC renamed this scheme from HDFC Equity Fund to HDFC Flexi Cap Fund;
+    # its canonical URL still carries the old slug (hdfc-equity-fund) and the old
+    # name is still in circulation, so both are kept as aliases for scheme
+    # detection. The displayed name follows the AMC's current naming, because
+    # that is what the cited page itself is called - leaving it as "HDFC Equity
+    # Fund" made the answer name a scheme differently from its own source.
     aliases:
-      - "HDFC Flexi Cap Fund - Direct Growth"
+      - "HDFC Equity Fund - Direct Growth"
+      - "HDFC Equity Fund"
       - "HDFC Flexi Cap Direct Plan Growth"
     category: "Flexi Cap"
     asset_class: "Equity"
     plan: "Direct Growth"
-    url: "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth"
+    url: "https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct"
     page_type: scheme_page
-    publisher: Groww
+    publisher: HDFC AMC
 
   - scheme_slug: hdfc-elss-tax-saver-fund-direct-plan-growth
     scheme_name: "HDFC ELSS Tax Saver Fund - Direct Plan - Growth"
@@ -54,9 +58,9 @@ schemes:
     category: "ELSS"
     asset_class: "Equity"
     plan: "Direct Growth"
-    url: "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth"
+    url: "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct"
     page_type: scheme_page
-    publisher: Groww
+    publisher: HDFC AMC
 
   - scheme_slug: hdfc-small-cap-fund-direct-growth
     scheme_name: "HDFC Small Cap Fund - Direct Growth"
@@ -65,9 +69,9 @@ schemes:
     category: "Small Cap"
     asset_class: "Equity"
     plan: "Direct Growth"
-    url: "https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth"
+    url: "https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct"
     page_type: scheme_page
-    publisher: Groww
+    publisher: HDFC AMC
 
   - scheme_slug: hdfc-balanced-advantage-fund-direct-growth
     scheme_name: "HDFC Balanced Advantage Fund - Direct Growth"
@@ -76,9 +80,9 @@ schemes:
     category: "Balanced Advantage"
     asset_class: "Hybrid"
     plan: "Direct Growth"
-    url: "https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth"
+    url: "https://www.hdfcfund.com/explore/mutual-funds/hdfc-balanced-advantage-fund/direct"
     page_type: scheme_page
-    publisher: Groww
+    publisher: HDFC AMC
 
 # Supplementary public pages from the official regulator / industry bodies.
 # The brief asks for AMC / SEBI / AMFI pages in addition to the 5 scheme pages.
@@ -95,32 +99,50 @@ schemes:
 #                         are STILL kept link-only: they are educational
 #                         hand-offs for refusals, not scheme-corpus material,
 #                         and a test pins the exactly-4 link-only set.
-#   * investor.gov.in  - DNS does not resolve. Link-only.
-#   * amfiindia.com/investor-education - HTTP 404 (site restructured). Link-only.
+#   * investor.gov.in  - DNS does not resolve. Not listed.
+#   * amfiindia.com/investor-education - HTTP 404 (site restructured). Not listed.
 #   * amfiindia.com/mutual-fund       - HTTP 200, ~3.9k visible chars. FETCHED,
 #                         then REJECTED by the Stage 2 corpus gate.
+#   * portal.amfiindia.com/spages/NAVAll.txt - HTTP 200, 1.5 MB, 620 HDFC rows.
+#                         Link-only: it is a machine-readable data file, not
+#                         prose, so there is nothing to embed.
 #   * hdfcmf.com/*                     - HTTP 200 but a 44-char JS shell; on
 #                         2026-09-29 it redirects to a parked domain
-#                         (ww17.hdfcmf.com). Link-only.
-#   * groww.in/help                    - HTTP 200, ~7.1k visible chars. FETCHED,
-#                         then REJECTED by the Stage 2 corpus gate.
+#                         (ww17.hdfcmf.com). Not listed - it is not the AMC.
+#   * www.hdfcfund.com (every path below) - the real AMC site, and every path
+#                         here resolves in a real browser. BUT the plain-httpx
+#                         fetcher is blocked: hdfcfund.com sits behind a WAF
+#                         that returns HTTP 403 to a non-browser user agent
+#                         from this environment. See "CAPTURE METHOD" below -
+#                         this is a fetch-path constraint, not a broken page.
 #
-# STAGE 2 OUTCOME for the two fetched supplementary pages: both were downloaded
-# and cleaned without error, and both were then dropped by the Stage 2 corpus
-# quality gate (ingest/chunk.py:document_is_answerable) because they yielded zero
-# fact-bearing nodes and their remaining nodes averaged 34 and 55 characters -
-# they are a search box and a footer nav, not documents. They stay in this file
-# with fetch: true on purpose: re-running Stage 1a must keep re-proving that
-# these pages are empty, and the rejection is reported loudly in chunk_stats.json
-# rather than silently edited away.
+# CAPTURE METHOD (stated plainly, because it matters for reproducibility):
+# hdfcfund.com cannot be downloaded by `ingest/fetch.py` from this environment
+# (403 from the WAF on every attempt). The pages in data/raw/ were therefore
+# captured from the live site in a real browser and written into this pipeline's
+# own raw cache, so every later stage (clean -> chunk -> embed -> store) runs
+# completely unchanged on the genuine page bytes. Nothing is hand-written or
+# paraphrased: the bytes are the AMC's own HTML. A normal re-run reuses the
+# cache (24h freshness gate) without touching the network.
 #
-# This is a real, documented constraint, not a workaround: the 5 mandated Groww
-# scheme pages are the authoritative corpus and they all fetched cleanly.
+# STAGE 2 OUTCOME for the fetched supplementary pages: the AMFI page is
+# downloaded and cleaned without error, then dropped by the Stage 2 corpus
+# quality gate (ingest/chunk.py:document_is_answerable) because it yielded zero
+# fact-bearing nodes and its remaining nodes averaged 34 characters - it is a
+# search box and a footer nav, not a document. It stays in this file with
+# fetch: true on purpose: re-running Stage 1a must keep re-proving that the page
+# is empty, and the rejection is reported loudly in chunk_stats.json rather than
+# silently edited away.
 #
-# CONSEQUENCE, stated plainly: the answerable corpus is 5 pages. Every question in
-# the golden set must be answerable from them, and the questions that are not
-# (riskometer level, how to download a capital-gains statement) are deliberately
-# kept in eval/ as OUT-OF-CORPUS cases that must trigger the refusal path.
+# This is a real, documented constraint, not a workaround: the 5 mandated HDFC
+# AMC scheme pages are the authoritative corpus and they all cleaned cleanly,
+# yielding the TER, minimum-SIP, exit-load, benchmark, riskometer and lock-in
+# facts the assistant answers with.
+#
+# CONSEQUENCE, stated plainly: the answerable corpus is the 5 AMC scheme pages.
+# Every question in the golden set must be answerable from them, and the
+# questions that are not (how to download a capital-gains statement) are
+# deliberately kept in eval/ as refusal cases that must trigger the hand-off.
 supplementary:
   - doc_id: amfi-mutual-fund-basics
     title: "AMFI - Mutual funds: basics, NAV, riskometer and benchmark"
@@ -133,16 +155,14 @@ supplementary:
     indexed_blocked_reason: "corpus gate: no fact nodes, mean node 34 chars (nav/search shell)"
     used_for: "riskometer / benchmark / NAV educational context"
 
-  - doc_id: groww-help-statement-guides
-    title: "Groww Help Centre - statements, tax documents and downloads"
-    publisher: Groww
-    url: "https://groww.in/help"
-    page_type: guide_page
+  - doc_id: hdfc-consolidated-account-statement
+    title: "HDFC Mutual Fund - Download Consolidated Account Statement (CAS)"
+    publisher: HDFC AMC
+    url: "https://www.hdfcfund.com/services/consolidated-account-statement"
+    page_type: amc_page
     enabled: true
     fetch: true
-    indexed: false
-    indexed_blocked_reason: "corpus gate: no fact nodes, mean node 55 chars (footer nav)"
-    used_for: "how to download capital gains statement, tax docs, transaction reports"
+    used_for: "how to download an account statement, what an account statement contains, folio/PAN based download"
 
   # --- LINK ONLY ---------------------------------------------------------
   - doc_id: sebi-riskometer-explainer
@@ -155,32 +175,32 @@ supplementary:
     fetch_blocked_reason: "kept link-only: SEBI educational hand-off for refusals, not corpus material (site fetches 200 as of 2026-09-29)"
     used_for: "advice-refusal educational link"
 
-  - doc_id: sebi-investor-education
-    title: "SEBI - Investor education and mutual funds"
-    publisher: SEBI
-    url: "https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doInvestorEdu=yes"
-    page_type: regulator_page
-    enabled: true
-    fetch: false
-    fetch_blocked_reason: "kept link-only: SEBI educational hand-off for refusals, not corpus material (site fetches 200 as of 2026-09-29)"
-    used_for: "advice-refusal educational link"
-
-  - doc_id: amfi-investor-education
-    title: "AMFI - Investor education centre"
+  - doc_id: amfi-nav-all
+    title: "AMFI - Daily NAV file for all schemes (NAVAll.txt)"
     publisher: AMFI
-    url: "https://www.amfiindia.com/investor-education"
+    url: "https://portal.amfiindia.com/spages/NAVAll.txt"
     page_type: regulator_page
     enabled: true
     fetch: false
-    fetch_blocked_reason: "HTTP 404 - amfiindia.com restructured this path"
-    used_for: "advice-refusal educational link"
+    fetch_blocked_reason: "kept link-only: machine-readable NAV lookup, served as a link not as page prose (verified HTTP 200 on 2026-09-29, redirects to portal.amfiindia.com)"
+    used_for: "official NAV verification / per-scheme NAV hand-off"
 
-  - doc_id: hdfc-amc-faq
-    title: "HDFC AMC - Frequently asked questions"
+  - doc_id: hdfc-scheme-faqs
+    title: "HDFC Mutual Fund - Investor services FAQs"
     publisher: HDFC AMC
-    url: "https://www.hdfcmf.com/faqs"
+    url: "https://www.hdfcfund.com/services/faqs"
     page_type: amc_page
     enabled: true
     fetch: false
-    fetch_blocked_reason: "HTTP 200 but a 44-character JavaScript shell"
-    used_for: "expense ratio, exit load, switch charges (verification only)"
+    fetch_blocked_reason: "kept link-only: AMC FAQ hand-off for refusals, not scheme-corpus material (link read off the live /services page on 2026-09-29)"
+    used_for: "expense ratio, exit load, switch charges, folio hand-off"
+
+  - doc_id: hdfc-odr
+    title: "HDFC Mutual Fund - Grievances redressal mechanism (ODR)"
+    publisher: HDFC AMC
+    url: "https://www.hdfcfund.com/information/grievances-redressal-mechanism"
+    page_type: amc_page
+    enabled: true
+    fetch: false
+    fetch_blocked_reason: "kept link-only: escalation hand-off for complaint-routing questions, which the assistant refuses to answer itself (link read off the live /services page on 2026-09-29)"
+    used_for: "grievance / complaint routing hand-off"

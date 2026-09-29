@@ -213,6 +213,35 @@ def tokenizer_backend() -> str:
     return "tiktoken:cl100k_base" if _get_encoder() is not None else "fallback:regex"
 
 
+# ---------------------------------------------------------------------------
+# Source-text shapes that are not values
+# ---------------------------------------------------------------------------
+
+#: A body that is only an "as on" date - "As on 31 Aug 2026", "As of 30/09/2026".
+#:
+#: The AMC uses these as section furniture: a heading and nothing else. Promoting
+#: one to a fact produced a stored value that carries no information, under
+#: whatever fact_key the heading happened to key to. "Portfolio Allocation & Top
+#: Holdings" became the fact "portfolio allocation & top holdings: as on 31 aug
+#: 2026", and a link label ("Click here to view performance of other schemes
+#: managed by the Fund Manager(s)") became `fund_managers: As on 31 Aug 2026`.
+#: Both were then retrievable and quotable as though they were facts.
+#:
+#: Defined here rather than in either ingest stage because both need it: Stage 1
+#: declines to emit the node at all, and Stage 2 refuses to make a chunk from a
+#: value that has no content.
+_AS_ON_ONLY_RE = re.compile(
+    r"^\s*(?:as\s+(?:on|of)|as\s+at)\s+\d{1,2}\s*[a-z/-]{3,12}\.?,?\s*\d{2,4}\s*$",
+    re.I,
+)
+
+
+def is_as_on_only(value: str) -> bool:
+    """True if `value` is nothing but an as-on date, so carries no fact."""
+    text = re.sub(r"\s+", " ", str(value or "")).strip().strip(".")
+    return bool(text) and bool(_AS_ON_ONLY_RE.match(text))
+
+
 def truncate_to_tokens(text: str, max_tokens: int) -> str:
     enc = _get_encoder()
     if enc is None:

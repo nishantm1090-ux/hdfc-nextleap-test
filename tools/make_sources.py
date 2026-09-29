@@ -79,11 +79,14 @@ def render_md(rows: list[dict[str, object]]) -> str:
              f"`docs/SOURCES.csv` for a spreadsheet.\n")
 
     L.append("## What is in scope\n")
-    L.append(f"The corpus is **{len(idx)} indexable pages**, one per scheme, "
-             f"totalling **{total_chunks} chunks**. The other "
-             f"{len(rows) - len(idx)} pages are fetched on every run and then "
-             "rejected by the Stage 2 corpus gate - they are listed below "
-             "because a source list that hid them would not be a source list.\n")
+    L.append(f"The corpus is **{len(idx)} indexable pages** - the AMC's own page "
+             f"for each of the five schemes, plus its consolidated account "
+             f"statement page, which is where the statement-download and "
+             f"capital-gains answers come from - totalling **{total_chunks} "
+             f"chunks**. The other {len(rows) - len(idx)} pages are fetched on "
+             "every run and then rejected by the Stage 2 corpus gate: they are "
+             "listed below because a source list that hid them would not be a "
+             "source list.\n")
 
     L.append("| Scheme | Publisher | Chunks | Fact keys |")
     L.append("|---|---|---|---|")
@@ -154,11 +157,12 @@ def render_md(rows: list[dict[str, object]]) -> str:
     L.append("")
 
     L.append("## Refreshing\n")
-    L.append("```\npython -m ingest.fetch --force   # re-fetch all 7 pages\n"
-             "python -m tools.dump               # refresh data/dump/*.txt\n```")
+    L.append(f"```\npython -m ingest.fetch --force   # re-fetch all {len(rows)} pages\n"
+             "python -m tools.dump               # refresh data/dump/*.txt\n"
+             "python -m tools.make_sources       # regenerate this file + the CSV\n```")
     L.append("")
-    L.append("A NAV, a rating or an AUM on these pages changes without notice, so "
-             "a demo run on a stale snapshot will quote figures that have moved. "
+    L.append("A NAV or an AUM on these pages changes without notice, so a demo run "
+             "on a stale snapshot will quote figures that have moved. "
              "The stamp is there so that is visible rather than hidden.\n")
     return "\n".join(L)
 

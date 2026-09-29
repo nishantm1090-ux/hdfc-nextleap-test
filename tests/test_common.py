@@ -55,7 +55,9 @@ def test_exactly_five_schemes_all_direct_growth():
     assert len(schemes) == 5
     for s in schemes:
         assert s["plan"] == "Direct Growth"
-        assert s["url"].startswith("https://groww.in/mutual-funds/")
+        # The AMC's own canonical scheme page - the only host the brief allows.
+        assert s["url"].startswith("https://www.hdfcfund.com/explore/mutual-funds/"), \
+            f"{s['scheme_slug']} does not cite an HDFC AMC scheme page: {s['url']}"
         assert s["scheme_slug"] and s["category"] and s["short_name"]
 
 
@@ -75,16 +77,31 @@ def test_scheme_slugs_unique():
     assert len(slugs) == len(set(slugs))
 
 
+def test_every_scheme_name_is_the_amcs_own_naming():
+    """The displayed name must be the one the cited page actually uses.
+
+    The AMC renamed HDFC Equity Fund to HDFC Flexi Cap Fund without renaming its
+    URL, so the old name is still in circulation and is kept as an alias for
+    detection. It must not be the name the answer prints, or the answer names a
+    scheme differently from the page it cites.
+    """
+    by_slug = {s["scheme_slug"]: s for s in load_schemes()}
+    flexi = by_slug["hdfc-equity-fund-direct-growth"]
+    assert flexi["scheme_name"].startswith("HDFC Flexi Cap Fund"), flexi["scheme_name"]
+    assert flexi["url"].endswith("/hdfc-flexi-cap-fund/direct"), flexi["url"]
+    assert any("HDFC Equity Fund" in a for a in flexi["aliases"]), \
+        "the old name must stay resolvable, users still ask for it"
+
+
 def test_supplementary_sources_have_publishers():
     """Allowlist of publishers we are willing to cite.
 
     The point is to keep third-party blogs, forums and content farms out
-    (PRD S4.3), not to insist that only regulators may appear. Groww is here
-    because it is the publisher of the 5 mandated scheme pages and of
-    groww.in/help; SEBI/AMFI/HDFC AMC are here because they are the official
-    bodies the brief asks for.
+    (PRD S4.3), not to insist that only regulators may appear. SEBI/AMFI/HDFC
+    AMC are here because they are the official bodies the brief asks for, and
+    nothing else is: the corpus is the AMC's own site plus the two regulators.
     """
-    allowed = {"SEBI", "AMFI", "HDFC AMC", "Groww"}
+    allowed = {"SEBI", "AMFI", "HDFC AMC"}
     for d in load_supplementary():
         assert d["publisher"] in allowed, \
             f"{d['doc_id']} cites {d['publisher']!r}, which is not an approved publisher"

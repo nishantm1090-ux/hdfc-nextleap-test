@@ -328,10 +328,15 @@ class BM25Index:
 def _index_terms(chunk: dict[str, Any]) -> str:
     """The text BM25 indexes: chunk body + the scheme identity around it.
 
-    Mirrors Stage 3's `embed_prefix_template` on purpose. The two retrievers
+    The same identity tokens Stage 3 embeds, on purpose. The two retrievers
     disagreeing about what a chunk *is* is how you end up with a dense ranking
     and a lexical ranking that share no documents at all, and an RRF fusion of two
     disjoint lists is worth nothing.
+
+    Order is not mirrored: BM25 is a bag of words, so it is indifferent to where
+    the name sits, and Stage 3 moved the aliases to the end of the embedded text
+    for a reason that only applies to an encoder. What must match is the SET of
+    tokens - scheme name, aliases, category, section heading.
     """
     aliases = chunk.get("scheme_aliases") or []
     if isinstance(aliases, str):
@@ -551,9 +556,23 @@ def _embedding_lookup() -> Any:
 # titles. It is a fact_key in this corpus ("nav", "nav_change", "nav_date") and
 # "what is the NAV of HDFC Small Cap" has to be able to match on it. Presence in
 # a page title is not the same as absence of meaning.
+#
+# The second group are QUALIFIERS: words that modify the name of a fact without
+# ever being the fact. The AMC's rows are terse - "TER: 0.78", "Benchmark: NIFTY
+# 100 (Total Return Index)" - so no chunk can ever contain "annual", and a
+# question like "what is the annual expense ratio for HDFC Balanced Advantage
+# Fund?" scored coverage 2/5 and was refused for a fact the corpus publishes.
+# Dropping the qualifier leaves ["expense", "ratio", "balanced", "advantage"],
+# which the TER row covers outright.
+#
+# Deliberately NOT here: "risk" (the riskometer question needs it), "lock"
+# (the ELSS lock-in question needs it), "exit" and "value" (both are the fact).
+# Every entry had to be a word that no row in this corpus can carry.
 _COVERAGE_NOISE = frozenset("""
 fund funds mutual scheme schemes hdfc amc direct growth plan invest
 investment investments details detail information tell know about please
+annual annually current currently latest today now ongoing recurring
+total
 """.split())
 
 # A query term counts as matched when the chunk contains it, or contains a prefix
@@ -722,20 +741,28 @@ def _message_text(m: Any) -> str:
 
 
 def _scheme_display_name(slug: str, corpus: Sequence[dict[str, Any]]) -> str:
-    """The name users actually type for this scheme, minus the "- Direct …" tail.
+    """The name the corpus itself uses for this scheme, minus the "- Direct …" tail.
 
-    ``scheme_name`` carries the market-gateway name ("HDFC Equity Fund") but
-    the project speaks Groww's alias ("HDFC Flexi Cap Fund"); the alias is what
-    a follow-up should be spliced with, so retrieval and ranking see the same
-    tokens the user used.
+    ``scheme_name`` is the name the cited page carries, so it is the name an
+    answer should print and the name a follow-up should be spliced with: both
+    retrieval and ranking then see the same tokens the page uses.
+
+    It previously preferred ``scheme_aliases[0]``, because the corpus was built
+    from a market gateway whose page title lagged the AMC's rename and the alias
+    carried the current name. That is now exactly backwards. The AMC's own page
+    says "HDFC Flexi Cap Fund", and splicing the stale alias instead added
+    "equity" - a word no Flexi Cap chunk contains - so "And its expense ratio?"
+    resolved to a query that failed its own term-coverage gate:
+    coverage 0.33 of ['expense', 'ratio', 'equity'] against a 0.5 floor. The
+    aliases keep their real job, which is RECOGNITION in `detect_scheme`.
     """
     for c in corpus:
         if c.get("scheme_slug") == slug:
-            aliases = c.get("scheme_aliases") or []
-            if isinstance(aliases, list) and aliases and str(aliases[0]).strip():
-                name = str(aliases[0])
-            else:
-                name = str(c.get("scheme_name") or "")
+            name = str(c.get("scheme_name") or "").strip()
+            if not name:
+                aliases = c.get("scheme_aliases") or []
+                if isinstance(aliases, list) and aliases:
+                    name = str(aliases[0])
             return re.sub(r"\s*[-–]\s*(Direct|Direct Plan|Plan).*$",
                           "", name).strip() or slug
     return slug.replace("-", " ").strip()

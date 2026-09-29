@@ -111,11 +111,12 @@ def test_fact_chunks_carry_a_canonical_fact_key(chunks):
 
 
 FACT_KEYS = {
-    "expense_ratio", "exit_load", "minimum_sip", "minimum_investment",
-    "lock_in_period", "riskometer_level", "benchmark", "aum", "nav",
-    "statement_download", "stamp_duty", "fund_objective", "fund_category",
-    "fund_managers", "taxation", "risk_profile", "rating", "fund_launch",
-    "contact", "how_to_invest", "how_to_redeem", "sip_vs_lumpsum", "pe_pb_ratio",
+    "expense_ratio", "exit_load", "entry_load", "minimum_sip",
+    "minimum_investment", "lock_in_period", "riskometer_level", "benchmark",
+    "aum", "nav", "statement_download", "stamp_duty", "fund_objective",
+    "fund_category", "fund_managers", "taxation", "risk_profile", "rating",
+    "fund_launch", "contact", "how_to_invest", "how_to_redeem",
+    "sip_vs_lumpsum", "pe_pb_ratio",
 }
 
 
@@ -247,13 +248,19 @@ def test_no_chunk_contains_return_data(chunks):
 
 
 def test_no_chunk_contains_holdings_data(chunks):
-    """Holdings listings (~850 stock names) are excluded from the index.
+    """Portfolio holdings must stay out of the index.
 
-    Asserted in the positive as well as the negative direction: a holdings
-    *listing* is a name plus a weight ("Infosys - 4.2%"), while the redemption
-    FAQ legitimately says "go to your holdings and click redeem". A blanket
-    `"holdings" not in text` check would pass by deleting the redemption
-    instructions, which are answerable content we want to keep.
+    Asserted in the negative direction only, because on this corpus there is no
+    positive case to keep: every AMC scheme page renders "Portfolio Allocation
+    & Top Holdings" as a section title plus the single line "As on 31 Aug 2026",
+    and the actual holdings table is drawn client-side, so it never reaches the
+    captured HTML at all.
+
+    That section title is the real regression risk. It was briefly indexed as
+    the fact "portfolio allocation & top holdings: as on 31 aug 2026" - a fact
+    with no content in it - which then anchored a prose chunk and surfaced in
+    answers. So it is asserted as a positive too: the title may exist as prose
+    context, but never as a stored value.
     """
     import re
 
@@ -262,10 +269,9 @@ def test_no_chunk_contains_holdings_data(chunks):
         assert not listing.search(c["text"].lower()), \
             f"{c['chunk_id']} contains a holdings listing"
 
-    kept = [c for c in chunks
-            if "holding" in c["text"].lower() and "redeem" in c["text"].lower()]
-    assert kept, ("the how-to-redeem instructions were over-stripped along with "
-                  "the holdings widget - they are answerable content")
+    dated = [c for c in chunks
+             if c["fact_key"] and re.match(r"(?i)^as on \d", c.get("fact_value") or "")]
+    assert not dated, f"a section's as-on date became a stored value: {dated[:1]}"
 
 
 def test_no_chunk_contains_pii(chunks):
@@ -282,14 +288,16 @@ def test_no_chunk_contains_pii(chunks):
 
 
 def test_chrome_pages_are_rejected_not_silently_indexed(stats):
-    """The two supplementary pages yielded nothing answerable.
+    """A page that yields nothing answerable must be REPORTED as rejected.
 
-    They must be REPORTED as rejected, because a corpus that quietly drops half
-    its inputs looks identical to a corpus that quietly lost them.
+    A corpus that quietly drops an input looks identical to a corpus that
+    quietly lost it, so the rejection is part of the published stats rather than
+    a side effect. On this corpus exactly one fetched page is rejected: the AMFI
+    basics page, which is a navigation shell.
     """
     rejected = stats.get("rejected_documents", {})
-    assert "amfi-mutual-fund-basics" in rejected
-    assert "groww-help-statement-guides" in rejected
+    assert "amfi-mutual-fund-basics" in rejected, \
+        f"the AMFI basics page should still be rejected; got {sorted(rejected)}"
     for doc_id, why in rejected.items():
         assert why, f"{doc_id} was rejected without a stated reason"
     for c in read_jsonl(common.path_for("chunks_file")):

@@ -112,11 +112,18 @@ embedding:
   batch_size: 64
   # MiniLM degrades past ~256 tokens, so we embed a metadata prefix + the
   # LEAD of the chunk rather than the whole thing (PRD S6 "Budget rationale").
-  # The prefix is what stops "Expense ratio: 1.03%" from embedding almost
-  # identically to the other four schemes' expense-ratio rows. `{aliases}` adds
-  # the fund's other public names (HDFC Flexi Cap vs HDFC Equity Fund), so a
-  # question using either name reaches the same chunks.
-  embed_prefix_template: "{scheme_name}{aliases} ({category}) - {section_heading}: "
+  # The prefix is what stops "TER: 0.78" from embedding almost identically to
+  # the other schemes' expense-ratio rows.
+  #
+  # The fund's other public names (HDFC Flexi Cap vs HDFC Equity Fund) are NOT
+  # in the prefix. They go AFTER the text, as `embed_alias_suffix`. In the
+  # leading position they out-weighed the current name - the alias list is three
+  # names long against one primary name - and "expense ratio of HDFC Flexi Cap
+  # Fund - Direct Growth" then retrieved the Large Cap row, because "Cap" is
+  # shared and "Flexi" had been averaged away. Trailing, the primary name leads
+  # and the old name is still visible to the encoder.
+  embed_prefix_template: "{scheme_name} ({category}) - {section_heading}: "
+  embed_alias_suffix: " (also called {aliases})"
   embed_lead_tokens: 200
   # The cache key is a hash of the EMBEDDED text (prefix + lead), NOT the raw
   # chunk's content_hash. Raw text collides across schemes - "Min. for SIP: 100"
@@ -239,8 +246,16 @@ guardrails:
   # Kept deliberately narrow. "regular plan" is also absent, but the corpus
   # DOES answer the Direct-vs-Regular question from scheme metadata, so adding
   # it would refuse a question we can answer. Every entry must be measured.
+  #
+  # "riskometer" WAS here and had to come out. The Groww corpus never published
+  # the SEBI riskometer, so O01 ("what is the riskometer level of HDFC Large
+  # Cap?") was answered with the EXPENSE RATIO - a cited, confident, wrong
+  # answer, the worst output this system can produce. The AMC publishes
+  # `Riskometer: Very High` on every one of the five scheme pages, so it is
+  # extracted into a `riskometer_level` fact and answerable for all five.
+  # `test_every_known_absent_term_really_is_absent_from_the_corpus` is what
+  # forced this removal; leave it out of this list unless you re-measure.
   known_absent_terms:
-    - "riskometer"
     - "exit score"
     - "fund of funds"
     - "nav history"
@@ -379,10 +394,17 @@ generation:
   # The answer-side list is phrased as ASSERTIONS, which is how a language model
   # actually produces advice.
   #
-  # Every phrase below was measured against the 121 real chunks: 0 occurrences.
-  # That is the safety property that makes them usable as a validator - an
-  # answer-side phrase that appears in the corpus cannot be a reliable signal,
-  # because it would reject legitimate grounded answers.
+  # Every phrase below was measured against the real chunks, and each one must
+  # appear 0 times. That is the safety property that makes them usable as a
+  # validator - an answer-side phrase that appears in the corpus cannot be a
+  # reliable signal, because it would reject legitimate grounded answers.
+  #
+  # Two phrases that used to be here were REMOVED for exactly that reason when
+  # the corpus moved to the AMC's own pages: "ideal for" and "consider investing
+  # in" are both things the AMC writes on its scheme pages ("Ideal for", "before
+  # considering investing in the scheme"), so on this corpus they describe the
+  # source rather than a model's opinion. They remain on the QUERY side, where
+  # the framing is a question the user is asking us.
   advice_vocabulary:
     - "you should"
     - "you must"
@@ -396,13 +418,11 @@ generation:
     - "must buy"
     - "is safe"
     - "safe to invest"
-    - "ideal for"
     - "suitable for you"
     - "right choice"
     - "i would suggest"
     - "we suggest"
     - "my suggestion"
-    - "consider investing in"
     - "go for"
     - "look to invest"
 

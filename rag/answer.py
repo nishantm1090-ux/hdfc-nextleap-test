@@ -123,6 +123,123 @@ def _corpus_metadata() -> tuple[dict[str, Any], ...]:
     return tuple(common.read_jsonl(common.path_for("chunks_file")))
 
 
+@lru_cache(maxsize=1)
+def _corpus_fact_keys() -> frozenset[str]:
+    """The fact_keys the whole corpus actually carries."""
+    return frozenset(
+        str(c.get("fact_key") or "") for c in _corpus_metadata() if c.get("fact_key")
+    )
+
+
+@lru_cache(maxsize=1)
+def _facts_by_scheme() -> dict[str, frozenset[str]]:
+    """scheme_slug -> the fact_keys that scheme's own pages carry.
+
+    Includes the keys recovered from prose by `_labelled_facts_by_scheme`, so a
+    fact that ADR-001 pushed out of the fact channel still counts as carried.
+    """
+    out: dict[str, set[str]] = {}
+    for c in _corpus_metadata():
+        slug = str(c.get("scheme_slug") or "")
+        if not slug:
+            continue
+        key = str(c.get("fact_key") or "")
+        if key:
+            out.setdefault(slug, set()).add(key)
+    for slug, keys in _labelled_facts_by_scheme().items():
+        out.setdefault(slug, set()).update(keys)
+    return {k: frozenset(v) for k, v in out.items()}
+
+
+@lru_cache(maxsize=1)
+def _labelled_facts_by_scheme() -> dict[str, frozenset[str]]:
+    """scheme_slug -> fact_keys recovered from PROSE chunks that open with a label.
+
+    ADR-001 declines a `label: value` node that will not fit `fact_max_tokens`
+    and routes it to the prose splitter, so the fact survives as prose with an
+    empty `fact_key`. HDFC Balanced Advantage's exit-load row is 129 tokens
+    against a 120 cap, so it is one of them - and without this, "what exit load
+    applies to HDFC Balanced Advantage Fund?" was refused with "no chunk in the
+    corpus carries that fact_key" while the AMC's own sentence sat in the index,
+    whole and quotable. The refusal was true about the fact channel and false
+    about the corpus.
+
+    Only the LEADING CLAUSE is read, for the same reason `ingest.chunk` reads
+    only the leading clause: a later clause can mention a second fact and would
+    key the row to the wrong subject.
+    """
+    from ingest.chunk import _head_clause, canonical_fact_key  # noqa: PLC0415
+
+    out: dict[str, set[str]] = {}
+    for c in _corpus_metadata():
+        if c.get("fact_key"):
+            continue                      # already keyed; nothing to recover
+        slug = str(c.get("scheme_slug") or "")
+        if not slug:
+            continue
+        key = canonical_fact_key(_head_clause(str(c.get("text") or "")))
+        if key:
+            out.setdefault(slug, set()).add(key)
+    return {k: frozenset(v) for k, v in out.items()}
+
+
+def _question_fact_keys(question: str) -> set[str]:
+    """Which fact_keys does this question unambiguously ask for?
+
+    A key counts only when the question is about that subject and nothing else.
+    "What is the rating of HDFC Large Cap?" is about `rating`. "What is the
+    expense ratio and rating?" is about `expense_ratio` too, and refusing it
+    because `rating` is missing would be wrong.
+    """
+    q = (question or "").lower()
+    hits = {key for key, triggers in FACT_TRIGGERS.items()
+            if any(re.search(rf"(?<![a-z0-9]){re.escape(t)}(?![a-z0-9])", q)
+                   for t in triggers)}
+    if _MANAGER_QUERY.search(question or ""):
+        hits.add("fund_manager")
+    return hits
+
+
+def unanswerable_fact(question: str) -> str | None:
+    """A fact the question is solely about that the corpus does not carry.
+
+    Retrieval cannot express "I don't know that". Asked for a scheme's star
+    rating, the retriever returns the best available chunk for the scheme - the
+    minimum SIP row, which shares the scheme name - and the answer layer has no
+    way to tell "the best chunk about this fund" from "the chunk about the thing
+    I asked for". So the answer was fluent, cited to the right page, and about a
+    different fact: "the minimum SIP for HDFC Balanced Advantage Fund is ₹ 100"
+    in reply to a question about its rating. The AMC does not publish a rating
+    on a scheme page, so the honest reply is that the official sources do not
+    state it.
+
+    The scope is the NAMED scheme when the question names one, and the whole
+    corpus otherwise. Corpus-wide is not enough: only one AMC page carries a
+    "minimum investment" Q&A, so "what is the minimum investment for HDFC Large
+    Cap?" passed a corpus-wide check (the fact exists, on another fund's page)
+    and was then answered with the exit load. A fact another fund's page states
+    is not a fact this fund's page states.
+
+    Returns the fact_key when the question asks only for a fact that is missing,
+    and None otherwise - so a question touching a missing fact alongside a
+    present one is still answered from what is actually there.
+
+    "Missing" means missing from the CORPUS, not missing from the fact channel:
+    see `_labelled_facts_by_scheme` for the prose rows that still carry a label.
+    """
+    asked = _question_fact_keys(question)
+    if not asked:
+        return None
+    named = detect_scheme(question, list(_corpus_metadata()))
+    present = (_facts_by_scheme().get(named, frozenset()) if named
+               else _corpus_fact_keys())
+    if not present:
+        present = _corpus_fact_keys()
+    if asked & present:
+        return None                      # at least one of them we can answer
+    return sorted(asked)[0]
+
+
 def last_updated_stamp(chunks: Sequence[Any]) -> str:
     """"Last updated from sources: YYYY-MM-DD" - the newest fetch date.
 
@@ -214,6 +331,94 @@ def _quote(text: str) -> str:
     return body
 
 
+#: The AMC's field names, mapped to the words a reader would use. The corpus
+#: quotes the page exactly ("TER", "Min SIP", "Lock in"), which is correct for
+#: a stored node but reads as machine output inside a sentence: "The ter for
+#: HDFC Large Cap Fund is 1.03". Only the wording of the LABEL changes here; the
+#: value is quoted from the source unchanged, so no fact is restated or invented.
+FRIENDLY_LABELS: dict[str, str] = {
+    "ter": "total expense ratio (TER)",
+    "min sip": "minimum SIP",
+    "lock in": "lock-in period",
+    "aum": "AUM (assets under management)",
+    "nav": "NAV",
+}
+
+#: A trailing as-on date qualifies a label without being part of its name, so
+#: "nav (28/09/2026)" has to resolve through the same key as "nav".
+_AS_ON_SUFFIX_RE = re.compile(r"\s*\(\s*\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\s*\)\s*$")
+
+#: Units the AMC's fact card implies through the field itself but never prints
+#: beside the figure. Keyed by fact_key, and kept to one entry on purpose: adding
+#: a unit is a claim that the page defines it, so each future entry has to be
+#: justified by the source rather than added because a number "looks bare".
+_VALUE_UNITS: dict[str, str] = {
+    "expense_ratio": "%",
+}
+
+#: Values the AMC states in words. The corpus lowercases values for matching, so
+#: a reader-facing sentence has to restore the capitalisation the page uses.
+_VALUE_CASING: dict[str, str] = {
+    "very high": "Very High",
+    "high": "High",
+    "moderate": "Moderate",
+    "medium": "Medium",
+    "low": "Low",
+    "na": "not applicable (stated as NA)",
+    "n/a": "not applicable (stated as N/A)",
+    "nil": "nil (stated as NIL)",
+    "none": "not applicable",
+}
+
+
+def friendly_label(label: str) -> str:
+    """Render a stored field name as a phrase a reader recognises."""
+    low = re.sub(r"\s+", " ", (label or "")).strip().rstrip(":").lower()
+    for candidate in (low, _AS_ON_SUFFIX_RE.sub("", low).strip()):
+        if candidate in FRIENDLY_LABELS:
+            return FRIENDLY_LABELS[candidate]
+    return (label or "").strip().rstrip(":")
+
+
+def friendly_value(value: str, fact_key: str = "") -> str:
+    """Restore the capitalisation and the unit a source value is written with.
+
+    Numbers, rupee amounts, percentages, dates and index names are left exactly
+    as retrieved; only the enumerated word values are touched, and only when the
+    whole value is that word.
+    """
+    raw = re.sub(r"\s+", " ", (value or "")).strip()
+    unit = _VALUE_UNITS.get(fact_key)
+    if unit and re.fullmatch(r"\d+(?:\.\d+)?", raw):
+        # The AMC's fact card prints the expense ratio as a bare "0.77" beside a
+        # "TER" title, and defines TER in that title's own tooltip as "calculated
+        # as a percentage of the scheme's average Net Asset Value". The digit is
+        # quoted unchanged; only the unit the page itself defines is restored, so
+        # "is 0.77" does not read as 0.77 of nothing.
+        raw = f"{raw}{unit}"
+    return _VALUE_CASING.get(raw.lower(), raw)
+
+
+#: A value is "a sentence" when it carries its own grammar rather than being a
+#: term: it ends in a full stop, or it is a clause long enough that splicing it
+#: after "is" would be ungrammatical.
+_SENTENCE_VAL_MIN_WORDS = 9
+
+
+def _reads_as_sentence(value: str) -> bool:
+    raw = re.sub(r"\s+", " ", value or "").strip()
+    if not raw:
+        return False
+    if raw.endswith((".", "!", "?")) and not _is_numberish(raw):
+        return True
+    return len(re.findall(r"[A-Za-z₹][\w₹.,%()/'-]*", raw)) >= _SENTENCE_VAL_MIN_WORDS
+
+
+def _is_numberish(value: str) -> bool:
+    """True for a bare figure, so "1.03." is not mistaken for a sentence."""
+    return not re.search(r"[A-Za-z]{3,}", value)
+
+
 def _repeats_label(label: str, value: str) -> bool:
     """Does the value open by restating the label?
 
@@ -255,11 +460,31 @@ FACT_TRIGGERS: dict[str, list[str]] = {
     "minimum_investment": ["minimum investment", "min investment",
                            "first investment", "1st investment", "lump sum",
                            "lumpsum", "one time"],
-    "exit_load": ["exit load", "exit charge", "redemption charge", "load",
+    "exit_load": ["exit load", "exit charge", "redemption charge",
                   "stamp duty", "withdrawal charge", "switching charge"],
+    # "load" on its own is deliberately NOT an exit_load trigger. The AMC states
+    # both loads on every scheme page, and its exit-load value ends with the
+    # sentence "No Entry/Exit Load shall be levied on bonus units", so a bare
+    # "load" trigger made "what is the entry load?" score the exit-load chunk
+    # higher than the entry-load chunk and answer a different question than the
+    # one asked. The two loads are separate facts and need separate triggers.
+    "entry_load": ["entry load", "front-end load", "front end load",
+                   "load on purchase", "purchase load"],
     "benchmark": ["benchmark", "reference index", "index", "tri", "base index"],
     "fund_objective": ["objective", "goal", "scheme seeks", "mandate"],
     "rating": ["rating", "star rating", "stars"],
+    # The AMC publishes "Riskometer: Very High" in the fact card of all five
+    # scheme pages, and this table had no entry for it - so the riskometer
+    # questions were answered by whatever ranked first for the SCHEME. On the
+    # Large Cap that happened to be the right row; on the Flexi Cap it was the
+    # minimum SIP, and "what is the riskometer of HDFC Flexi Cap Fund Direct
+    # Growth?" came back with "The minimum SIP is ₹ 100": fluent, cited to the
+    # right page, about a different fact. O01 in the golden set is the same
+    # failure that the corpus swap first exposed on a corpus with no
+    # riskometer at all.
+    "riskometer_level": ["riskometer", "risk level", "risk category",
+                         "riskometer level", "what is the risk",
+                         "how risky", "risk category of"],
     "lock_in_period": ["lock in", "lock-in", "lockin", "minimum holding",
                        "holding period", "locked in",
                        # A user asks about a lock-in without ever using the word.
@@ -273,13 +498,25 @@ FACT_TRIGGERS: dict[str, list[str]] = {
     "how_to_redeem": ["how to redeem", "how do i redeem", "redeem my",
                       "how to sell", "sell my", "withdraw"],
     "sip_vs_lumpsum": ["sip vs lumpsum", "sip or lumpsum", "lump sum", "lumpsum"],
-    "pe_pb_ratio": ["pe ratio", "pb ratio", "pe and pb", "price to earnings",
-                    "price to book", "valuation"],
-    # The manager's name IS in the corpus - "rahul baijal is the current fund
-    # manager of hdfc large cap fund direct growth fund" - but only inside the
-    # run-on stat-strip chunk, which carries no fact_key. With no trigger,
-    # "who is the fund manager" ranked the `rating` row first and answered
-    # "the rating is 4": a different fact, confidently cited.
+    "pe_pb_ratio": ["pe ratio", "p/e ratio", "pb ratio", "p/b ratio", "pe and pb",
+                    "price to earnings", "price to book", "valuation"],
+    # Which plan variant is this? No AMC page states the Direct-vs-Regular
+    # distinction as a fact a user can ask about - the plan is in the page title
+    # and the scheme metadata, never in a row of its own - so the honest answer
+    # is a refusal. Before this key existed, "Is HDFC Large Cap Fund Direct
+    # Growth the Direct plan or the Regular plan?" was answered "The minimum SIP
+    # for HDFC Large Cap Fund is ₹ 100": fluent, cited to the right page, and
+    # about a different fact. `unanswerable_fact` sees the key, finds no chunk
+    # carrying it, and refuses. A question that ALSO asks for something present
+    # ("the minimum SIP for HDFC ELSS Tax Saver Fund - Direct Plan - Growth?")
+    # still answers, because that key is present.
+    "plan_variant": ["direct plan", "regular plan", "which plan", "what plan",
+                     "direct vs regular", "plan variant"],
+    # The manager's name is NOT in this corpus. The AMC's scheme pages do not
+    # carry it in the captured markup - it loads separately - so there is no
+    # `fund_manager` chunk and this key is never present. The trigger stays
+    # because it is what makes the refusal fire: with no trigger the retriever
+    # would happily answer a manager question with whatever keyed row it found.
     "fund_manager": ["fund manager", "managed by", "manages", "manager of",
                      "fund manager name"],
 }
@@ -297,9 +534,10 @@ def _value_of(text: str) -> str:
     return _split_row(text)[1]
 
 
-#: Charge terms that Groww groups under a single compound heading, so one
-#: fact_key covers several of them. Measured over the 121 chunks: "exit load",
-#: "stamp duty" and "tax" are the only such group in this corpus.
+#: Charge terms that the AMC's exit-load table groups under one heading, so one
+#: fact_key covers several of them. The row is a single sentence pair - "an Exit
+#: Load of 1.00% is payable ... No Exit Load is payable if ..." - and the
+#: stamp-duty charge is stated in the same block.
 _COMPOUND_CHARGES = (
     "stamp duty", "exit charge", "redemption charge", "withdrawal charge",
     "switching charge", "commission", "tax",
@@ -311,17 +549,20 @@ def _label_of(text: str) -> str:
     return _split_row(text)[0]
 
 
-# "rahul baijal is the current fund manager of hdfc large cap fund direct
-# growth fund" - the manager's name, as Groww publishes it. Anchored on the
-# verb phrase so it cannot match any other sentence in the corpus.
+# A sentence that STATES a manager's name in the form the AMC would use it.
+# Nothing in the captured DOM currently matches - the scheme pages load the
+# manager block separately - but the pattern is kept rather than deleted, so
+# that if a re-capture ever does carry the line it is detected as a name and
+# never mistaken for the rest of the sentence. Anchored on the verb phrase so
+# it cannot match any other sentence in the corpus.
 _MANAGER_SENTENCE = re.compile(
     r"([a-z][a-z.'-]*(?:\s+[a-z][a-z.'-]*){0,3})\s+is\s+the\s+current\s+fund\s+manager\s+of\b",
     re.I)
 
-# "Who manages HDFC Small Cap?" and "rahul baijal is the current fund manager
-# of hdfc small cap fund" are the same question wearing different vocabulary.
-# A trigger list cannot bridge a verb and a noun - "manages" and "manager" do
-# not match on word boundaries - so the pair is matched explicitly.
+# "Who manages HDFC Small Cap Fund?" is the same question as "who is the fund
+# manager", wearing different vocabulary. A trigger list cannot bridge a verb
+# and a noun - "manages" and "manager" do not match on word boundaries - so the
+# pair is matched explicitly.
 _MANAGER_QUERY = re.compile(
     r"\bwho\s+(?:manage|manages|managed)\b|\bwho\s+is\s+the\s+(?:fund\s+)?manager\b"
     r"|\bfund\s+manager\b|\bmanaged\s+by\b", re.I)
@@ -537,18 +778,30 @@ def render_from_chunk(chunk: Any, question: str) -> str:
     if m:
         label, value = _clean(m.group(1)), _clean(m.group(2))
         if label and value:
-            # Groww's DOM concatenates sibling rows, so a chunk can arrive as
-            # "exit load, stamp duty and tax: exit load exit load of 1% if
-            # redeemed within 1 year" - the value restates the label. Wrapping
-            # that in "The <label> ... is <value>" produces "The exit load ...
-            # is exit load of 1%", which reads as a stutter. When the value
-            # opens by repeating the label, quote the whole line verbatim
-            # instead, which is both more readable and more faithful.
+            # A source page's DOM concatenates sibling rows, so a chunk can
+            # arrive as "exit load: exit load of 1% if redeemed within 1 year"
+            # - the value restates the label. Wrapping that in "The <label> ...
+            # is <value>" produces "The exit load ... is exit load of 1%",
+            # which reads as a stutter. When the value opens by repeating the
+            # label, quote the whole line verbatim instead, which is both more
+            # readable and more faithful.
             if _repeats_label(label, value):
                 return _clip_sentences(_quote(text), 2)
-            # The label is already a noun phrase ("expense ratio", "min. for sip",
-            # "exit load"), so "The <label> for <scheme> is <value>" reads as a
-            # sentence without the label needing to be re-worded.
+            # The label is stored exactly as the source words it, which may be
+            # an abbreviation or a code ("TER"). friendly_label renders it as
+            # the phrase a reader would use; the value is quoted as retrieved.
+            label = friendly_label(label)
+            value = friendly_value(value, str(meta.get("fact_key") or ""))
+            # A value that is itself a sentence cannot be spliced after "is".
+            # The AMC states the exit load as a full sentence ("In respect of
+            # each purchase / switch-in of Units, an Exit Load of 1.00% is
+            # payable if..."), and "The Exit Load for HDFC Small Cap Fund is In
+            # respect of each purchase..." is both ungrammatical and cut off
+            # mid-clause. A fact card handles both shapes: "is <value>" when the
+            # value is a term, "<scheme> - <label>: <value>" when it is prose.
+            if _reads_as_sentence(value):
+                head = f"{scheme} - " if scheme else ""
+                return _clip_sentences(f"{head}{label}: {value}", 2)
             if scheme:
                 return _clip_sentences(f"The {label} for {scheme} is {value}.", 1)
             return _clip_sentences(f"The {label} is {value}.", 1)
@@ -906,11 +1159,31 @@ def ask(question: str, *, top_k: int | None = None,
         return _refusal("out_of_corpus", G.STATEMENT_REFUSAL,
                         "the question asks for a statement/account document, "
                         "which the assistant cannot produce", debug)
+    if G.is_personal_data_question(q2):
+        debug["guardrail"] = "personal_data"
+        return _refusal("personal_data", G.PERSONAL_DATA_REFUSAL,
+                        "the question asks the assistant for a value that "
+                        "belongs to one investor, and it has no account data",
+                        debug)
     if G.is_future_speculation(q2):
         debug["guardrail"] = "future_speculation"
         return _refusal("out_of_corpus", G.FUTURE_REFUSAL,
                         "the question asks about a future state that no "
                         "current source can state", debug)
+
+    # --- 4e. a fact this corpus does not carry --------------------------------
+    # Asked only about something the official pages do not state - a star
+    # rating, a P/E ratio, the manager's name - the honest reply is that it
+    # could not be verified. Without this the retriever supplies the best chunk
+    # it has for the SCHEME and the answer reads as if it were about the thing
+    # asked. See `unanswerable_fact`.
+    missing = unanswerable_fact(q2)
+    if missing:
+        debug["guardrail"] = "fact_not_in_corpus"
+        debug["missing_fact_key"] = missing
+        return _refusal("out_of_corpus", G.OUT_OF_CORPUS,
+                        f"the question asks only about {missing!r}, and no "
+                        f"chunk in the corpus carries that fact_key", debug)
 
     # --- 5. retrieve --------------------------------------------------------
     # Over-fetch when the question names a scheme, then filter locally.
@@ -1005,8 +1278,16 @@ def ask(question: str, *, top_k: int | None = None,
                     and c0.scheme_slug != c1.scheme_slug):
                 debug["guardrail"] = "ask_scheme"
                 corpus = list(_corpus_metadata())
-                slugs = list(dict.fromkeys(
-                    c["scheme_slug"] for c in corpus if c["scheme_slug"]))
+                # The list of funds is read from config/sources.yaml, NOT from
+                # the chunk metadata. A chunk's `scheme_slug` is a SCOPE key, and
+                # the AMC's Consolidated Account Statement page is scoped under
+                # its own document id - so deriving the list from chunks printed
+                # "hdfc-consolidated-account-statement" to the user as though it
+                # were a sixth fund. The declared scheme list, filtered to those
+                # that actually have chunks, cannot contain a document id.
+                indexed = {c["scheme_slug"] for c in corpus if c.get("scheme_slug")}
+                slugs = [s["scheme_slug"] for s in common.load_schemes()
+                         if s["scheme_slug"] in indexed]
                 funds = ", ".join(_scheme_display_name(s, corpus) for s in slugs)
                 return _refusal(
                     "out_of_corpus", G.ASK_SCHEME.format(funds=funds),

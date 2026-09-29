@@ -77,7 +77,8 @@ def test_every_example_chip_returns_a_cited_answer(q):
     a = app.ask(q)
     assert a.kind == "answer", f"chip {q!r} returned kind={a.kind}: {a.text[:90]}"
     assert len(a.sources) == 1
-    assert a.sources[0].url.startswith("https://groww.in/mutual-funds/")
+    assert a.sources[0].url.startswith("https://www.hdfcfund.com/"), \
+        f"chip cited a non-official page: {a.sources[0].url}"
     assert a.last_updated.startswith("Last updated from sources: ")
 
 
@@ -179,24 +180,41 @@ def test_why_rows_is_empty_for_a_refusal_that_never_retrieves():
 
 
 def test_corpus_stats_reflects_the_real_build():
+    """The sidebar numbers come from the build artefacts, not from constants.
+
+    The counts are asserted against the chunk file rather than pinned to a
+    literal, because a pinned 121 was a lie twice over: it survived a corpus
+    rebuild that produced 68 chunks, and it would have survived a broken build
+    that produced none. What is pinned is the INVARIANT - one embedding per
+    chunk, 100% cache hit, five schemes.
+
+    `pages` is 6, not 5, and that is not a bug: the AMC's consolidated account
+    statement page is a fetched document in its own right, so counting pages
+    (6) above schemes (5) is the honest reading. The old `== 5` only held while
+    one page per scheme happened to be the whole corpus.
+    """
     cs = app.corpus_stats()
+    n_chunks = len(common.read_jsonl(common.path_for("chunks_file")))
+    pages = {r["source_url"] for r in common.read_jsonl(common.path_for("chunks_file"))}
     assert cs["schemes"] == 5
-    assert cs["chunks"] == 121
-    assert cs["pages"] == 5
-    assert cs["embeddings"] == 121
+    assert cs["chunks"] == n_chunks
+    assert cs["pages"] == len(pages) >= 5
+    assert cs["embeddings"] == n_chunks
     assert cs["embed_hit_pct"] == 100.0
     assert re.match(r"\d{4}-\d{2}-\d{2}", str(cs["last_ingest"]))
 
 
 def test_corpus_stats_counts_cached_embeddings_not_only_newly_computed():
-    """A warm rebuild computes nothing and caches all 121 (`computed: 0`).
+    """A warm rebuild computes nothing and caches every chunk (`computed: 0`).
 
     Reading `computed` alone therefore reported "Embeddings: —" on every
     Rebuild press - the one control whose whole point is a warm no-op rebuild.
     """
     stats = common.read_json(common.path_for("embed_stats_file"))
-    assert stats["cached"] == 121 and stats["computed"] == 0, "expected a warm cache"
-    assert app.corpus_stats()["embeddings"] == 121
+    n_chunks = len(common.read_jsonl(common.path_for("chunks_file")))
+    assert stats["cached"] == n_chunks and stats["computed"] == 0, \
+        f"expected a warm cache over {n_chunks} chunks, got {stats}"
+    assert app.corpus_stats()["embeddings"] == n_chunks
 
 
 def test_corpus_stats_degrades_instead_of_crashing(monkeypatch, tmp_path):
@@ -209,9 +227,12 @@ def test_corpus_stats_degrades_instead_of_crashing(monkeypatch, tmp_path):
 
 
 def test_sidebar_lists_the_five_source_links():
+    """The five source links the sidebar offers are the AMC's own scheme pages."""
     schemes = common.load_schemes()
     assert len(schemes) == 5
-    assert all(s["url"].startswith("https://groww.in/") for s in schemes)
+    assert all(s["url"].startswith("https://www.hdfcfund.com/explore/mutual-funds/")
+               for s in schemes), [s["url"] for s in schemes]
+    assert len({s["url"] for s in schemes}) == 5, "the five links must be distinct"
 
 
 # ---------------------------------------------------------------------------
@@ -374,7 +395,8 @@ def test_asking_a_question_renders_the_whole_answer_block():
     main = [m.value for m in at.markdown if m.value not in sidebar_texts]
     rendered = "\n".join(main)
     assert "1.03%" in rendered
-    assert rendered.count("https://groww.in/mutual-funds/") == 1, "FR-8.4: one source link"
+    assert rendered.count("https://www.hdfcfund.com/explore/mutual-funds/") == 1, \
+        "FR-8.4: one source link"
     assert "https://" not in next(m for m in main if "1.03%" in m), "bare URL in the prose"
 
     caps = [c.value for c in at.caption]

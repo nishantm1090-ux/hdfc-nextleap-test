@@ -100,6 +100,23 @@ FUTURE_REFUSAL = (
     f"\"Who manages HDFC Large Cap Fund today?\"). {EDUCATION_LINK}"
 )
 
+# A question asking for the *user's own* record. This is a different refusal
+# from PII_REFUSAL, which fires when the user pastes an identifier in; here the
+# user offers nothing, they just ask to be told a personal value. It has to be
+# refused anyway: the assistant has no account data, and the corpus contains the
+# AMC's Consolidated Account Statement page, whose FAQ text explains what a folio
+# is. So "What is my folio number?" retrieved that page and answered with a
+# confident paragraph about what a folio contains - fluent, cited, and
+# answering a different question than the one asked. The refusal says where the
+# real answer lives.
+PERSONAL_DATA_REFUSAL = (
+    "I don't have access to any investor account, so I can't tell you a folio "
+    "number, a name, a bank account or any other personal record - those live in "
+    "your HDFC Mutual Fund account (https://www.hdfcfund.com/). I can share the "
+    "published facts of a scheme: expense ratio, exit load, minimum SIP, "
+    "lock-in period, benchmark, NAV and AUM."
+)
+
 # PRD §11 pins "exactly one source link" per answer. A question that names no
 # scheme but asks about a fact that differs by scheme (expense ratio, exit
 # load, NAV) cannot be answered honestly: picking a scheme by retrieval order
@@ -138,8 +155,11 @@ INDEX_ERROR = (
 
 REFUSALS = {
     "pii": PII_REFUSAL,
+    "personal_data": PERSONAL_DATA_REFUSAL,
     "advice": ADVICE_REFUSAL,
     "performance": PERFORMANCE_REFUSAL,
+    "statement": STATEMENT_REFUSAL,
+    "future": FUTURE_REFUSAL,
     "out_of_corpus": OUT_OF_CORPUS,
     "out_of_scope": OUT_OF_SCOPE,
 }
@@ -202,7 +222,17 @@ _PII_PATTERNS: list[tuple[str, re.Pattern[str], str]] = [
     ("pan", re.compile(r"\b[A-Z]{5}\d{4}[A-Z]\b"), "PAN-like {mask}"),
     ("aadhaar", re.compile(r"\b[2-9]\d{3}\s?\d{4}\s?\d{4}\b"), "Aadhaar-like number"),
     ("aadhaar_word", re.compile(r"\baadhaar\b|\baar\b", re.I), "the word 'Aadhaar'"),
-    ("pan_word", re.compile(r"\bpan\b(?!\s*card\b(?!\s*of))", re.I), "the word 'PAN'"),
+    # A bare "pan" is not PII, and treating it as PII breaks the corpus check:
+    # the AMC's account-statement page says "PAN-based Account Statement" and
+    # "all folios linked to the PAN" - the page explaining what it needs, not a
+    # user disclosing theirs. What IS PII is a user OFFERING the identifier, so
+    # this rule is anchored on the framing rather than on the word. The `pan`
+    # rule above still catches the identifier itself wherever it appears, so
+    # nothing is lost by narrowing this one.
+    ("pan_word", re.compile(
+        r"(?:\bmy\b|\bour\b)\s+pan\b"
+        r"|\bpan\b\s*(?:no\.?|number|#)?\s*(?:is|was|:)\s*\S",
+        re.I), "the word 'PAN'"),
     # "is" / "was" between the label and the digits. Without it the most
     # natural phrasing of all - "my account number is 1234567890123456" -
     # slipped through, because the regex demanded digits the instant the
@@ -246,6 +276,23 @@ def _mask(text: str) -> str:
     if letters and not digits:
         return text[0].upper() + "*" * (len(text) - 1)
     return "".join(ch if ch.isdigit() else "*" for ch in text[:4]) + "****"
+
+
+def scan_query_pii(q: str) -> list[PIIMatch]:
+    """Which PII rules fire on this query? Never raises, never logs the text.
+
+    Split out from check_query_pii so another guardrail can ask "would the PII
+    refusal already handle this?" without triggering the refusal itself, and
+    without the scan's logging side effect firing twice.
+    """
+    cfg = common.load_config()["guardrails"]
+    if not cfg.get("pii", {}).get("enabled", True):
+        return []
+    found: list[PIIMatch] = []
+    for kind, pattern, _template in _PII_PATTERNS:
+        for m in pattern.finditer(q or ""):
+            found.append(PIIMatch(kind=kind, masked=_mask(m.group(0))))
+    return found
 
 
 def check_query_pii(q: str) -> list[PIIMatch]:
@@ -510,6 +557,34 @@ _STATEMENT_QUERY = re.compile(
 def is_statement_question(q: str) -> bool:
     """Is this a request to obtain a statement or account document?"""
     return bool(q and _STATEMENT_QUERY.search(q))
+
+
+# Asking to be *told* a personal value, rather than to be sent a document. The
+# first-person pronoun is what separates this from a genuine question about a
+# published definition: "What is my folio number?" cannot be answered from any
+# public page, while "What is a folio number?" can and should be. A possessive
+# plus a personal-record noun is the signal; the corpus legitimately uses these
+# nouns when describing the statement ("units allotted in the folio"), so the
+# pronoun is required rather than optional.
+_PERSONAL_RECORD = (
+    r"folio\s*(?:no|number|id)?|account\s*(?:no|number)|demat\s*(?:id|number)|"
+    r"bank\s*(?:account|a/c)|cheque\s*book|passbook|statement\s*of\s*my|"
+    r"my\s*(?:name|pan|aadhaar|aadhar|email|phone|mobile|address|nominee)"
+)
+_PERSONAL_DATA_QUERY = re.compile(
+    r"\b(?:my|mine|our|his|her|their)\b[^?.]{0,40}\b(?:" + _PERSONAL_RECORD + r")\b"
+    r"|\b(?:what|whats|which|tell|show|give|find|know)\b[^?.]{0,30}\bmy\b"
+    r"[^?.]{0,30}\b(?:" + _PERSONAL_RECORD + r")\b",
+    re.I)
+
+
+def is_personal_data_question(q: str) -> bool:
+    """Is this asking the assistant for a value that belongs to one investor?"""
+    if not q:
+        return False
+    if scan_query_pii(q):
+        return False                      # PII_REFUSAL is the better answer
+    return bool(_PERSONAL_DATA_QUERY.search(q))
 
 
 # A calendar year in the future, tied to a time preposition. 2026 is today's
@@ -876,7 +951,7 @@ def self_test() -> int:
         ("One sentence.", 1),
         ("One. Two.", 2),
         ("The NAV is Rs 1,189.08. Min SIP is Rs 100.", 2),
-        ("See https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth", 1),
+        ("See https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct", 1),
         ("A, B, and C. D.", 2),
     ]:
         got = count_sentences(t)
@@ -884,7 +959,7 @@ def self_test() -> int:
 
     print("\n  VALIDATOR:")
     urls = corpus_urls()
-    big = "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth"
+    big = "https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct"
     # Real context, so the grounding check has something to check against.
     ctx = [c for c in common.read_jsonl(common.path_for("chunks_file"))
            if c["scheme_slug"] == "hdfc-large-cap-fund-direct-growth"]
@@ -930,8 +1005,12 @@ def self_test() -> int:
         print(f"    {mark} {label:<24}{detail}")
 
     print("\n  GROUNDING - the check that catches a fabricated figure:")
+    # The two "sourced" figures below are the AMC's own, read off the Large Cap
+    # page in the captured snapshot: NAV 1,170.11 and AUM 39,933.37 Cr. Both must
+    # pass grounding, and both must fail if the corpus no longer carries them -
+    # a self-test that stops testing anything is the failure mode here.
     for text, want_unsourced in [
-        ("The NAV is 1,189.08.", False),
+        ("The NAV is 1,170.11.", False),
         ("The AUM is 39,933.37 Cr.", False),
         ("It returned 24% last year.", True),
         ("The expense ratio is 2.99%.", True),

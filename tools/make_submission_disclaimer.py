@@ -1,4 +1,28 @@
-# Disclaimer
+"""Generate the root `disclaimer.md` submission file from the code's own string.
+
+The brief asks for a short disclaimer whose wording matches what the user sees
+in the app. "Matches" has to mean byte-for-byte or it means nothing, so this
+imports `rag.guardrails.DISCLAIMER` - the same object `app.py` renders under
+every answer and the same object `eval/run_eval.py` scores per row - and refuses
+to write a file that does not contain it exactly once.
+
+`docs/DISCLAIMER.md` is the long-form version: the same string, plus where it
+appears and how to read it. This is the short one.
+
+Regenerate with:
+
+    python -m tools.make_submission_disclaimer
+"""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+OUT = ROOT / "disclaimer.md"
+
+PREAMBLE = """# Disclaimer
 
 **Live app:** <https://hdfc-nextleap-test.onrender.com/>
 
@@ -7,7 +31,9 @@
 This is the text exactly as the assistant shows it - under every answer, in the
 UI and in the command line. It is not a summary of it.
 
-**Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
+"""
+
+POSTAMBLE = """
 
 ## Why it is worded this way
 
@@ -56,3 +82,21 @@ recommendation, or an offer to buy or sell any security.
 Mutual fund investments are subject to market risks. Read the scheme's own
 Scheme Information Document, Key Information Memorandum and monthly factsheet
 before investing, and consider your own circumstances.
+"""
+
+
+def main() -> int:
+    from rag.guardrails import DISCLAIMER
+
+    text = PREAMBLE + DISCLAIMER + POSTAMBLE
+    assert text.count(DISCLAIMER) == 1, "the disclaimer must appear exactly once"
+    assert "Sources: HDFC Mutual Fund, SEBI and AMFI" in DISCLAIMER, (
+        "the disclaimer no longer names the three official publishers")
+    OUT.write_text(text, encoding="utf-8")
+    print(f"wrote {OUT.relative_to(ROOT)} ({OUT.stat().st_size} bytes, "
+          f"disclaimer {len(DISCLAIMER)} chars, verbatim)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

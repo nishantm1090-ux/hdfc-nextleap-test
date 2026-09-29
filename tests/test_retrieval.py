@@ -183,7 +183,6 @@ def test_mmr_on_an_empty_pool_returns_empty():
 @pytest.mark.parametrize("question", [
     "price of gold in Mumbai",
     "mumbai flat price",
-    "best time to enter the market",
     "weather forecast tomorrow",
     "who is the CEO of HDFC AMC",
     "what is the airspeed velocity of an unladen swallow",
@@ -191,6 +190,25 @@ def test_mmr_on_an_empty_pool_returns_empty():
 def test_out_of_corpus_questions_are_refused(question):
     with pytest.raises(R.OutOfCorpus):
         R.retrieve(question)
+
+
+def test_a_market_timing_question_is_not_out_of_corpus_at_the_retriever():
+    """"Best time to enter the market" is nonsense for a *publishing* corpus.
+
+    It is not nonsense for this one. The AMC's Flexi Cap page carries a
+    strategy FAQ that genuinely discusses when to time an entry, so the chunk
+    matches "time" and "market" and clears the coverage gate. Retrieval is
+    behaving correctly - the words are really there. What the user must not get
+    is the FAQ quoted as if it were an answer, so the question is caught one
+    layer up, by the advice guardrail. This test pins that split so nobody
+    "fixes" it by tightening the retrieval gate and re-breaking the real
+    questions.
+    """
+    results = R.retrieve("best time to enter the market", with_debug=True)
+    assert results, "the strategy FAQ genuinely mentions timing"
+    from rag import answer as A
+    a = A.ask("best time to enter the market")
+    assert a.kind == "refusal_advice", f"answered instead of refused: {a.text!r}"
 
 
 def test_a_question_with_no_searchable_content_is_refused():
@@ -215,16 +233,29 @@ def test_out_of_corpus_the_reason_names_the_question(cfg):
 
 
 def test_every_result_carries_every_score():
+    """Every returned chunk carries a real score for every component.
+
+    A dense score may legitimately be negative. `clears()` admits a chunk on
+    coverage plus EITHER retriever's floor, so a chunk whose lexical match is
+    strong and whose embedding is merely unrelated - here an exit-load question
+    against the AMC's benchmark-and-NAV blob - is admitted on BM25 while its
+    cosine is -0.005. Requiring `dense_score > 0` would assert something the
+    gate does not promise; requiring it to have cleared one of the two floors
+    asserts what it does.
+    """
+    cfg = common.load_config()["retrieval"]
     results = R.retrieve("exit load", top_k=5, with_debug=True)
     assert results
     for r in results:
         assert r.chunk_id and r.text
-        assert r.dense_score > 0.0
+        assert r.dense_score >= float(cfg["min_cosine"]) or \
+            r.bm25_score >= float(cfg["min_bm25"]), \
+            f"{r.chunk_id} cleared neither retriever's floor"
         assert r.rrf_score > 0.0
         assert r.final_score > 0.0
-        assert r.coverage > 0.0
+        assert r.coverage >= float(cfg["min_coverage"])
         assert isinstance(r.matched_terms, list)
-        assert r.source_url.startswith("https://groww.in/")
+        assert r.source_url.startswith("https://www.hdfcfund.com/")
 
 
 def test_matched_terms_come_from_the_question_not_the_synonyms():

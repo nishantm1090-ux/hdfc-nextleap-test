@@ -274,9 +274,16 @@ def _rank(query: str, candidates: list[tuple[str, np.ndarray]],
     "hdfc-balanced-advantage-fund-direct-growth",
 ])
 def _page_fund_name(chunk: dict) -> str:
-    """The fund name as the page itself titles it, e.g. 'HDFC Flexi Cap Direct
-    Plan Growth' from 'HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Funds'."""
-    return chunk["page_title"].split(" - ")[0].strip()
+    """The fund name as the corpus itself carries it.
+
+    Read from the chunk's `scheme_name` rather than parsed out of `page_title`.
+    The AMC titles its scheme pages with the whole SEO string - "HDFC Flexi Cap
+    Fund - Direct Plan | NAV, Returns & SIP | HDFC Mutual Fund" - and splitting
+    on " - " returned the entire title, which is not a fund name and made the
+    query read as keyword soup. `scheme_name` is the name the chunk is indexed
+    and answered under, so it is the name a user actually types.
+    """
+    return chunk["scheme_name"].strip()
 
 
 @pytest.mark.parametrize("slug", [
@@ -289,19 +296,21 @@ def _page_fund_name(chunk: dict) -> str:
 def test_expense_ratio_query_finds_its_own_scheme(chunks, vectors, cfg, slug, model):
     """The acceptance test that justifies the whole prefix.
 
-    Without the scheme prefix, "expense ratio: 0.78%" (Small Cap and Balanced
-    Advantage) and "expense ratio: 1.03%" (Large Cap) are near-identical
-    strings, and a query naming a scheme can retrieve the wrong row.
+    The AMC's fact card states the expense ratio as a bare "TER: 0.78", so two
+    of the five chunks are byte-identical and the third differs only in a
+    digit. Without the scheme prefix in the embedded text, a query naming a
+    scheme can retrieve the wrong row and cite the wrong fund.
     """
     cands = [(c["chunk_id"], vectors[embed_hash(c, cfg)]) for c in chunks
              if c["fact_key"] == "expense_ratio"]
-    # Each scheme has two: the atomic fact row and the FAQ that restates it.
+    # Every scheme states its own expense ratio exactly once.
     by_slug: dict[str, int] = {}
     for c in chunks:
         if c["fact_key"] == "expense_ratio":
             by_slug[c["scheme_slug"]] = by_slug.get(c["scheme_slug"], 0) + 1
-    assert set(by_slug.values()) == {2}, \
-        f"expected 2 expense-ratio chunks per scheme, got {by_slug}"
+    assert set(by_slug.values()) == {1}, \
+        f"expected exactly 1 expense-ratio chunk per scheme, got {by_slug}"
+    assert len(by_slug) == 5, f"expected 5 schemes, got {sorted(by_slug)}"
 
     mine = [c for c in chunks if c["scheme_slug"] == slug and c["fact_key"] == "expense_ratio"]
     query = f"expense ratio of {_page_fund_name(mine[0])}"
@@ -395,13 +404,15 @@ def test_aliases_reach_the_chunks(chunks):
 
 
 def test_two_schemes_with_the_same_value_stay_distinguishable(chunks, vectors, cfg):
-    """Balanced Advantage and Small Cap both have TER 0.78%.
+    """Balanced Advantage and Small Cap both publish TER 0.78.
 
-    If the prefix were dropped these two chunks would be byte-identical and a
-    user asking about one would be shown the other's page as the source.
+    The AMC's fact card states it as a bare "TER: 0.78", so without the scheme
+    prefix these two chunks would be byte-identical and a user asking about one
+    would be shown the other's page as the source.
     """
-    same = [c for c in chunks if c["text"] == "expense ratio: 0.78%"]
-    assert len(same) == 2, f"expected 2 chunks with TER 0.78%, found {len(same)}"
+    same = [c for c in chunks if c["text"] == "TER: 0.78"]
+    assert len(same) == 2, \
+        f"expected 2 chunks stating TER 0.78, found {[c['text'] for c in same]}"
     hs = {embed_hash(c, cfg) for c in same}
     assert len(hs) == 2, "identical raw text produced one shared vector"
     v1, v2 = vectors[embed_hash(same[0], cfg)], vectors[embed_hash(same[1], cfg)]

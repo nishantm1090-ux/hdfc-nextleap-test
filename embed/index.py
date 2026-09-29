@@ -77,35 +77,48 @@ class EmbedStats:
 
 
 def build_embed_text(chunk: dict[str, Any], cfg: dict[str, Any]) -> str:
-    """prefix + lead(chunk text), truncated to `embed_lead_tokens`.
+    """prefix + lead(chunk text) + alias tail, truncated to `embed_lead_tokens`.
 
-    The prefix is NOT decoration. A fact chunk is "Expense ratio: 1.03%" - four
-    words that are near-identical across all five schemes. Prefixing with the
-    scheme name is what makes "expense ratio of HDFC Large Cap" retrieve the
-    Large Cap row rather than whichever row the encoder happened to nudge.
+    The prefix is NOT decoration. A fact chunk is "TER: 1.03" - three words that
+    are near-identical across all five schemes. Prefixing with the scheme name is
+    what makes "expense ratio of HDFC Large Cap" retrieve the Large Cap row
+    rather than whichever row the encoder happened to nudge.
 
-    The prefix also carries the fund's OTHER public names. HDFC's Flexi Cap page
-    is titled "HDFC Flexi Cap Direct Plan Growth" while its canonical URL is
-    hdfc-equity-fund-direct-growth, so people ask about it under either name; a
-    chunk that only knows one of them is unreachable by the other.
+    The fund's OTHER public names - HDFC's Flexi Cap page is reached at
+    hdfc-equity-fund-direct-growth, and people still ask for it by the old name -
+    are appended at the END rather than placed in the prefix. Measured, not
+    assumed: in the leading position the three-name alias list outweighed the one
+    current name, and "expense ratio of HDFC Flexi Cap Fund - Direct Growth"
+    retrieved the Large Cap row (0.7601 against 0.7721), because "Cap" is shared
+    with two rivals and "Flexi" had been averaged out of the vector. Trailing,
+    the same query puts Flexi Cap first with a 0.0126 margin, and the old name is
+    still in the embedded text. Trailing loses a little on every scheme; leading
+    lost the one scheme that has aliases at all.
     """
     template = cfg.get("embed_prefix_template",
-                       "{scheme_name}{aliases} ({category}) - {section_heading}: ")
+                       "{scheme_name} ({category}) - {section_heading}: ")
+    alias_tpl = cfg.get("embed_alias_suffix", " (also called {aliases})")
     aliases = chunk.get("scheme_aliases") or []
-    alias_text = f" (also called {', '.join(aliases)})" if aliases else ""
+    joined = ", ".join(aliases)
     try:
         prefix = template.format(
             scheme_name=chunk.get("scheme_name") or chunk.get("scheme_slug", ""),
-            aliases=alias_text,
+            aliases=joined,
             category=chunk.get("category", ""),
             section_heading=chunk.get("section_heading", ""),
         )
     except (KeyError, IndexError):
         # A literal brace in a page heading must not crash the whole run.
-        prefix = f"{chunk.get('scheme_name', '')}{alias_text} - "
+        prefix = f"{chunk.get('scheme_name', '')} - "
+    tail = ""
+    if joined:
+        try:
+            tail = alias_tpl.format(aliases=joined)
+        except (KeyError, IndexError):
+            tail = f" (also called {joined})"
 
     lead = int(cfg.get("embed_lead_tokens", 200))
-    return truncate_to_tokens(prefix + chunk.get("text", ""), lead)
+    return truncate_to_tokens(prefix + chunk.get("text", "") + tail, lead)
 
 
 def embed_hash(chunk: dict[str, Any], cfg: dict[str, Any]) -> str:

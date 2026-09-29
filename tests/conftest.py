@@ -35,6 +35,37 @@ def app_cfg() -> dict:
     return common.load_config()
 
 
+# ---------------------------------------------------------------------------
+# Scheme URL helper
+# ---------------------------------------------------------------------------
+
+#: Internal slug -> the public URL config/sources.yaml actually declares.
+#:
+#: The tests used to assert that a citation "ends with the scheme slug", which
+#: was true only while every source was a Groww page, where the URL path IS the
+#: slug (`.../hdfc-large-cap-fund-direct-growth`). The corpus is now the AMC's
+#: own site, whose canonical paths are shorter and which renamed one scheme
+#: without renaming its URL: the Flexi Cap fund lives at
+#: `.../hdfc-flexi-cap-fund/direct` while its internal slug is still
+#: `hdfc-equity-fund-direct-growth`. Asserting the slug is a second, redundant
+#: copy of a fact the config already states, and it disagreed with the truth.
+#: Reading the URL out of the config instead means one source of truth: if the
+#: declared URL changes, these tests follow it.
+_SCHEME_URLS: dict[str, str] = {
+    s["scheme_slug"]: s["url"] for s in common.load_schemes()
+}
+
+
+def scheme_url(slug: str) -> str:
+    """The configured public URL for a scheme's internal slug."""
+    try:
+        return _SCHEME_URLS[slug]
+    except KeyError:  # pragma: no cover - a typo in a test, fail loudly
+        raise AssertionError(
+            f"unknown scheme slug {slug!r}; known: {sorted(_SCHEME_URLS)}"
+        ) from None
+
+
 @pytest.fixture(scope="session")
 def model():
     """MiniLM, loaded once. Skips the test - not the suite - if unavailable."""

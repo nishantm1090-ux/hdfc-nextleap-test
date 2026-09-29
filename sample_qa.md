@@ -1,188 +1,244 @@
 # Sample Q&A
 
-Ten questions, answered by the pipeline as it actually runs. Every answer,
-link, `Last updated` stamp and disclaimer below was produced by calling
-`rag.answer.ask` - this file is a transcript, not a description. Regenerate it
-with `python -m tools.make_sample_qa`.
+**Live app:** <https://hdfc-nextleap-test.onrender.com/>
 
-Figures are the values published on the source pages on the fetch date recorded
-in `docs/SOURCES.md`. They are quoted, never computed, and none of them is a
-return.
+Ten questions against the running system. Every answer, source link and
+`Last updated from sources` date below was produced by calling the pipeline
+(`rag.answer.ask`), not typed by hand. Regenerate it with:
 
-Each answer carries exactly one source link, in the format PRD §12.1 requires.
-Refusals carry **no** source link at all: there is nothing in the corpus to
-cite, and inventing a citation for a refusal would be a lie with a URL on it.
-
-
-## Answers
-
-### 1. What is the expense ratio of HDFC Large Cap Direct Growth?
-
-**`answer`** - category `expense_ratio` - scheme HDFC Large Cap Fund - Direct Growth
-
-```
-The expense ratio for HDFC Large Cap Fund is 1.03%.
+```powershell
+.\.venv\Scripts\python.exe -m tools.make_submission_qa
 ```
 
-Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+**Sources: HDFC Mutual Fund, SEBI and AMFI.** Six of the ten are answered from
+HDFC Mutual Fund's own scheme pages on `hdfcfund.com`, and every cited link
+points there. The four refusals hand off to SEBI and AMFI's investor-education
+material, which is why those two are named in the disclaimer.
+
+Figures are quoted from the source page and never computed. Each answer is at
+most three sentences and carries exactly one citation - the one page it was read
+from. The `Last updated from sources` date is the day that page was captured, and
+it is on every answered question because a scraped page is a snapshot: NAV, AUM
+and riskometer levels move without notice, and the AMC edits these pages in
+place without changing the URL.
+
+
+---
+
+
+## 1. Minimum SIP
+
+**Question:** What is the minimum SIP for HDFC Large Cap Direct Growth?
+
+**Assistant Answer:**
 
 ```
-Last updated from sources: 2026-09-27
+The minimum SIP for HDFC Large Cap Fund is ₹ 100.
 ```
 
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
+**Official Source Link:** https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct
 
-### 2. What is the NAV of HDFC Flexi Cap Fund?
+**Last Updated From Sources:** 2026-09-29
 
-**`answer`** - category `nav_aum` - scheme HDFC Flexi Cap Fund - Direct Growth
 
-```
-The nav for HDFC Equity Fund is 25 sep '26 ₹2,214.57.
-```
+## 2. Expense ratio
 
-Source: https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+**Question:** What is the expense ratio of HDFC ELSS Tax Saver Direct Growth?
 
-```
-Last updated from sources: 2026-09-27
-```
-
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
-
-### 3. What is the minimum SIP for HDFC ELSS Tax Saver Fund?
-
-**`answer`** - category `min_sip` - scheme HDFC ELSS Tax Saver Fund - Direct Plan - Growth
+**Assistant Answer:**
 
 ```
-The min. for sip for HDFC ELSS Tax Saver Fund is ₹500.
+The total expense ratio (TER) for HDFC ELSS Tax Saver Fund is 1.21%.
 ```
 
-Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+**Official Source Link:** https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct
+
+**Last Updated From Sources:** 2026-09-29
+
+
+## 3. Exit load
+
+**Question:** What is the exit load on HDFC Large Cap if I redeem within 1 year?
+
+**Assistant Answer:**
 
 ```
-Last updated from sources: 2026-09-27
+HDFC Large Cap Fund - Exit Load: In respect of each purchase/switch-in of Units, an Exit Load of 1.00% is payable if Units are redeemed/switched-out within 1 year from the date of allotment. No Exit Load is payable if Units are redeemed/switched-out after 1 year from the date of allotment.
 ```
 
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
+**Official Source Link:** https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct
 
-### 4. What is the fund size or AUM of HDFC Small Cap Fund?
+**Last Updated From Sources:** 2026-09-29
 
-**`answer`** - category `aum` - scheme HDFC Small Cap Fund - Direct Growth
 
-```
-The fund size (aum) for HDFC Small Cap Fund is ₹41,890.86 cr.
-```
+## 4. Benchmark
 
-Source: https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+**Question:** What benchmark does HDFC Flexi Cap Direct Growth track?
 
-```
-Last updated from sources: 2026-09-27
-```
-
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
-
-### 5. What is the exit load on HDFC Balanced Advantage Fund?
-
-**`answer`** - category `exit_load` - scheme HDFC Balanced Advantage Fund - Direct Growth
+**Assistant Answer:**
 
 ```
-The exit load for HDFC Balanced Advantage Fund is from july 1st 2020.
+The Benchmark for HDFC Flexi Cap Fund is NIFTY 500 Total Returns Index.
 ```
 
-Source: https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth
+**Official Source Link:** https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct
+
+**Last Updated From Sources:** 2026-09-29
+
+
+## 5. Riskometer
+
+**Question:** What is the riskometer level of HDFC Small Cap Fund?
+
+**Assistant Answer:**
 
 ```
-Last updated from sources: 2026-09-27
+The Riskometer for HDFC Small Cap Fund is Very High.
 ```
 
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
+**Official Source Link:** https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct
 
-### 6. How long do I have to keep HDFC ELSS Tax Saver invested?
+**Last Updated From Sources:** 2026-09-29
 
-**`answer`** - category `lock_in` - scheme HDFC ELSS Tax Saver Fund - Direct Plan - Growth
 
-```
-elss • 3y lock-in.
-```
+## 6. ELSS lock-in
 
-Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+**Question:** What is the lock-in period on HDFC ELSS Tax Saver?
 
-```
-Last updated from sources: 2026-09-27
-```
-
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
-
-### 7. Who is the fund manager of HDFC Large Cap Fund?
-
-**`answer`** - category `fund_manager` - scheme HDFC Large Cap Fund - Direct Growth
+**Assistant Answer:**
 
 ```
-The current fund manager of HDFC Large Cap Fund is Rahul Baijal.
+The lock-in period for HDFC ELSS Tax Saver Fund is 3 years.
 ```
 
-Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+**Official Source Link:** https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct
+
+**Last Updated From Sources:** 2026-09-29
+
+
+## 7. Capital gains statement
+
+**Question:** How do I download my capital gains statement?
+
+**Assistant Answer:**
 
 ```
-Last updated from sources: 2026-09-27
+I can't download or send your statements from here — that needs your account login and your personal data. In your HDFC Mutual Fund account (https://www.hdfcfund.com/) you can download your capital gains statement and Consolidated Account Statement. SEBI's investor-education pages (https://www.sebi.gov.in/) and AMFI (https://www.amfiindia.com/) explain how these statements work.
 ```
 
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
+**Refused.** `out_of_corpus` - the question asks for a statement/account document, which the assistant cannot produce
 
-### 8. Should I buy HDFC Large Cap Fund?
+**Official Source Link:** none - nothing was retrieved, so there is nothing to cite.
 
-**`refusal_advice`** - category `advice` - _refused as advice_ (`advice keyword 'should i'`)
+
+The document exists, but only behind the holder's own login. The AMC's statement page is in the corpus, so the assistant can name *where* to get it, and it hands off rather than pretending to produce the data.
+
+
+## 8. Investment advice
+
+**Question:** Should I buy HDFC Small Cap Fund for my retirement?
+
+**Assistant Answer:**
 
 ```
 I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)
 ```
 
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
+**Refused.** `refusal_advice` - advice keyword 'should i'
 
-### 9. What is the 5-year return of HDFC Large Cap Fund?
+**Official Source Link:** none - nothing was retrieved, so there is nothing to cite.
 
-**`refusal_performance`** - category `performance` - _refused as a performance question_ (`performance keyword 'return'`)
+
+The corpus holds all five schemes' expense ratios, so it could rank them by cost - and that ranking would itself be a recommendation. The numbers are available; the judgement is withheld.
+
+
+## 9. Returns / comparison
+
+**Question:** How much did HDFC Small Cap Fund return last year?
+
+**Assistant Answer:**
 
 ```
 I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).
 ```
 
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
+**Refused.** `refusal_performance` - performance keyword 'return'
 
-### 10. What is the riskometer level of HDFC Large Cap Fund?
+**Official Source Link:** none - nothing was retrieved, so there is nothing to cite.
 
-**`out_of_corpus`** - category `out_of_corpus` - _refused as out of corpus_ (`the question asks about riskometer, which appears in none of the retrieved pages; answering with a neighbouring fact would be wrong`)
+
+A return needs a start date, an end date and a price source, and choosing them is an act of authority this assistant does not have. The refusal hands over to the published factsheet, which does.
+
+
+## 10. Personal data
+
+**Question:** My PAN is ABCDE1234F. What is the exit load on HDFC Flexi Cap?
+
+**Assistant Answer:**
 
 ```
-I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.
+Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs, or contact details here — I can't accept, store, or use them. Scheme facts are all public; ask me anything about expense ratio, exit load, SIP, lock-in, or statements.
 ```
 
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
+**Refused.** `refusal_pii` - PAN-like ********
+
+**Official Source Link:** none - nothing was retrieved, so there is nothing to cite.
 
 
-## Why the refusals look the way they do
+The identifier is not stored, not used and not written to any file. The refusal names the categories it will not accept so the user knows what to do instead.
 
-Three of the ten are refusals, and each is a different failure the system has to
-avoid rather than a topic it has not read.
 
-**`Should I buy HDFC Large Cap Fund?`** is advice. The corpus can tell you the
-expense ratio is 1.03%; it cannot tell you whether that is a good number *for
-you*, and the moment it starts ranking schemes it is making a recommendation it
-has no standing to make. The refusal points at official investor-education
-material instead of at a fund.
+---
 
-**`What is the 5-year return of HDFC Large Cap Fund?`** is a performance
-question. A return is a calculation over a period, and computing it means
-choosing a start and an end date and a price source, which is exactly the
-authority this assistant does not have. The published factsheet does have that
-authority, so the refusal hands over rather than calculates.
 
-**`What is the riskometer level of HDFC Large Cap Fund?`** is the hard one,
-because it *sounds* perfectly in scope - it is a real mutual-fund fact, about
-the right AMC, for a scheme in the corpus. The pages simply do not publish it:
-"riskometer" occurs 0 times across all 121 chunks. Left alone, the term-coverage
-gate cleared the question on the words "level" and "large cap" and the system
-answered with the **expense ratio**: a confident, cited, wrong number. That is
-the worst output this system can produce, and it is why `known_absent_terms` in
-`config/app.yaml` exists. Each entry there is measured to be absent from the
-corpus before it is added, and a test fails if a re-fetch ever makes one present.
+## Also refused, and why
+
+These are not in the ten above. They are listed separately because the honest
+answer to "what does it refuse?" needs its own list, and because the interesting
+property of this assistant is that it refuses *named* gaps rather than filling
+them with a neighbouring fact.
+
+HDFC Mutual Fund does not publish these on a scheme page, so there is nothing in
+the corpus to retrieve. All four return the same line, verbatim:
+
+> I couldn't verify that from the available official sources.
+
+| Asked | The assistant says | Why |
+|---|---|---|
+| Fund manager's name | `out_of_corpus` | the question asks only about 'fund_manager', and no chunk in the corpus carries that fact_key |
+| Portfolio P/E | `out_of_corpus` | the question asks only about 'pe_pb_ratio', and no chunk in the corpus carries that fact_key |
+| Direct vs Regular plan | `out_of_corpus` | the question asks only about 'plan_variant', and no chunk in the corpus carries that fact_key |
+| Minimum lump-sum investment (any scheme except Small Cap) | `out_of_corpus` | the only `minimum_investment` chunk in the corpus belongs to HDFC Small Cap, so asking for any other scheme's is a question the pages do not answer |
+
+
+The distinction that matters: a refusal is either a **policy** (the four in the
+ten above - advice, returns, statements, personal data) or a **gap** (this
+table). A policy refusal would happen even with a perfect corpus, because the
+answer is withheld on purpose. A gap refusal happens because the source does not
+carry the fact, and the point of `known_absent_terms` in `config/app.yaml` is
+that the assistant can say so instead of answering the fund-manager question with
+the expense ratio.
+
+## Scope of this corpus
+
+68 chunks from 5 HDFC Mutual Fund scheme pages plus the AMC's
+Consolidated Account Statement page, captured 29 September 2026.
+
+| Asked | Answered |
+|---|---|
+| expense ratio / TER | yes, for all five schemes |
+| minimum SIP | yes, for all five schemes |
+| exit load | yes, for all five schemes |
+| ELSS lock-in | yes |
+| benchmark | yes, for all five schemes |
+| NAV, AUM | yes, for all five schemes |
+| riskometer level | yes, for all five schemes |
+| minimum lump-sum investment | Small Cap only - the only page that publishes it |
+| fund manager, star rating, portfolio P/E | no - not published on a scheme page |
+| Direct vs Regular plan | no - the page does not state the plan variant as a fact |
+| returns, rankings, recommendations | no - withheld by policy, see above |
+| your personal holdings, statements, tax figures | no - requires your login |
+
+**One source per answer, always.** A question that genuinely spans two schemes
+is refused as ambiguous rather than answered from two pages.
 
