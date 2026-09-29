@@ -1,0 +1,21 @@
+source_id,title,scheme,source_type,url,facts_supported,status,checked_on
+amc-hdfcfund,HDFC Asset Management Company - official website,,amc,https://www.hdfcfund.com/,Scheme pages, factsheets, NAV and official documents for all 5 HDFC funds,bot-blocked (403),2026-09-29
+amc-hdfc-large-cap,HDFC Large Cap Fund - Direct Growth,hdfc-large-cap-fund-direct-growth,amc,https://www.hdfcfund.com/,expense ratio, exit load, minimum SIP, NAV, AUM, benchmark (official factsheet lives under the AMC domain),bot-blocked (403),2026-09-29
+amc-hdfc-flexi-cap,HDFC Flexi Cap Fund - Direct Growth,hdfc-equity-fund-direct-growth,amc,https://www.hdfcfund.com/,expense ratio, exit load, minimum SIP, NAV, AUM, benchmark (official factsheet lives under the AMC domain),bot-blocked (403),2026-09-29
+amc-hdfc-elss,HDFC ELSS Tax Saver Fund - Direct Plan - Growth,hdfc-elss-tax-saver-fund-direct-plan-growth,amc,https://www.hdfcfund.com/,expense ratio, exit load, 3-year lock-in, minimum SIP, NAV, AUM (official factsheet lives under the AMC domain),bot-blocked (403),2026-09-29
+amc-hdfc-small-cap,HDFC Small Cap Fund - Direct Growth,hdfc-small-cap-fund-direct-growth,amc,https://www.hdfcfund.com/,expense ratio, exit load, minimum SIP, NAV, AUM, benchmark (official factsheet lives under the AMC domain),bot-blocked (403),2026-09-29
+amc-hdfc-balanced,HDFC Balanced Advantage Fund - Direct Growth,hdfc-balanced-advantage-fund-direct-growth,amc,https://www.hdfcfund.com/,expense ratio, exit load, minimum SIP, NAV, AUM, benchmark (official factsheet lives under the AMC domain),bot-blocked (403),2026-09-29
+amfi-home,AMFI - Association of Mutual Funds in India homepage,,industry_body,https://www.amfiindia.com/,industry-wide scheme lists, NAV lookup and official AMFI announcements,live (200),2026-09-29
+amfi-mf,AMFI - Mutual Funds education section,,industry_body,https://www.amfiindia.com/mutual-fund,how mutual funds work; the official industry investor-education primer,live (200),2026-09-29
+amfi-about,AMFI - About AMFI,,industry_body,https://www.amfiindia.com/aboutamfi,AMFI's mandate and members (all AMCs/asset management companies),live (200),2026-09-29
+amfi-updates,AMFI - Important updates,,industry_body,https://www.amfiindia.com/important-updates,regulator and industry updates that change scheme-level facts,live (200),2026-09-29
+amfi-articles,AMFI - Industry articles,,industry_body,https://www.amfiindia.com/articles/indian-mutual,industry education articles on mutual fund investing,live (200),2026-09-29
+amfi-contact,AMFI - Contact us,,industry_body,https://www.amfiindia.com/contact,official complaints and grievance routing channels,live (200),2026-09-29
+amfi-terms,AMFI - Terms of use,,industry_body,https://www.amfiindia.com/terms-of-use,terms governing AMFI's published data,live (200),2026-09-29
+amfi-privacy,AMFI - Privacy notice,,industry_body,https://www.amfiindia.com/privacy-notice,AMFI's privacy notice for its data services,live (200),2026-09-29
+amfi-nav-all,AMFI - Official NAV for all open-ended schemes (NAVAll.txt),,data,https://www.amfiindia.com/spages/NAVAll.txt,official daily NAV of every open-ended scheme (redirects to portal.amfiindia.com),live (200),2026-09-29
+sebi-home,SEBI - Regulator homepage,,regulator,https://www.sebi.gov.in/,regulator news, investor alerts and official SEBI publications,live (200),2026-09-29
+sebi-mf,SEBI - Mutual Funds microsite,,regulator,https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doMutualFund=yes,SEBI's official mutual funds section for investors,live (200),2026-09-29
+sebi-mfd,SEBI - Mutual Fund department page,,regulator,https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doMfd=yes,SEBI Mutual Fund department overview,live (200),2026-09-29
+sebi-stats,SEBI - Statistics,,regulator,https://www.sebi.gov.in/statistics/statistics.html,official mutual fund industry statistics released by SEBI,live (200),2026-09-29
+sebi-mf-listings,SEBI - Mutual fund listings (legal documents),,regulator,https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes&cid=10,SEBI's listing of mutual fund regulations, circulars and orders,live (200),2026-09-29

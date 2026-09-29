@@ -47,6 +47,25 @@ Declared in `config/sources.yaml` with `fetch: false`, and absent from the fetch
 | AMFI | [AMFI - Investor education centre](https://www.amfiindia.com/investor-education) | advice-refusal educational link |
 | HDFC AMC | [HDFC AMC - Frequently asked questions](https://www.hdfcmf.com/faqs) | expense ratio, exit load, switch charges (verification only) |
 
+## The official reference library (`sources.csv`)
+
+The root-level [`sources.csv`](../sources.csv) is the user-facing official library:
+20 URLs from **HDFC Mutual Fund, SEBI and AMFI only**, each with the facts it can
+support and a live status. It is a reference list, not a fetch manifest — nothing
+in the pipeline reads it.
+
+Re-probed on **2026-09-29**:
+
+- `amfiindia.com` and every AMFI page listed are **live (200)**, including the
+  official NAV dump `spages/NAVAll.txt` (redirects to `portal.amfiindia.com`, 1.5 MB).
+- `sebi.gov.in` home, the Mutual Funds microsite and the statistics pages are all
+  **live (200)** — the earlier "TLS connection forcibly reset" note was an
+  environment glitch that no longer reproduces.
+- `hdfcfund.com` is **bot-blocked (403)** to this toolchain; it remains the
+  authoritative AMC domain, so the five scheme rows point at it and say so.
+- `hdfcmf.com` now redirects to a **parked domain** (`ww17.hdfcmf.com`) and is
+  not listed in the library.
+
 ## Sourcing rules the pipeline enforces
 
 These are not guidelines the author followed; each one is a check in code with a test behind it.

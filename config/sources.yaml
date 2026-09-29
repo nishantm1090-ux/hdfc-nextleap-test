@@ -88,13 +88,20 @@ schemes:
 #                   advice/performance refusals, never fetched and never embedded.
 #
 # FINDINGS from running Stage 1a on 2026-09-27 (see data/ingestion_log.jsonl):
-#   * sebi.gov.in      - TLS connection forcibly reset from this environment
-#                         (WinError 10054) for every path tried. Link-only.
+#   * sebi.gov.in      - HTTP 200 (home + Mutual Funds microsite + statistics)
+#                         on re-probe 2026-09-29. The earlier "TLS connection
+#                         forcibly reset (WinError 10054)" note was a transient
+#                         environment glitch and no longer reproduces. The pages
+#                         are STILL kept link-only: they are educational
+#                         hand-offs for refusals, not scheme-corpus material,
+#                         and a test pins the exactly-4 link-only set.
 #   * investor.gov.in  - DNS does not resolve. Link-only.
 #   * amfiindia.com/investor-education - HTTP 404 (site restructured). Link-only.
 #   * amfiindia.com/mutual-fund       - HTTP 200, ~3.9k visible chars. FETCHED,
 #                         then REJECTED by the Stage 2 corpus gate.
-#   * hdfcmf.com/*                     - HTTP 200 but a 44-char JS shell. Link-only.
+#   * hdfcmf.com/*                     - HTTP 200 but a 44-char JS shell; on
+#                         2026-09-29 it redirects to a parked domain
+#                         (ww17.hdfcmf.com). Link-only.
 #   * groww.in/help                    - HTTP 200, ~7.1k visible chars. FETCHED,
 #                         then REJECTED by the Stage 2 corpus gate.
 #
@@ -145,7 +152,7 @@ supplementary:
     page_type: regulator_page
     enabled: true
     fetch: false
-    fetch_blocked_reason: "TLS reset (WinError 10054) from this environment"
+    fetch_blocked_reason: "kept link-only: SEBI educational hand-off for refusals, not corpus material (site fetches 200 as of 2026-09-29)"
     used_for: "advice-refusal educational link"
 
   - doc_id: sebi-investor-education
@@ -155,7 +162,7 @@ supplementary:
     page_type: regulator_page
     enabled: true
     fetch: false
-    fetch_blocked_reason: "TLS reset (WinError 10054) from this environment"
+    fetch_blocked_reason: "kept link-only: SEBI educational hand-off for refusals, not corpus material (site fetches 200 as of 2026-09-29)"
     used_for: "advice-refusal educational link"
 
   - doc_id: amfi-investor-education

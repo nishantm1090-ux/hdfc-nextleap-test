@@ -44,14 +44,18 @@ PY = Path(sys.executable)
 
 @st.cache_resource(show_spinner=False)
 def _warm() -> None:
-    """No-op. Warmup is intentionally NOT done here.
+    """Warm the model and the store OFF the render thread, once per process.
 
-    The embed model is a committed ONNX export running on onnxruntime, so on a
-    cold Render instance the first question pays a single ~1-2s model load
-    inside the 'Retrieving and checking…' spinner (torch was ~560 MB RSS, which
-    OOM-killed the free-tier process; onnxruntime is ~135 MB). Rendering never
-    waits on the model, so the page still loads instantly.
+    The embed model is a committed ONNX export running on onnxruntime, so a
+    cold process would otherwise pay a ~1.5s load inside the first question's
+    spinner. Rendering never waits on it: `warmup.start()` runs in a daemon
+    thread right after the page paints, and the page loads instantly. Anything
+    it fails to warm is re-attempted lazily by `ask()`, so behaviour never
+    changes - only first-answer latency does.
     """
+    import warmup
+
+    warmup.start()
 
 # ---------------------------------------------------------------------------
 # Pure helpers - no Streamlit state, fully unit-testable.
@@ -228,7 +232,8 @@ def sidebar() -> None:
 
     st.sidebar.subheader("Sources")
     for s in common.load_schemes():
-        st.sidebar.markdown(f"- [{s['short_name']}]({s['url']})  \n  <sub>{s['publisher']}</sub>")
+        st.sidebar.markdown(f"- [{s['short_name']}]({s['url']})")
+    st.sidebar.markdown("**Official references:** [HDFC Mutual Fund](https://www.hdfcfund.com/) · [SEBI](https://www.sebi.gov.in/) · [AMFI](https://www.amfiindia.com/)")
 
     st.sidebar.subheader("Corpus")
     cs = corpus_stats()
@@ -291,7 +296,6 @@ def main() -> None:
             render_answer(answer)
         st.session_state["messages"].append({"role": "assistant", "answer": answer})
 
-    st.caption(UI["note"])
     st.caption(G.DISCLAIMER)
 
 

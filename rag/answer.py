@@ -359,9 +359,9 @@ def is_bare_date(value: str) -> bool:
     return bool(text) and bool(_BARE_DATE.match(text))
 
 
-def rank_for_extraction(question: str, chunks: Sequence[RetrievedChunk]
-                        ) -> list[RetrievedChunk]:
-    """Re-order retrieved chunks by scheme first, then by subject.
+def extraction_scores(question: str, chunks: Sequence[RetrievedChunk]
+                      ) -> list[tuple[float, RetrievedChunk]]:
+    """(score, chunk) pairs in extraction order, highest first.
 
     Returns a new list; the retriever's own ordering is preserved inside each
     score group, so this refines rather than overrides.
@@ -380,6 +380,10 @@ def rank_for_extraction(question: str, chunks: Sequence[RetrievedChunk]
     to promote another scheme's figure, and a question about a scheme whose
     chunks were not retrieved must fall through to the out-of-corpus path rather
     than borrow a neighbour's figure.
+
+    The scores are also the "no scheme named" signal: a clear subject means the
+    top score strictly beats the runner-up, while a tie across two schemes means
+    the question genuinely cannot be answered without naming the scheme.
     """
     q = (question or "").lower()
     wants_when = bool(_ASKS_WHEN.search(q))
@@ -473,7 +477,18 @@ def rank_for_extraction(question: str, chunks: Sequence[RetrievedChunk]
         scored.append((score, -i, c))
 
     scored.sort(key=lambda t: (t[0], t[1]), reverse=True)
-    return [c for _, _, c in scored]
+    return [(s, c) for s, _, c in scored]
+
+
+def rank_for_extraction(question: str, chunks: Sequence[RetrievedChunk]
+                        ) -> list[RetrievedChunk]:
+    """Chunks in extraction order - the same order, without the scores.
+
+    `extraction_scores` computes the order; these callers just need the chunks,
+    so this wrapper keeps the generation and validation code reading the way it
+    always has.
+    """
+    return [c for _, c in extraction_scores(question, chunks)]
 
 
 def render_from_chunk(chunk: Any, question: str) -> str:
@@ -880,6 +895,23 @@ def ask(question: str, *, top_k: int | None = None,
             f"names {len(named_all)} schemes; the one-source contract allows "
             "one fund per question", debug)
 
+    # --- 4d. statements and future speculation -----------------------------
+    # "How do I download my capital gains statement?" is personal account
+    # output the assistant cannot produce; it deserves the official place to
+    # go rather than the generic out-of-corpus text. "Who will manage a fund
+    # in 2030?" asks about a future state no current page can state. Both are
+    # directed refusals, before retrieval, so they never retrieve or generate.
+    if G.is_statement_question(q2):
+        debug["guardrail"] = "statement"
+        return _refusal("out_of_corpus", G.STATEMENT_REFUSAL,
+                        "the question asks for a statement/account document, "
+                        "which the assistant cannot produce", debug)
+    if G.is_future_speculation(q2):
+        debug["guardrail"] = "future_speculation"
+        return _refusal("out_of_corpus", G.FUTURE_REFUSAL,
+                        "the question asks about a future state that no "
+                        "current source can state", debug)
+
     # --- 5. retrieve --------------------------------------------------------
     # Over-fetch when the question names a scheme, then filter locally.
     #
@@ -893,13 +925,20 @@ def ask(question: str, *, top_k: int | None = None,
     # over_fetch, applied one level up.
     named_for_fetch = detect_scheme(q2, list(_corpus_metadata()))
     fetch_k = top_k
+    where = None
     if named_for_fetch:
         fetch_k = max(top_k or 0,
                       int(common.load_config()["generation"].get(
                           "named_scheme_over_fetch", 15)))
+        # The scheme filter is applied in the STORE, before similarity search:
+        # a `where` on scheme_slug tells Chroma to only consider that scheme's
+        # vectors, so no other fund's chunk can even compete for a dense score.
+        # The BM25 side still runs unfiltered; the local trim two blocks down
+        # drops anything that crosses the scheme from that direction.
+        where = {"scheme_slug": named_for_fetch}
 
     try:
-        chunks = retrieve(q2, top_k=fetch_k)
+        chunks = retrieve(q2, top_k=fetch_k, where=where)
     except OutOfCorpus as exc:
         debug["guardrail"] = "out_of_corpus"
         debug["reason"] = str(exc)
@@ -921,6 +960,14 @@ def ask(question: str, *, top_k: int | None = None,
         return _refusal("error", G.INDEX_ERROR,
                         f"retrieval failed: {type(exc).__name__}", debug)
 
+    # The store-level `where` narrowed the DENSE side to the named scheme; BM25
+    # still contributes other schemes' chunks that get fused in. Trim locally so
+    # debug/"Why this answer?", the validation context and the generator all
+    # see ONLY the named scheme's chunks - a neighbour can no longer float a
+    # figure into any of them.
+    if named_for_fetch:
+        chunks = [c for c in chunks if c.scheme_slug == named_for_fetch]
+
     debug["retrieved"] = [c.to_dict() for c in chunks]
     debug["chunk_ids"] = [c.chunk_id for c in chunks]
 
@@ -940,6 +987,30 @@ def ask(question: str, *, top_k: int | None = None,
                 f"the question asks about {', '.join(absent)}, which appears in "
                 f"none of the retrieved pages; answering with a neighbouring "
                 f"fact would be wrong", debug)
+
+    # --- 5c. no scheme named: is the fact genuinely ambiguous? --------------
+    # "What is the exit load?" has five schemes tied at the top extraction
+    # score. Answering would pick one by retrieval order - a coin flip the user
+    # reads as fact. Ask which scheme instead. A single-scheme-subject question
+    # ("Is there a lock-in period?") has one clearly-on-subject chunk whose top
+    # score beats the runner-up, and falls through to a normal answer. Memory
+    # resolution already re-names the scheme, so a resolved follow-up is never
+    # ambiguous here.
+    if not named_for_fetch and not memo.get("resolved_scheme"):
+        top = extraction_scores(q2, chunks)
+        if len(top) >= 2:
+            s0, c0 = top[0]
+            s1, c1 = top[1]
+            if (s0 > 0 and s1 >= s0 and c0.scheme_slug and c1.scheme_slug
+                    and c0.scheme_slug != c1.scheme_slug):
+                debug["guardrail"] = "ask_scheme"
+                corpus = list(_corpus_metadata())
+                slugs = list(dict.fromkeys(
+                    c["scheme_slug"] for c in corpus if c["scheme_slug"]))
+                funds = ", ".join(_scheme_display_name(s, corpus) for s in slugs)
+                return _refusal(
+                    "out_of_corpus", G.ASK_SCHEME.format(funds=funds),
+                    "the fact differs by scheme and no scheme is named", debug)
 
     # --- 6/7. generate ------------------------------------------------------
     # A scheme named in the question that has no chunk of its own is reported

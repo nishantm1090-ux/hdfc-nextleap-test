@@ -29,6 +29,7 @@ import hashlib
 import re
 import sys
 from dataclasses import dataclass
+from datetime import date
 from typing import Any, Sequence
 
 import common
@@ -44,7 +45,8 @@ DISCLAIMER = (
     "Growth plans) from the sources linked in each answer. It does not "
     "recommend, compare, or rate schemes, and it does not compute or report "
     "returns. Mutual fund investments are subject to market risks; read all "
-    "scheme-related documents carefully. Sources: HDFC AMC, Groww, SEBI, AMFI."
+    "scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and "
+    "AMFI."
 )
 
 EDUCATION_LINK = "https://www.sebi.gov.in/ (investor education)"
@@ -65,14 +67,47 @@ ADVICE_REFUSAL = (
 
 PERFORMANCE_REFUSAL = (
     "I don't compute or compare returns. For a scheme's official performance "
-    "figures, please use the published factsheet: "
-    "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth"
+    "figures, please use the published factsheets from HDFC Mutual Fund "
+    "(https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/)."
 )
 
 OUT_OF_CORPUS = (
-    "I couldn't find that in the official pages I use (5 HDFC schemes, Direct "
-    "Growth). Try: expense ratio \u00b7 exit load \u00b7 minimum SIP \u00b7 ELSS lock-in "
-    "\u00b7 benchmark \u00b7 NAV and AUM \u00b7 investment objective."
+    "I couldn't verify that from the available official sources. Try: expense "
+    "ratio \u00b7 exit load \u00b7 minimum SIP \u00b7 ELSS lock-in \u00b7 benchmark \u00b7 NAV and "
+    "AUM \u00b7 investment objective."
+)
+
+# A user asking to download or access their own statements (a capital gains
+# statement, the Consolidated Account Statement) is asking for personal account
+# output. This assistant cannot produce that - but the question deserves the
+# official place to go, not the generic out-of-corpus text.
+STATEMENT_REFUSAL = (
+    "I can't download or send your statements from here \u2014 that needs your "
+    "account login and your personal data. In your HDFC Mutual Fund account "
+    "(https://www.hdfcfund.com/) you can download your capital gains statement "
+    "and Consolidated Account Statement. SEBI's investor-education pages "
+    "(https://www.sebi.gov.in/) and AMFI (https://www.amfiindia.com/) explain "
+    "how these statements work."
+)
+
+# Anything about a future state - who will manage a fund in 2030, a NAV "in"
+# a future year - is not a fact the current official pages can state. Refuse
+# rather than let a generator extrapolate.
+FUTURE_REFUSAL = (
+    "I can't answer questions about the future \u2014 the official pages state "
+    "facts as they are today, and none of them says what will happen or who "
+    "will manage a fund later. Ask for the current fact instead (for example, "
+    f"\"Who manages HDFC Large Cap Fund today?\"). {EDUCATION_LINK}"
+)
+
+# PRD §11 pins "exactly one source link" per answer. A question that names no
+# scheme but asks about a fact that differs by scheme (expense ratio, exit
+# load, NAV) cannot be answered honestly: picking a scheme by retrieval order
+# is a coin flip the user will take as fact. Ask instead, naming the universe.
+ASK_SCHEME = (
+    "I'm not sure which scheme you mean \u2014 I cover: {funds}. Every answer "
+    "here cites exactly one source link, so please ask again with the scheme "
+    "name."
 )
 
 OUT_OF_SCOPE = (
@@ -454,6 +489,50 @@ def is_out_of_scope(q: str) -> bool:
 
 def is_out_of_corpus_reason(reason: str) -> bool:
     return bool(reason)
+
+
+# ---------------------------------------------------------------------------
+# Statements and future speculation - directed refusals, not generic OOC
+# ---------------------------------------------------------------------------
+
+# A request to obtain one of the user's own documents. The action verb and the
+# noun can be separated, so the window is generous: "How do I download my
+# capital gains statement?" (verb "download", noun "capital gains statement")
+# fires, while "what is a capital gains statement?" - an explanation question -
+# does not, because it carries no obtaining verb.
+_STATEMENT_QUERY = re.compile(
+    r"\b(?:download|get|access|obtain|find|view|request|check|track)\b"
+    r"[^?.]{0,60}"
+    r"\b(?:capital gains?|gain statement|tax statement|consolidated account "
+    r"statement|statement of account|cas)\b", re.I)
+
+
+def is_statement_question(q: str) -> bool:
+    """Is this a request to obtain a statement or account document?"""
+    return bool(q and _STATEMENT_QUERY.search(q))
+
+
+# A calendar year in the future, tied to a time preposition. 2026 is today's
+# year, so a past or present-year question ("what was the NAV in 2022?") coasts
+# past and is judged by retrieval like any other question.
+_FUTURE_YEAR = re.compile(
+    r"\b(?:in|by|during|after)\s+(?:the\s+year\s+)?(20\d{2})\b", re.I)
+# "Who will manage HDFC Large Cap Fund in 2030?" - the verb "will" in company
+# with a management role. "Who manages HDFC Large Cap Fund?" (golden F31) has
+# no "will" and is a normal current-fact question.
+_WHO_WILL = re.compile(
+    r"\bwho\s+will\b[^?.]{0,60}"
+    r"\b(?:manage|lead|run|be\s+(?:the\s+)?(?:fund\s+)?manager)\b", re.I)
+
+
+def is_future_speculation(q: str) -> bool:
+    """Is this asking about a future state that no current source can state?"""
+    ql = q or ""
+    year_now = date.today().year
+    for m in _FUTURE_YEAR.finditer(ql):
+        if int(m.group(1)) > year_now:
+            return True
+    return _WHO_WILL.search(ql) is not None
 
 
 # ---------------------------------------------------------------------------

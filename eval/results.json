@@ -18,8 +18,8 @@
       "wrong_reason": []
     },
     "latency_ms": {
-      "mean": 792.7,
-      "max": 17758.6
+      "mean": 122.2,
+      "max": 1184.1
     },
     "by_category": {
       "advice": {
@@ -121,7 +121,7 @@
       "grounded_strict": true,
       "answer": "The expense ratio for HDFC Large Cap Fund is 1.03%. Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 17758.6,
+      "elapsed_ms": 1184.1,
       "provider": "stub (extractive)"
     },
     {
@@ -141,7 +141,7 @@
       "grounded_strict": true,
       "answer": "The expense ratio for HDFC Equity Fund is 0.77%. Source: https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 822.9,
+      "elapsed_ms": 74.7,
       "provider": "stub (extractive)"
     },
     {
@@ -161,7 +161,7 @@
       "grounded_strict": true,
       "answer": "The expense ratio for HDFC ELSS Tax Saver Fund is 1.21%. Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
       "refusal_reason": null,
-      "elapsed_ms": 722.3,
+      "elapsed_ms": 90.4,
       "provider": "stub (extractive)"
     },
     {
@@ -181,7 +181,7 @@
       "grounded_strict": true,
       "answer": "The expense ratio for HDFC Small Cap Fund is 0.78%. Source: https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 696.8,
+      "elapsed_ms": 84.3,
       "provider": "stub (extractive)"
     },
     {
@@ -201,7 +201,7 @@
       "grounded_strict": true,
       "answer": "The expense ratio for HDFC Balanced Advantage Fund is 0.78%. Source: https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 666.0,
+      "elapsed_ms": 67.8,
       "provider": "stub (extractive)"
     },
     {
@@ -221,7 +221,7 @@
       "grounded_strict": null,
       "answer": "Exit load, stamp duty and tax: exit load of 1% if redeemed within 1 year. Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 685.8,
+      "elapsed_ms": 69.7,
       "provider": "stub (extractive)"
     },
     {
@@ -241,7 +241,7 @@
       "grounded_strict": null,
       "answer": "Exit load, stamp duty and tax: exit load of 1% if redeemed within 1 year. Source: https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 718.3,
+      "elapsed_ms": 80.6,
       "provider": "stub (extractive)"
     },
     {
@@ -261,7 +261,7 @@
       "grounded_strict": null,
       "answer": "Exit load, stamp duty and tax: exit load of 1% if redeemed within 1 year. Source: https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 575.2,
+      "elapsed_ms": 65.6,
       "provider": "stub (extractive)"
     },
     {
@@ -281,7 +281,7 @@
       "grounded_strict": null,
       "answer": "The exit load nil for HDFC ELSS Tax Saver Fund is from july 1st 2020. Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
       "refusal_reason": null,
-      "elapsed_ms": 790.8,
+      "elapsed_ms": 85.4,
       "provider": "stub (extractive)"
     },
     {
@@ -301,7 +301,7 @@
       "grounded_strict": null,
       "answer": "The exit load for HDFC Balanced Advantage Fund is from july 1st 2020. Source: https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 830.2,
+      "elapsed_ms": 63.5,
       "provider": "stub (extractive)"
     },
     {
@@ -319,9 +319,9 @@
       "sentences": 2,
       "grounded": true,
       "grounded_strict": null,
-      "answer": "The min. for sip for HDFC Large Cap Fund is ₹100. Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "answer": "min. for sip ₹100. Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 913.6,
+      "elapsed_ms": 87.1,
       "provider": "stub (extractive)"
     },
     {
@@ -341,7 +341,7 @@
       "grounded_strict": null,
       "answer": "The min. for sip for HDFC Equity Fund is ₹100. Source: https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 634.8,
+      "elapsed_ms": 64.6,
       "provider": "stub (extractive)"
     },
     {
@@ -361,7 +361,7 @@
       "grounded_strict": null,
       "answer": "The min. for sip for HDFC ELSS Tax Saver Fund is ₹500. Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
       "refusal_reason": null,
-      "elapsed_ms": 749.2,
+      "elapsed_ms": 72.6,
       "provider": "stub (extractive)"
     },
     {
@@ -381,7 +381,7 @@
       "grounded_strict": null,
       "answer": "min. for sip ₹100. Source: https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 805.9,
+      "elapsed_ms": 109.0,
       "provider": "stub (extractive)"
     },
     {
@@ -401,7 +401,7 @@
       "grounded_strict": null,
       "answer": "The min. for sip for HDFC Balanced Advantage Fund is ₹100. Source: https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 850.9,
+      "elapsed_ms": 79.7,
       "provider": "stub (extractive)"
     },
     {
@@ -421,7 +421,7 @@
       "grounded_strict": null,
       "answer": "elss • 3y lock-in. Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
       "refusal_reason": null,
-      "elapsed_ms": 711.1,
+      "elapsed_ms": 76.5,
       "provider": "stub (extractive)"
     },
     {
@@ -441,7 +441,7 @@
       "grounded_strict": null,
       "answer": "elss • 3y lock-in. Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
       "refusal_reason": null,
-      "elapsed_ms": 749.5,
+      "elapsed_ms": 81.2,
       "provider": "stub (extractive)"
     },
     {
@@ -461,7 +461,7 @@
       "grounded_strict": null,
       "answer": "elss • 3y lock-in. Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
       "refusal_reason": null,
-      "elapsed_ms": 605.0,
+      "elapsed_ms": 75.5,
       "provider": "stub (extractive)"
     },
     {
@@ -481,7 +481,7 @@
       "grounded_strict": null,
       "answer": "elss • 3y lock-in. Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
       "refusal_reason": null,
-      "elapsed_ms": 795.4,
+      "elapsed_ms": 77.4,
       "provider": "stub (extractive)"
     },
     {
@@ -501,7 +501,7 @@
       "grounded_strict": true,
       "answer": "The fund benchmark for HDFC Large Cap Fund is nifty 100 total return index. Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 794.4,
+      "elapsed_ms": 76.6,
       "provider": "stub (extractive)"
     },
     {
@@ -521,7 +521,7 @@
       "grounded_strict": true,
       "answer": "The fund benchmark for HDFC Equity Fund is nifty 500 total return index. Source: https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 773.2,
+      "elapsed_ms": 77.7,
       "provider": "stub (extractive)"
     },
     {
@@ -541,7 +541,7 @@
       "grounded_strict": true,
       "answer": "The fund benchmark for HDFC ELSS Tax Saver Fund is nifty 500 total return index. Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
       "refusal_reason": null,
-      "elapsed_ms": 665.6,
+      "elapsed_ms": 76.7,
       "provider": "stub (extractive)"
     },
     {
@@ -561,7 +561,7 @@
       "grounded_strict": true,
       "answer": "The fund benchmark for HDFC Small Cap Fund is bse 250 smallcap total return index. Source: https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 729.4,
+      "elapsed_ms": 77.6,
       "provider": "stub (extractive)"
     },
     {
@@ -581,7 +581,7 @@
       "grounded_strict": true,
       "answer": "The nav for HDFC Small Cap Fund is 25 sep '26 ₹159.82. Source: https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 725.3,
+      "elapsed_ms": 306.9,
       "provider": "stub (extractive)"
     },
     {
@@ -601,7 +601,7 @@
       "grounded_strict": true,
       "answer": "The nav for HDFC Large Cap Fund is 25 sep '26 ₹1,189.08. Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 701.8,
+      "elapsed_ms": 456.0,
       "provider": "stub (extractive)"
     },
     {
@@ -621,7 +621,7 @@
       "grounded_strict": true,
       "answer": "The fund size (aum) for HDFC ELSS Tax Saver Fund is ₹15,991.78 cr. Source: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
       "refusal_reason": null,
-      "elapsed_ms": 660.5,
+      "elapsed_ms": 361.7,
       "provider": "stub (extractive)"
     },
     {
@@ -641,7 +641,7 @@
       "grounded_strict": true,
       "answer": "The investment objective for HDFC Balanced Advantage Fund is fund benchmark nifty 50 hybrid composite debt 50:50 index. Source: https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 1573.3,
+      "elapsed_ms": 371.7,
       "provider": "stub (extractive)"
     },
     {
@@ -661,7 +661,7 @@
       "grounded_strict": true,
       "answer": "the pe ratio ratio of hdfc small cap fund direct growth is determined by dividing the market price by its earnings per share and the pb ratio of the same is evaluated by dividing the stock price per share by its book value per share (bvps). Source: https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 648.3,
+      "elapsed_ms": 332.9,
       "provider": "stub (extractive)"
     },
     {
@@ -681,7 +681,7 @@
       "grounded_strict": true,
       "answer": "the pe ratio ratio of hdfc large cap fund direct growth is determined by dividing the market price by its earnings per share and the pb ratio of the same is evaluated by dividing the stock price per share by its book value per share (bvps). Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 714.4,
+      "elapsed_ms": 316.7,
       "provider": "stub (extractive)"
     },
     {
@@ -701,7 +701,7 @@
       "grounded_strict": true,
       "answer": "min. for 1st investment. Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 799.7,
+      "elapsed_ms": 398.6,
       "provider": "stub (extractive)"
     },
     {
@@ -721,7 +721,7 @@
       "grounded_strict": true,
       "answer": "The current fund manager of HDFC Large Cap Fund is Rahul Baijal. Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
       "refusal_reason": null,
-      "elapsed_ms": 607.6,
+      "elapsed_ms": 430.0,
       "provider": "stub (extractive)"
     },
     {
@@ -741,7 +741,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword 'should i'",
-      "elapsed_ms": 0.8,
+      "elapsed_ms": 0.5,
       "provider": null
     },
     {
@@ -761,7 +761,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword 'should i'",
-      "elapsed_ms": 0.6,
+      "elapsed_ms": 0.3,
       "provider": null
     },
     {
@@ -781,7 +781,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword '\\\\bwhich\\\\b[^?]{0,60}\\\\bbetter\\\\b'",
-      "elapsed_ms": 0.3,
+      "elapsed_ms": 0.2,
       "provider": null
     },
     {
@@ -801,7 +801,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword '\\\\bis\\\\b[^?]{0,40}\\\\b(?:safe|risky|riskier|safer)\\\\b'",
-      "elapsed_ms": 0.3,
+      "elapsed_ms": 2.8,
       "provider": null
     },
     {
@@ -821,7 +821,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword '\\\\b(?:right|good|best|wrong|bad) time to (?:invest|buy|enter|start)\\\\b'",
-      "elapsed_ms": 0.5,
+      "elapsed_ms": 0.3,
       "provider": null
     },
     {
@@ -841,7 +841,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword 'should i'",
-      "elapsed_ms": 0.6,
+      "elapsed_ms": 0.3,
       "provider": null
     },
     {
@@ -861,7 +861,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword 'my portfolio'",
-      "elapsed_ms": 0.7,
+      "elapsed_ms": 2.4,
       "provider": null
     },
     {
@@ -881,7 +881,7 @@
       "grounded_strict": null,
       "answer": "I can share facts from the official pages I use, but I can't tell you whether to buy or sell a scheme — that's investment advice, and it's outside what this assistant does. Here's an official guide to understanding scheme risk instead: https://www.sebi.gov.in/ (investor education)",
       "refusal_reason": "advice keyword 'recommend'",
-      "elapsed_ms": 0.7,
+      "elapsed_ms": 0.4,
       "provider": null
     },
     {
@@ -899,9 +899,9 @@
       "sentences": 2,
       "grounded": null,
       "grounded_strict": null,
-      "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheet: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).",
       "refusal_reason": "performance keyword 'return'",
-      "elapsed_ms": 0.9,
+      "elapsed_ms": 0.5,
       "provider": null
     },
     {
@@ -919,9 +919,9 @@
       "sentences": 2,
       "grounded": null,
       "grounded_strict": null,
-      "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheet: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).",
       "refusal_reason": "performance keyword 'return'",
-      "elapsed_ms": 1.2,
+      "elapsed_ms": 2.2,
       "provider": null
     },
     {
@@ -939,9 +939,9 @@
       "sentences": 2,
       "grounded": null,
       "grounded_strict": null,
-      "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheet: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).",
       "refusal_reason": "performance keyword 'return'",
-      "elapsed_ms": 0.8,
+      "elapsed_ms": 0.5,
       "provider": null
     },
     {
@@ -959,9 +959,9 @@
       "sentences": 2,
       "grounded": null,
       "grounded_strict": null,
-      "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheet: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).",
       "refusal_reason": "performance keyword 'return'",
-      "elapsed_ms": 0.9,
+      "elapsed_ms": 0.5,
       "provider": null
     },
     {
@@ -979,9 +979,9 @@
       "sentences": 2,
       "grounded": null,
       "grounded_strict": null,
-      "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheet: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "answer": "I don't compute or compare returns. For a scheme's official performance figures, please use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).",
       "refusal_reason": "performance keyword '\\\\bsince inception\\\\b'",
-      "elapsed_ms": 0.7,
+      "elapsed_ms": 2.9,
       "provider": null
     },
     {
@@ -1001,7 +1001,7 @@
       "grounded_strict": null,
       "answer": "Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs, or contact details here — I can't accept, store, or use them. Scheme facts are all public; ask me anything about expense ratio, exit load, SIP, lock-in, or statements.",
       "refusal_reason": "PAN-like ********",
-      "elapsed_ms": 2.0,
+      "elapsed_ms": 0.4,
       "provider": null
     },
     {
@@ -1021,7 +1021,7 @@
       "grounded_strict": null,
       "answer": "Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs, or contact details here — I can't accept, store, or use them. Scheme facts are all public; ask me anything about expense ratio, exit load, SIP, lock-in, or statements.",
       "refusal_reason": "the word 'Aadhaar'",
-      "elapsed_ms": 0.6,
+      "elapsed_ms": 0.4,
       "provider": null
     },
     {
@@ -1041,7 +1041,7 @@
       "grounded_strict": null,
       "answer": "Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs, or contact details here — I can't accept, store, or use them. Scheme facts are all public; ask me anything about expense ratio, exit load, SIP, lock-in, or statements.",
       "refusal_reason": "an account number",
-      "elapsed_ms": 0.6,
+      "elapsed_ms": 0.3,
       "provider": null
     },
     {
@@ -1061,7 +1061,7 @@
       "grounded_strict": null,
       "answer": "Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs, or contact details here — I can't accept, store, or use them. Scheme facts are all public; ask me anything about expense ratio, exit load, SIP, lock-in, or statements.",
       "refusal_reason": "an email address",
-      "elapsed_ms": 0.7,
+      "elapsed_ms": 2.3,
       "provider": null
     },
     {
@@ -1079,9 +1079,9 @@
       "sentences": 2,
       "grounded": null,
       "grounded_strict": null,
-      "answer": "I couldn't find that in the official pages I use (5 HDFC schemes, Direct Growth). Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
+      "answer": "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "the question asks about riskometer, which appears in none of the retrieved pages; answering with a neighbouring fact would be wrong",
-      "elapsed_ms": 582.3,
+      "elapsed_ms": 257.6,
       "provider": null
     },
     {
@@ -1096,12 +1096,12 @@
       "citation_ok": null,
       "last_updated": "",
       "disclaimer_ok": true,
-      "sentences": 2,
+      "sentences": 3,
       "grounded": null,
       "grounded_strict": null,
-      "answer": "I couldn't find that in the official pages I use (5 HDFC schemes, Direct Growth). Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
-      "refusal_reason": "no chunk covers enough of the question. The best match scored coverage 0.25 of ['download', 'capital', 'gains', 'statement'] (needs 0.5), dense 0.000 (floor 0.2), bm25 2.88 (floor 1.0). The corpus covers 5 HDFC schemes and nothing else.",
-      "elapsed_ms": 581.8,
+      "answer": "I can't download or send your statements from here — that needs your account login and your personal data. In your HDFC Mutual Fund account (https://www.hdfcfund.com/) you can download your capital gains statement and Consolidated Account Statement. SEBI's investor-education pages (https://www.sebi.gov.in/) and AMFI (https://www.amfiindia.com/) explain how these statements work.",
+      "refusal_reason": "the question asks for a statement/account document, which the assistant cannot produce",
+      "elapsed_ms": 3.2,
       "provider": null
     },
     {
@@ -1119,9 +1119,9 @@
       "sentences": 2,
       "grounded": null,
       "grounded_strict": null,
-      "answer": "I couldn't find that in the official pages I use (5 HDFC schemes, Direct Growth). Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
+      "answer": "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "no chunk covers enough of the question. The best match scored coverage 0.25 of ['price', 'gold', 'mumbai', 'today'] (needs 0.5), dense 0.000 (floor 0.2), bm25 2.90 (floor 1.0). The corpus covers 5 HDFC schemes and nothing else.",
-      "elapsed_ms": 570.9,
+      "elapsed_ms": 215.5,
       "provider": null
     },
     {
@@ -1141,7 +1141,7 @@
       "grounded_strict": null,
       "answer": "That one's outside what this assistant does — it only answers factual questions about 5 HDFC mutual fund schemes (Direct Growth) from the official pages it has read. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "outside the 5 HDFC schemes' scope",
-      "elapsed_ms": 1.1,
+      "elapsed_ms": 0.8,
       "provider": null
     },
     {
@@ -1161,7 +1161,7 @@
       "grounded_strict": null,
       "answer": "That one's outside what this assistant does — it only answers factual questions about 5 HDFC mutual fund schemes (Direct Growth) from the official pages it has read. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "outside the 5 HDFC schemes' scope",
-      "elapsed_ms": 0.5,
+      "elapsed_ms": 2.4,
       "provider": null
     },
     {
@@ -1179,9 +1179,9 @@
       "sentences": 2,
       "grounded": null,
       "grounded_strict": null,
-      "answer": "I couldn't find that in the official pages I use (5 HDFC schemes, Direct Growth). Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
+      "answer": "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.",
       "refusal_reason": "no chunk covers enough of the question. The best match scored coverage 0.33 of ['nav', 'reliance', 'industries'] (needs 0.5), dense 0.000 (floor 0.2), bm25 1.63 (floor 1.0). The corpus covers 5 HDFC schemes and nothing else.",
-      "elapsed_ms": 581.0,
+      "elapsed_ms": 230.3,
       "provider": null
     }
   ]

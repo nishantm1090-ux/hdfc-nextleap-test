@@ -292,7 +292,7 @@ figure in it was read off the live page.
 - **FR-7.1 PII gate (input).** Regex + entropy check for PAN (`[A-Z]{5}\d{4}[A-Z]`), Aadhaar (12-digit), account numbers, OTPs, emails, phone numbers. On hit: refuse, do **not** log the raw text (log only a hash + reason), instruct the user not to share it.
 - **FR-7.2 Advice gate.** Keywords/patterns: *should I, which is better, best scheme, worth buying, is it safe, suggest, recommend, allocate, goal, plan my, good investment, safe to*. On hit: polite facts-only refusal + 1 relevant educational link (SEBI/AMFI investor-education page).
 - **FR-7.3 Performance gate.** *returns, CAGR, XIRR, performance, best performing, growth rate, how much did it give*. On hit: refuse to compute/compare; state that the assistant doesn't provide performance; link the official factsheet / factsheet index.
-- **FR-7.4 Out-of-corpus gate.** No chunk above threshold ⇒ "I couldn't find that in the official pages I use. Try asking about expense ratio, exit load, minimum SIP, ELSS lock-in, benchmark, NAV or AUM, or the investment objective." The suggested topics must be exactly the `fact_key`s that exist in the index — suggesting `riskometer` or `statements` when neither is in the corpus is a small lie that sends the user looking for an answer the system was never built to have.
+- **FR-7.4 Out-of-corpus gate.** No chunk above threshold ⇒ "I couldn't verify that from the available official sources. Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective." The suggested topics must be exactly the `fact_key`s that exist in the index — suggesting `riskometer` or `statements` when neither is in the corpus is a small lie that sends the user looking for an answer the system was never built to have.
 - **FR-7.5 Refusal message** is fixed, friendly, and always paired with a useful next step. Refusals are counted in the eval report.
 
 ### FR-8 — UI
@@ -427,7 +427,7 @@ class Answer:
 
 **Disclaimer text (exact, used verbatim in UI and in every answer):**
 
-> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC AMC, Groww, SEBI, AMFI.
+> **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
 
 ---
 
@@ -457,7 +457,8 @@ https://www.sebi.gov.in/ (investor education)
 ### 12.3 Performance refusal
 ```
 I don't compute or compare returns. For a scheme's official performance figures, please
-use the published factsheet: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+use the published factsheets from HDFC Mutual Fund (https://www.hdfcfund.com/) or AMFI
+(https://www.amfiindia.com/).
 Last updated from sources: 2026-09-27
 ```
 
@@ -470,9 +471,32 @@ ask me anything about expense ratio, exit load, SIP, lock-in, or statements.
 
 ### 12.5 Out-of-corpus
 ```
-I couldn't find that in the official pages I use (5 HDFC schemes, Direct Growth).
-Try: expense ratio · exit load · minimum SIP · ELSS lock-in · benchmark · NAV and AUM ·
-investment objective.
+I couldn't verify that from the available official sources. Try: expense ratio · exit load
+· minimum SIP · ELSS lock-in · benchmark · NAV and AUM · investment objective.
+```
+
+### 12.6 Statement / account-document request
+```
+I can't download or send your statements from here — that needs your account login and
+your personal data. In your HDFC Mutual Fund account (https://www.hdfcfund.com/) you can
+download your capital gains statement and Consolidated Account Statement. SEBI's
+investor-education pages (https://www.sebi.gov.in/) and AMFI
+(https://www.amfiindia.com/) explain how these statements work.
+```
+
+### 12.7 Ask-which-scheme and future speculation
+```
+I'm not sure which scheme you mean — I cover: {funds}. Every answer here cites exactly
+one source link, so please ask again with the scheme name.
+```
+A question that names no scheme but asks about a fact that differs by scheme (expense
+ratio, exit load, NAV) is asked back rather than guessed, because PRD §11 allows exactly
+one source link per answer.
+```
+I can't answer questions about the future — the official pages state facts as they are
+today, and none of them says what will happen or who will manage a fund later. Ask for
+the current fact instead (for example, "Who manages HDFC Large Cap Fund today?").
+https://www.sebi.gov.in/ (investor education)
 ```
 
 ---

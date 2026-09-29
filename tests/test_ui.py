@@ -141,7 +141,7 @@ def test_answer_text_carries_the_disclaimer_field():
 def test_disclaimer_matches_prd_section_11_verbatim():
     assert G.DISCLAIMER.startswith("**Facts-only. No investment advice.**")
     assert "does not recommend, compare, or rate schemes" in G.DISCLAIMER
-    assert "Sources: HDFC AMC, Groww, SEBI, AMFI." in G.DISCLAIMER
+    assert "Sources: HDFC Mutual Fund, SEBI and AMFI." in G.DISCLAIMER
 
 
 # ---------------------------------------------------------------------------

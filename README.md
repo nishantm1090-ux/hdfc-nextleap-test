@@ -14,7 +14,7 @@ constraint the design is built around. See [`docs/DISCLAIMER.md`](docs/DISCLAIME
 > the sources linked in each answer. It does not recommend, compare, or rate
 > schemes, and it does not compute or report returns. Mutual fund investments are
 > subject to market risks; read all scheme-related documents carefully. Sources:
-> HDFC AMC, Groww, SEBI, AMFI.
+> HDFC Mutual Fund, SEBI and AMFI.
 
 ---
 
@@ -186,6 +186,27 @@ fetch → clean → chunk → embed → store → retrieve → generate → vali
 `label: value` text rather than paraphrasing it, so a wrong answer requires a bug
 rather than a hallucination. This is why the eval can assert exact figures.
 
+### Performance and load profile
+
+The app is deliberately lean, with one lazy cold path and nothing else hot:
+
+- **The page paints instantly — the model never blocks it.** The ONNX export
+  (`models/all-MiniLM-L6-v2/`) runs on onnxruntime, not torch: a cold process
+  imports in ~0.3 s, loads the model weights in ~1 s, and peaks around 135 MB
+  RSS instead of torch's ~560 MB (which OOM-killed the Render free tier).
+- **A background warm-up makes the first question fast too.** `app.py` starts
+  `warmup.py` off the render thread via a Streamlit `cache_resource` gate, so
+  the model sessions and the Chroma client open exactly once per process, in
+  parallel with the user reading the page; a warm-up failure is ignored and the
+  lazy path simply pays it on the first question, so behaviour never changes.
+- **Everything hot is cached at process level across reruns.** Config (lru),
+  BM25 index, Chroma client + collection, the embedding model, and per-text
+  `.npy` query embeddings all survive Streamlit reruns — a warm question costs
+  ~0.1 s, and rerender-only interactions cost milliseconds.
+- **No heavy imports at UI-import time.** `embed/index.py` and the Chroma
+  client are deferred until first use; importing `app.py` pulls in Streamlit
+  and the small retrieval modules only.
+
 ### Looking at the data
 
 Every stage's output is dumped as readable text:
@@ -227,7 +248,7 @@ rejected and the next chunk is tried.
 ## Testing
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -q          # 578 tests
+.\.venv\Scripts\python.exe -m pytest -q          # 593 tests
 ```
 
 | Suite | Tests | What it pins |
@@ -245,6 +266,7 @@ rejected and the next chunk is tried.
 | `test_eval.py` | 23 | the harness, and the golden set against the corpus |
 | `test_memory_context.py` | 12 | retrieval memory: terse follow-ups resolve to the last-named scheme |
 | `test_multi_scheme.py` | 15 | one scheme per question (PRD §11: exactly one source), path-free error refusals, distinct-URL validation |
+| `test_official_copy.py` | 15 | official-only copy, store-level scheme filter, ask-which-scheme, statements, future speculation |
 
 `test_golden_regressions.py` is worth knowing about. All six bugs it covers were
 invisible to 420 unit tests, to the demo questions, and to reading the code.
@@ -265,6 +287,9 @@ origin would be invisible.
 | Source list | [`docs/SOURCES.md`](docs/SOURCES.md) · [`docs/SOURCES.csv`](docs/SOURCES.csv) |
 | Sample Q&A (generated live) | [`docs/SAMPLE_QA.md`](docs/SAMPLE_QA.md) |
 | Disclaimer | [`docs/DISCLAIMER.md`](docs/DISCLAIMER.md) |
+| Official source library | [`sources.csv`](sources.csv) (HDFC MF / SEBI / AMFI only) |
+| Sample Q&A, root copy | [`sample_qa.md`](sample_qa.md) |
+| Disclaimer, root copy | [`disclaimer.md`](disclaimer.md) |
 | Eval report | [`eval/report.md`](eval/report.md) |
 
 `docs/SAMPLE_QA.md`, `docs/SOURCES.md` and `docs/DISCLAIMER.md` are **generated**,
@@ -297,8 +322,14 @@ not.
 - **The generator quotes; it does not reason.** With the default `stub`, an
   answer is the page's own text shaped into a sentence. That is a feature for
   auditability and a limitation for fluency.
-- **The corpus pages are Groww's, not HDFC AMC's.** Groww is a broker publishing
-  the AMC's figures. For anything binding, the scheme's own factsheet governs.
+- **The corpus pages are third-party digests of HDFC AMC's published figures.**
+  HDFC AMC's own site (`hdfcfund.com`/`hdfcmf.com`) and the regulator pages
+  (SEBI, AMFI) block or shell out to programmatic fetching, so the five pages
+  actually read for the corpus are broker digests that restate the AMC's data.
+  The visible copy, refusals and links all point to official sources —
+  HDFC Mutual Fund, SEBI and AMFI — and `sources.csv` keeps the official
+  reference library (15+ verified URLs). For anything binding, a scheme's own
+  factsheet governs.
 
 ---
 

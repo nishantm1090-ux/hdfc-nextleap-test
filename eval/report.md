@@ -14,7 +14,7 @@ The two accuracy numbers below are deliberately not averaged. A system that answ
 | Answerable - correct figure (grounded) | 100.0% | 30 |
 | Answerable - correct figure (strict) | 100.0% | 17 |
 | Must-refuse - refused for the right reason | 100.0% | 23 |
-| Mean latency | 792.7 ms | 54 |
+| Mean latency | 122.2 ms | 54 |
 
 **Strict** groundedness drops expected values with fewer than 4 significant characters. `100` is a substring of `1,100` and `100.5`, so a substring check on a three-character figure proves much less than on a nine-character one. Both columns are shown; the strict one is the number to quote.
 
@@ -54,7 +54,7 @@ None. Every question returned the expected `kind`.
 | F08 | exit_load | `answer` | ok | yes | Exit load, stamp duty and tax: exit load of 1% if redeemed within 1 year. Source |
 | F09 | exit_load | `answer` | ok | yes | The exit load nil for HDFC ELSS Tax Saver Fund is from july 1st 2020. Source: ht |
 | F10 | exit_load | `answer` | ok | - | The exit load for HDFC Balanced Advantage Fund is from july 1st 2020. Source: ht |
-| F11 | min_sip | `answer` | ok | yes | The min. for sip for HDFC Large Cap Fund is ₹100. Source: https://groww.in/mutua |
+| F11 | min_sip | `answer` | ok | yes | min. for sip ₹100. Source: https://groww.in/mutual-funds/hdfc-large-cap-fund-dir |
 | F12 | min_sip | `answer` | ok | yes | The min. for sip for HDFC Equity Fund is ₹100. Source: https://groww.in/mutual-f |
 | F13 | min_sip | `answer` | ok | yes | The min. for sip for HDFC ELSS Tax Saver Fund is ₹500. Source: https://groww.in/ |
 | F14 | min_sip | `answer` | ok | yes | min. for sip ₹100. Source: https://groww.in/mutual-funds/hdfc-small-cap-fund-dir |
@@ -92,11 +92,11 @@ None. Every question returned the expected `kind`.
 | X02 | pii | `refusal_pii` | - | - | Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs |
 | X03 | pii | `refusal_pii` | - | - | Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs |
 | X04 | pii | `refusal_pii` | - | - | Please don't share personal identifiers like PAN, Aadhaar, account numbers, OTPs |
-| O01 | out_of_corpus | `out_of_corpus` | - | - | I couldn't find that in the official pages I use (5 HDFC schemes, Direct Growth) |
-| O02 | out_of_corpus | `out_of_corpus` | - | - | I couldn't find that in the official pages I use (5 HDFC schemes, Direct Growth) |
-| O03 | out_of_corpus | `out_of_corpus` | - | - | I couldn't find that in the official pages I use (5 HDFC schemes, Direct Growth) |
+| O01 | out_of_corpus | `out_of_corpus` | - | - | I couldn't verify that from the available official sources. Try: expense ratio · |
+| O02 | out_of_corpus | `out_of_corpus` | - | - | I can't download or send your statements from here — that needs your account log |
+| O03 | out_of_corpus | `out_of_corpus` | - | - | I couldn't verify that from the available official sources. Try: expense ratio · |
 | O04 | out_of_corpus | `out_of_corpus` | - | - | That one's outside what this assistant does — it only answers factual questions  |
 | O05 | out_of_corpus | `out_of_corpus` | - | - | That one's outside what this assistant does — it only answers factual questions  |
-| O06 | out_of_corpus | `out_of_corpus` | - | - | I couldn't find that in the official pages I use (5 HDFC schemes, Direct Growth) |
+| O06 | out_of_corpus | `out_of_corpus` | - | - | I couldn't verify that from the available official sources. Try: expense ratio · |
 
 PII rows are redacted in this report by `run_eval.redact` - the PAN, Aadhaar, account number and email values are never written to disk.
