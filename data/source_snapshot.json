@@ -1,57 +1,59 @@
 {
-  "_updated_at": "2026-09-27T06:57:31.922Z",
+  "_updated_at": "2026-09-30T10:19:25.532750+00:00",
   "amfi-mutual-fund-basics": {
-    "bytes": 226765,
-    "fetched_at": "2026-09-27T06:57:29.912Z",
-    "page_type": "amfi_page",
-    "publisher": "AMFI",
-    "sha256": "89fd00f348b56824c863b28c94a3ab4c1d4973db07ea04a5abe13fd63bab5b9e",
     "url": "https://www.amfiindia.com/mutual-fund",
-    "visible_chars": 3973
+    "sha256": "83afea62eb7b7184901bdca11e22cc25e52b35bbfffe1a587c9f5b3f782913be",
+    "bytes": 226765,
+    "fetched_at": "2026-09-29T11:55:35.900Z",
+    "status": 200,
+    "content_type": "text/html"
   },
   "hdfc-balanced-advantage-fund-direct-growth": {
-    "bytes": 815645,
-    "fetched_at": "2026-09-27T06:57:27.901Z",
-    "page_type": "scheme_page",
-    "publisher": "Groww",
-    "sha256": "a75393484800f7f2609e0425e53d258ad9fe65794520352906be2cb738718324",
-    "url": "https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
-    "visible_chars": 43873
+    "url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-balanced-advantage-fund/direct",
+    "sha256": "204ed361574941adb13144230f685d7f0417bffb15a99e946489b5a530e7e099",
+    "bytes": 231344,
+    "fetched_at": "2026-09-29T11:55:32.913Z",
+    "status": 200,
+    "content_type": "text/html"
+  },
+  "hdfc-consolidated-account-statement": {
+    "url": "https://www.hdfcfund.com/services/consolidated-account-statement",
+    "sha256": "7303aa99d4563db643177c8ddde36b53e4abf16e5c7821942b7fd32c9124f368",
+    "bytes": 141184,
+    "fetched_at": "2026-09-29T18:49:00.000Z",
+    "status": 200,
+    "content_type": "text/html"
   },
   "hdfc-elss-tax-saver-fund-direct-plan-growth": {
-    "bytes": 452551,
-    "fetched_at": "2026-09-27T06:57:23.846Z",
-    "page_type": "scheme_page",
-    "publisher": "Groww",
-    "sha256": "ace5d8e5226034c10283d7ea2aef3991331a6abf58f1ac11970bc263ff75eeb5",
-    "url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
-    "visible_chars": 18100
+    "url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
+    "sha256": "3ecd384db9689eb2fccc2def3d08d53a625a9f44131a9df75de8f7651597017f",
+    "bytes": 225728,
+    "fetched_at": "2026-09-29T11:55:28.894Z",
+    "status": 200,
+    "content_type": "text/html"
   },
   "hdfc-equity-fund-direct-growth": {
-    "bytes": 494209,
-    "fetched_at": "2026-09-27T06:57:21.827Z",
-    "page_type": "scheme_page",
-    "publisher": "Groww",
-    "sha256": "78615f7c8af7af40be1971b9907873f6b0f87d90238302493eb825bbefacd66c",
-    "url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
-    "visible_chars": 19771
+    "url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct",
+    "sha256": "e25e394980cf4476c3b2d3316f21e0fe7e5d5ec52a5e4522591b86414f99ddf2",
+    "bytes": 241923,
+    "fetched_at": "2026-09-29T11:55:26.883Z",
+    "status": 200,
+    "content_type": "text/html"
   },
   "hdfc-large-cap-fund-direct-growth": {
-    "bytes": 453890,
-    "fetched_at": "2026-09-27T06:57:19.809Z",
-    "page_type": "scheme_page",
-    "publisher": "Groww",
-    "sha256": "f8b8fa3f539695c746684d086343f72146b7ccc65e70ef4816fb68724bd837be",
-    "url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
-    "visible_chars": 17907
+    "url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct",
+    "sha256": "256891b5241bab5d8a60453f0f5bdb26bc076204b5c629755fa86ccb4e17017a",
+    "bytes": 218994,
+    "fetched_at": "2026-09-29T11:55:24.879Z",
+    "status": 200,
+    "content_type": "text/html"
   },
   "hdfc-small-cap-fund-direct-growth": {
-    "bytes": 496884,
-    "fetched_at": "2026-09-27T06:57:25.868Z",
-    "page_type": "scheme_page",
-    "publisher": "Groww",
-    "sha256": "457091c7ed86b790c81e70a85fae9b911af1d49eeefbcbcba07496a4396941e2",
-    "url": "https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
-    "visible_chars": 20065
+    "url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct",
+    "sha256": "cc66dcd6d2d4c52d6df5ee86c09e6f0618e93472be67e5e5b1f928170567d000",
+    "bytes": 240463,
+    "fetched_at": "2026-09-29T11:55:30.903Z",
+    "status": 200,
+    "content_type": "text/html"
   }
 }
