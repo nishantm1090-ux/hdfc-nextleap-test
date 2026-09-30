@@ -3,7 +3,7 @@
     "fact_label_value_separated_pct": 0.0,
     "note": "fact_label_value_separated_pct must be 0.0 - the ADR-001 acceptance test (PRD S20). Non-zero means re-open ADR-001.",
     "prose_below_min_tokens_pct": 0.0,
-    "prose_median_tokens": 174,
+    "prose_median_tokens": 163,
     "semantic_merges_applied": 0
   },
   "fact_key_histogram": {
@@ -20,7 +20,7 @@
     "sip_vs_lumpsum": 2,
     "statement_download": 2
   },
-  "generated_at": "2026-09-30T09:58:37.993Z",
+  "generated_at": "2026-09-30T10:36:49.916Z",
   "per_scheme": {
     "hdfc-balanced-advantage-fund-direct-growth": {
       "chunks": 13,
@@ -30,6 +30,15 @@
       "median_tokens": 15,
       "min_tokens": 4,
       "prose": 3
+    },
+    "hdfc-consolidated-account-statement": {
+      "chunks": 1,
+      "facts": 0,
+      "max_tokens": 145,
+      "mean_tokens": 145,
+      "median_tokens": 145,
+      "min_tokens": 145,
+      "prose": 1
     },
     "hdfc-elss-tax-saver-fund-direct-plan-growth": {
       "chunks": 13,
@@ -76,17 +85,17 @@
   "tokens": {
     "cap": 1100,
     "max": 408,
-    "mean": 62.9,
+    "mean": 64.1,
     "median": 16,
     "min": 4
   },
   "totals": {
-    "chunks": 67,
-    "documents_kept": 5,
+    "chunks": 68,
+    "documents_kept": 6,
     "documents_rejected": 1,
     "facts": 52,
     "faq": 6,
-    "prose": 15,
+    "prose": 16,
     "quarantined": 0
   }
 }
