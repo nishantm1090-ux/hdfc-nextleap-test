@@ -3,7 +3,7 @@
     {
       "aliases": [],
       "doc_id": "amfi-mutual-fund-basics",
-      "ingested_at": "2026-09-30T09:48:02.124Z",
+      "ingested_at": "2026-09-30T09:53:23.816Z",
       "node_count": 37,
       "nodes": [
         {
@@ -269,7 +269,7 @@
       "aliases": [],
       "category": "Balanced Advantage",
       "doc_id": "hdfc-balanced-advantage-fund-direct-growth",
-      "ingested_at": "2026-09-30T09:48:02.571Z",
+      "ingested_at": "2026-09-30T09:53:24.180Z",
       "node_count": 33,
       "nodes": [
         {
@@ -541,7 +541,7 @@
       "aliases": [],
       "category": "ELSS",
       "doc_id": "hdfc-elss-tax-saver-fund-direct-plan-growth",
-      "ingested_at": "2026-09-30T09:48:02.953Z",
+      "ingested_at": "2026-09-30T09:53:24.503Z",
       "node_count": 30,
       "nodes": [
         {
@@ -792,7 +792,7 @@
       ],
       "category": "Flexi Cap",
       "doc_id": "hdfc-equity-fund-direct-growth",
-      "ingested_at": "2026-09-30T09:48:03.349Z",
+      "ingested_at": "2026-09-30T09:53:24.878Z",
       "node_count": 41,
       "nodes": [
         {
@@ -1128,7 +1128,7 @@
       "aliases": [],
       "category": "Large Cap",
       "doc_id": "hdfc-large-cap-fund-direct-growth",
-      "ingested_at": "2026-09-30T09:48:03.768Z",
+      "ingested_at": "2026-09-30T09:53:25.227Z",
       "node_count": 29,
       "nodes": [
         {
@@ -1367,7 +1367,7 @@
       "aliases": [],
       "category": "Small Cap",
       "doc_id": "hdfc-small-cap-fund-direct-growth",
-      "ingested_at": "2026-09-30T09:48:04.216Z",
+      "ingested_at": "2026-09-30T09:53:25.678Z",
       "node_count": 40,
       "nodes": [
         {
@@ -1691,6 +1691,6 @@
       "text_chars": 3093
     }
   ],
-  "generated_at": "2026-09-30T09:48:04.222Z",
+  "generated_at": "2026-09-30T09:53:25.683Z",
   "quarantined": []
 }
