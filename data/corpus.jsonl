@@ -3,20 +3,12 @@
     {
       "aliases": [],
       "doc_id": "amfi-mutual-fund-basics",
-      "ingested_at": "2026-09-28T15:59:13.301Z",
-      "node_count": 31,
+      "ingested_at": "2026-09-30T09:48:02.124Z",
+      "node_count": 37,
       "nodes": [
         {
           "label": "Search",
           "order": 0,
-          "origin": "dom",
-          "text": "Search: Association of Mutual Funds in India CIN- U65991MH1995NPL092062",
-          "type": "table_row",
-          "value": "Association of Mutual Funds in India CIN- U65991MH1995NPL092062"
-        },
-        {
-          "label": "Search",
-          "order": 1,
           "origin": "dom",
           "text": "Search: CIN- U65991MH1995NPL092062",
           "type": "table_row",
@@ -24,23 +16,15 @@
         },
         {
           "label": "Association of Mutual Funds in India",
-          "order": 2,
+          "order": 1,
           "origin": "dom",
           "text": "Association of Mutual Funds in India: CIN- U65991MH1995NPL092062",
           "type": "table_row",
           "value": "CIN- U65991MH1995NPL092062"
         },
         {
-          "label": "Locate a MF Distributor",
-          "order": 3,
-          "origin": "dom",
-          "text": "Locate a MF Distributor: TERMS OF USE | PRIVACY NOTICE © 2025 AMFI. All Rights Reserved",
-          "type": "table_row",
-          "value": "TERMS OF USE | PRIVACY NOTICE © 2025 AMFI. All Rights Reserved"
-        },
-        {
           "label": "View More",
-          "order": 4,
+          "order": 2,
           "origin": "dom",
           "text": "View More: © 2025 AMFI. All Rights Reserved",
           "type": "table_row",
@@ -48,179 +32,227 @@
         },
         {
           "level": 2,
-          "order": 5,
+          "order": 3,
           "origin": "dom",
           "text": "Total amount collected through SIP during August 2026 was ₹ 32,297 crore.",
           "type": "heading"
         },
         {
           "level": 3,
-          "order": 6,
+          "order": 4,
           "origin": "dom",
           "text": "Light",
           "type": "heading"
         },
         {
           "level": 3,
-          "order": 7,
+          "order": 5,
           "origin": "dom",
           "text": "Dark",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 8,
+          "order": 6,
           "origin": "dom",
           "text": "About AMFI",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 9,
+          "order": 7,
           "origin": "dom",
           "text": "Objectives",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 10,
+          "order": 8,
           "origin": "dom",
           "text": "Board of Directors",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 11,
+          "order": 9,
           "origin": "dom",
           "text": "AMFI Executives",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 12,
+          "order": 10,
           "origin": "dom",
           "text": "Committees",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 13,
+          "order": 11,
           "origin": "dom",
           "text": "View More",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 14,
+          "order": 12,
           "origin": "dom",
           "text": "Press Release",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 15,
+          "order": 13,
           "origin": "dom",
           "text": "AMFI Publications",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 16,
+          "order": 14,
           "origin": "dom",
           "text": "AMFI Mutual Fund Summit",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 17,
+          "order": 15,
           "origin": "dom",
           "text": "Gallery",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 18,
+          "order": 16,
           "origin": "dom",
           "text": "Videos",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 19,
+          "order": 17,
           "origin": "dom",
           "text": "Schedule of Investor Awareness Program",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 20,
+          "order": 18,
           "origin": "dom",
           "text": "AMC Branches",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 21,
+          "order": 19,
           "origin": "dom",
           "text": "Locate a MF Distributor",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 22,
+          "order": 20,
           "origin": "dom",
           "text": "SEBI",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 23,
+          "order": 21,
           "origin": "dom",
           "text": "Useful Links",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 24,
+          "order": 22,
           "origin": "dom",
           "text": "TERMS OF USE",
           "type": "heading"
         },
         {
           "level": 4,
-          "order": 25,
+          "order": 23,
           "origin": "dom",
           "text": "PRIVACY NOTICE",
           "type": "heading"
         },
         {
+          "order": 24,
+          "origin": "dom",
+          "text": "Systematic Investment Plan or SIP as it is commonly known, is an investment plan (methodology) offered by Mutual Funds wherein one could invest a fixed amount in a mutual fund Scheme periodically at fixed intervals - say once a month instead of making a lump-sum investment. The SIP instalment amount could be as small as ₹500 per month and ₹ 250 per month under Chhoti SIP. SIP is similar to a recurring deposit where you deposit a small /fixed amount every month.",
+          "type": "list_item"
+        },
+        {
+          "order": 25,
+          "origin": "dom",
+          "text": "SIP is a very convenient method of investing in mutual funds through standing instructions to debit your bank account every month, without the hassle of having to write out a cheque each time.",
+          "type": "list_item"
+        },
+        {
           "order": 26,
+          "origin": "dom",
+          "text": "SIP has been gaining popularity among Indian MF investors, as it helps in Rupee Cost Averaging and also in investing in a disciplined manner without worrying about market volatility and timing the market.",
+          "type": "list_item"
+        },
+        {
+          "order": 27,
           "origin": "dom",
           "text": "Month-wise SIP contribution collected from FY 2016-17 onwards are mentioned below:",
           "type": "paragraph"
         },
         {
-          "order": 27,
+          "order": 28,
           "origin": "dom",
           "text": "Details of new SIPs registered and discontinued during FY 25-26 are as under : (SIP Count in Lakh)",
           "type": "paragraph"
         },
         {
-          "order": 28,
+          "order": 29,
+          "origin": "dom",
+          "text": "- 3 consecutive instalments with respect to daily, weekly, fortnightly, and monthly intervals and",
+          "type": "list_item"
+        },
+        {
+          "order": 30,
+          "origin": "dom",
+          "text": "- 2 consecutive instalments with respect to others are failed, are treated as ceased/discontinued.",
+          "type": "list_item"
+        },
+        {
+          "order": 31,
+          "origin": "dom",
+          "text": "# Includes the past/legacy data on account of above reason, revised on 14th May 2025.",
+          "type": "list_item"
+        },
+        {
+          "order": 32,
           "origin": "dom",
           "text": "Light Dark Investor Distributor Research & Information About AMFI Contact Us Search",
           "type": "paragraph"
         },
         {
-          "order": 29,
+          "order": 33,
+          "origin": "dom",
+          "text": "Association of Mutual Funds in India CIN- U65991MH1995NPL092062",
+          "type": "paragraph"
+        },
+        {
+          "order": 34,
           "origin": "dom",
           "text": "Know About AMFI About AMFI Objectives Board of Directors AMFI Executives Committees View More",
           "type": "paragraph"
         },
         {
-          "order": 30,
+          "order": 35,
           "origin": "dom",
           "text": "Media Press Release AMFI Publications AMFI Mutual Fund Summit Gallery Videos",
+          "type": "paragraph"
+        },
+        {
+          "order": 36,
+          "origin": "dom",
+          "text": "TERMS OF USE | PRIVACY NOTICE © 2025 AMFI. All Rights Reserved",
           "type": "paragraph"
         }
       ],
@@ -228,499 +260,483 @@
       "page_type": "amfi_page",
       "pii_scan": "clean",
       "publisher": "AMFI",
-      "raw_sha256": "sha256:89fd00f348b56824c863b28c94a3ab4c1d4973db07ea04a5abe13fd63bab5b9e",
+      "raw_sha256": "sha256:83afea62eb7b7184901bdca11e22cc25e52b35bbfffe1a587c9f5b3f782913be",
       "source_fetched_at": "2026-09-27T06:57:29.912Z",
       "source_url": "https://www.amfiindia.com/mutual-fund",
-      "text_chars": 1066
-    },
-    {
-      "aliases": [],
-      "doc_id": "groww-help-statement-guides",
-      "ingested_at": "2026-09-28T15:59:13.551Z",
-      "node_count": 2,
-      "nodes": [
-        {
-          "level": 1,
-          "order": 0,
-          "origin": "dom",
-          "text": "Customer Support",
-          "type": "heading"
-        },
-        {
-          "order": 1,
-          "origin": "dom",
-          "text": "Most Asked My Account Stocks, F&O, IPO & MTF Payments & Withdrawals Mutual Funds FDs US Stocks",
-          "type": "paragraph"
-        }
-      ],
-      "page_title": "Help & Support | Groww",
-      "page_type": "guide_page",
-      "pii_scan": "clean",
-      "publisher": "Groww",
-      "raw_sha256": "sha256:80cec95f46ac1204430c4d3eb69d6c3269039ba403565c36a053bf01aae08ce4",
-      "source_fetched_at": "2026-09-27T06:57:31.920Z",
-      "source_url": "https://groww.in/help",
-      "text_chars": 110
+      "text_chars": 2174
     },
     {
       "aliases": [],
       "category": "Balanced Advantage",
       "doc_id": "hdfc-balanced-advantage-fund-direct-growth",
-      "ingested_at": "2026-09-28T15:59:15.558Z",
-      "node_count": 34,
+      "ingested_at": "2026-09-30T09:48:02.571Z",
+      "node_count": 33,
       "nodes": [
         {
-          "label": "Min. for SIP",
+          "label": "Exit Load",
           "order": 0,
           "origin": "dom",
-          "text": "Min. for SIP: ₹100",
+          "text": "Exit Load: In respect of each purchase/switch-in of Units, 15% of the units (“the limit”) may be redeemed without any exit load from the date of allotment. Any redemption in excess of the limit shall be subject to the following exit load: Exit load of 1.00% is payable if Units are redeemed/switched-out within 1 year from thedate of allotment of units. No Exit Load is payable if Units are redeemed/switched-out after 1 year from the date of allotment. No Entry/Exit Load shall be levied on bonus units and units allotted on dividend reinvestment.",
           "type": "table_row",
-          "value": "₹100"
+          "value": "In respect of each purchase/switch-in of Units, 15% of the units (“the limit”) may be redeemed without any exit load from the date of allotment. Any redemption in excess of the limit shall be subject to the following exit load: Exit load of 1.00% is payable if Units are redeemed/switched-out within 1 year from thedate of allotment of units. No Exit Load is payable if Units are redeemed/switched-out after 1 year from the date of allotment. No Entry/Exit Load shall be levied on bonus units and units allotted on dividend reinvestment."
         },
         {
-          "label": "Fund size (AUM)",
+          "label": "Product Suitability",
           "order": 1,
           "origin": "dom",
-          "text": "Fund size (AUM): ₹1,07,295.79 Cr",
+          "text": "Product Suitability: This product is suitable for investors who are seeking~ to generate long-term capital appreciation/income investments in a mix of equity and debt instruments ~Investors should consult their financial advisers if in doubt about whether the product is suitable for them.",
           "type": "table_row",
-          "value": "₹1,07,295.79 Cr"
+          "value": "This product is suitable for investors who are seeking~ to generate long-term capital appreciation/income investments in a mix of equity and debt instruments ~Investors should consult their financial advisers if in doubt about whether the product is suitable for them."
         },
         {
-          "label": "Expense ratio",
+          "label": "Inception Date",
           "order": 2,
           "origin": "dom",
-          "text": "Expense ratio: 0.78%",
+          "text": "Inception Date: 01/01/2013",
           "type": "table_row",
-          "value": "0.78%"
+          "value": "01/01/2013"
         },
         {
-          "label": "Rating",
+          "label": "Riskometer",
           "order": 3,
           "origin": "dom",
-          "text": "Rating: 5",
+          "text": "Riskometer: Very High",
           "type": "table_row",
-          "value": "5"
+          "value": "Very High"
         },
         {
-          "label": "Exit load, stamp duty and tax",
+          "label": "Min SIP",
           "order": 4,
           "origin": "dom",
-          "text": "Exit load, stamp duty and tax: Stamp duty on investment: 0.005% (from July 1st, 2020) from July 1st 2020",
+          "text": "Min SIP: ₹ 100",
           "type": "table_row",
-          "value": "Stamp duty on investment: 0.005% (from July 1st, 2020) from July 1st 2020"
+          "value": "₹ 100"
         },
         {
-          "label": "Exit load, stamp duty and tax",
+          "label": "Ideal for",
           "order": 5,
           "origin": "dom",
-          "text": "Exit load, stamp duty and tax: Stamp duty on investment: 0.005% (from July 1st, 2020)",
+          "text": "Ideal for: 3 Years and above",
           "type": "table_row",
-          "value": "Stamp duty on investment: 0.005% (from July 1st, 2020)"
+          "value": "3 Years and above"
         },
         {
-          "label": "Exit load",
+          "label": "Wealth Creation",
           "order": 6,
           "origin": "dom",
-          "text": "Exit load: from July 1st 2020",
+          "text": "Wealth Creation: 3 Years and above",
           "type": "table_row",
-          "value": "from July 1st 2020"
+          "value": "3 Years and above"
         },
         {
-          "label": "Investment Objective",
+          "label": "Entry Load",
           "order": 7,
           "origin": "dom",
-          "text": "Investment Objective: Fund benchmark NIFTY 50 Hybrid Composite Debt 50:50 Index",
+          "text": "Entry Load: NA",
           "type": "table_row",
-          "value": "Fund benchmark NIFTY 50 Hybrid Composite Debt 50:50 Index"
+          "value": "NA"
         },
         {
-          "label": "Fund benchmark",
+          "label": "TER",
           "order": 8,
           "origin": "dom",
-          "text": "Fund benchmark: NIFTY 50 Hybrid Composite Debt 50:50 Index",
+          "text": "TER: 0.78",
+          "type": "table_row",
+          "value": "0.78"
+        },
+        {
+          "label": "Lock in",
+          "order": 9,
+          "origin": "dom",
+          "text": "Lock in: NA",
+          "type": "table_row",
+          "value": "NA"
+        },
+        {
+          "label": "NAV (28/09/2026)",
+          "order": 10,
+          "origin": "dom",
+          "text": "NAV (28/09/2026): ₹ 551.04",
+          "type": "table_row",
+          "value": "₹ 551.04"
+        },
+        {
+          "label": "AUM (31/08/2026)",
+          "order": 11,
+          "origin": "dom",
+          "text": "AUM (31/08/2026): ₹107,295.79 Cr.",
+          "type": "table_row",
+          "value": "₹107,295.79 Cr."
+        },
+        {
+          "label": "Benchmark",
+          "order": 12,
+          "origin": "dom",
+          "text": "Benchmark: NIFTY 50 Hybrid Composite Debt 50:50 Index",
           "type": "table_row",
           "value": "NIFTY 50 Hybrid Composite Debt 50:50 Index"
         },
         {
-          "label": "NAV: 25 Sep '26 ₹557.73",
-          "order": 9,
-          "origin": "badge",
-          "text": "NAV: 25 Sep '26 ₹557.73",
-          "type": "table_row"
-        },
-        {
-          "label": "NAV: 25 Sep '26",
-          "order": 10,
-          "origin": "badge",
-          "text": "NAV: 25 Sep '26",
-          "type": "table_row"
-        },
-        {
-          "label": "Min. for 1st investment ₹100",
-          "order": 11,
-          "origin": "badge",
-          "text": "Min. for 1st investment ₹100",
-          "type": "table_row"
-        },
-        {
-          "label": "Min. for 1st investment",
-          "order": 12,
-          "origin": "badge",
-          "text": "Min. for 1st investment",
-          "type": "table_row"
-        },
-        {
-          "label": "Min. for 2nd investment ₹100",
+          "label": "HDFC Balanced Advantage Fund NAV and Historical Performance",
           "order": 13,
-          "origin": "badge",
-          "text": "Min. for 2nd investment ₹100",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "HDFC Balanced Advantage Fund NAV and Historical Performance: 1Y",
+          "type": "table_row",
+          "value": "1Y"
         },
         {
-          "label": "Min. for 2nd investment",
+          "label": "Benchmark Performance",
           "order": 14,
-          "origin": "badge",
-          "text": "Min. for 2nd investment",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Benchmark Performance: 3Y",
+          "type": "table_row",
+          "value": "3Y"
         },
         {
-          "label": "Min. for SIP ₹100",
+          "label": "Click here to view performance of other schemes managed by the Fund Manager(s)",
           "order": 15,
-          "origin": "badge",
-          "text": "Min. for SIP ₹100",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Click here to view performance of other schemes managed by the Fund Manager(s): As on 31 Aug 2026",
+          "type": "table_row",
+          "value": "As on 31 Aug 2026"
         },
         {
-          "level": 4,
+          "label": "Downloads",
           "order": 16,
           "origin": "dom",
-          "text": "Tax implication",
-          "type": "heading"
+          "text": "Downloads: SID - HDFC Balanced Advantage Fund dated November 21, 2025",
+          "type": "table_row",
+          "value": "SID - HDFC Balanced Advantage Fund dated November 21, 2025"
         },
         {
-          "level": 3,
+          "label": "HDFC Balanced Advantage Fund",
           "order": 17,
           "origin": "dom",
-          "text": "About HDFC Balanced Advantage Fund Direct Growth",
+          "text": "HDFC Balanced Advantage Fund: SID - HDFC Balanced Advantage Fund dated November 21, 2025",
+          "type": "table_row",
+          "value": "SID - HDFC Balanced Advantage Fund dated November 21, 2025"
+        },
+        {
+          "label": "HDFC Balanced Advantage Fund",
+          "order": 18,
+          "origin": "dom",
+          "text": "HDFC Balanced Advantage Fund: KIM - HDFC Balanced Advantage Fund dated November 21, 2025",
+          "type": "table_row",
+          "value": "KIM - HDFC Balanced Advantage Fund dated November 21, 2025"
+        },
+        {
+          "label": "Fund Facts - HDFC Balanced Advantage Fund",
+          "order": 19,
+          "origin": "dom",
+          "text": "Fund Facts - HDFC Balanced Advantage Fund: Presentation - HDFC Balanced Advantage Fund (August 2026).pdf",
+          "type": "table_row",
+          "value": "Presentation - HDFC Balanced Advantage Fund (August 2026).pdf"
+        },
+        {
+          "label": "Benchmark Riskometer",
+          "order": 20,
+          "origin": "badge",
+          "text": "Benchmark Riskometer",
+          "type": "table_row"
+        },
+        {
+          "level": 2,
+          "order": 21,
+          "origin": "dom",
+          "text": "Fund Managers",
           "type": "heading"
         },
         {
-          "order": 18,
-          "origin": "dom",
-          "text": "NAV: 25 Sep '26 ₹557.73 Min. for SIP ₹100 Fund size (AUM) ₹1,07,295.79 Cr Expense ratio 0.78% Rating 5",
-          "type": "paragraph"
-        },
-        {
-          "order": 19,
-          "origin": "dom",
-          "text": "Min. for 1st investment ₹100 Min. for 2nd investment ₹100 Min. for SIP ₹100",
-          "type": "paragraph"
-        },
-        {
-          "order": 20,
-          "origin": "dom",
-          "text": "Exit Load for units in excess of 15% of the investment,1% will be charged for redemption within 1 year.",
-          "type": "paragraph"
-        },
-        {
-          "order": 21,
-          "origin": "dom",
-          "text": "If you redeem within one year, returns are taxed at 20%. If you redeem after one year, returns exceeding Rs 1.25 lakh in a financial year are taxed at 12.5%.",
-          "type": "paragraph"
-        },
-        {
+          "level": 2,
           "order": 22,
           "origin": "dom",
-          "text": "HDFC Balanced Advantage Fund Direct Growth is a Hybrid Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Anil Bamboli is the Current Fund Manager of HDFC Balanced Advantage Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,86,237 Cr and the Latest NAV as of 25 Sep 2026 is ₹557.73. The HDFC Balanced Advantage Fund Direct Growth is rated Very High risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100. Exit Load for units in excess of 15% of the investment,1% will be charged for redemption within 1 year. ;",
-          "type": "paragraph"
+          "text": "Portfolio Allocation & Top Holdings",
+          "type": "heading"
         },
         {
+          "level": 3,
           "order": 23,
           "origin": "dom",
-          "text": "The Scheme seeks to provide long term capital appreciation / income from a dynamic mix of equity and debt investments.",
+          "text": "Product Labelling",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "order": 24,
+          "origin": "dom",
+          "text": "Benchmark Riskometer",
+          "type": "heading"
+        },
+        {
+          "level": 2,
+          "order": 25,
+          "origin": "dom",
+          "text": "FAQs",
+          "type": "heading"
+        },
+        {
+          "order": 26,
+          "origin": "dom",
+          "text": "NAV (28/09/2026) ₹ 551.04 AUM (31/08/2026) ₹107,295.79 Cr. Benchmark NIFTY 50 Hybrid Composite Debt 50:50 Index",
           "type": "paragraph"
         },
         {
-          "order": 24,
+          "order": 27,
           "origin": "dom",
-          "text": "Fund benchmark NIFTY 50 Hybrid Composite Debt 50:50 Index Scheme Information Document(SID)",
+          "text": "^Past performance may or may not be sustained in future and is not a guarantee of any future returns. # Nifty 50 Hybrid Composite ... Read More",
+          "type": "paragraph"
+        },
+        {
+          "order": 28,
+          "origin": "dom",
+          "text": "SID - HDFC Balanced Advantage Fund dated November 21, 2025 KIM - HDFC Balanced Advantage Fund dated November 21, 2025 Fund Facts - HDFC Balanced Advantage Fund Presentation - HDFC Balanced Advantage Fund (August 2026).pdf Leaflet - HDFC Balanced Advantage Fund (As on August 31, 2026)_0.pdf",
           "type": "paragraph"
         },
         {
           "level": 3,
-          "order": 25,
+          "order": 29,
           "origin": "jsonld",
           "text": "Frequently asked questions (page data)",
           "type": "heading"
         },
         {
-          "label": "How to Invest in HDFC Balanced Advantage Fund Direct Growth?",
-          "order": 26,
-          "origin": "jsonld",
-          "text": "How to Invest in HDFC Balanced Advantage Fund Direct Growth? You can easily invest in HDFC Balanced Advantage Fund Direct Growth in a hassle-free manner on Groww. The process is extremely simple, quick and completely paperless. Invest in a few minutes with the following steps: Log on to your Groww account Search for HDFC Balanced Advantage Fund Direct Growth from the search box In order to invest, you will have to complete all the KYC formalities which are completely online and paperless and take a few minutes to complete Once you are done with that, you can start investing in HDFC Balanced Advantage Fund Direct Growth as SIP or lumpsum as per your investment objective and risk tolerance",
-          "type": "accordion",
-          "value": "You can easily invest in HDFC Balanced Advantage Fund Direct Growth in a hassle-free manner on Groww. The process is extremely simple, quick and completely paperless. Invest in a few minutes with the following steps: Log on to your Groww account Search for HDFC Balanced Advantage Fund Direct Growth from the search box In order to invest, you will have to complete all the KYC formalities which are completely online and paperless and take a few minutes to complete Once you are done with that, you can start investing in HDFC Balanced Advantage Fund Direct Growth as SIP or lumpsum as per your investment objective and risk tolerance"
-        },
-        {
-          "label": "What kind of returns does HDFC Balanced Advantage Fund Direct Growth provide?",
-          "order": 27,
-          "origin": "jsonld",
-          "text": "What kind of returns does HDFC Balanced Advantage Fund Direct Growth provide? The HDFC Balanced Advantage Fund Direct Growth has been there from 01 Jan 2013 and the average annual returns provided by this fund is 14.28% since its inception.",
-          "type": "accordion",
-          "value": "The HDFC Balanced Advantage Fund Direct Growth has been there from 01 Jan 2013 and the average annual returns provided by this fund is 14.28% since its inception."
-        },
-        {
-          "label": "How much expense ratio is charged by HDFC Balanced Advantage Fund Direct Growth?",
-          "order": 28,
-          "origin": "jsonld",
-          "text": "How much expense ratio is charged by HDFC Balanced Advantage Fund Direct Growth? The term Expense Ratio used for HDFC Balanced Advantage Fund Direct Growth or any other mutual fund is the annual charges one needs to pay to the Mutual Fund company for managing your investments in that fund. The Expense Ratio of HDFC Balanced Advantage Fund Direct Growth is 0.78% as of 27 Sep 2026...",
-          "type": "accordion",
-          "value": "The term Expense Ratio used for HDFC Balanced Advantage Fund Direct Growth or any other mutual fund is the annual charges one needs to pay to the Mutual Fund company for managing your investments in that fund. The Expense Ratio of HDFC Balanced Advantage Fund Direct Growth is 0.78% as of 27 Sep 2026..."
-        },
-        {
-          "label": "What is the AUM of HDFC Balanced Advantage Fund Direct Growth?",
-          "order": 29,
-          "origin": "jsonld",
-          "text": "What is the AUM of HDFC Balanced Advantage Fund Direct Growth? The AUM, short for Assets Under Management of HDFC Balanced Advantage Fund Direct Growth is ₹1,07,295.79Cr as of 27 Sep 2026.",
-          "type": "accordion",
-          "value": "The AUM, short for Assets Under Management of HDFC Balanced Advantage Fund Direct Growth is ₹1,07,295.79Cr as of 27 Sep 2026."
-        },
-        {
-          "label": "How to Redeem HDFC Balanced Advantage Fund Direct Growth?",
+          "label": "Can I invest in SIP and Lump Sum of HDFC Balanced Advantage Fund ?",
           "order": 30,
           "origin": "jsonld",
-          "text": "How to Redeem HDFC Balanced Advantage Fund Direct Growth? If you want to sell your HDFC Balanced Advantage Fund Direct Growth holdings, go to your holding on the app or web and simply click on it. You will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox.",
+          "text": "Can I invest in SIP and Lump Sum of HDFC Balanced Advantage Fund ? Yes, SIP as well as Lump Sum investments are permitted with the minimum application amount being ₹100. Any additional purchase must have a minimum amount of ₹100. The SIP and Lumpsum are available in direct and regular plan with both Growth and IDCW option.",
           "type": "accordion",
-          "value": "If you want to sell your HDFC Balanced Advantage Fund Direct Growth holdings, go to your holding on the app or web and simply click on it. You will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox."
+          "value": "Yes, SIP as well as Lump Sum investments are permitted with the minimum application amount being ₹100. Any additional purchase must have a minimum amount of ₹100. The SIP and Lumpsum are available in direct and regular plan with both Growth and IDCW option."
         },
         {
-          "label": "Can I invest in SIP and Lump Sum of HDFC Balanced Advantage Fund Direct Growth?",
+          "label": "How to Invest in HDFC Balanced Advantage Fund?",
           "order": 31,
           "origin": "jsonld",
-          "text": "Can I invest in SIP and Lump Sum of HDFC Balanced Advantage Fund Direct Growth? You can select either SIP or Lumpsum investment of HDFC Balanced Advantage Fund Direct Growth based on your investment objective and risk tolerance.",
+          "text": "How to Invest in HDFC Balanced Advantage Fund? Investors can apply for their transactions requests either offline or electronically using the relevant application / transaction request forms available on our website or at any of our Officials Points of Acceptance.The application form/transaction slip for subscription/ redemption/ switches can be submitted at our Official Points of Acceptances whose addresses are available on the website of the AMC. These include:AMC / RTA’s branches i.e. Investor Services Centres*HDFC MF website and App/ RTA website for Investors to transactMFSS/BSE StAR MF/NMF II platforms of the Stock Exchanges(s)Authorized Points of Service of MF Utilities India Private Limited (MFUI)Channel partners/ Distributors/ RIAs/ Portfolio Managers/Execution Only Platforms (EOPs) who have tied up with the AMCMF Central *Note: Business Centres i.e. Sales offices of HDFC AMC are not Official Points of Acceptance of transactions.Please refer Scheme Documents above for more details",
           "type": "accordion",
-          "value": "You can select either SIP or Lumpsum investment of HDFC Balanced Advantage Fund Direct Growth based on your investment objective and risk tolerance."
+          "value": "Investors can apply for their transactions requests either offline or electronically using the relevant application / transaction request forms available on our website or at any of our Officials Points of Acceptance.The application form/transaction slip for subscription/ redemption/ switches can be submitted at our Official Points of Acceptances whose addresses are available on the website of the AMC. These include:AMC / RTA’s branches i.e. Investor Services Centres*HDFC MF website and App/ RTA website for Investors to transactMFSS/BSE StAR MF/NMF II platforms of the Stock Exchanges(s)Authorized Points of Service of MF Utilities India Private Limited (MFUI)Channel partners/ Distributors/ RIAs/ Portfolio Managers/Execution Only Platforms (EOPs) who have tied up with the AMCMF Central *Note: Business Centres i.e. Sales offices of HDFC AMC are not Official Points of Acceptance of transactions.Please refer Scheme Documents above for more details"
         },
         {
-          "label": "What is the NAV of HDFC Balanced Advantage Fund Direct Growth?",
+          "label": "How to Redeem HDFC Balanced Advantage Fund?",
           "order": 32,
           "origin": "jsonld",
-          "text": "What is the NAV of HDFC Balanced Advantage Fund Direct Growth? The NAV of HDFC Balanced Advantage Fund Direct Growth is ₹557.73 as of 25 Sep 2026.",
+          "text": "How to Redeem HDFC Balanced Advantage Fund? Units of the scheme can be redeemed/switched out on any Business day at NAV based prices.For Redemption (including switch-out) applications• In respect of valid applications received upto 3 p.m. on a Business Day by the Fund, same day's closing NAV shall be applicable.• In respect of valid applications received after 3 p.m. on a Business Day by the Fund, the closing NAV of the next Business Day shall be applicable.Transactions through online facilities / electronic modes:The time of transaction done through various online facilities / electronic modes offered by the AMC, for the purpose of determining the applicability of NAV, would be the time when the request for purchase / sale / switch of units is received in the servers of AMC/RTA.The AMC has the right to amend cut off timings subject to SEBI (MF) Regulations for the smooth and efficient functioning of the Scheme.",
           "type": "accordion",
-          "value": "The NAV of HDFC Balanced Advantage Fund Direct Growth is ₹557.73 as of 25 Sep 2026."
-        },
-        {
-          "label": "What is the PE and PB ratio of HDFC Balanced Advantage Fund Direct Growth?",
-          "order": 33,
-          "origin": "jsonld",
-          "text": "What is the PE and PB ratio of HDFC Balanced Advantage Fund Direct Growth? The PE ratio ratio of HDFC Balanced Advantage Fund Direct Growth is determined by dividing the market price by its earnings per share and the PB ratio of the same is evaluated by dividing the stock price per share by its book value per share (BVPS).",
-          "type": "accordion",
-          "value": "The PE ratio ratio of HDFC Balanced Advantage Fund Direct Growth is determined by dividing the market price by its earnings per share and the PB ratio of the same is evaluated by dividing the stock price per share by its book value per share (BVPS)."
+          "value": "Units of the scheme can be redeemed/switched out on any Business day at NAV based prices.For Redemption (including switch-out) applications• In respect of valid applications received upto 3 p.m. on a Business Day by the Fund, same day's closing NAV shall be applicable.• In respect of valid applications received after 3 p.m. on a Business Day by the Fund, the closing NAV of the next Business Day shall be applicable.Transactions through online facilities / electronic modes:The time of transaction done through various online facilities / electronic modes offered by the AMC, for the purpose of determining the applicability of NAV, would be the time when the request for purchase / sale / switch of units is received in the servers of AMC/RTA.The AMC has the right to amend cut off timings subject to SEBI (MF) Regulations for the smooth and efficient functioning of the Scheme."
         }
       ],
-      "page_title": "HDFC Balanced Advantage Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio",
+      "page_title": "HDFC Balanced Advantage Fund Direct Plan | NAV & Returns | HDFC Mutual Fund",
       "page_type": "scheme_page",
       "pii_scan": "clean",
       "plan": "Direct Growth",
-      "publisher": "Groww",
-      "raw_sha256": "sha256:a75393484800f7f2609e0425e53d258ad9fe65794520352906be2cb738718324",
+      "publisher": "HDFC AMC",
+      "raw_sha256": "sha256:4efda1145b98da56d39240ae577a4398ca6a1a0d3bdfd34a56bd7f10434b7230",
       "scheme_name": "HDFC Balanced Advantage Fund - Direct Growth",
       "scheme_slug": "hdfc-balanced-advantage-fund-direct-growth",
       "short_name": "HDFC Balanced Advantage",
       "source_fetched_at": "2026-09-27T06:57:27.901Z",
-      "source_url": "https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
-      "text_chars": 4552
+      "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-balanced-advantage-fund/direct",
+      "text_chars": 4583
     },
     {
       "aliases": [],
       "category": "ELSS",
       "doc_id": "hdfc-elss-tax-saver-fund-direct-plan-growth",
-      "ingested_at": "2026-09-28T15:59:16.317Z",
-      "node_count": 35,
+      "ingested_at": "2026-09-30T09:48:02.953Z",
+      "node_count": 30,
       "nodes": [
         {
-          "label": "ELSS • 3Y Lock-in",
+          "label": "Exit Load",
           "order": 0,
-          "origin": "pill",
-          "text": "ELSS • 3Y Lock-in",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Exit Load: NIL",
+          "type": "table_row",
+          "value": "NIL"
         },
         {
-          "label": "Min. for SIP",
+          "label": "Product Suitability",
           "order": 1,
           "origin": "dom",
-          "text": "Min. for SIP: ₹500",
+          "text": "Product Suitability: This product is suitable for investors who are seeking~ to generate long-term capital appreciation/income investment predominantly of equity and equity related instruments ~Investors should consult their financial advisers if in doubt about whether the product is suitable for them.",
           "type": "table_row",
-          "value": "₹500"
+          "value": "This product is suitable for investors who are seeking~ to generate long-term capital appreciation/income investment predominantly of equity and equity related instruments ~Investors should consult their financial advisers if in doubt about whether the product is suitable for them."
         },
         {
-          "label": "Fund size (AUM)",
+          "label": "Inception Date",
           "order": 2,
           "origin": "dom",
-          "text": "Fund size (AUM): ₹15,991.78 Cr",
+          "text": "Inception Date: 01/01/2013",
           "type": "table_row",
-          "value": "₹15,991.78 Cr"
+          "value": "01/01/2013"
         },
         {
-          "label": "Expense ratio",
+          "label": "Riskometer",
           "order": 3,
           "origin": "dom",
-          "text": "Expense ratio: 1.21%",
+          "text": "Riskometer: Very High",
           "type": "table_row",
-          "value": "1.21%"
+          "value": "Very High"
         },
         {
-          "label": "Rating",
+          "label": "Min SIP",
           "order": 4,
           "origin": "dom",
-          "text": "Rating: 5",
+          "text": "Min SIP: ₹ 500",
           "type": "table_row",
-          "value": "5"
+          "value": "₹ 500"
         },
         {
-          "label": "Exit load, stamp duty and tax",
+          "label": "Ideal for",
           "order": 5,
           "origin": "dom",
-          "text": "Exit load, stamp duty and tax: Stamp duty on investment: 0.005% (from July 1st, 2020) from July 1st 2020",
+          "text": "Ideal for: 3 Years and above",
           "type": "table_row",
-          "value": "Stamp duty on investment: 0.005% (from July 1st, 2020) from July 1st 2020"
+          "value": "3 Years and above"
         },
         {
-          "label": "Exit load, stamp duty and tax",
+          "label": "Wealth Creation",
           "order": 6,
           "origin": "dom",
-          "text": "Exit load, stamp duty and tax: Stamp duty on investment: 0.005% (from July 1st, 2020)",
+          "text": "Wealth Creation: 3 Years and above",
           "type": "table_row",
-          "value": "Stamp duty on investment: 0.005% (from July 1st, 2020)"
+          "value": "3 Years and above"
         },
         {
-          "label": "Exit load Nil",
+          "label": "Entry Load",
           "order": 7,
           "origin": "dom",
-          "text": "Exit load Nil: from July 1st 2020",
+          "text": "Entry Load: NA",
           "type": "table_row",
-          "value": "from July 1st 2020"
+          "value": "NA"
         },
         {
-          "label": "Investment Objective",
+          "label": "TER",
           "order": 8,
           "origin": "dom",
-          "text": "Investment Objective: Fund benchmark NIFTY 500 Total Return Index Scheme Information Document(SID)",
+          "text": "TER: 1.21",
           "type": "table_row",
-          "value": "Fund benchmark NIFTY 500 Total Return Index Scheme Information Document(SID)"
+          "value": "1.21"
         },
         {
-          "label": "Fund benchmark",
+          "label": "Lock in",
           "order": 9,
           "origin": "dom",
-          "text": "Fund benchmark: NIFTY 500 Total Return Index",
+          "text": "Lock in: 3 years",
           "type": "table_row",
-          "value": "NIFTY 500 Total Return Index"
+          "value": "3 years"
         },
         {
-          "label": "NAV: 25 Sep '26 ₹1,447.38",
+          "label": "NAV (28/09/2026)",
           "order": 10,
-          "origin": "badge",
-          "text": "NAV: 25 Sep '26 ₹1,447.38",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "NAV (28/09/2026): ₹ 1,426.93",
+          "type": "table_row",
+          "value": "₹ 1,426.93"
         },
         {
-          "label": "NAV: 25 Sep '26",
+          "label": "AUM (31/08/2026)",
           "order": 11,
-          "origin": "badge",
-          "text": "NAV: 25 Sep '26",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "AUM (31/08/2026): ₹15,991.78 Cr.",
+          "type": "table_row",
+          "value": "₹15,991.78 Cr."
         },
         {
-          "label": "Min. for 1st investment ₹500",
+          "label": "Benchmark",
           "order": 12,
-          "origin": "badge",
-          "text": "Min. for 1st investment ₹500",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Benchmark: NIFTY 500 Total Returns Index",
+          "type": "table_row",
+          "value": "NIFTY 500 Total Returns Index"
         },
         {
-          "label": "Min. for 1st investment",
+          "label": "HDFC ELSS - Tax Saver Fund NAV and Historical Performance",
           "order": 13,
-          "origin": "badge",
-          "text": "Min. for 1st investment",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "HDFC ELSS - Tax Saver Fund NAV and Historical Performance: 1Y",
+          "type": "table_row",
+          "value": "1Y"
         },
         {
-          "label": "Min. for 2nd investment ₹500",
+          "label": "Benchmark Performance",
           "order": 14,
-          "origin": "badge",
-          "text": "Min. for 2nd investment ₹500",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Benchmark Performance: 3Y",
+          "type": "table_row",
+          "value": "3Y"
         },
         {
-          "label": "Min. for 2nd investment",
+          "label": "Click here to view performance of other schemes managed by the Fund Manager(s)",
           "order": 15,
-          "origin": "badge",
-          "text": "Min. for 2nd investment",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Click here to view performance of other schemes managed by the Fund Manager(s): As on 31 Aug 2026",
+          "type": "table_row",
+          "value": "As on 31 Aug 2026"
         },
         {
-          "label": "Min. for SIP ₹500",
+          "label": "Benchmark Riskometer",
           "order": 16,
           "origin": "badge",
-          "text": "Min. for SIP ₹500",
+          "text": "Benchmark Riskometer",
           "type": "table_row"
         },
         {
-          "label": "Exit load",
+          "level": 2,
           "order": 17,
-          "origin": "badge",
-          "text": "Exit load",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Fund Managers",
+          "type": "heading"
         },
         {
-          "level": 4,
+          "level": 2,
           "order": 18,
           "origin": "dom",
-          "text": "Tax implication",
+          "text": "Portfolio Allocation & Top Holdings",
+          "type": "heading"
+        },
+        {
+          "level": 2,
+          "order": 19,
+          "origin": "dom",
+          "text": "Downloads",
           "type": "heading"
         },
         {
           "level": 3,
-          "order": 19,
+          "order": 20,
           "origin": "dom",
-          "text": "About HDFC ELSS Tax Saver Fund Direct Plan Growth",
+          "text": "Product Labelling",
           "type": "heading"
         },
         {
-          "order": 20,
-          "origin": "dom",
-          "text": "NAV: 25 Sep '26 ₹1,447.38 Min. for SIP ₹500 Fund size (AUM) ₹15,991.78 Cr Expense ratio 1.21% Rating 5",
-          "type": "paragraph"
-        },
-        {
+          "level": 3,
           "order": 21,
           "origin": "dom",
-          "text": "Min. for 1st investment ₹500 Min. for 2nd investment ₹500 Min. for SIP ₹500",
-          "type": "paragraph"
+          "text": "Benchmark Riskometer",
+          "type": "heading"
         },
         {
+          "level": 2,
           "order": 22,
           "origin": "dom",
-          "text": "If you redeem within one year, returns are taxed at 20%. If you redeem after one year, returns exceeding Rs 1.25 lakh in a financial year are taxed at 12.5%.",
-          "type": "paragraph"
+          "text": "FAQs",
+          "type": "heading"
         },
         {
           "order": 23,
           "origin": "dom",
-          "text": "HDFC ELSS Tax Saver Fund Direct Plan Growth is a Equity Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Amar Kalkundrikar is the Current Fund Manager of HDFC ELSS Tax Saver Fund Direct Plan Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,86,237 Cr and the Latest NAV as of 25 Sep 2026 is ₹1,447.38. The HDFC ELSS Tax Saver Fund Direct Plan Growth is rated Very High risk. Minimum SIP Investment is set to ₹500. Minimum Lumpsum Investment is ₹500. ;",
+          "text": "NAV (28/09/2026) ₹ 1,426.93 AUM (31/08/2026) ₹15,991.78 Cr. Benchmark NIFTY 500 Total Returns Index",
           "type": "paragraph"
         },
         {
           "order": 24,
           "origin": "dom",
-          "text": "The scheme seeks to generate capital appreciation / income from a portfolio, comprising predominantly of equity & equity related instruments.",
+          "text": "^Past performance may or may not be sustained in future and is not a guarantee of any future returns. # Nifty 500 TRI ## Nifty 50 ... Read More",
           "type": "paragraph"
         },
         {
           "order": 25,
           "origin": "dom",
-          "text": "Fund benchmark NIFTY 500 Total Return Index Scheme Information Document(SID)",
+          "text": "SID - HDFC ELSS Tax Saver KIM - HDFC ELSS Tax Saver Fund Facts - HDFC Tax Saver Fund",
           "type": "paragraph"
         },
         {
@@ -731,897 +747,950 @@
           "type": "heading"
         },
         {
-          "label": "How to Invest in HDFC ELSS Tax Saver Fund Direct Plan Growth?",
+          "label": "1. How to Invest in HDFC ELSS Tax Saver?",
           "order": 27,
           "origin": "jsonld",
-          "text": "How to Invest in HDFC ELSS Tax Saver Fund Direct Plan Growth? You can easily invest in HDFC ELSS Tax Saver Fund Direct Plan Growth in a hassle-free manner on Groww. The process is extremely simple, quick and completely paperless. Invest in a few minutes with the following steps: Log on to your Groww account Search for HDFC ELSS Tax Saver Fund Direct Plan Growth from the search box In order to invest, you will have to complete all the KYC formalities which are completely online and paperless and take a few minutes to complete Once you are done with that, you can start investing in HDFC ELSS Tax Saver Fund Direct Plan Growth as SIP or lumpsum as per your investment objective and risk tolerance",
+          "text": "1. How to Invest in HDFC ELSS Tax Saver? Investors can apply for their transactions requests either offline or electronically using the relevant application / transaction request forms available on our website or at any of our Officials Points of Acceptance.The application form/transaction slip for subscription/ redemption/ switches can be submitted at our Official Points of Acceptances whose addresses are available on the website of the AMC. These include:1. AMC / RTA’s branches i.e. Investor Services Centres*2. HDFC MF website and App/ RTA website for Investors to transact3. MFSS/BSE StAR MF/NMF II platforms of the Stock Exchanges(s)4. Authorized Points of Service of MF Utilities India Private Limited (MFUI)5. Channel partners/ Distributors/ RIAs/ Portfolio Managers/Execution Only Platforms (EOPs) who have tied up with the AMC6. MF Central * Note: Business Centres i.e. Sales offices of HDFC AMC are not Official Points of Acceptance of transactions.Please refer offer documents for more details.",
           "type": "accordion",
-          "value": "You can easily invest in HDFC ELSS Tax Saver Fund Direct Plan Growth in a hassle-free manner on Groww. The process is extremely simple, quick and completely paperless. Invest in a few minutes with the following steps: Log on to your Groww account Search for HDFC ELSS Tax Saver Fund Direct Plan Growth from the search box In order to invest, you will have to complete all the KYC formalities which are completely online and paperless and take a few minutes to complete Once you are done with that, you can start investing in HDFC ELSS Tax Saver Fund Direct Plan Growth as SIP or lumpsum as per your investment objective and risk tolerance"
+          "value": "Investors can apply for their transactions requests either offline or electronically using the relevant application / transaction request forms available on our website or at any of our Officials Points of Acceptance.The application form/transaction slip for subscription/ redemption/ switches can be submitted at our Official Points of Acceptances whose addresses are available on the website of the AMC. These include:1. AMC / RTA’s branches i.e. Investor Services Centres*2. HDFC MF website and App/ RTA website for Investors to transact3. MFSS/BSE StAR MF/NMF II platforms of the Stock Exchanges(s)4. Authorized Points of Service of MF Utilities India Private Limited (MFUI)5. Channel partners/ Distributors/ RIAs/ Portfolio Managers/Execution Only Platforms (EOPs) who have tied up with the AMC6. MF Central * Note: Business Centres i.e. Sales offices of HDFC AMC are not Official Points of Acceptance of transactions.Please refer offer documents for more details."
         },
         {
-          "label": "What kind of returns does HDFC ELSS Tax Saver Fund Direct Plan Growth provide?",
+          "label": "2. Can I invest in SIP and Lump Sum of the HDFC ELSS Tax Saver?",
           "order": 28,
           "origin": "jsonld",
-          "text": "What kind of returns does HDFC ELSS Tax Saver Fund Direct Plan Growth provide? The HDFC ELSS Tax Saver Fund Direct Plan Growth has been there from 01 Jan 2013 and the average annual returns provided by this fund is 13.75% since its inception.",
+          "text": "2. Can I invest in SIP and Lump Sum of the HDFC ELSS Tax Saver? Yes, SIP as well as Lump Sum investments are permitted with the minimum application amount being ₹500. Any additional purchase must have a minimum amount of ₹500. The SIP and Lumpsum are available in direct and regular plan with both Growth and IDCW option.",
           "type": "accordion",
-          "value": "The HDFC ELSS Tax Saver Fund Direct Plan Growth has been there from 01 Jan 2013 and the average annual returns provided by this fund is 13.75% since its inception."
+          "value": "Yes, SIP as well as Lump Sum investments are permitted with the minimum application amount being ₹500. Any additional purchase must have a minimum amount of ₹500. The SIP and Lumpsum are available in direct and regular plan with both Growth and IDCW option."
         },
         {
-          "label": "How much expense ratio is charged by HDFC ELSS Tax Saver Fund Direct Plan Growth?",
+          "label": "3. How to Redeem HDFC ELSS Tax Saver?",
           "order": 29,
           "origin": "jsonld",
-          "text": "How much expense ratio is charged by HDFC ELSS Tax Saver Fund Direct Plan Growth? The term Expense Ratio used for HDFC ELSS Tax Saver Fund Direct Plan Growth or any other mutual fund is the annual charges one needs to pay to the Mutual Fund company for managing your investments in that fund. The Expense Ratio of HDFC ELSS Tax Saver Fund Direct Plan Growth is 1.21% as of 27 Sep 2026...",
+          "text": "3. How to Redeem HDFC ELSS Tax Saver? Units of the scheme can be redeemed/switched out on any Business day at NAV based prices.For Redemption (including switch-out) applications• In respect of valid applications received upto 3 p.m. on a Business Day by the Fund, same day's closing NAV shall be applicable.• In respect of valid applications received after 3 p.m. on a Business Day by the Fund, the closing NAV of the next Business Day shall be applicable.Transactions through online facilities / electronic modes:The time of transaction done through various online facilities / electronic modes offered by the AMC, for the purpose of determining the applicability of NAV, would be the time when the request for purchase / sale / switch of units is received in the servers of AMC/RTA.The AMC has the right to amend cut off timings subject to SEBI (MF) Regulations for the smooth and efficient functioning of the Scheme.",
           "type": "accordion",
-          "value": "The term Expense Ratio used for HDFC ELSS Tax Saver Fund Direct Plan Growth or any other mutual fund is the annual charges one needs to pay to the Mutual Fund company for managing your investments in that fund. The Expense Ratio of HDFC ELSS Tax Saver Fund Direct Plan Growth is 1.21% as of 27 Sep 2026..."
-        },
-        {
-          "label": "What is the AUM of HDFC ELSS Tax Saver Fund Direct Plan Growth?",
-          "order": 30,
-          "origin": "jsonld",
-          "text": "What is the AUM of HDFC ELSS Tax Saver Fund Direct Plan Growth? The AUM, short for Assets Under Management of HDFC ELSS Tax Saver Fund Direct Plan Growth is ₹15,991.78Cr as of 27 Sep 2026.",
-          "type": "accordion",
-          "value": "The AUM, short for Assets Under Management of HDFC ELSS Tax Saver Fund Direct Plan Growth is ₹15,991.78Cr as of 27 Sep 2026."
-        },
-        {
-          "label": "How to Redeem HDFC ELSS Tax Saver Fund Direct Plan Growth?",
-          "order": 31,
-          "origin": "jsonld",
-          "text": "How to Redeem HDFC ELSS Tax Saver Fund Direct Plan Growth? If you want to sell your HDFC ELSS Tax Saver Fund Direct Plan Growth holdings, go to your holding on the app or web and simply click on it. You will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox.",
-          "type": "accordion",
-          "value": "If you want to sell your HDFC ELSS Tax Saver Fund Direct Plan Growth holdings, go to your holding on the app or web and simply click on it. You will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox."
-        },
-        {
-          "label": "Can I invest in SIP and Lump Sum of HDFC ELSS Tax Saver Fund Direct Plan Growth?",
-          "order": 32,
-          "origin": "jsonld",
-          "text": "Can I invest in SIP and Lump Sum of HDFC ELSS Tax Saver Fund Direct Plan Growth? You can select either SIP or Lumpsum investment of HDFC ELSS Tax Saver Fund Direct Plan Growth based on your investment objective and risk tolerance.",
-          "type": "accordion",
-          "value": "You can select either SIP or Lumpsum investment of HDFC ELSS Tax Saver Fund Direct Plan Growth based on your investment objective and risk tolerance."
-        },
-        {
-          "label": "What is the NAV of HDFC ELSS Tax Saver Fund Direct Plan Growth?",
-          "order": 33,
-          "origin": "jsonld",
-          "text": "What is the NAV of HDFC ELSS Tax Saver Fund Direct Plan Growth? The NAV of HDFC ELSS Tax Saver Fund Direct Plan Growth is ₹1,447.38 as of 25 Sep 2026.",
-          "type": "accordion",
-          "value": "The NAV of HDFC ELSS Tax Saver Fund Direct Plan Growth is ₹1,447.38 as of 25 Sep 2026."
-        },
-        {
-          "label": "What is the PE and PB ratio of HDFC ELSS Tax Saver Fund Direct Plan Growth?",
-          "order": 34,
-          "origin": "jsonld",
-          "text": "What is the PE and PB ratio of HDFC ELSS Tax Saver Fund Direct Plan Growth? The PE ratio ratio of HDFC ELSS Tax Saver Fund Direct Plan Growth is determined by dividing the market price by its earnings per share and the PB ratio of the same is evaluated by dividing the stock price per share by its book value per share (BVPS).",
-          "type": "accordion",
-          "value": "The PE ratio ratio of HDFC ELSS Tax Saver Fund Direct Plan Growth is determined by dividing the market price by its earnings per share and the PB ratio of the same is evaluated by dividing the stock price per share by its book value per share (BVPS)."
+          "value": "Units of the scheme can be redeemed/switched out on any Business day at NAV based prices.For Redemption (including switch-out) applications• In respect of valid applications received upto 3 p.m. on a Business Day by the Fund, same day's closing NAV shall be applicable.• In respect of valid applications received after 3 p.m. on a Business Day by the Fund, the closing NAV of the next Business Day shall be applicable.Transactions through online facilities / electronic modes:The time of transaction done through various online facilities / electronic modes offered by the AMC, for the purpose of determining the applicability of NAV, would be the time when the request for purchase / sale / switch of units is received in the servers of AMC/RTA.The AMC has the right to amend cut off timings subject to SEBI (MF) Regulations for the smooth and efficient functioning of the Scheme."
         }
       ],
-      "page_title": "HDFC ELSS Tax Saver Fund Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio",
+      "page_title": "HDFC ELSS - Tax Saver Fund Direct Plan | NAV, Returns & Portfolio | HDFC Mutual Fund",
       "page_type": "scheme_page",
       "pii_scan": "clean",
       "plan": "Direct Growth",
-      "publisher": "Groww",
-      "raw_sha256": "sha256:ace5d8e5226034c10283d7ea2aef3991331a6abf58f1ac11970bc263ff75eeb5",
+      "publisher": "HDFC AMC",
+      "raw_sha256": "sha256:3791ccef084957f3e20e242487a97ab6fb2d6feed7b187b3be3898ae4c912677",
       "scheme_name": "HDFC ELSS Tax Saver Fund - Direct Plan - Growth",
       "scheme_slug": "hdfc-elss-tax-saver-fund-direct-plan-growth",
       "short_name": "HDFC ELSS",
       "source_fetched_at": "2026-09-27T06:57:23.846Z",
-      "source_url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
-      "text_chars": 4419
+      "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
+      "text_chars": 3494
     },
     {
       "aliases": [
-        "HDFC Flexi Cap Fund - Direct Growth",
+        "HDFC Equity Fund - Direct Growth",
+        "HDFC Equity Fund",
         "HDFC Flexi Cap Direct Plan Growth"
       ],
       "category": "Flexi Cap",
       "doc_id": "hdfc-equity-fund-direct-growth",
-      "ingested_at": "2026-09-28T15:59:17.224Z",
-      "node_count": 34,
+      "ingested_at": "2026-09-30T09:48:03.349Z",
+      "node_count": 41,
       "nodes": [
         {
-          "label": "Min. for SIP",
+          "label": "Exit Load",
           "order": 0,
           "origin": "dom",
-          "text": "Min. for SIP: ₹100",
+          "text": "Exit Load: In respect of each purchase / switch-in of Units, an Exit Load of 1.00% is payable if Units are redeemed / switched-out within 1 year from the date of allotment. No Exit Load is payable if Units are redeemed / switched-out after 1 year from the date of allotment.",
           "type": "table_row",
-          "value": "₹100"
+          "value": "In respect of each purchase / switch-in of Units, an Exit Load of 1.00% is payable if Units are redeemed / switched-out within 1 year from the date of allotment. No Exit Load is payable if Units are redeemed / switched-out after 1 year from the date of allotment."
         },
         {
-          "label": "Fund size (AUM)",
+          "label": "Product Suitability",
           "order": 1,
           "origin": "dom",
-          "text": "Fund size (AUM): ₹1,13,606.47 Cr",
+          "text": "Product Suitability: This product is suitable for investors who are seeking~ To generate long-term capital appreciation / income Investment predominantly in equity & equity related instruments ~Investors should consult their financial advisers if in doubt about whether the product is suitable for them.",
           "type": "table_row",
-          "value": "₹1,13,606.47 Cr"
+          "value": "This product is suitable for investors who are seeking~ To generate long-term capital appreciation / income Investment predominantly in equity & equity related instruments ~Investors should consult their financial advisers if in doubt about whether the product is suitable for them."
         },
         {
-          "label": "Expense ratio",
+          "label": "Inception Date",
           "order": 2,
           "origin": "dom",
-          "text": "Expense ratio: 0.77%",
+          "text": "Inception Date: 01/01/2013",
           "type": "table_row",
-          "value": "0.77%"
+          "value": "01/01/2013"
         },
         {
-          "label": "Rating",
+          "label": "Riskometer",
           "order": 3,
           "origin": "dom",
-          "text": "Rating: 5",
+          "text": "Riskometer: Very High",
           "type": "table_row",
-          "value": "5"
+          "value": "Very High"
         },
         {
-          "label": "Exit load, stamp duty and tax",
+          "label": "Min SIP",
           "order": 4,
           "origin": "dom",
-          "text": "Exit load, stamp duty and tax: Exit load Exit load of 1% if redeemed within 1 year",
+          "text": "Min SIP: ₹ 100",
           "type": "table_row",
-          "value": "Exit load Exit load of 1% if redeemed within 1 year"
+          "value": "₹ 100"
         },
         {
-          "label": "Exit load, stamp duty and tax",
+          "label": "Ideal for",
           "order": 5,
           "origin": "dom",
-          "text": "Exit load, stamp duty and tax: Exit load of 1% if redeemed within 1 year",
+          "text": "Ideal for: 3 Years and above",
           "type": "table_row",
-          "value": "Exit load of 1% if redeemed within 1 year"
+          "value": "3 Years and above"
         },
         {
-          "label": "Exit load",
+          "label": "Wealth Creation",
           "order": 6,
           "origin": "dom",
-          "text": "Exit load: Stamp duty on investment: 0.005% (from July 1st, 2020) from July 1st 2020",
+          "text": "Wealth Creation: 3 Years and above",
           "type": "table_row",
-          "value": "Stamp duty on investment: 0.005% (from July 1st, 2020) from July 1st 2020"
+          "value": "3 Years and above"
         },
         {
-          "label": "Investment Objective",
+          "label": "Entry Load",
           "order": 7,
           "origin": "dom",
-          "text": "Investment Objective: Fund benchmark NIFTY 500 Total Return Index Scheme Information Document(SID)",
+          "text": "Entry Load: NA",
           "type": "table_row",
-          "value": "Fund benchmark NIFTY 500 Total Return Index Scheme Information Document(SID)"
+          "value": "NA"
         },
         {
-          "label": "Fund benchmark",
+          "label": "TER",
           "order": 8,
           "origin": "dom",
-          "text": "Fund benchmark: NIFTY 500 Total Return Index",
+          "text": "TER: 0.77",
           "type": "table_row",
-          "value": "NIFTY 500 Total Return Index"
+          "value": "0.77"
         },
         {
-          "label": "NAV: 25 Sep '26 ₹2,214.57",
+          "label": "Lock in",
           "order": 9,
-          "origin": "badge",
-          "text": "NAV: 25 Sep '26 ₹2,214.57",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Lock in: NA",
+          "type": "table_row",
+          "value": "NA"
         },
         {
-          "label": "NAV: 25 Sep '26",
+          "label": "NAV (28/09/2026)",
           "order": 10,
-          "origin": "badge",
-          "text": "NAV: 25 Sep '26",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "NAV (28/09/2026): ₹ 2,181.07",
+          "type": "table_row",
+          "value": "₹ 2,181.07"
         },
         {
-          "label": "Min. for 1st investment ₹100",
+          "label": "AUM (31/08/2026)",
           "order": 11,
-          "origin": "badge",
-          "text": "Min. for 1st investment ₹100",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "AUM (31/08/2026): ₹113,606.47 Cr.",
+          "type": "table_row",
+          "value": "₹113,606.47 Cr."
         },
         {
-          "label": "Min. for 1st investment",
+          "label": "Benchmark",
           "order": 12,
-          "origin": "badge",
-          "text": "Min. for 1st investment",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Benchmark: NIFTY 500 Total Returns Index",
+          "type": "table_row",
+          "value": "NIFTY 500 Total Returns Index"
         },
         {
-          "label": "Min. for 2nd investment ₹100",
+          "label": "HDFC Flexi Cap Fund NAV and Historical Performance",
           "order": 13,
-          "origin": "badge",
-          "text": "Min. for 2nd investment ₹100",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "HDFC Flexi Cap Fund NAV and Historical Performance: 1Y",
+          "type": "table_row",
+          "value": "1Y"
         },
         {
-          "label": "Min. for 2nd investment",
+          "label": "Benchmark Performance",
           "order": 14,
-          "origin": "badge",
-          "text": "Min. for 2nd investment",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Benchmark Performance: 3Y",
+          "type": "table_row",
+          "value": "3Y"
         },
         {
-          "label": "Min. for SIP ₹100",
+          "label": "Click here to view performance of other schemes managed by the Fund Manager(s)",
           "order": 15,
-          "origin": "badge",
-          "text": "Min. for SIP ₹100",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Click here to view performance of other schemes managed by the Fund Manager(s): As on 31 Aug 2026",
+          "type": "table_row",
+          "value": "As on 31 Aug 2026"
         },
         {
-          "level": 4,
+          "label": "Downloads",
           "order": 16,
           "origin": "dom",
-          "text": "Stamp duty on investment: 0.005% (from July 1st, 2020)",
-          "type": "heading"
+          "text": "Downloads: SID - HDFC Flexi Cap Fund dated November 21, 2025",
+          "type": "table_row",
+          "value": "SID - HDFC Flexi Cap Fund dated November 21, 2025"
         },
         {
-          "level": 4,
+          "label": "HDFC Flexi Cap Fund",
           "order": 17,
           "origin": "dom",
-          "text": "Tax implication",
-          "type": "heading"
+          "text": "HDFC Flexi Cap Fund: SID - HDFC Flexi Cap Fund dated November 21, 2025",
+          "type": "table_row",
+          "value": "SID - HDFC Flexi Cap Fund dated November 21, 2025"
         },
         {
-          "level": 3,
+          "label": "HDFC Flexi Cap Fund",
           "order": 18,
           "origin": "dom",
-          "text": "About HDFC Flexi Cap Direct Plan Growth",
+          "text": "HDFC Flexi Cap Fund: KIM - HDFC Flexi Cap Fund dated November 21, 2025",
+          "type": "table_row",
+          "value": "KIM - HDFC Flexi Cap Fund dated November 21, 2025"
+        },
+        {
+          "label": "Benchmark Riskometer",
+          "order": 19,
+          "origin": "badge",
+          "text": "Benchmark Riskometer",
+          "type": "table_row"
+        },
+        {
+          "level": 2,
+          "order": 20,
+          "origin": "dom",
+          "text": "Fund Managers",
           "type": "heading"
         },
         {
-          "order": 19,
-          "origin": "dom",
-          "text": "NAV: 25 Sep '26 ₹2,214.57 Min. for SIP ₹100 Fund size (AUM) ₹1,13,606.47 Cr Expense ratio 0.77% Rating 5",
-          "type": "paragraph"
-        },
-        {
-          "order": 20,
-          "origin": "dom",
-          "text": "Min. for 1st investment ₹100 Min. for 2nd investment ₹100 Min. for SIP ₹100",
-          "type": "paragraph"
-        },
-        {
+          "level": 2,
           "order": 21,
           "origin": "dom",
-          "text": "If you redeem within one year, returns are taxed at 20%. If you redeem after one year, returns exceeding Rs 1.25 lakh in a financial year are taxed at 12.5%.",
-          "type": "paragraph"
+          "text": "Portfolio Allocation & Top Holdings",
+          "type": "heading"
         },
         {
+          "level": 3,
           "order": 22,
           "origin": "dom",
-          "text": "HDFC Flexi Cap Direct Plan Growth is a Equity Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Dhruv Muchhal is the Current Fund Manager of HDFC Flexi Cap Direct Plan Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,86,237 Cr and the Latest NAV as of 25 Sep 2026 is ₹2,214.57. The HDFC Flexi Cap Direct Plan Growth is rated Very High risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100. Exit load of 1% if redeemed within 1 year ;",
-          "type": "paragraph"
+          "text": "Product Labelling",
+          "type": "heading"
         },
         {
+          "level": 3,
           "order": 23,
           "origin": "dom",
-          "text": "The scheme seeks to generate capital appreciation / income from a portfolio, predominantly invested in equity & equity related instruments.",
+          "text": "Benchmark Riskometer",
+          "type": "heading"
+        },
+        {
+          "level": 2,
+          "order": 24,
+          "origin": "dom",
+          "text": "FAQs",
+          "type": "heading"
+        },
+        {
+          "order": 25,
+          "origin": "dom",
+          "text": "NAV (28/09/2026) ₹ 2,181.07 AUM (31/08/2026) ₹113,606.47 Cr. Benchmark NIFTY 500 Total Returns Index",
           "type": "paragraph"
         },
         {
-          "order": 24,
+          "order": 26,
           "origin": "dom",
-          "text": "Fund benchmark NIFTY 500 Total Return Index Scheme Information Document(SID)",
+          "text": "^Past performance may or may not be sustained in future and is not a guarantee of any future returns. # Nifty 500 TRI ## Nifty 50 ... Read More",
+          "type": "paragraph"
+        },
+        {
+          "order": 27,
+          "origin": "dom",
+          "text": "SID - HDFC Flexi Cap Fund dated November 21, 2025 KIM - HDFC Flexi Cap Fund dated November 21, 2025 Fund Facts - HDFC Flexi Cap Fund Presentation - HDFC Flexi Cap Fund Leaflet - HDFC Flexi Cap Fund",
           "type": "paragraph"
         },
         {
           "level": 3,
-          "order": 25,
+          "order": 28,
           "origin": "jsonld",
           "text": "Frequently asked questions (page data)",
           "type": "heading"
         },
         {
-          "label": "How to Invest in HDFC Flexi Cap Direct Plan Growth?",
-          "order": 26,
-          "origin": "jsonld",
-          "text": "How to Invest in HDFC Flexi Cap Direct Plan Growth? You can easily invest in HDFC Flexi Cap Direct Plan Growth in a hassle-free manner on Groww. The process is extremely simple, quick and completely paperless. Invest in a few minutes with the following steps: Log on to your Groww account Search for HDFC Flexi Cap Direct Plan Growth from the search box In order to invest, you will have to complete all the KYC formalities which are completely online and paperless and take a few minutes to complete Once you are done with that, you can start investing in HDFC Flexi Cap Direct Plan Growth as SIP or lumpsum as per your investment objective and risk tolerance",
-          "type": "accordion",
-          "value": "You can easily invest in HDFC Flexi Cap Direct Plan Growth in a hassle-free manner on Groww. The process is extremely simple, quick and completely paperless. Invest in a few minutes with the following steps: Log on to your Groww account Search for HDFC Flexi Cap Direct Plan Growth from the search box In order to invest, you will have to complete all the KYC formalities which are completely online and paperless and take a few minutes to complete Once you are done with that, you can start investing in HDFC Flexi Cap Direct Plan Growth as SIP or lumpsum as per your investment objective and risk tolerance"
-        },
-        {
-          "label": "What kind of returns does HDFC Flexi Cap Direct Plan Growth provide?",
-          "order": 27,
-          "origin": "jsonld",
-          "text": "What kind of returns does HDFC Flexi Cap Direct Plan Growth provide? The HDFC Flexi Cap Direct Plan Growth has been there from 01 Jan 2013 and the average annual returns provided by this fund is 15.75% since its inception.",
-          "type": "accordion",
-          "value": "The HDFC Flexi Cap Direct Plan Growth has been there from 01 Jan 2013 and the average annual returns provided by this fund is 15.75% since its inception."
-        },
-        {
-          "label": "How much expense ratio is charged by HDFC Flexi Cap Direct Plan Growth?",
-          "order": 28,
-          "origin": "jsonld",
-          "text": "How much expense ratio is charged by HDFC Flexi Cap Direct Plan Growth? The term Expense Ratio used for HDFC Flexi Cap Direct Plan Growth or any other mutual fund is the annual charges one needs to pay to the Mutual Fund company for managing your investments in that fund. The Expense Ratio of HDFC Flexi Cap Direct Plan Growth is 0.77% as of 27 Sep 2026...",
-          "type": "accordion",
-          "value": "The term Expense Ratio used for HDFC Flexi Cap Direct Plan Growth or any other mutual fund is the annual charges one needs to pay to the Mutual Fund company for managing your investments in that fund. The Expense Ratio of HDFC Flexi Cap Direct Plan Growth is 0.77% as of 27 Sep 2026..."
-        },
-        {
-          "label": "What is the AUM of HDFC Flexi Cap Direct Plan Growth?",
+          "label": "What is HDFC Flexi Cap Fund?",
           "order": 29,
           "origin": "jsonld",
-          "text": "What is the AUM of HDFC Flexi Cap Direct Plan Growth? The AUM, short for Assets Under Management of HDFC Flexi Cap Direct Plan Growth is ₹1,13,606.47Cr as of 27 Sep 2026.",
+          "text": "What is HDFC Flexi Cap Fund? HDFC Flexi Cap Fund is an open-ended equity mutual fund that invests across large-cap, mid-cap, and small-cap stocks, giving the fund manager flexibility to capture opportunities across market segments.",
           "type": "accordion",
-          "value": "The AUM, short for Assets Under Management of HDFC Flexi Cap Direct Plan Growth is ₹1,13,606.47Cr as of 27 Sep 2026."
+          "value": "HDFC Flexi Cap Fund is an open-ended equity mutual fund that invests across large-cap, mid-cap, and small-cap stocks, giving the fund manager flexibility to capture opportunities across market segments."
         },
         {
-          "label": "How to Redeem HDFC Flexi Cap Direct Plan Growth?",
+          "label": "How does a Flexi Cap Fund work?",
           "order": 30,
           "origin": "jsonld",
-          "text": "How to Redeem HDFC Flexi Cap Direct Plan Growth? If you want to sell your HDFC Flexi Cap Direct Plan Growth holdings, go to your holding on the app or web and simply click on it. You will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox.",
+          "text": "How does a Flexi Cap Fund work? A flexi cap fund dynamically allocates investments across different market capitalizations based on market conditions, valuations, and growth opportunities.",
           "type": "accordion",
-          "value": "If you want to sell your HDFC Flexi Cap Direct Plan Growth holdings, go to your holding on the app or web and simply click on it. You will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox."
+          "value": "A flexi cap fund dynamically allocates investments across different market capitalizations based on market conditions, valuations, and growth opportunities."
         },
         {
-          "label": "Can I invest in SIP and Lump Sum of HDFC Flexi Cap Direct Plan Growth?",
+          "label": "What is the key advantage of a Flexi Cap Fund?",
           "order": 31,
           "origin": "jsonld",
-          "text": "Can I invest in SIP and Lump Sum of HDFC Flexi Cap Direct Plan Growth? You can select either SIP or Lumpsum investment of HDFC Flexi Cap Direct Plan Growth based on your investment objective and risk tolerance.",
+          "text": "What is the key advantage of a Flexi Cap Fund? The main advantage is flexibility — the fund manager can shift allocation between large, mid, and small caps to optimize risk-reward potential. Please refer Scheme Documents above for more details",
           "type": "accordion",
-          "value": "You can select either SIP or Lumpsum investment of HDFC Flexi Cap Direct Plan Growth based on your investment objective and risk tolerance."
+          "value": "The main advantage is flexibility — the fund manager can shift allocation between large, mid, and small caps to optimize risk-reward potential. Please refer Scheme Documents above for more details"
         },
         {
-          "label": "What is the NAV of HDFC Flexi Cap Direct Plan Growth?",
+          "label": "Is HDFC Flexi Cap Fund suitable for long-term investment?",
           "order": 32,
           "origin": "jsonld",
-          "text": "What is the NAV of HDFC Flexi Cap Direct Plan Growth? The NAV of HDFC Flexi Cap Direct Plan Growth is ₹2,214.57 as of 25 Sep 2026.",
+          "text": "Is HDFC Flexi Cap Fund suitable for long-term investment? Yes, it is generally suited for investors with a long-term horizon (5+ years) who want diversified equity exposure.",
           "type": "accordion",
-          "value": "The NAV of HDFC Flexi Cap Direct Plan Growth is ₹2,214.57 as of 25 Sep 2026."
+          "value": "Yes, it is generally suited for investors with a long-term horizon (5+ years) who want diversified equity exposure."
         },
         {
-          "label": "What is the PE and PB ratio of HDFC Flexi Cap Direct Plan Growth?",
+          "label": "Who should invest in HDFC Flexi Cap Fund?",
           "order": 33,
           "origin": "jsonld",
-          "text": "What is the PE and PB ratio of HDFC Flexi Cap Direct Plan Growth? The PE ratio ratio of HDFC Flexi Cap Direct Plan Growth is determined by dividing the market price by its earnings per share and the PB ratio of the same is evaluated by dividing the stock price per share by its book value per share (BVPS).",
+          "text": "Who should invest in HDFC Flexi Cap Fund? Investors seeking long-term capital appreciation, diversification across market caps, and professional portfolio management may consider this fund.",
           "type": "accordion",
-          "value": "The PE ratio ratio of HDFC Flexi Cap Direct Plan Growth is determined by dividing the market price by its earnings per share and the PB ratio of the same is evaluated by dividing the stock price per share by its book value per share (BVPS)."
+          "value": "Investors seeking long-term capital appreciation, diversification across market caps, and professional portfolio management may consider this fund."
+        },
+        {
+          "label": "Is this fund risky?",
+          "order": 34,
+          "origin": "jsonld",
+          "text": "Is this fund risky? Since it invests in equities across market caps, the fund carries market risk. However, diversification across large, mid, and small caps aims to manage volatility.",
+          "type": "accordion",
+          "value": "Since it invests in equities across market caps, the fund carries market risk. However, diversification across large, mid, and small caps aims to manage volatility."
+        },
+        {
+          "label": "How is Flexi Cap different from Multi Cap funds?",
+          "order": 35,
+          "origin": "jsonld",
+          "text": "How is Flexi Cap different from Multi Cap funds? Flexi Cap funds have complete flexibility in allocation across market caps, whereas Multi Cap funds follow SEBI-defined minimum allocation rules for each market segment.",
+          "type": "accordion",
+          "value": "Flexi Cap funds have complete flexibility in allocation across market caps, whereas Multi Cap funds follow SEBI-defined minimum allocation rules for each market segment."
+        },
+        {
+          "label": "Can I invest through SIP in HDFC Flexi Cap Fund?",
+          "order": 36,
+          "origin": "jsonld",
+          "text": "Can I invest through SIP in HDFC Flexi Cap Fund? Yes, investors can start a SIP to invest regularly and benefit from rupee cost averaging over time.",
+          "type": "accordion",
+          "value": "Yes, investors can start a SIP to invest regularly and benefit from rupee cost averaging over time."
+        },
+        {
+          "label": "What is the investment strategy of HDFC Flexi Cap Fund?",
+          "order": 37,
+          "origin": "jsonld",
+          "text": "What is the investment strategy of HDFC Flexi Cap Fund? The fund follows a diversified approach focusing on quality businesses, valuation discipline, and long-term growth opportunities across sectors and market caps.",
+          "type": "accordion",
+          "value": "The fund follows a diversified approach focusing on quality businesses, valuation discipline, and long-term growth opportunities across sectors and market caps."
+        },
+        {
+          "label": "What makes HDFC Flexi Cap Fund different from large-cap funds?",
+          "order": 38,
+          "origin": "jsonld",
+          "text": "What makes HDFC Flexi Cap Fund different from large-cap funds? Unlike large-cap funds that mainly invest in large cap companies, this fund can invest across the entire market spectrum, providing wider growth opportunities.",
+          "type": "accordion",
+          "value": "Unlike large-cap funds that mainly invest in large cap companies, this fund can invest across the entire market spectrum, providing wider growth opportunities."
+        },
+        {
+          "label": "What is the minimum SIP amount in HDFC Flexi Cap Fund?",
+          "order": 39,
+          "origin": "jsonld",
+          "text": "What is the minimum SIP amount in HDFC Flexi Cap Fund? The minimum SIP amount for HDFC Flexi Cap Fund is ₹100 (or as specified by the scheme). Investors can start a Systematic Investment Plan with small periodic investments and increase the amount over time based on their financial goals.You can refer website or the scheme information document for the latest investment requirements.",
+          "type": "accordion",
+          "value": "The minimum SIP amount for HDFC Flexi Cap Fund is ₹100 (or as specified by the scheme). Investors can start a Systematic Investment Plan with small periodic investments and increase the amount over time based on their financial goals.You can refer website or the scheme information document for the latest investment requirements."
+        },
+        {
+          "label": "What benchmark does HDFC Flexi Cap Fund use?",
+          "order": 40,
+          "origin": "jsonld",
+          "text": "What benchmark does HDFC Flexi Cap Fund use? HDFC Flexi Cap Fund is benchmarked against NIFTY 500 Total Returns Index (TRI), which represents the performance of a broad range of companies across different market capitalisations.",
+          "type": "accordion",
+          "value": "HDFC Flexi Cap Fund is benchmarked against NIFTY 500 Total Returns Index (TRI), which represents the performance of a broad range of companies across different market capitalisations."
         }
       ],
-      "page_title": "HDFC Flexi Cap Direct Plan Growth - NAV, Mutual Fund Performance & Portfolio",
+      "page_title": "HDFC Flexi Cap Fund – Direct Plan | NAV, Returns & SIP | HDFC Mutual Fund",
       "page_type": "scheme_page",
       "pii_scan": "clean",
       "plan": "Direct Growth",
-      "publisher": "Groww",
-      "raw_sha256": "sha256:78615f7c8af7af40be1971b9907873f6b0f87d90238302493eb825bbefacd66c",
-      "scheme_name": "HDFC Equity Fund - Direct Growth",
+      "publisher": "HDFC AMC",
+      "raw_sha256": "sha256:40312ffc4c961c2a7383036013413a57d3dcc6ddc7f3c459846319541eb26b6a",
+      "scheme_name": "HDFC Flexi Cap Fund - Direct Growth",
       "scheme_slug": "hdfc-equity-fund-direct-growth",
       "short_name": "HDFC Flexi Cap",
       "source_fetched_at": "2026-09-27T06:57:21.827Z",
-      "source_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
-      "text_chars": 4275
+      "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct",
+      "text_chars": 4423
     },
     {
       "aliases": [],
       "category": "Large Cap",
       "doc_id": "hdfc-large-cap-fund-direct-growth",
-      "ingested_at": "2026-09-28T15:59:18.004Z",
-      "node_count": 34,
+      "ingested_at": "2026-09-30T09:48:03.768Z",
+      "node_count": 29,
       "nodes": [
         {
-          "label": "Min. for SIP",
+          "label": "Exit Load",
           "order": 0,
           "origin": "dom",
-          "text": "Min. for SIP: ₹100",
+          "text": "Exit Load: In respect of each purchase/switch-in of Units, an Exit Load of 1.00% is payable if Units are redeemed/switched-out within 1 year from the date of allotment. No Exit Load is payable if Units are redeemed/switched-out after 1 year from the date of allotment. No Entry/Exit Load shall be levied on bonus units and units allotted on dividend reinvestment",
           "type": "table_row",
-          "value": "₹100"
+          "value": "In respect of each purchase/switch-in of Units, an Exit Load of 1.00% is payable if Units are redeemed/switched-out within 1 year from the date of allotment. No Exit Load is payable if Units are redeemed/switched-out after 1 year from the date of allotment. No Entry/Exit Load shall be levied on bonus units and units allotted on dividend reinvestment"
         },
         {
-          "label": "Fund size (AUM)",
+          "label": "Product Suitability",
           "order": 1,
           "origin": "dom",
-          "text": "Fund size (AUM): ₹39,933.37 Cr",
+          "text": "Product Suitability: This product is suitable for investors who are seeking~ to generate long-term capital appreciation/income investment predominantly in Large-Cap companies ~Investors should consult their financial advisers if in doubt about whether the product is suitable for them",
           "type": "table_row",
-          "value": "₹39,933.37 Cr"
+          "value": "This product is suitable for investors who are seeking~ to generate long-term capital appreciation/income investment predominantly in Large-Cap companies ~Investors should consult their financial advisers if in doubt about whether the product is suitable for them"
         },
         {
-          "label": "Expense ratio",
+          "label": "Inception Date",
           "order": 2,
           "origin": "dom",
-          "text": "Expense ratio: 1.03%",
+          "text": "Inception Date: 01/01/2013",
           "type": "table_row",
-          "value": "1.03%"
+          "value": "01/01/2013"
         },
         {
-          "label": "Rating",
+          "label": "Riskometer",
           "order": 3,
           "origin": "dom",
-          "text": "Rating: 4",
+          "text": "Riskometer: Very High",
           "type": "table_row",
-          "value": "4"
+          "value": "Very High"
         },
         {
-          "label": "Exit load, stamp duty and tax",
+          "label": "Min SIP",
           "order": 4,
           "origin": "dom",
-          "text": "Exit load, stamp duty and tax: Exit load Exit load of 1% if redeemed within 1 year",
+          "text": "Min SIP: ₹ 100",
           "type": "table_row",
-          "value": "Exit load Exit load of 1% if redeemed within 1 year"
+          "value": "₹ 100"
         },
         {
-          "label": "Exit load, stamp duty and tax",
+          "label": "Ideal for",
           "order": 5,
           "origin": "dom",
-          "text": "Exit load, stamp duty and tax: Exit load of 1% if redeemed within 1 year",
+          "text": "Ideal for: 3 Years and above",
           "type": "table_row",
-          "value": "Exit load of 1% if redeemed within 1 year"
+          "value": "3 Years and above"
         },
         {
-          "label": "Exit load",
+          "label": "Wealth Creation",
           "order": 6,
           "origin": "dom",
-          "text": "Exit load: Stamp duty on investment: 0.005% (from July 1st, 2020) from July 1st 2020",
+          "text": "Wealth Creation: 3 Years and above",
           "type": "table_row",
-          "value": "Stamp duty on investment: 0.005% (from July 1st, 2020) from July 1st 2020"
+          "value": "3 Years and above"
         },
         {
-          "label": "Investment Objective",
+          "label": "Entry Load",
           "order": 7,
           "origin": "dom",
-          "text": "Investment Objective: Fund benchmark NIFTY 100 Total Return Index Scheme Information Document(SID)",
+          "text": "Entry Load: NA",
           "type": "table_row",
-          "value": "Fund benchmark NIFTY 100 Total Return Index Scheme Information Document(SID)"
+          "value": "NA"
         },
         {
-          "label": "Fund benchmark",
+          "label": "TER",
           "order": 8,
           "origin": "dom",
-          "text": "Fund benchmark: NIFTY 100 Total Return Index",
+          "text": "TER: 1.03",
           "type": "table_row",
-          "value": "NIFTY 100 Total Return Index"
+          "value": "1.03"
         },
         {
-          "label": "NAV: 25 Sep '26 ₹1,189.08",
+          "label": "Lock in",
           "order": 9,
-          "origin": "badge",
-          "text": "NAV: 25 Sep '26 ₹1,189.08",
-          "type": "table_row"
-        },
-        {
-          "label": "NAV: 25 Sep '26",
-          "order": 10,
-          "origin": "badge",
-          "text": "NAV: 25 Sep '26",
-          "type": "table_row"
-        },
-        {
-          "label": "Min. for 1st investment ₹100",
-          "order": 11,
-          "origin": "badge",
-          "text": "Min. for 1st investment ₹100",
-          "type": "table_row"
-        },
-        {
-          "label": "Min. for 1st investment",
-          "order": 12,
-          "origin": "badge",
-          "text": "Min. for 1st investment",
-          "type": "table_row"
-        },
-        {
-          "label": "Min. for 2nd investment ₹100",
-          "order": 13,
-          "origin": "badge",
-          "text": "Min. for 2nd investment ₹100",
-          "type": "table_row"
-        },
-        {
-          "label": "Min. for 2nd investment",
-          "order": 14,
-          "origin": "badge",
-          "text": "Min. for 2nd investment",
-          "type": "table_row"
-        },
-        {
-          "label": "Min. for SIP ₹100",
-          "order": 15,
-          "origin": "badge",
-          "text": "Min. for SIP ₹100",
-          "type": "table_row"
-        },
-        {
-          "level": 4,
-          "order": 16,
           "origin": "dom",
-          "text": "Stamp duty on investment: 0.005% (from July 1st, 2020)",
+          "text": "Lock in: NA",
+          "type": "table_row",
+          "value": "NA"
+        },
+        {
+          "label": "NAV (28/09/2026)",
+          "order": 10,
+          "origin": "dom",
+          "text": "NAV (28/09/2026): ₹ 1,170.11",
+          "type": "table_row",
+          "value": "₹ 1,170.11"
+        },
+        {
+          "label": "AUM (31/08/2026)",
+          "order": 11,
+          "origin": "dom",
+          "text": "AUM (31/08/2026): ₹39,933.37 Cr.",
+          "type": "table_row",
+          "value": "₹39,933.37 Cr."
+        },
+        {
+          "label": "Benchmark",
+          "order": 12,
+          "origin": "dom",
+          "text": "Benchmark: NIFTY 100 (Total Return Index)",
+          "type": "table_row",
+          "value": "NIFTY 100 (Total Return Index)"
+        },
+        {
+          "label": "HDFC Large Cap Fund NAV and Historical Performance",
+          "order": 13,
+          "origin": "dom",
+          "text": "HDFC Large Cap Fund NAV and Historical Performance: 1Y",
+          "type": "table_row",
+          "value": "1Y"
+        },
+        {
+          "label": "Benchmark Performance",
+          "order": 14,
+          "origin": "dom",
+          "text": "Benchmark Performance: 3Y",
+          "type": "table_row",
+          "value": "3Y"
+        },
+        {
+          "label": "Click here to view performance of other schemes managed by the Fund Manager(s)",
+          "order": 15,
+          "origin": "dom",
+          "text": "Click here to view performance of other schemes managed by the Fund Manager(s): As on 31 Aug 2026",
+          "type": "table_row",
+          "value": "As on 31 Aug 2026"
+        },
+        {
+          "label": "Benchmark Riskometer",
+          "order": 16,
+          "origin": "badge",
+          "text": "Benchmark Riskometer",
+          "type": "table_row"
+        },
+        {
+          "level": 2,
+          "order": 17,
+          "origin": "dom",
+          "text": "Fund Managers",
           "type": "heading"
         },
         {
-          "level": 4,
-          "order": 17,
+          "level": 2,
+          "order": 18,
           "origin": "dom",
-          "text": "Tax implication",
+          "text": "Portfolio Allocation & Top Holdings",
+          "type": "heading"
+        },
+        {
+          "level": 2,
+          "order": 19,
+          "origin": "dom",
+          "text": "Downloads",
           "type": "heading"
         },
         {
           "level": 3,
-          "order": 18,
+          "order": 20,
           "origin": "dom",
-          "text": "About HDFC Large Cap Fund Direct Growth",
+          "text": "Product Labelling",
           "type": "heading"
         },
         {
-          "order": 19,
-          "origin": "dom",
-          "text": "NAV: 25 Sep '26 ₹1,189.08 Min. for SIP ₹100 Fund size (AUM) ₹39,933.37 Cr Expense ratio 1.03% Rating 4",
-          "type": "paragraph"
-        },
-        {
-          "order": 20,
-          "origin": "dom",
-          "text": "Min. for 1st investment ₹100 Min. for 2nd investment ₹100 Min. for SIP ₹100",
-          "type": "paragraph"
-        },
-        {
+          "level": 3,
           "order": 21,
           "origin": "dom",
-          "text": "If you redeem within one year, returns are taxed at 20%. If you redeem after one year, returns exceeding Rs 1.25 lakh in a financial year are taxed at 12.5%.",
-          "type": "paragraph"
+          "text": "Benchmark Riskometer",
+          "type": "heading"
         },
         {
+          "level": 2,
           "order": 22,
           "origin": "dom",
-          "text": "HDFC Large Cap Fund Direct Growth is a Equity Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Rahul Baijal is the Current Fund Manager of HDFC Large Cap Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,86,237 Cr and the Latest NAV as of 25 Sep 2026 is ₹1,189.08. The HDFC Large Cap Fund Direct Growth is rated Very High risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100. Exit load of 1% if redeemed within 1 year ;",
-          "type": "paragraph"
+          "text": "FAQs",
+          "type": "heading"
         },
         {
           "order": 23,
           "origin": "dom",
-          "text": "The scheme seeks to provide long-term capital appreciation/income by investing predominantly in Large-Cap companies.",
+          "text": "NAV (28/09/2026) ₹ 1,170.11 AUM (31/08/2026) ₹39,933.37 Cr. Benchmark NIFTY 100 (Total Return Index)",
           "type": "paragraph"
         },
         {
           "order": 24,
           "origin": "dom",
-          "text": "Fund benchmark NIFTY 100 Total Return Index Scheme Information Document(SID)",
+          "text": "^Past performance may or may not be sustained in future and is not a guarantee of any future returns. # Nifty 100 TRI ## BSE SENSE... Read More",
+          "type": "paragraph"
+        },
+        {
+          "order": 25,
+          "origin": "dom",
+          "text": "SID - HDFC Large Cap Fund KIM - HDFC Large Cap Fund Leaflet - HDFC Large Cap Fund Fund Facts - HDFC Large Cap Fund",
           "type": "paragraph"
         },
         {
           "level": 3,
-          "order": 25,
+          "order": 26,
           "origin": "jsonld",
           "text": "Frequently asked questions (page data)",
           "type": "heading"
         },
         {
-          "label": "How to Invest in HDFC Large Cap Fund Direct Growth?",
-          "order": 26,
-          "origin": "jsonld",
-          "text": "How to Invest in HDFC Large Cap Fund Direct Growth? You can easily invest in HDFC Large Cap Fund Direct Growth in a hassle-free manner on Groww. The process is extremely simple, quick and completely paperless. Invest in a few minutes with the following steps: Log on to your Groww account Search for HDFC Large Cap Fund Direct Growth from the search box In order to invest, you will have to complete all the KYC formalities which are completely online and paperless and take a few minutes to complete Once you are done with that, you can start investing in HDFC Large Cap Fund Direct Growth as SIP or lumpsum as per your investment objective and risk tolerance",
-          "type": "accordion",
-          "value": "You can easily invest in HDFC Large Cap Fund Direct Growth in a hassle-free manner on Groww. The process is extremely simple, quick and completely paperless. Invest in a few minutes with the following steps: Log on to your Groww account Search for HDFC Large Cap Fund Direct Growth from the search box In order to invest, you will have to complete all the KYC formalities which are completely online and paperless and take a few minutes to complete Once you are done with that, you can start investing in HDFC Large Cap Fund Direct Growth as SIP or lumpsum as per your investment objective and risk tolerance"
-        },
-        {
-          "label": "What kind of returns does HDFC Large Cap Fund Direct Growth provide?",
+          "label": "Who should consider investing in the HDFC Large Cap Fund?",
           "order": 27,
           "origin": "jsonld",
-          "text": "What kind of returns does HDFC Large Cap Fund Direct Growth provide? The HDFC Large Cap Fund Direct Growth has been there from 01 Jan 2013 and the average annual returns provided by this fund is 12.74% since its inception.",
+          "text": "Who should consider investing in the HDFC Large Cap Fund? This product is suitable for investors who are seeking~To generate long-term capital appreciation / incomeInvestment predominantly in Large-cap companies ~ Investors should consult their financial advisers, if in doubt about whether the product is suitable for them",
           "type": "accordion",
-          "value": "The HDFC Large Cap Fund Direct Growth has been there from 01 Jan 2013 and the average annual returns provided by this fund is 12.74% since its inception."
+          "value": "This product is suitable for investors who are seeking~To generate long-term capital appreciation / incomeInvestment predominantly in Large-cap companies ~ Investors should consult their financial advisers, if in doubt about whether the product is suitable for them"
         },
         {
-          "label": "How much expense ratio is charged by HDFC Large Cap Fund Direct Growth?",
+          "label": "How to Invest in HDFC Large Cap Fund?",
           "order": 28,
           "origin": "jsonld",
-          "text": "How much expense ratio is charged by HDFC Large Cap Fund Direct Growth? The term Expense Ratio used for HDFC Large Cap Fund Direct Growth or any other mutual fund is the annual charges one needs to pay to the Mutual Fund company for managing your investments in that fund. The Expense Ratio of HDFC Large Cap Fund Direct Growth is 1.03% as of 27 Sep 2026...",
+          "text": "How to Invest in HDFC Large Cap Fund? Investors can apply for their transactions requests either offline or electronically using the relevant application / transaction request forms available on our website or at any of our Officials Points of Acceptance.The application form/transaction slip for subscription/ redemption/ switches can be submitted at our Official Points of Acceptances whose addresses are available on the website of the AMC. These include:AMC / RTA’s branches i.e. Investor Services Centres*HDFC MF website and App/ RTA website for Investors to transactMFSS/BSE StAR MF/NMF II platforms of the Stock Exchanges(s)Authorized Points of Service of MF Utilities India Private Limited (MFUI)Channel partners/ Distributors/ RIAs/ Portfolio Managers/Execution Only Platforms (EOPs) who have tied up with the AMCMF Central * Note: Business Centres i.e. Sales offices of HDFC AMC are not Official Points of Acceptance of transactions.The above list is indicative. For further details, including cut-off timing and applicability of NAV, refer Section II.Please refer Scheme Documents above for more details",
           "type": "accordion",
-          "value": "The term Expense Ratio used for HDFC Large Cap Fund Direct Growth or any other mutual fund is the annual charges one needs to pay to the Mutual Fund company for managing your investments in that fund. The Expense Ratio of HDFC Large Cap Fund Direct Growth is 1.03% as of 27 Sep 2026..."
-        },
-        {
-          "label": "What is the AUM of HDFC Large Cap Fund Direct Growth?",
-          "order": 29,
-          "origin": "jsonld",
-          "text": "What is the AUM of HDFC Large Cap Fund Direct Growth? The AUM, short for Assets Under Management of HDFC Large Cap Fund Direct Growth is ₹39,933.37Cr as of 27 Sep 2026.",
-          "type": "accordion",
-          "value": "The AUM, short for Assets Under Management of HDFC Large Cap Fund Direct Growth is ₹39,933.37Cr as of 27 Sep 2026."
-        },
-        {
-          "label": "How to Redeem HDFC Large Cap Fund Direct Growth?",
-          "order": 30,
-          "origin": "jsonld",
-          "text": "How to Redeem HDFC Large Cap Fund Direct Growth? If you want to sell your HDFC Large Cap Fund Direct Growth holdings, go to your holding on the app or web and simply click on it. You will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox.",
-          "type": "accordion",
-          "value": "If you want to sell your HDFC Large Cap Fund Direct Growth holdings, go to your holding on the app or web and simply click on it. You will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox."
-        },
-        {
-          "label": "Can I invest in SIP and Lump Sum of HDFC Large Cap Fund Direct Growth?",
-          "order": 31,
-          "origin": "jsonld",
-          "text": "Can I invest in SIP and Lump Sum of HDFC Large Cap Fund Direct Growth? You can select either SIP or Lumpsum investment of HDFC Large Cap Fund Direct Growth based on your investment objective and risk tolerance.",
-          "type": "accordion",
-          "value": "You can select either SIP or Lumpsum investment of HDFC Large Cap Fund Direct Growth based on your investment objective and risk tolerance."
-        },
-        {
-          "label": "What is the NAV of HDFC Large Cap Fund Direct Growth?",
-          "order": 32,
-          "origin": "jsonld",
-          "text": "What is the NAV of HDFC Large Cap Fund Direct Growth? The NAV of HDFC Large Cap Fund Direct Growth is ₹1,189.08 as of 25 Sep 2026.",
-          "type": "accordion",
-          "value": "The NAV of HDFC Large Cap Fund Direct Growth is ₹1,189.08 as of 25 Sep 2026."
-        },
-        {
-          "label": "What is the PE and PB ratio of HDFC Large Cap Fund Direct Growth?",
-          "order": 33,
-          "origin": "jsonld",
-          "text": "What is the PE and PB ratio of HDFC Large Cap Fund Direct Growth? The PE ratio ratio of HDFC Large Cap Fund Direct Growth is determined by dividing the market price by its earnings per share and the PB ratio of the same is evaluated by dividing the stock price per share by its book value per share (BVPS).",
-          "type": "accordion",
-          "value": "The PE ratio ratio of HDFC Large Cap Fund Direct Growth is determined by dividing the market price by its earnings per share and the PB ratio of the same is evaluated by dividing the stock price per share by its book value per share (BVPS)."
+          "value": "Investors can apply for their transactions requests either offline or electronically using the relevant application / transaction request forms available on our website or at any of our Officials Points of Acceptance.The application form/transaction slip for subscription/ redemption/ switches can be submitted at our Official Points of Acceptances whose addresses are available on the website of the AMC. These include:AMC / RTA’s branches i.e. Investor Services Centres*HDFC MF website and App/ RTA website for Investors to transactMFSS/BSE StAR MF/NMF II platforms of the Stock Exchanges(s)Authorized Points of Service of MF Utilities India Private Limited (MFUI)Channel partners/ Distributors/ RIAs/ Portfolio Managers/Execution Only Platforms (EOPs) who have tied up with the AMCMF Central * Note: Business Centres i.e. Sales offices of HDFC AMC are not Official Points of Acceptance of transactions.The above list is indicative. For further details, including cut-off timing and applicability of NAV, refer Section II.Please refer Scheme Documents above for more details"
         }
       ],
-      "page_title": "HDFC Large Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio",
+      "page_title": "HDFC Large Cap Fund – Direct Plan | NAV, Returns & SIP | HDFC Mutual Fund",
       "page_type": "scheme_page",
       "pii_scan": "clean",
       "plan": "Direct Growth",
-      "publisher": "Groww",
-      "raw_sha256": "sha256:f8b8fa3f539695c746684d086343f72146b7ccc65e70ef4816fb68724bd837be",
+      "publisher": "HDFC AMC",
+      "raw_sha256": "sha256:3d101c6a879d9a2814311358228d090a0b9693f2b2b58aaef7c1e5cf1a5ba108",
       "scheme_name": "HDFC Large Cap Fund - Direct Growth",
       "scheme_slug": "hdfc-large-cap-fund-direct-growth",
       "short_name": "HDFC Large Cap",
       "source_fetched_at": "2026-09-27T06:57:19.809Z",
-      "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
-      "text_chars": 4245
+      "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct",
+      "text_chars": 3030
     },
     {
       "aliases": [],
       "category": "Small Cap",
       "doc_id": "hdfc-small-cap-fund-direct-growth",
-      "ingested_at": "2026-09-28T15:59:18.960Z",
-      "node_count": 34,
+      "ingested_at": "2026-09-30T09:48:04.216Z",
+      "node_count": 40,
       "nodes": [
         {
-          "label": "Min. for SIP",
+          "label": "Exit Load",
           "order": 0,
           "origin": "dom",
-          "text": "Min. for SIP: ₹100",
+          "text": "Exit Load: In respect of each purchase / switch-in of Units, an Exit Load of 1.00% is payable if Units are redeemed / switched out within 1 year from the date of allotment. No Exit Load is payable if Units are redeemed / switched out after 1 year from the date of allotment.",
           "type": "table_row",
-          "value": "₹100"
+          "value": "In respect of each purchase / switch-in of Units, an Exit Load of 1.00% is payable if Units are redeemed / switched out within 1 year from the date of allotment. No Exit Load is payable if Units are redeemed / switched out after 1 year from the date of allotment."
         },
         {
-          "label": "Fund size (AUM)",
+          "label": "Product Suitability",
           "order": 1,
           "origin": "dom",
-          "text": "Fund size (AUM): ₹41,890.86 Cr",
+          "text": "Product Suitability: This product is suitable for investors who are seeking~ to generate long-term capital appreciation/income investments predominantly in Small-Cap companies ~Investors should consult their financial advisers if in doubt about whether the product is suitable for them.",
           "type": "table_row",
-          "value": "₹41,890.86 Cr"
+          "value": "This product is suitable for investors who are seeking~ to generate long-term capital appreciation/income investments predominantly in Small-Cap companies ~Investors should consult their financial advisers if in doubt about whether the product is suitable for them."
         },
         {
-          "label": "Expense ratio",
+          "label": "Inception Date",
           "order": 2,
           "origin": "dom",
-          "text": "Expense ratio: 0.78%",
+          "text": "Inception Date: 01/01/2013",
           "type": "table_row",
-          "value": "0.78%"
+          "value": "01/01/2013"
         },
         {
-          "label": "Rating",
+          "label": "Riskometer",
           "order": 3,
           "origin": "dom",
-          "text": "Rating: 3",
+          "text": "Riskometer: Very High",
           "type": "table_row",
-          "value": "3"
+          "value": "Very High"
         },
         {
-          "label": "Exit load, stamp duty and tax",
+          "label": "Min SIP",
           "order": 4,
           "origin": "dom",
-          "text": "Exit load, stamp duty and tax: Exit load Exit load of 1% if redeemed within 1 year",
+          "text": "Min SIP: ₹ 100",
           "type": "table_row",
-          "value": "Exit load Exit load of 1% if redeemed within 1 year"
+          "value": "₹ 100"
         },
         {
-          "label": "Exit load, stamp duty and tax",
+          "label": "Ideal for",
           "order": 5,
           "origin": "dom",
-          "text": "Exit load, stamp duty and tax: Exit load of 1% if redeemed within 1 year",
+          "text": "Ideal for: 3 Years and above",
           "type": "table_row",
-          "value": "Exit load of 1% if redeemed within 1 year"
+          "value": "3 Years and above"
         },
         {
-          "label": "Exit load",
+          "label": "Wealth Creation",
           "order": 6,
           "origin": "dom",
-          "text": "Exit load: Stamp duty on investment: 0.005% (from July 1st, 2020) from July 1st 2020",
+          "text": "Wealth Creation: 3 Years and above",
           "type": "table_row",
-          "value": "Stamp duty on investment: 0.005% (from July 1st, 2020) from July 1st 2020"
+          "value": "3 Years and above"
         },
         {
-          "label": "Investment Objective",
+          "label": "Entry Load",
           "order": 7,
           "origin": "dom",
-          "text": "Investment Objective: Fund benchmark BSE 250 SmallCap Total Return Index",
+          "text": "Entry Load: NA",
           "type": "table_row",
-          "value": "Fund benchmark BSE 250 SmallCap Total Return Index"
+          "value": "NA"
         },
         {
-          "label": "Fund benchmark",
+          "label": "TER",
           "order": 8,
           "origin": "dom",
-          "text": "Fund benchmark: BSE 250 SmallCap Total Return Index",
+          "text": "TER: 0.78",
           "type": "table_row",
-          "value": "BSE 250 SmallCap Total Return Index"
+          "value": "0.78"
         },
         {
-          "label": "NAV: 25 Sep '26 ₹159.82",
+          "label": "Lock in",
           "order": 9,
-          "origin": "badge",
-          "text": "NAV: 25 Sep '26 ₹159.82",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Lock in: NA",
+          "type": "table_row",
+          "value": "NA"
         },
         {
-          "label": "NAV: 25 Sep '26",
+          "label": "NAV (28/09/2026)",
           "order": 10,
-          "origin": "badge",
-          "text": "NAV: 25 Sep '26",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "NAV (28/09/2026): ₹ 157.26",
+          "type": "table_row",
+          "value": "₹ 157.26"
         },
         {
-          "label": "Min. for 1st investment ₹100",
+          "label": "AUM (31/08/2026)",
           "order": 11,
-          "origin": "badge",
-          "text": "Min. for 1st investment ₹100",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "AUM (31/08/2026): ₹41,890.86 Cr.",
+          "type": "table_row",
+          "value": "₹41,890.86 Cr."
         },
         {
-          "label": "Min. for 1st investment",
+          "label": "Benchmark",
           "order": 12,
-          "origin": "badge",
-          "text": "Min. for 1st investment",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Benchmark: BSE 250 SmallCap Index (Total Returns Index)",
+          "type": "table_row",
+          "value": "BSE 250 SmallCap Index (Total Returns Index)"
         },
         {
-          "label": "Min. for 2nd investment ₹100",
+          "label": "HDFC Small Cap Fund NAV and Historical Performance",
           "order": 13,
-          "origin": "badge",
-          "text": "Min. for 2nd investment ₹100",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "HDFC Small Cap Fund NAV and Historical Performance: 1Y",
+          "type": "table_row",
+          "value": "1Y"
         },
         {
-          "label": "Min. for 2nd investment",
+          "label": "Benchmark Performance",
           "order": 14,
-          "origin": "badge",
-          "text": "Min. for 2nd investment",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Benchmark Performance: 3Y",
+          "type": "table_row",
+          "value": "3Y"
         },
         {
-          "label": "Min. for SIP ₹100",
+          "label": "Click here to view performance of other schemes managed by the Fund Manager(s)",
           "order": 15,
-          "origin": "badge",
-          "text": "Min. for SIP ₹100",
-          "type": "table_row"
+          "origin": "dom",
+          "text": "Click here to view performance of other schemes managed by the Fund Manager(s): As on 31 Aug 2026",
+          "type": "table_row",
+          "value": "As on 31 Aug 2026"
         },
         {
-          "level": 4,
+          "label": "SID - HDFC Small Cap Fund",
           "order": 16,
           "origin": "dom",
-          "text": "Stamp duty on investment: 0.005% (from July 1st, 2020)",
-          "type": "heading"
+          "text": "SID - HDFC Small Cap Fund: Note - HDFC Small Cap Fund- August 2026.pdf",
+          "type": "table_row",
+          "value": "Note - HDFC Small Cap Fund- August 2026.pdf"
         },
         {
-          "level": 4,
+          "label": "KIM - HDFC Small Cap Fund",
           "order": 17,
           "origin": "dom",
-          "text": "Tax implication",
-          "type": "heading"
+          "text": "KIM - HDFC Small Cap Fund: Note - HDFC Small Cap Fund- August 2026.pdf",
+          "type": "table_row",
+          "value": "Note - HDFC Small Cap Fund- August 2026.pdf"
         },
         {
-          "level": 3,
+          "label": "Benchmark Riskometer",
           "order": 18,
-          "origin": "dom",
-          "text": "About HDFC Small Cap Fund Direct Growth",
-          "type": "heading"
+          "origin": "badge",
+          "text": "Benchmark Riskometer",
+          "type": "table_row"
         },
         {
+          "level": 2,
           "order": 19,
           "origin": "dom",
-          "text": "NAV: 25 Sep '26 ₹159.82 Min. for SIP ₹100 Fund size (AUM) ₹41,890.86 Cr Expense ratio 0.78% Rating 3",
-          "type": "paragraph"
+          "text": "Fund Managers",
+          "type": "heading"
         },
         {
+          "level": 2,
           "order": 20,
           "origin": "dom",
-          "text": "Min. for 1st investment ₹100 Min. for 2nd investment ₹100 Min. for SIP ₹100",
-          "type": "paragraph"
+          "text": "Portfolio Allocation & Top Holdings",
+          "type": "heading"
         },
         {
+          "level": 2,
           "order": 21,
           "origin": "dom",
-          "text": "If you redeem within one year, returns are taxed at 20%. If you redeem after one year, returns exceeding Rs 1.25 lakh in a financial year are taxed at 12.5%.",
-          "type": "paragraph"
+          "text": "Downloads",
+          "type": "heading"
         },
         {
+          "level": 3,
           "order": 22,
           "origin": "dom",
-          "text": "HDFC Small Cap Fund Direct Growth is a Equity Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Dhruv Muchhal is the Current Fund Manager of HDFC Small Cap Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,86,237 Cr and the Latest NAV as of 25 Sep 2026 is ₹159.82. The HDFC Small Cap Fund Direct Growth is rated Very High risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100. Exit load of 1% if redeemed within 1 year ;",
-          "type": "paragraph"
+          "text": "Product Labelling",
+          "type": "heading"
         },
         {
+          "level": 3,
           "order": 23,
           "origin": "dom",
-          "text": "The scheme seeks to provide long-term capital appreciation /income by investing predominantly in Small-Cap companies.",
+          "text": "Benchmark Riskometer",
+          "type": "heading"
+        },
+        {
+          "level": 2,
+          "order": 24,
+          "origin": "dom",
+          "text": "FAQs",
+          "type": "heading"
+        },
+        {
+          "order": 25,
+          "origin": "dom",
+          "text": "NAV (28/09/2026) ₹ 157.26 AUM (31/08/2026) ₹41,890.86 Cr. Benchmark BSE 250 SmallCap Index (Total Returns Index)",
           "type": "paragraph"
         },
         {
-          "order": 24,
+          "order": 26,
           "origin": "dom",
-          "text": "Fund benchmark BSE 250 SmallCap Total Return Index Scheme Information Document(SID)",
+          "text": "^Past performance may or may not be sustained in future and is not a guarantee of any future returns. # BSE 250 SmallCap Index TRI... Read More",
+          "type": "paragraph"
+        },
+        {
+          "order": 27,
+          "origin": "dom",
+          "text": "SID - HDFC Small Cap Fund KIM - HDFC Small Cap Fund Note - HDFC Small Cap Fund- August 2026.pdf Fund Facts - HDFC Small Cap Fund",
           "type": "paragraph"
         },
         {
           "level": 3,
-          "order": 25,
+          "order": 28,
           "origin": "jsonld",
           "text": "Frequently asked questions (page data)",
           "type": "heading"
         },
         {
-          "label": "How to Invest in HDFC Small Cap Fund Direct Growth?",
-          "order": 26,
-          "origin": "jsonld",
-          "text": "How to Invest in HDFC Small Cap Fund Direct Growth? You can easily invest in HDFC Small Cap Fund Direct Growth in a hassle-free manner on Groww. The process is extremely simple, quick and completely paperless. Invest in a few minutes with the following steps: Log on to your Groww account Search for HDFC Small Cap Fund Direct Growth from the search box In order to invest, you will have to complete all the KYC formalities which are completely online and paperless and take a few minutes to complete Once you are done with that, you can start investing in HDFC Small Cap Fund Direct Growth as SIP or lumpsum as per your investment objective and risk tolerance",
-          "type": "accordion",
-          "value": "You can easily invest in HDFC Small Cap Fund Direct Growth in a hassle-free manner on Groww. The process is extremely simple, quick and completely paperless. Invest in a few minutes with the following steps: Log on to your Groww account Search for HDFC Small Cap Fund Direct Growth from the search box In order to invest, you will have to complete all the KYC formalities which are completely online and paperless and take a few minutes to complete Once you are done with that, you can start investing in HDFC Small Cap Fund Direct Growth as SIP or lumpsum as per your investment objective and risk tolerance"
-        },
-        {
-          "label": "What kind of returns does HDFC Small Cap Fund Direct Growth provide?",
-          "order": 27,
-          "origin": "jsonld",
-          "text": "What kind of returns does HDFC Small Cap Fund Direct Growth provide? The HDFC Small Cap Fund Direct Growth has been there from 01 Jan 2013 and the average annual returns provided by this fund is 18.28% since its inception.",
-          "type": "accordion",
-          "value": "The HDFC Small Cap Fund Direct Growth has been there from 01 Jan 2013 and the average annual returns provided by this fund is 18.28% since its inception."
-        },
-        {
-          "label": "How much expense ratio is charged by HDFC Small Cap Fund Direct Growth?",
-          "order": 28,
-          "origin": "jsonld",
-          "text": "How much expense ratio is charged by HDFC Small Cap Fund Direct Growth? The term Expense Ratio used for HDFC Small Cap Fund Direct Growth or any other mutual fund is the annual charges one needs to pay to the Mutual Fund company for managing your investments in that fund. The Expense Ratio of HDFC Small Cap Fund Direct Growth is 0.78% as of 27 Sep 2026...",
-          "type": "accordion",
-          "value": "The term Expense Ratio used for HDFC Small Cap Fund Direct Growth or any other mutual fund is the annual charges one needs to pay to the Mutual Fund company for managing your investments in that fund. The Expense Ratio of HDFC Small Cap Fund Direct Growth is 0.78% as of 27 Sep 2026..."
-        },
-        {
-          "label": "What is the AUM of HDFC Small Cap Fund Direct Growth?",
+          "label": "What is a small-cap fund?",
           "order": 29,
           "origin": "jsonld",
-          "text": "What is the AUM of HDFC Small Cap Fund Direct Growth? The AUM, short for Assets Under Management of HDFC Small Cap Fund Direct Growth is ₹41,890.86Cr as of 27 Sep 2026.",
+          "text": "What is a small-cap fund? A small-cap fund invests mainly in companies ranked beyond the top 250 by market capitalization.",
           "type": "accordion",
-          "value": "The AUM, short for Assets Under Management of HDFC Small Cap Fund Direct Growth is ₹41,890.86Cr as of 27 Sep 2026."
+          "value": "A small-cap fund invests mainly in companies ranked beyond the top 250 by market capitalization."
         },
         {
-          "label": "How to Redeem HDFC Small Cap Fund Direct Growth?",
+          "label": "Is this fund risky?",
           "order": 30,
           "origin": "jsonld",
-          "text": "How to Redeem HDFC Small Cap Fund Direct Growth? If you want to sell your HDFC Small Cap Fund Direct Growth holdings, go to your holding on the app or web and simply click on it. You will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox.",
+          "text": "Is this fund risky? Small-cap funds tend to be more volatile but may offer higher growth potential over the long term.",
           "type": "accordion",
-          "value": "If you want to sell your HDFC Small Cap Fund Direct Growth holdings, go to your holding on the app or web and simply click on it. You will get two options - redeem & invest more; click on redeem and enter your desired amount or if you wish to redeem the entire holding amount then select the 'redeem all' checkbox."
+          "value": "Small-cap funds tend to be more volatile but may offer higher growth potential over the long term."
         },
         {
-          "label": "Can I invest in SIP and Lump Sum of HDFC Small Cap Fund Direct Growth?",
+          "label": "What is the ideal investment horizon?",
           "order": 31,
           "origin": "jsonld",
-          "text": "Can I invest in SIP and Lump Sum of HDFC Small Cap Fund Direct Growth? You can select either SIP or Lumpsum investment of HDFC Small Cap Fund Direct Growth based on your investment objective and risk tolerance.",
+          "text": "What is the ideal investment horizon? Typically 5 years or more.",
           "type": "accordion",
-          "value": "You can select either SIP or Lumpsum investment of HDFC Small Cap Fund Direct Growth based on your investment objective and risk tolerance."
+          "value": "Typically 5 years or more."
         },
         {
-          "label": "What is the NAV of HDFC Small Cap Fund Direct Growth?",
+          "label": "Can beginners invest?",
           "order": 32,
           "origin": "jsonld",
-          "text": "What is the NAV of HDFC Small Cap Fund Direct Growth? The NAV of HDFC Small Cap Fund Direct Growth is ₹159.82 as of 25 Sep 2026.",
+          "text": "Can beginners invest? Yes, if they understand equity market volatility and invest for long-term goals.",
           "type": "accordion",
-          "value": "The NAV of HDFC Small Cap Fund Direct Growth is ₹159.82 as of 25 Sep 2026."
+          "value": "Yes, if they understand equity market volatility and invest for long-term goals."
         },
         {
-          "label": "What is the PE and PB ratio of HDFC Small Cap Fund Direct Growth?",
+          "label": "SIP or lump sum: which is better?",
           "order": 33,
           "origin": "jsonld",
-          "text": "What is the PE and PB ratio of HDFC Small Cap Fund Direct Growth? The PE ratio ratio of HDFC Small Cap Fund Direct Growth is determined by dividing the market price by its earnings per share and the PB ratio of the same is evaluated by dividing the stock price per share by its book value per share (BVPS).",
+          "text": "SIP or lump sum: which is better? SIP helps average costs and reduce timing risk.",
           "type": "accordion",
-          "value": "The PE ratio ratio of HDFC Small Cap Fund Direct Growth is determined by dividing the market price by its earnings per share and the PB ratio of the same is evaluated by dividing the stock price per share by its book value per share (BVPS)."
+          "value": "SIP helps average costs and reduce timing risk."
+        },
+        {
+          "label": "Does the fund only invest in small caps?",
+          "order": 34,
+          "origin": "jsonld",
+          "text": "Does the fund only invest in small caps? Primarily yes, but it can allocate a portion to large and mid caps for flexibility.",
+          "type": "accordion",
+          "value": "Primarily yes, but it can allocate a portion to large and mid caps for flexibility."
+        },
+        {
+          "label": "Is this suitable for retirement planning?",
+          "order": 35,
+          "origin": "jsonld",
+          "text": "Is this suitable for retirement planning? It can form part of a diversified long-term retirement portfolio but is typically not a standalone option.",
+          "type": "accordion",
+          "value": "It can form part of a diversified long-term retirement portfolio but is typically not a standalone option."
+        },
+        {
+          "label": "What role does this fund play in a portfolio?",
+          "order": 36,
+          "origin": "jsonld",
+          "text": "What role does this fund play in a portfolio? It aims to enhance long-term growth potential within a diversified equity portfolio.",
+          "type": "accordion",
+          "value": "It aims to enhance long-term growth potential within a diversified equity portfolio."
+        },
+        {
+          "label": "What benchmark does HDFC Small Cap Fund track?",
+          "order": 37,
+          "origin": "jsonld",
+          "text": "What benchmark does HDFC Small Cap Fund track? HDFC Small Cap Fund is benchmarked against BSE 250 SmallCap Index (TRI)",
+          "type": "accordion",
+          "value": "HDFC Small Cap Fund is benchmarked against BSE 250 SmallCap Index (TRI)"
+        },
+        {
+          "label": "What is the minimum investment in HDFC Small Cap Fund?",
+          "order": 38,
+          "origin": "jsonld",
+          "text": "What is the minimum investment in HDFC Small Cap Fund? Rs.100/- and any amount thereafter",
+          "type": "accordion",
+          "value": "Rs.100/- and any amount thereafter"
+        },
+        {
+          "label": "How is HDFC Small Cap Fund different from a large-cap fund?",
+          "order": 39,
+          "origin": "jsonld",
+          "text": "How is HDFC Small Cap Fund different from a large-cap fund? A small-cap fund invests primarily in smaller companies, whereas large-cap funds invest mainly in well-established companies with larger market capitalisation. Small-cap funds may offer higher growth potential but can also experience higher volatility.",
+          "type": "accordion",
+          "value": "A small-cap fund invests primarily in smaller companies, whereas large-cap funds invest mainly in well-established companies with larger market capitalisation. Small-cap funds may offer higher growth potential but can also experience higher volatility."
         }
       ],
-      "page_title": "HDFC Small Cap Fund Direct Growth - NAV, Mutual Fund Performance & Portfolio",
+      "page_title": "HDFC Small Cap Fund – Direct Plan | NAV, Returns & SIP | HDFC Mutual Fund",
       "page_type": "scheme_page",
       "pii_scan": "clean",
       "plan": "Direct Growth",
-      "publisher": "Groww",
-      "raw_sha256": "sha256:457091c7ed86b790c81e70a85fae9b911af1d49eeefbcbcba07496a4396941e2",
+      "publisher": "HDFC AMC",
+      "raw_sha256": "sha256:84b619775051dda5930f8f6305a34b94a166e4cc672c19008844f6fc41f81b49",
       "scheme_name": "HDFC Small Cap Fund - Direct Growth",
       "scheme_slug": "hdfc-small-cap-fund-direct-growth",
       "short_name": "HDFC Small Cap",
       "source_fetched_at": "2026-09-27T06:57:25.868Z",
-      "source_url": "https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
-      "text_chars": 4227
+      "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct",
+      "text_chars": 3093
     }
   ],
-  "generated_at": "2026-09-28T15:59:18.968Z",
+  "generated_at": "2026-09-30T09:48:04.222Z",
   "quarantined": []
 }

@@ -3,7 +3,7 @@
     "fact_label_value_separated_pct": 0.0,
     "note": "fact_label_value_separated_pct must be 0.0 - the ADR-001 acceptance test (PRD S20). Non-zero means re-open ADR-001.",
     "prose_below_min_tokens_pct": 0.0,
-    "prose_median_tokens": 243,
+    "prose_median_tokens": 247,
     "semantic_merges_applied": 0
   },
   "fact_key_histogram": {
@@ -21,13 +21,13 @@
     "rating": 5,
     "sip_vs_lumpsum": 5
   },
-  "generated_at": "2026-09-28T15:59:03.847Z",
+  "generated_at": "2026-09-30T09:47:37.388Z",
   "per_scheme": {
     "hdfc-balanced-advantage-fund-direct-growth": {
       "chunks": 24,
       "facts": 22,
-      "max_tokens": 325,
-      "mean_tokens": 44.7,
+      "max_tokens": 328,
+      "mean_tokens": 44.8,
       "median_tokens": 15,
       "min_tokens": 4,
       "prose": 2
@@ -35,8 +35,8 @@
     "hdfc-elss-tax-saver-fund-direct-plan-growth": {
       "chunks": 25,
       "facts": 23,
-      "max_tokens": 283,
-      "mean_tokens": 43.7,
+      "max_tokens": 287,
+      "mean_tokens": 44.6,
       "median_tokens": 13,
       "min_tokens": 4,
       "prose": 2
@@ -44,9 +44,9 @@
     "hdfc-equity-fund-direct-growth": {
       "chunks": 24,
       "facts": 22,
-      "max_tokens": 289,
-      "mean_tokens": 43.8,
-      "median_tokens": 16,
+      "max_tokens": 291,
+      "mean_tokens": 44.0,
+      "median_tokens": 17,
       "min_tokens": 4,
       "prose": 2
     },
@@ -54,17 +54,17 @@
       "chunks": 24,
       "facts": 22,
       "max_tokens": 282,
-      "mean_tokens": 42.5,
-      "median_tokens": 15,
+      "mean_tokens": 42.6,
+      "median_tokens": 16,
       "min_tokens": 4,
       "prose": 2
     },
     "hdfc-small-cap-fund-direct-growth": {
       "chunks": 24,
       "facts": 22,
-      "max_tokens": 279,
+      "max_tokens": 281,
       "mean_tokens": 42.2,
-      "median_tokens": 13,
+      "median_tokens": 14,
       "min_tokens": 4,
       "prose": 2
     }
@@ -77,9 +77,9 @@
   "tokenizer": "tiktoken:cl100k_base",
   "tokens": {
     "cap": 1100,
-    "max": 325,
-    "mean": 43.4,
-    "median": 14,
+    "max": 328,
+    "mean": 43.7,
+    "median": 15,
     "min": 4
   },
   "totals": {
