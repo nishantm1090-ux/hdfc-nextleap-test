@@ -1,323 +1,559 @@
 /*
- * assets/style.css - premium editorial-luxury theme for the HDFC FAQ assistant.
+ * assets/style.css - Apple-inspired fluid interface for the HDFC FAQ assistant.
  *
- * Direction (design-router, L3 = high-end-visual-design "Editorial Luxury"):
- *   warm ivory paper, deep ink navy, brushed bronze accent, serif display type,
- *   hairline bezels, diffused shadows, macro whitespace. Trust + clarity for a
- *   financial brand; nothing glows, nothing shouts.
- *
- * Targets Streamlit 1.64's data-testid DOM. All motion is transform/opacity on
- * a custom cubic-bezier; prefers-reduced-motion collapses it.
+ * System fonts, frosted glass materials, spring-like motion, tactile feedback.
+ * Respects prefers-reduced-motion, prefers-reduced-transparency, prefers-contrast.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 /* ---------------------------------------------------------------------------
- * Tokens
+ * Tokens — Apple-aligned, semantic names
  * ------------------------------------------------------------------------- */
 :root {
-  --paper:        #F6F1E7;   /* warm ivory page ground            */
-  --paper-2:      #FCFAF4;   /* card inner core                   */
-  --shell:        #EFE8D9;   /* card outer bezel                  */
-  --ink:          #1B2541;   /* deep navy ink                     */
-  --ink-soft:     #45506A;   /* muted ink                         */
-  --ink-faint:    #6C7590;   /* faint ink (captions)              */
-  --line:         rgba(27, 37, 65, 0.10);
-  --line-strong:  rgba(27, 37, 65, 0.18);
-  --bronze:       #9C7A2C;   /* brushed bronze accent             */
-  --bronze-deep:  #7E611F;
-  --bronze-wash:  rgba(156, 122, 44, 0.10);
-  --milk:         #F8F4EA;   /* sidebar text on navy              */
-  --sidebar:      #141D35;   /* deep navy sidebar                 */
-  --sidebar-2:    #1B2642;
-  --ease-premium: cubic-bezier(0.32, 0.72, 0, 1);
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body:    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont,
-                  "Segoe UI", system-ui, sans-serif;
+  /* Light mode (default) */
+  --bg-base: #F5F5F7;
+  --bg-elevated: rgba(255, 255, 255, 0.72);
+  --bg-glass: rgba(255, 255, 255, 0.56);
+  --bg-glass-strong: rgba(255, 255, 255, 0.72);
+  --bg-card: rgba(255, 255, 255, 0.8);
+  --ink-primary: #1D1D1F;
+  --ink-secondary: #6E6E73;
+  --ink-tertiary: #86868B;
+  --accent: #0071E3;          /* Apple blue */
+  --accent-hover: #0077ED;
+  --accent-pressed: #005BBB;
+  --accent-focus: rgba(0, 113, 227, 0.4);
+  --divider: rgba(0, 0, 0, 0.08);
+  --divider-strong: rgba(0, 0, 0, 0.16);
+  --shadow-ambient: rgba(0, 0, 0, 0.04);
+  --shadow-elevation: rgba(0, 0, 0, 0.08);
+  --shadow-high: rgba(0, 0, 0, 0.12);
+  --surface-tint: rgba(0, 113, 227, 0.08);
+  --error: #D1242F;
+  --error-bg: rgba(209, 36, 47, 0.1);
+
+  /* Springs — Apple damping/response translated to cubic-bezier */
+  --spring-swift: cubic-bezier(0.25, 0.46, 0.45, 0.94);  /* ~0.35s response, critically damped */
+  --spring-smooth: cubic-bezier(0.32, 0.72, 0, 1);       /* Apple's --ease-premium */
+  --spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);    /* damping ~0.8, slight overshoot */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+
+  /* Border radii — Apple's rounded language */
+  --radius-pill: 999px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --radius-xs: 8px;
+
+  /* Spacing — 4pt grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* Typography — SF Pro system font stack with Plus Jakarta Sans fallback */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Plus Jakarta Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", monospace;
+
+  /* Blur strengths */
+  --blur-ultra: 40px;
+  --blur-strong: 20px;
+  --blur-medium: 12px;
+  --blur-light: 8px;
+}
+
+/* Dark mode — Apple system appearance */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-base: #1D1D1F;
+    --bg-elevated: rgba(28, 28, 30, 0.72);
+    --bg-glass: rgba(28, 28, 30, 0.56);
+    --bg-glass-strong: rgba(28, 28, 30, 0.72);
+    --bg-card: rgba(44, 44, 46, 0.8);
+    --ink-primary: #F5F5F7;
+    --ink-secondary: #98989D;
+    --ink-tertiary: #8E8E93;
+    --accent: #0A84FF;
+    --accent-hover: #409CFF;
+    --accent-pressed: #0060DF;
+    --accent-focus: rgba(10, 132, 255, 0.4);
+    --divider: rgba(255, 255, 255, 0.1);
+    --divider-strong: rgba(255, 255, 255, 0.18);
+    --shadow-ambient: rgba(0, 0, 0, 0.3);
+    --shadow-elevation: rgba(0, 0, 0, 0.4);
+    --shadow-high: rgba(0, 0, 0, 0.5);
+    --surface-tint: rgba(10, 132, 255, 0.15);
+  }
+}
+
+/* High contrast */
+@media (prefers-contrast: more) {
+  :root {
+    --bg-glass: var(--bg-elevated);
+    --bg-glass-strong: var(--bg-elevated);
+    --divider: var(--divider-strong);
+    --shadow-ambient: transparent;
+    --shadow-elevation: transparent;
+  }
+}
+
+/* Reduced transparency — frostier, less blur */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --bg-glass: var(--bg-elevated);
+    --bg-glass-strong: var(--bg-elevated);
+    --blur-ultra: 0;
+    --blur-strong: 0;
+    --blur-medium: 0;
+    --blur-light: 0;
+  }
 }
 
 /* ---------------------------------------------------------------------------
- * Page ground
+ * Global page ground
  * ------------------------------------------------------------------------- */
-
 [data-testid="stAppViewContainer"] {
   background:
-    radial-gradient(1200px 520px at 12% -8%, rgba(156, 122, 44, 0.07), transparent 60%),
-    radial-gradient(900px 480px at 105% 4%, rgba(27, 37, 65, 0.05), transparent 55%),
-    var(--paper);
-  color: var(--ink);
-  font-family: var(--font-body);
+    radial-gradient(800px 400px at 10% -10%, var(--surface-tint), transparent 55%),
+    radial-gradient(600px 300px at 110% 10%, var(--surface-tint), transparent 50%),
+    var(--bg-base);
+  color: var(--ink-primary);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* Hide Streamlit's chrome above the content; the page owns its top edge. */
 [data-testid="stHeader"] { background: transparent; }
 [data-testid="stToolbar"] { display: none; }
 
 [data-testid="stAppViewContainer"] .main,
 [data-testid="stMainBlockContainer"] {
-  padding-top: 2.2rem;
+  padding-top: var(--space-6);
   max-width: 820px;
   margin-inline: auto;
 }
 
 /* ---------------------------------------------------------------------------
- * Typography - editorial serif headings, refined body
+ * Typography — Apple system behavior
  * ------------------------------------------------------------------------- */
+html { font-size: 16px; }
 
 [data-testid="stHeading"] h1,
 .stMarkdown h1 {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 2.5rem;
-  line-height: 1.14;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-  margin: 0.4rem 0 0.6rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+  margin: var(--space-3) 0 var(--space-4);
 }
 
-[data-testid="stHeading"] h2 { color: var(--ink); font-family: var(--font-display); }
+[data-testid="stHeading"] h2 { color: var(--ink-primary); font-weight: 600; letter-spacing: -0.01em; }
+[data-testid="stHeading"] h3 { color: var(--ink-primary); font-weight: 600; }
 
-.stMarkdown h3 { color: var(--ink); }
-
-/* The italic welcome line (*…*) */
+/* Italic welcome line */
 [data-testid="stMainBlockContainer"] p em,
 .stMarkdown em {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-style: italic;
-  font-size: 1.05rem;
-  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink-secondary);
 }
 
-.stMarkdown p { color: var(--ink-soft); line-height: 1.6; }
+.stMarkdown p { color: var(--ink-secondary); line-height: 1.6; }
 
-/* ---------------------------------------------------------------------------
- * The note + disclaimer, set as small-caps eyebrows
- * ------------------------------------------------------------------------- */
-
+/* Captions — eyebrow style */
 [data-testid="stCaptionContainer"] p,
 .stCaption,
 [data-testid="stCaption"] {
-  font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-faint);
-  margin: 0.35rem 0;
+  color: var(--ink-tertiary);
+  margin: var(--space-2) 0;
 }
+
+/* Links — system blue */
+a { color: var(--accent); text-decoration: none; transition: color var(--duration-fast) var(--spring-swift); }
+a:hover { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+/* Code */
+code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-tint); padding: 0.1em 0.4em; border-radius: var(--radius-xs); }
+pre { background: var(--bg-card); border: 1px solid var(--divider); border-radius: var(--radius-md); padding: var(--space-4); overflow: auto; }
 
 /* ---------------------------------------------------------------------------
- * Sidebar - deep navy panel
+ * Sidebar — frosted glass panel
  * ------------------------------------------------------------------------- */
-
 [data-testid="stSidebar"] {
-  background: linear-gradient(180deg, var(--sidebar) 0%, var(--sidebar-2) 100%);
-  border-right: 1px solid rgba(248, 244, 234, 0.06);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.02) 0%, transparent 100%),
+    var(--bg-glass-strong);
+  backdrop-filter: blur(var(--blur-strong)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-strong)) saturate(180%);
+  border-right: 1px solid var(--divider);
 }
-[data-testid="stSidebar"] * { color: var(--milk); }
+
+[data-testid="stSidebar"] * { color: var(--ink-primary); }
 [data-testid="stSidebar"] h1,
 [data-testid="stSidebar"] h2,
-[data-testid="stSidebar"] h3 {
-  font-family: var(--font-display);
-  color: var(--milk);
-}
+[data-testid="stSidebar"] h3 { font-family: var(--font-sans); color: var(--ink-primary); }
+
 [data-testid="stSidebar"] h2,
 [data-testid="stSidebar"] h3 {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  opacity: 0.72;
-  margin-top: 1.6rem;
+  color: var(--ink-tertiary);
+  margin-top: var(--space-6);
 }
-[data-testid="stSidebar"] a { color: #D9B45C; text-decoration: none; }
-[data-testid="stSidebar"] a:hover { color: #EFD48A; }
-[data-testid="stSidebar"] sub { color: rgba(248, 244, 234, 0.55); }
+
+[data-testid="stSidebar"] a { color: var(--accent); }
+[data-testid="stSidebar"] a:hover { color: var(--accent-hover); }
 
 /* ---------------------------------------------------------------------------
- * Chips (example questions + buttons) - pill architecture
+ * Buttons / Chips — tactile, spring-like
  * ------------------------------------------------------------------------- */
-
 [data-testid="stButton"] button {
-  font-family: var(--font-body);
-  font-size: 0.86rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
   font-weight: 600;
-  color: var(--ink);
-  background: var(--paper-2);
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  padding: 0.5rem 1.05rem;
-  box-shadow: 0 1px 2px rgba(27, 37, 65, 0.05),
-              inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  transition: transform 240ms var(--ease-premium),
-              border-color 240ms var(--ease-premium),
-              box-shadow 240ms var(--ease-premium),
-              color 240ms var(--ease-premium);
-}
-[data-testid="stButton"] button:hover {
-  color: var(--bronze-deep);
-  border-color: rgba(156, 122, 44, 0.5);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px -6px rgba(27, 37, 65, 0.22),
-              inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-[data-testid="stButton"] button:active { transform: translateY(0) scale(0.975); }
-[data-testid="stButton"] button:focus-visible {
-  outline: 2px solid var(--bronze);
-  outline-offset: 2px;
+  color: var(--ink-primary);
+  background: var(--bg-glass);
+  backdrop-filter: blur(var(--blur-medium));
+  -webkit-backdrop-filter: blur(var(--blur-medium));
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-5);
+  box-shadow:
+    0 1px 2px var(--shadow-ambient),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  transition:
+    transform 120ms var(--spring-swift),
+    background 120ms var(--spring-swift),
+    border-color 120ms var(--spring-swift),
+    color 120ms var(--spring-swift),
+    box-shadow 120ms var(--spring-swift);
+  cursor: pointer;
 }
 
-/* Sidebar "Rebuild index" - outline pill on navy */
+[data-testid="stButton"] button:hover {
+  background: var(--bg-glass-strong);
+  border-color: var(--divider-strong);
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 12px -4px var(--shadow-elevation),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+[data-testid="stButton"] button:active {
+  transform: scale(0.97);
+  transition-duration: 50ms;
+  background: var(--bg-elevated);
+}
+
+[data-testid="stButton"] button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--accent-focus),
+    0 1px 2px var(--shadow-ambient),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* Primary button variant */
+[data-testid="stButton"] button[kind="primary"],
+[data-testid="stButton"] button[data-kind="primary"] {
+  background: var(--accent);
+  border-color: transparent;
+  color: white;
+}
+[data-testid="stButton"] button[kind="primary"]:hover {
+  background: var(--accent-hover);
+  color: white;
+}
+[data-testid="stButton"] button[kind="primary"]:active {
+  background: var(--accent-pressed);
+}
+
+/* Sidebar button — outline on glass */
 [data-testid="stSidebar"] [data-testid="stButton"] button {
   background: transparent;
-  color: var(--milk);
-  border-color: rgba(248, 244, 234, 0.28);
+  color: var(--ink-primary);
+  border-color: var(--divider-strong);
 }
 [data-testid="stSidebar"] [data-testid="stButton"] button:hover {
-  background: rgba(248, 244, 234, 0.08);
-  color: #EFD48A;
-  border-color: rgba(239, 212, 138, 0.5);
+  background: var(--surface-tint);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 /* ---------------------------------------------------------------------------
- * Chat - double-bezel cards with avatars
+ * Chat messages — Apple Messages-style bubbles
  * ------------------------------------------------------------------------- */
-
 [data-testid="stChatMessage"] {
   background: transparent;
-  padding: 0.25rem 0;
+  padding: var(--space-1) 0;
 }
 
-/* Assistant: ivory core inside a tinted bezel */
+/* Assistant bubble — glass card on elevated surface */
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
-  background: var(--shell);
-  border: 1px solid var(--line);
-  border-radius: 26px;
-  padding: 0.45rem;
-  margin: 0.7rem 0 0.9rem 0.5rem;
-  box-shadow: 0 2px 2px rgba(27, 37, 65, 0.04);
+  background: transparent;
+  margin: var(--space-3) var(--space-2) var(--space-4) var(--space-1);
+  border-radius: var(--radius-lg);
 }
+
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"])
   [data-testid="stChatMessageContent"] {
-  background: var(--paper-2);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9),
-              0 10px 28px -18px rgba(27, 37, 65, 0.35);
-  padding: 0.9rem 1.1rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--blur-strong)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-strong)) saturate(180%);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 2px 4px var(--shadow-ambient),
+    0 8px 24px -12px var(--shadow-elevation),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+  padding: var(--space-4) var(--space-5);
+  animation: messageEnter var(--duration-base) var(--spring-smooth);
 }
 
-/* User: solid ink card, right-aligned */
+@keyframes messageEnter {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* User bubble — accent tinted */
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
   justify-content: flex-end;
-}
-[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"])
-  [data-testid="stChatMessageContent"] {
-  background: var(--ink);
-  color: var(--milk);
-  border-radius: 22px 22px 6px 22px;
-  box-shadow: 0 10px 24px -14px rgba(27, 37, 65, 0.5);
-  max-width: 84%;
-  padding: 0.8rem 1.1rem;
-}
-[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) p {
-  color: var(--milk);
+  margin: var(--space-3) var(--space-1) var(--space-4) var(--space-2);
 }
 
-/* Avatars - quiet roundels */
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"])
+  [data-testid="stChatMessageContent"] {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: white;
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-xs) var(--radius-lg);
+  box-shadow:
+    0 2px 4px var(--shadow-ambient),
+    0 8px 24px -12px var(--shadow-high);
+  max-width: 85%;
+  padding: var(--space-3) var(--space-5);
+  animation: messageEnter var(--duration-base) var(--spring-smooth);
+}
+
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) p {
+  color: white;
+}
+
+/* Avatars — simple, clean */
 [data-testid="stChatMessageAvatarUser"],
 [data-testid="stChatMessageAvatarAssistant"] {
   border-radius: 50%;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--bg-glass);
+  backdrop-filter: blur(var(--blur-medium));
+  border: 1px solid var(--divider);
 }
 
-/* Source link inside an answer - bronze, never blue */
+/* Links inside chat — subtle */
 [data-testid="stChatMessage"] a {
-  color: var(--bronze-deep);
+  color: var(--accent);
   text-decoration: underline;
-  text-decoration-color: rgba(156, 122, 44, 0.45);
-  text-underline-offset: 3px;
-  transition: color 200ms var(--ease-premium);
+  text-decoration-color: var(--accent-focus);
+  text-underline-offset: 2px;
 }
-[data-testid="stChatMessage"] a:hover { color: var(--bronze); }
+[data-testid="stChatMessage"] a:hover { color: var(--accent-hover); }
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) a { color: white; text-decoration-color: rgba(255,255,255,0.5); }
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) a:hover { color: rgba(255,255,255,0.9); }
 
 /* ---------------------------------------------------------------------------
- * Chat input - floating rounded bar
+ * Chat Input — floating pill with spring focus
  * ------------------------------------------------------------------------- */
-
 [data-testid="stChatInput"] {
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  background: var(--paper-2);
-  box-shadow: 0 1px 2px rgba(27, 37, 65, 0.05),
-              inset 0 1px 0 rgba(255, 255, 255, 0.8),
-              0 12px 30px -20px rgba(27, 37, 65, 0.4);
-  transition: box-shadow 260ms var(--ease-premium),
-              border-color 260ms var(--ease-premium);
+  background: var(--bg-glass);
+  backdrop-filter: blur(var(--blur-strong)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-strong)) saturate(180%);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-pill);
+  box-shadow:
+    0 1px 2px var(--shadow-ambient),
+    inset 0 1px 0 rgba(255,255,255,0.6),
+    0 8px 32px -16px var(--shadow-elevation);
+  transition:
+    box-shadow var(--duration-base) var(--spring-swift),
+    border-color var(--duration-base) var(--spring-swift),
+    background var(--duration-base) var(--spring-swift);
 }
+
 [data-testid="stChatInput"]:focus-within {
-  border-color: rgba(156, 122, 44, 0.55);
-  box-shadow: 0 0 0 3px var(--bronze-wash),
-              0 14px 34px -20px rgba(27, 37, 65, 0.45);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 4px var(--accent-focus),
+    inset 0 1px 0 rgba(255,255,255,0.7),
+    0 12px 40px -20px var(--shadow-elevation);
+  background: var(--bg-glass-strong);
 }
+
 [data-testid="stChatInputTextArea"] textarea {
-  color: var(--ink);
-  font-family: var(--font-body);
+  color: var(--ink-primary);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  caret-color: var(--accent);
 }
+
+[data-testid="stChatInputTextArea"] textarea::placeholder {
+  color: var(--ink-tertiary);
+}
+
 [data-testid="stChatInputSubmitButton"] {
-  background: var(--bronze);
+  background: var(--accent);
   border-radius: 50%;
-  transition: transform 220ms var(--ease-premium), background 220ms var(--ease-premium);
+  transition:
+    transform 100ms var(--spring-bouncy),
+    background 100ms var(--spring-swift);
 }
 [data-testid="stChatInputSubmitButton"]:hover {
-  background: var(--bronze-deep);
-  transform: scale(1.06);
+  background: var(--accent-hover);
+  transform: scale(1.08);
+}
+[data-testid="stChatInputSubmitButton"]:active {
+  transform: scale(0.92);
+  background: var(--accent-pressed);
 }
 
 /* ---------------------------------------------------------------------------
- * "Why this answer?" expander - quiet inset card
+ * Expander — quiet disclosure
  * ------------------------------------------------------------------------- */
-
 [data-testid="stExpander"] {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: rgba(252, 250, 244, 0.6);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
+  backdrop-filter: blur(var(--blur-medium));
+  -webkit-backdrop-filter: blur(var(--blur-medium));
   overflow: hidden;
-  transition: border-color 240ms var(--ease-premium);
+  transition: border-color var(--duration-fast) var(--spring-swift), box-shadow var(--duration-fast) var(--spring-swift);
 }
-[data-testid="stExpander"]:hover { border-color: var(--line-strong); }
+[data-testid="stExpander"]:hover { border-color: var(--divider-strong); }
+[data-testid="stExpander"]:focus-within { box-shadow: 0 0 0 3px var(--accent-focus); }
+
 [data-testid="stExpander"] summary {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--ink-soft);
-  padding: 0.6rem 0.9rem;
+  color: var(--ink-secondary);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  list-style: none;
 }
-[data-testid="stExpander"] summary:hover { color: var(--bronze-deep); }
+[data-testid="stExpander"] summary::-webkit-details-marker { display: none; }
+[data-testid="stExpander"] summary::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: var(--space-2);
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform var(--duration-fast) var(--spring-swift);
+}
+[data-testid="stExpander"][open] summary::before { transform: rotate(45deg); }
+[data-testid="stExpander"] summary:hover { color: var(--accent); }
 
-/* Dataframe inside the expander - fit the theme */
+[data-testid="stExpander"] > div:last-child {
+  border-top: 1px solid var(--divider);
+  background: var(--bg-card);
+}
+
+/* Dataframe inside expander */
 [data-testid="stDataFrame"] {
-  border: 1px solid var(--line);
-  border-radius: 12px;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--paper-2);
+  background: var(--bg-card);
+}
+[data-testid="stDataFrame"] table { font-family: var(--font-sans); font-size: 0.8rem; }
+
+/* ---------------------------------------------------------------------------
+ * Alerts / status messages
+ * ------------------------------------------------------------------------- */
+[data-testid="stAlert"] {
+  border-radius: var(--radius-md);
+  border: 1px solid;
+  backdrop-filter: blur(var(--blur-medium));
+}
+[data-testid="stAlert"][kind="info"] { background: var(--surface-tint); border-color: var(--accent); color: var(--accent-pressed); }
+[data-testid="stAlert"][kind="success"] { background: rgba(52, 199, 89, 0.12); border-color: #34C759; color: #1E8030; }
+[data-testid="stAlert"][kind="warning"] { background: rgba(255, 149, 0, 0.12); border-color: #FF9F0A; color: #B85C00; }
+[data-testid="stAlert"][kind="error"] { background: var(--error-bg); border-color: var(--error); color: var(--error); }
+
+/* ---------------------------------------------------------------------------
+ * Spinner — Apple-style indeterminate
+ * ------------------------------------------------------------------------- */
+[data-testid="stSpinner"] > div {
+  border-color: var(--divider) !important;
+  border-top-color: var(--accent) !important;
 }
 
 /* ---------------------------------------------------------------------------
- * Discrete scrollbars
+ * Scrollbars — discrete
  * ------------------------------------------------------------------------- */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-thumb { background: rgba(27, 37, 65, 0.18); border-radius: 8px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(27, 37, 65, 0.3); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--divider-strong); border-radius: var(--radius-pill); border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-tertiary); border: 2px solid transparent; background-clip: content-box; }
 ::-webkit-scrollbar-track { background: transparent; }
 
 /* ---------------------------------------------------------------------------
- * Reduced motion
+ * Reduced motion — collapse all spring motion to instant or simple fade
  * ------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition-duration: 0.01ms !important;
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) [data-testid="stChatMessageContent"],
+  [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
+    animation: none;
+  }
+  [data-testid="stButton"] button,
+  [data-testid="stChatInputSubmitButton"],
+  [data-testid="stExpander"] summary::before {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Print — clean output
+ * ------------------------------------------------------------------------- */
+@media print {
+  [data-testid="stSidebar"],
+  [data-testid="stChatInput"],
+  [data-testid="stButton"],
+  [data-testid="stExpander"] summary { display: none !important; }
+  [data-testid="stAppViewContainer"] { background: white; color: black; }
+  [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) [data-testid="stChatMessageContent"],
+  [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
   }
 }
