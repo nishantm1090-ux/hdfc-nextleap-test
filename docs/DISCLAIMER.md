@@ -37,7 +37,7 @@ date and a price source, and choosing them is an act of authority. The refusal
 text hands over to the published factsheet instead, which has that authority.
 
 **"read all scheme-related documents carefully."** Not boilerplate. The corpus is
-68 chunks scraped from 6 web pages, and a scraped page is a
+67 chunks scraped from 5 web pages, and a scraped page is a
 snapshot: it can be stale, and it is not the scheme's own document. The dated
 `Last updated from sources:` stamp on every answer exists so a reader can see
 how old the snapshot is, and this sentence is why the stamp is there.

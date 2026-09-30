@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-09-28T15:14:46.330Z",
+  "checked_at": "2026-09-30T10:00:17.383Z",
   "collection": "hdfc_mf_faq",
-  "count": 121,
-  "elapsed_seconds": 0.59,
+  "count": 67,
+  "elapsed_seconds": 0.61,
   "embedding_dim": 384,
   "exists": true,
-  "generated_at": "2026-09-28T15:14:46.318Z",
+  "generated_at": "2026-09-30T10:00:17.375Z",
   "hnsw": {
     "metadata": {
       "embedding_dim": 384,
@@ -15,32 +15,31 @@
   },
   "path": "E:\\nextleap cursor project class\\data\\chroma",
   "per_doc_type": {
-    "fact": 81,
-    "faq": 30,
-    "prose": 10
+    "fact": 46,
+    "faq": 6,
+    "prose": 15
   },
   "per_fact_key": {
-    "aum": 10,
-    "benchmark": 5,
-    "exit_load": 15,
-    "expense_ratio": 10,
-    "fund_objective": 5,
-    "how_to_redeem": 5,
-    "lock_in_period": 1,
-    "minimum_investment": 20,
-    "minimum_sip": 10,
-    "nav": 15,
-    "pe_pb_ratio": 5,
-    "rating": 5,
-    "sip_vs_lumpsum": 5
+    "aum": 5,
+    "benchmark": 7,
+    "entry_load": 5,
+    "exit_load": 4,
+    "expense_ratio": 5,
+    "lock_in_period": 5,
+    "minimum_investment": 1,
+    "minimum_sip": 6,
+    "nav": 5,
+    "riskometer_level": 5,
+    "sip_vs_lumpsum": 2,
+    "statement_download": 2
   },
   "per_scheme": {
-    "hdfc-balanced-advantage-fund-direct-growth": 24,
-    "hdfc-elss-tax-saver-fund-direct-plan-growth": 25,
-    "hdfc-equity-fund-direct-growth": 24,
-    "hdfc-large-cap-fund-direct-growth": 24,
-    "hdfc-small-cap-fund-direct-growth": 24
+    "hdfc-balanced-advantage-fund-direct-growth": 13,
+    "hdfc-elss-tax-saver-fund-direct-plan-growth": 13,
+    "hdfc-equity-fund-direct-growth": 15,
+    "hdfc-large-cap-fund-direct-growth": 12,
+    "hdfc-small-cap-fund-direct-growth": 14
   },
   "rebuilt": true,
-  "written": 121
+  "written": 67
 }

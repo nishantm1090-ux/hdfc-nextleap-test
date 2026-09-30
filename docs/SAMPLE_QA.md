@@ -27,7 +27,7 @@ The total expense ratio (TER) for HDFC Large Cap Fund is 1.03%.
 Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct
 
 ```
-Last updated from sources: 2026-09-29
+Last updated from sources: 2026-09-27
 ```
 
 > **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
@@ -43,7 +43,7 @@ The Benchmark for HDFC Flexi Cap Fund is NIFTY 500 Total Returns Index.
 Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct
 
 ```
-Last updated from sources: 2026-09-29
+Last updated from sources: 2026-09-27
 ```
 
 > **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
@@ -59,7 +59,7 @@ The minimum SIP for HDFC ELSS Tax Saver Fund is ₹ 500.
 Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct
 
 ```
-Last updated from sources: 2026-09-29
+Last updated from sources: 2026-09-27
 ```
 
 > **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
@@ -75,7 +75,7 @@ The AUM (assets under management) for HDFC Small Cap Fund is ₹41,890.86 Cr.
 Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct
 
 ```
-Last updated from sources: 2026-09-29
+Last updated from sources: 2026-09-27
 ```
 
 > **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
@@ -91,7 +91,7 @@ The Riskometer for HDFC Balanced Advantage Fund is Very High.
 Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-balanced-advantage-fund/direct
 
 ```
-Last updated from sources: 2026-09-29
+Last updated from sources: 2026-09-27
 ```
 
 > **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
@@ -107,7 +107,7 @@ HDFC Large Cap Fund - Exit Load: In respect of each purchase/switch-in of Units,
 Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct
 
 ```
-Last updated from sources: 2026-09-29
+Last updated from sources: 2026-09-27
 ```
 
 > **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
@@ -123,7 +123,7 @@ The lock-in period for HDFC ELSS Tax Saver Fund is 3 years.
 Source: https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct
 
 ```
-Last updated from sources: 2026-09-29
+Last updated from sources: 2026-09-27
 ```
 
 > **Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
@@ -187,7 +187,7 @@ because nothing in the corpus was used to produce the account it is about.
 ## What the AMC publishes, and what it does not
 
 This corpus is five scheme pages and one statement page from
-`hdfcfund.com` - 68 chunks in total. That is enough for every keyed fact
+`hdfcfund.com` - 67 chunks in total. That is enough for every keyed fact
 above and not enough for a few things a reader might reasonably expect, and the
 honest response to those is the "I couldn't verify that from the available
 official sources" refusal rather than a guess:
