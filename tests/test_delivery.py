@@ -226,6 +226,31 @@ def test_no_source_is_a_broker_a_blog_an_aggregator_or_a_forum():
     assert len(amc) == 6, [r["url"] for r in amc]
     assert {r["publisher"] for r in amc} == {"HDFC AMC"}
 
+    # The committed dumps in data/dump/ are a human-readable view of the build.
+    # They are checked here because they go stale silently: nothing at runtime
+    # reads them, so the corpus swap from Groww to the AMC never touched them.
+    # They sat in the repo claiming 121 groww.in citations while the real store
+    # was 68 hdfcfund.com chunks - a reviewer reading the repo first would
+    # have concluded the corpus was aggregator-sourced, in direct contradiction
+    # of the README. Regenerate with `python -m tools.dump --what all`.
+    for dump in sorted((ROOT / "data" / "dump").glob("*.txt")):
+        hosts = set(re.findall(r"https?://([^/\s)]+)", dump.read_text(encoding="utf-8")))
+        offenders = hosts - {"www.hdfcfund.com", "www.amfiindia.com",
+                             "www.sebi.gov.in", "portal.amfiindia.com",
+                             "files.hdfcfund.com"}
+        assert not offenders, (
+            f"{dump.name} cites {sorted(offenders)} - it is a stale dump from "
+            "before the corpus moved to official sources. "
+            "Run: python -m tools.dump --what all")
+
+    # And the dumps must agree with the store they claim to describe.
+    store_dump = (ROOT / "data" / "dump" / "store.txt").read_text(encoding="utf-8")
+    real = common.read_jsonl(common.path_for("chunks_file"))
+    for c in real:
+        assert c["source_url"] in store_dump, (
+            f"data/dump/store.txt does not mention {c['source_url']} - "
+            "the dump is older than the store")
+
     # Nothing anywhere in the corpus may resolve to a host outside those two.
     corpus_hosts = {re.sub(r"^https?://([^/]+).*$", r"\1", c["source_url"])
                     for c in common.read_jsonl(common.path_for("chunks_file"))}
