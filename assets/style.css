@@ -181,6 +181,19 @@
   line-height: 1.6;
 }
 
+/* Streamlit ships an emotion class on every `stMarkdownContainer` that pins
+ * `font-family: "Source Sans", sans-serif`. It is a class selector on the
+ * element itself, so it beats the inherited font on `stAppViewContainer` and
+ * every paragraph, list item, link and caption in the app rendered in
+ * Source Sans while the headings and buttons around them used the system
+ * stack. Measured: 12 of 17 <p> on the page, across 23 markdown containers.
+ *
+ * There is no `prefers-color-scheme` or specificity trick needed here - the
+ * rule is simply absent from this file, and source order then decides. */
+[data-testid="stMarkdownContainer"] {
+  font-family: var(--font-text);
+}
+
 /* The hero. Large, tight, and the darkest thing on the page. */
 [data-testid="stHeading"] h1,
 [data-testid="stAppViewContainer"] h1 {
@@ -882,17 +895,53 @@ hr {
 [data-testid="stTextInput"] input::placeholder,
 [data-testid="stTextArea"] textarea::placeholder { color: var(--ink-3); }
 
-/* Apple's indeterminate spinner: one blue arc, a soft track, and a fixed
- * size so the page does not reflow when it appears. */
+/* Apple's indeterminate spinner: one blue arc, fixed size so the page does
+ * not reflow when it appears.
+ *
+ * TARGET DOM (Streamlit 1.64, measured - do not "simplify" this):
+ *   div[data-testid=stSpinner]        wrapper
+ *     div                            flex ROW: icon + label
+ *       span[data-testid=stSpinnerIcon]   the circle
+ *       div > div > div[stMarkdownContainer] > p   the LABEL
+ *
+ * The first version of this file styled `stSpinner > div` as though it were
+ * the circle. It is the row that CONTAINS the label, so pinning it to 18x18
+ * crushed the label container to 15px wide and the sentence wrapped one
+ * character per line - 419px tall for one line of text. The icon is
+ * `stSpinnerIcon`; the row must be allowed to size to its content. */
+[data-testid="stSpinner"] {
+  width: auto;
+  height: auto;
+}
+
 [data-testid="stSpinner"] > div {
+  width: auto;
+  height: auto;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+[data-testid="stSpinnerIcon"] {
+  flex: 0 0 auto;
   width: 18px;
   height: 18px;
-  border-width: 2px;
-  border-color: var(--line-2) !important;
-  border-top-color: var(--accent) !important;
 }
+
 [data-testid="stSpinner"] svg { fill: var(--accent); }
-[data-testid="stSpinner"] i { color: var(--ink-2); font-size: 0.875rem; }
+
+/* The label. `nowrap` is deliberate: this is a fixed short string next to a
+ * fixed-size icon, so it should never reflow. If it ever needs to, the icon
+ * shrinks first - see the flex values above. */
+[data-testid="stSpinner"] p {
+  font-family: var(--font-text);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--ink-2);
+  margin: 0;
+  white-space: nowrap;
+  width: auto;
+}
 
 /* Progress */
 [data-testid="stProgress"] > div > div > div {

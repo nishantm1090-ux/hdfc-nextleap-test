@@ -516,6 +516,64 @@ def test_the_composer_is_not_a_light_slab_on_a_dark_panel():
     assert ground, "--ground is not declared, so the fade cannot resolve"
 
 
+def test_the_spinner_label_is_not_squeezed_into_one_letter_per_line():
+    """The reported bug: "Retrieving and checking…" rendered vertically.
+
+    `st.spinner("…")` was styled as `[data-testid="stSpinner"] > div` on the
+    assumption that child was the spinner circle. In Streamlit 1.64 it is the
+    flex ROW that contains the label, so pinning it to 18x18 crushed the label
+    container to 15px wide and the sentence wrapped one character per line -
+    measured at 419px tall for a single line of text.
+
+    Two things must hold, and the second is the one that actually broke:
+      1. the icon is sized via `stSpinnerIcon`
+      2. neither `stSpinner` nor its row is given a fixed width
+    """
+    root = _rule_for("stSpinner")
+    assert root is not None, "assets/style.css no longer styles stSpinner at all"
+    assert not re.search(r"width:\s*\d", root), (
+        f"stSpinner must not be given a fixed width - it holds the label. Got: {root!r}")
+
+    rules = dict()
+    for sels, body in _css_rules():
+        for s in [x.strip() for x in sels.split(",")]:
+            rules.setdefault(s, []).append(body)
+
+    row_bodies = rules.get('[data-testid="stSpinner"] > div', [])
+    assert row_bodies, "the spinner flex row is unstyled - the icon will not sit with the label"
+    for body in row_bodies:
+        assert not re.search(r"width:\s*\d", body), (
+            f"the spinner's flex row must not be given a fixed width. Got: {body!r}")
+
+    icon = rules.get('[data-testid="stSpinnerIcon"]', [])
+    assert icon, ("size the icon via [data-testid=\"stSpinnerIcon\"], not via "
+                  "`stSpinner > div` - the latter is the row that holds the label")
+
+    label = rules.get('[data-testid="stSpinner"] p', [])
+    assert label and any("nowrap" in b for b in label), (
+        "the spinner label must be white-space: nowrap so it cannot reflow")
+
+
+def test_markdown_body_text_is_not_left_in_streamlits_default_font():
+    """Streamlit pins `font-family: "Source Sans"` on every markdown container.
+
+    It is a class selector on the element itself, so it beat the font
+    inherited from `stAppViewContainer` and every paragraph, list item, link
+    and caption rendered in Source Sans while headings and buttons used the
+    system stack. Measured before the fix: 12 of 17 <p> across 23 containers.
+    """
+    bodies = dict()
+    for sels, body in _css_rules():
+        for s in [x.strip() for x in sels.split(",")]:
+            bodies.setdefault(s, []).append(body)
+
+    md = bodies.get('[data-testid="stMarkdownContainer"]', [])
+    assert md, ("assets/style.css must style stMarkdownContainer - Streamlit's "
+                "emotion class pins Source Sans on it and nothing else overrides it")
+    assert any("font-family" in b for b in md), (
+        f"stMarkdownContainer must set font-family. Got: {md!r}")
+
+
 def test_the_page_shows_exactly_three_chips_and_the_scope():
     at = _run()
     chips = [b.label for b in at.button if b.label in UI["example_questions"]]
