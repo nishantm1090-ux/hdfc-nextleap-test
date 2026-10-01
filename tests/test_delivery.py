@@ -260,6 +260,56 @@ def test_the_readme_test_count_is_the_real_one():
         f"the README does not state the real test count ({total})")
 
 
+def test_the_readme_shows_the_deliverables_inline_not_only_as_links():
+    """The brief says: add source list, sample Q&A and disclaimer IN the README.
+
+    Linking them was not enough. The README linked all three files, which meant
+    the only GitHub URL a grader has to open does not itself show any of the
+    three required items - every one of them sat behind a second click. The
+    content is now inlined in the README body.
+
+    This asserts presence of the actual content, not the presence of a link,
+    so "we linked it" can never be mistaken for "we showed it".
+    """
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+    for heading in ("## Source list", "## Sample Q&A", "## Disclaimer"):
+        assert heading in readme, (
+            f"the README has no {heading!r} section - the content is only linked, "
+            "not shown, so the single GitHub URL does not contain the deliverable")
+
+    # 1. Source list: every row of sources.csv, by ref_id, and every URL that is
+    #    actually in the corpus.
+    rows = list(csv.DictReader((ROOT / "sources.csv").open(encoding="utf-8")))
+    missing = [r["ref_id"] for r in rows if r["ref_id"] not in readme]
+    assert not missing, f"these sources are missing from the README: {missing}"
+
+    in_corpus = [r for r in rows if r["in_corpus"] == "yes"]
+    assert in_corpus, "sources.csv marks nothing in_corpus, so the check is vacuous"
+    absent = [r["url"] for r in in_corpus if r["url"] not in readme]
+    assert not absent, f"the URLs the assistant actually cites are missing: {absent}"
+
+    # 2. Sample Q&A: every question, verbatim, not a paraphrase.
+    qa = (ROOT / "sample_qa.md").read_text(encoding="utf-8")
+    questions = re.findall(r"\*\*Question:\*\* (.+)", qa)
+    assert len(questions) >= 10, f"sample_qa.md only has {len(questions)} questions"
+    missing_q = [q for q in questions if q.strip() not in readme]
+    assert not missing_q, f"these sample questions are missing from the README: {missing_q}"
+
+    # 3. Disclaimer: byte-identical to what the code returns, so the README
+    #    cannot show a softer version than the app shows.
+    norm = lambda s: re.sub(r"\s+", " ", s).strip()  # noqa: E731
+    shown = [ln for ln in (ROOT / "disclaimer.md").read_text(encoding="utf-8").splitlines()
+             if ln.startswith("**Facts-only.")]
+    assert shown, "disclaimer.md no longer contains the disclaimer text"
+    assert norm(shown[0]) in norm(readme), (
+        "the disclaimer in the README is not the disclaimer the app shows")
+
+    # The three files must still exist - inlining must not replace them.
+    for name in ("sources.csv", "sample_qa.md", "disclaimer.md"):
+        assert (ROOT / name).is_file(), f"{name} is missing from the repo root"
+
+
 def test_the_readme_eval_headline_matches_the_recorded_run():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     s = json.loads((ROOT / "eval" / "results.json").read_text(encoding="utf-8"))["summary"]

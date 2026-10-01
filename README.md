@@ -353,7 +353,7 @@ columns are reported; the strict one is the number to quote.
 ## Testing
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -q          # 609 tests
+.\.venv\Scripts\python.exe -m pytest -q          # 610 tests
 ```
 
 | Suite | Tests | What it pins |
@@ -413,6 +413,258 @@ were opened and confirmed to resolve, including each scheme's Scheme Information
 Document and Key Information Memorandum as published by HDFC Mutual Fund. It is
 broader than the index on purpose: it is the reading list, not the ingestion
 manifest. `docs/SOURCES.csv` is the ingestion manifest.
+
+---
+
+## Source list
+
+All 23 URLs are official publishers only — **HDFC AMC**, **SEBI**, **AMFI**. No
+broker, aggregator, blog or forum contributes a single fact. Each was opened and
+confirmed to load on 29 September 2026.
+
+**In the corpus** (`in_corpus: yes`) — these 6 are what the assistant actually
+retrieves from:
+
+| Ref | Source | Publisher | Type | URL |
+|---|---|---|---|---|
+| S01 | HDFC Large Cap Fund — Direct Plan | HDFC AMC | scheme page | <https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct> |
+| S02 | HDFC Flexi Cap Fund — Direct Plan | HDFC AMC | scheme page | <https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct> |
+| S03 | HDFC ELSS — Tax Saver Fund Direct Plan | HDFC AMC | scheme page | <https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct> |
+| S04 | HDFC Small Cap Fund — Direct Plan | HDFC AMC | scheme page | <https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct> |
+| S05 | HDFC Balanced Advantage Fund Direct Plan | HDFC AMC | scheme page | <https://www.hdfcfund.com/explore/mutual-funds/hdfc-balanced-advantage-fund/direct> |
+| S06 | Download Consolidated Account Statement | HDFC AMC | AMC service page | <https://www.hdfcfund.com/services/consolidated-account-statement> |
+
+**Reading list** (`in_corpus: no`) — verified official, but not indexed. These are
+the documents a reader should check a figure against:
+
+| Ref | Source | Publisher | Type |
+|---|---|---|---|
+| S07 | Mutual Fund Glossary: A–Z Terms | HDFC AMC | glossary |
+| S08 | HDFC Mutual Fund Short | HDFC AMC | explainer |
+| S09 | Frequently Asked Questions for Investors | HDFC AMC | FAQ page |
+| S10 | Grievances Redressal Mechanism | HDFC AMC | complaint page |
+| S11 | Scheme Information Document — HDFC Large Cap Fund (21 Nov 2025) | HDFC AMC | SID (PDF) |
+| S12 | Scheme Information Document — HDFC Flexi Cap Fund (21 Nov 2025) | HDFC AMC | SID (PDF) |
+| S13 | Scheme Information Document — HDFC ELSS Tax Saver Fund (21 Nov 2025) | HDFC AMC | SID (PDF) |
+| S14 | Scheme Information Document — HDFC Small Cap Fund (21 Nov 2025) | HDFC AMC | SID (PDF) |
+| S15 | Scheme Information Document — HDFC Balanced Advantage Fund (21 Nov 2025) | HDFC AMC | SID (PDF) |
+| S16 | Key Information Memorandum — HDFC Large Cap Fund (21 Nov 2025) | HDFC AMC | KIM (PDF) |
+| S17 | Key Information Memorandum — HDFC Flexi Cap Fund (21 Nov 2025) | HDFC AMC | KIM (PDF) |
+| S18 | Key Information Memorandum — HDFC ELSS Tax Saver Fund (21 Nov 2025) | HDFC AMC | KIM (PDF) |
+| S19 | Key Information Memorandum — HDFC Small Cap Fund (21 Nov 2025) | HDFC AMC | KIM (PDF) |
+| S20 | Key Information Memorandum — HDFC Balanced Advantage Fund (21 Nov 2025) | HDFC AMC | KIM (PDF) |
+| S21 | Mutual Fund — AMFI | AMFI | industry body |
+| S22 | NAVAll.txt — daily NAV feed for all schemes | AMFI | NAV feed |
+| S23 | Mutual Funds — SEBI | SEBI | regulator |
+
+Full machine-readable version with titles, schemes and per-URL purpose:
+[`sources.csv`](sources.csv).
+
+> **Why HDFC pages are not fetched programmatically.** The AMC's WAF returns
+> HTTP 403 to non-browser clients, so `ingest/fetch.py` cannot read
+> `hdfcfund.com`. These pages were captured in a real browser and written into
+> `data/raw/`. This is a fetch-path constraint, not a broken page, and it is
+> documented in `config/sources.yaml`.
+
+---
+
+## Sample Q&A
+
+Ten questions against the running system. Every answer, source link and
+`Last updated from sources` date below was produced by calling the pipeline
+(`rag.answer.ask`) — not typed by hand. Full version with commentary:
+[`sample_qa.md`](sample_qa.md).
+
+**Sources: HDFC Mutual Fund, SEBI and AMFI.** Six of the ten are answered from
+HDFC Mutual Fund's own scheme pages, and every cited link points there. The four
+refusals hand off to SEBI and AMFI's investor-education material.
+
+### 1. Minimum SIP
+
+**Q:** What is the minimum SIP for HDFC Large Cap Direct Growth?
+
+> The minimum SIP for HDFC Large Cap Fund is ₹ 100.
+
+**Source:** <https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct>
+**Last updated from sources:** 2026-09-29
+
+### 2. Expense ratio
+
+**Q:** What is the expense ratio of HDFC ELSS Tax Saver Direct Growth?
+
+> The total expense ratio (TER) for HDFC ELSS Tax Saver Fund is 1.21%.
+
+**Source:** <https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct>
+**Last updated from sources:** 2026-09-29
+
+### 3. Exit load
+
+**Q:** What is the exit load on HDFC Large Cap if I redeem within 1 year?
+
+> HDFC Large Cap Fund - Exit Load: In respect of each purchase/switch-in of
+> Units, an Exit Load of 1.00% is payable if Units are redeemed/switched-out
+> within 1 year from the date of allotment. No Exit Load is payable if Units are
+> redeemed/switched-out after 1 year from the date of allotment.
+
+**Source:** <https://www.hdfcfund.com/explore/mutual-funds/hdfc-large-cap-fund/direct>
+**Last updated from sources:** 2026-09-29
+
+### 4. Benchmark
+
+**Q:** What benchmark does HDFC Flexi Cap Direct Growth track?
+
+> The Benchmark for HDFC Flexi Cap Fund is NIFTY 500 Total Returns Index.
+
+**Source:** <https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/direct>
+**Last updated from sources:** 2026-09-29
+
+### 5. Riskometer
+
+**Q:** What is the riskometer level of HDFC Small Cap Fund?
+
+> The Riskometer for HDFC Small Cap Fund is Very High.
+
+**Source:** <https://www.hdfcfund.com/explore/mutual-funds/hdfc-small-cap-fund/direct>
+**Last updated from sources:** 2026-09-29
+
+### 6. ELSS lock-in
+
+**Q:** What is the lock-in period on HDFC ELSS Tax Saver?
+
+> The lock-in period for HDFC ELSS Tax Saver Fund is 3 years.
+
+**Source:** <https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct>
+**Last updated from sources:** 2026-09-29
+
+### 7. Capital gains statement — refused
+
+**Q:** How do I download my capital gains statement?
+
+> I can't download or send your statements from here — that needs your account
+> login and your personal data. In your HDFC Mutual Fund account
+> (https://www.hdfcfund.com/) you can download your capital gains statement and
+> Consolidated Account Statement. SEBI's investor-education pages
+> (https://www.sebi.gov.in/) and AMFI (https://www.amfiindia.com/) explain how
+> these statements work.
+
+**Refused** — `out_of_corpus`. No citation, because nothing was retrieved. The
+document exists but only behind the holder's own login, so the assistant names
+*where* to get it rather than pretending to produce the data.
+
+### 8. Investment advice — refused
+
+**Q:** Should I buy HDFC Small Cap Fund for my retirement?
+
+> I can share facts from the official pages I use, but I can't tell you whether
+> to buy or sell a scheme — that's investment advice, and it's outside what this
+> assistant does. Here's an official guide to understanding scheme risk instead:
+> https://www.sebi.gov.in/ (investor education)
+
+**Refused** — `refusal_advice`. No citation. The corpus holds all five schemes'
+expense ratios, so it could rank them by cost — and that ranking would itself be
+a recommendation. The numbers are available; the judgement is withheld.
+
+### 9. Returns / comparison — refused
+
+**Q:** How much did HDFC Small Cap Fund return last year?
+
+> I don't compute or compare returns. For a scheme's official performance
+> figures, please use the published factsheets from HDFC Mutual Fund
+> (https://www.hdfcfund.com/) or AMFI (https://www.amfiindia.com/).
+
+**Refused** — `refusal_performance`. No citation. A return needs a start date, an
+end date and a price source, and choosing them is an act of authority this
+assistant does not have. The refusal hands over to the published factsheet,
+which does.
+
+### 10. Personal data — refused
+
+**Q:** My PAN is ABCDE1234F. What is the exit load on HDFC Flexi Cap?
+
+> Please don't share personal identifiers like PAN, Aadhaar, account numbers,
+> OTPs, or contact details here — I can't accept, store, or use them. Scheme
+> facts are all public; ask me anything about expense ratio, exit load, SIP,
+> lock-in, or statements.
+
+**Refused** — `refusal_pii`. No citation. The identifier is not stored, not used
+and not written to any file.
+
+### Also refused — named gaps, not policy
+
+HDFC Mutual Fund does not publish these on a scheme page, so there is nothing to
+retrieve. All four return the same line, verbatim:
+
+> I couldn't verify that from the available official sources.
+
+| Asked | Why |
+|---|---|
+| Fund manager's name | no chunk in the corpus carries that `fact_key` |
+| Portfolio P/E | no chunk in the corpus carries that `fact_key` |
+| Direct vs Regular plan | the page does not state the plan variant as a fact |
+| Minimum lump-sum (any scheme except Small Cap) | the only `minimum_investment` chunk belongs to HDFC Small Cap |
+
+A **policy** refusal would happen even with a perfect corpus — the answer is
+withheld on purpose. A **gap** refusal happens because the source does not carry
+the fact, and `known_absent_terms` in `config/app.yaml` is what lets the
+assistant say so instead of answering the fund-manager question with the expense
+ratio.
+
+### What the corpus can and cannot answer
+
+68 chunks from 5 HDFC scheme pages plus the AMC's Consolidated Account Statement
+page, captured 29 September 2026.
+
+| Asked | Answered |
+|---|---|
+| expense ratio / TER | yes, all five schemes |
+| minimum SIP | yes, all five schemes |
+| exit load | yes, all five schemes |
+| ELSS lock-in | yes |
+| benchmark | yes, all five schemes |
+| NAV, AUM | yes, all five schemes |
+| riskometer level | yes, all five schemes |
+| minimum lump-sum investment | Small Cap only — the only page that publishes it |
+| fund manager, star rating, portfolio P/E | no — not published on a scheme page |
+| Direct vs Regular plan | no — the page does not state it as a fact |
+| returns, rankings, recommendations | no — withheld by policy |
+| your holdings, statements, tax figures | no — requires your login |
+
+**One source per answer, always.** A question that genuinely spans two schemes is
+refused as ambiguous rather than answered from two pages.
+
+---
+
+## Disclaimer
+
+This is the text exactly as the assistant shows it — under every answer, in the UI
+and on the command line. Not a summary of it. Full version with the reasoning
+behind each clause: [`disclaimer.md`](disclaimer.md).
+
+**Facts-only. No investment advice.** This assistant shares publicly available factual information about 5 HDFC mutual fund schemes (Direct Growth plans) from the sources linked in each answer. It does not recommend, compare, or rate schemes, and it does not compute or report returns. Mutual fund investments are subject to market risks; read all scheme-related documents carefully. Sources: HDFC Mutual Fund, SEBI and AMFI.
+
+Three sentences do the work, and each rules out one thing the assistant is built
+not to do:
+
+- **"It does not recommend, compare, or rate schemes."** The corpus holds the
+  expense ratio of all five schemes, so it *could* rank them by cost — and that
+  ranking would be a recommendation, because a lower TER is often the reason a
+  person picks a scheme. The numbers are available. The comparison is withheld.
+- **"It does not compute or report returns."** A return needs a start date, an
+  end date and a price source. Choosing them is an act of authority, and the
+  published factsheets are where that authority sits.
+- **"read all scheme-related documents carefully."** Not boilerplate. The corpus is
+  a snapshot of web pages captured on a single date. NAV, AUM and riskometer
+  levels move without notice, and the AMC edits these pages in place without
+  changing the URL, so a page can be stale with nothing announcing it. The
+  `Last updated from sources:` date on every answer exists so you can see how old
+  the snapshot is.
+
+**This is an independent academic project.** It is not HDFC Mutual Fund, not
+SEBI, not AMFI, and not affiliated with, endorsed by, or connected to any of
+them. It is not a registered investment adviser and it is not a distributor.
+Nothing here is investment advice, a recommendation, or an offer to buy or sell
+any security. Read the scheme's own SID, KIM and monthly factsheet before
+investing, and consider your own circumstances.
 
 ---
 
