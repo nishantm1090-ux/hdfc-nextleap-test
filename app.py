@@ -62,6 +62,23 @@ def _warm() -> None:
 # ---------------------------------------------------------------------------
 
 
+def stylesheet_markup() -> str:
+    """`assets/style.css` wrapped in a `<style>` element.
+
+    WHY NOT `st.html(css_path)`: it looks like the right API and it is not.
+    `st.html` runs its input through DOMPurify, which strips `<style>` on the
+    way in, so the tag never reaches the DOM and the page renders as raw
+    Streamlit defaults. This was verified in a real browser, not assumed -
+    `st.html(Path(...css))` produced zero `<style>` nodes, while the identical
+    markup through `st.markdown(..., unsafe_allow_html=True)` applied fully.
+
+    The stylesheet is a repo asset, not user input, so `unsafe_allow_html` is
+    safe here. Reading it in a helper (rather than inline in `main`) keeps the
+    file I/O testable without a running Streamlit server.
+    """
+    return f"<style>{(Path(__file__).resolve().parent / 'assets' / 'style.css').read_text(encoding='utf-8')}</style>"
+
+
 def body_text(answer: Answer) -> str:
     """The answer paragraph, with any inline `Source: <url>` removed.
 
@@ -252,10 +269,9 @@ def sidebar() -> None:
 
 def main() -> None:
     st.set_page_config(page_title=UI["title"], page_icon="📊", layout="wide")
-    # Premium theme (assets/style.css). st.html wraps a CSS file Path in
-    # <style> and routes style-only content to the event container, so the
-    # stylesheet applies page-wide without occupying layout space.
-    st.html(Path(__file__).resolve().parent / "assets" / "style.css")
+    # The theme, first thing on the page. st.markdown + unsafe_allow_html is
+    # the delivery path on purpose - see stylesheet_markup's docstring.
+    st.markdown(stylesheet_markup(), unsafe_allow_html=True)
     _warm()  # background model+store warm-up; page renders without waiting on it
     sidebar()
 

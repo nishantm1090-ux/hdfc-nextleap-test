@@ -3,7 +3,7 @@
     {
       "aliases": [],
       "doc_id": "amfi-mutual-fund-basics",
-      "ingested_at": "2026-09-30T10:36:30.105Z",
+      "ingested_at": "2026-10-01T06:11:50.211Z",
       "node_count": 37,
       "nodes": [
         {
@@ -269,7 +269,7 @@
       "aliases": [],
       "category": "Balanced Advantage",
       "doc_id": "hdfc-balanced-advantage-fund-direct-growth",
-      "ingested_at": "2026-09-30T10:36:30.199Z",
+      "ingested_at": "2026-10-01T06:11:50.501Z",
       "node_count": 33,
       "nodes": [
         {
@@ -540,7 +540,7 @@
     {
       "aliases": [],
       "doc_id": "hdfc-consolidated-account-statement",
-      "ingested_at": "2026-09-30T10:36:30.240Z",
+      "ingested_at": "2026-10-01T06:11:50.661Z",
       "node_count": 2,
       "nodes": [
         {
@@ -572,7 +572,7 @@
       "aliases": [],
       "category": "ELSS",
       "doc_id": "hdfc-elss-tax-saver-fund-direct-plan-growth",
-      "ingested_at": "2026-09-30T10:36:30.310Z",
+      "ingested_at": "2026-10-01T06:11:51.019Z",
       "node_count": 30,
       "nodes": [
         {
@@ -823,7 +823,7 @@
       ],
       "category": "Flexi Cap",
       "doc_id": "hdfc-equity-fund-direct-growth",
-      "ingested_at": "2026-09-30T10:36:30.416Z",
+      "ingested_at": "2026-10-01T06:11:51.402Z",
       "node_count": 41,
       "nodes": [
         {
@@ -1159,7 +1159,7 @@
       "aliases": [],
       "category": "Large Cap",
       "doc_id": "hdfc-large-cap-fund-direct-growth",
-      "ingested_at": "2026-09-30T10:36:30.489Z",
+      "ingested_at": "2026-10-01T06:11:51.756Z",
       "node_count": 29,
       "nodes": [
         {
@@ -1398,7 +1398,7 @@
       "aliases": [],
       "category": "Small Cap",
       "doc_id": "hdfc-small-cap-fund-direct-growth",
-      "ingested_at": "2026-09-30T10:36:30.596Z",
+      "ingested_at": "2026-10-01T06:11:52.129Z",
       "node_count": 40,
       "nodes": [
         {
@@ -1722,6 +1722,6 @@
       "text_chars": 3093
     }
   ],
-  "generated_at": "2026-09-30T10:36:30.598Z",
+  "generated_at": "2026-10-01T06:11:52.135Z",
   "quarantined": []
 }

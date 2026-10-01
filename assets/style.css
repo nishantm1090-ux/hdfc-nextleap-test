@@ -1,559 +1,1005 @@
 /*
- * assets/style.css - Apple-inspired fluid interface for the HDFC FAQ assistant.
+ * assets/style.css - Apple's product-site design language, applied to the HDFC
+ * FAQ assistant.
  *
- * System fonts, frosted glass materials, spring-like motion, tactile feedback.
- * Respects prefers-reduced-motion, prefers-reduced-transparency, prefers-contrast.
+ * WHAT THIS IS AIMING AT
+ *   apple.com's own product pages, not "iOS chrome": a wide neutral ground
+ *   (#F5F5F7) washed with two very soft colour fields at the top; content in
+ *   pure-white cards separated from that ground by a 1px hairline rather than a
+ *   drop shadow; near-black ink (#1D1D1F) with real weight contrast; one accent
+ *   blue used sparingly, the way Apple uses a link colour; large type set tight
+ *   (-0.02em to -0.04em) so headlines read as a single confident shape; and
+ *   motion that starts from the current value on a spring curve, never a fade
+ *   with no destination.
+ *
+ * RULES THIS FILE FOLLOWS
+ *   1. One accent. #0071E3 is for links and the one primary action. Nothing
+ *      else gets to be blue, because a second blue reads as a mistake.
+ *   2. Hairline before shadow. Depth comes from a border and a wide, very
+ *      low-opacity shadow - never from a tight dark one.
+ *   3. Every interactive thing answers on pointer-down. Hover lifts, press
+ *      compresses, focus-visible shows a 3px blue ring. Nothing is a dead hit
+ *      area.
+ *   4. Motion is transform/opacity only, on a spring curve, and every one of
+ *      them collapses under prefers-reduced-motion.
+ *   5. One appearance, pinned light. See .streamlit/config.toml for why there
+ *      is deliberately no prefers-color-scheme branch here.
+ *
+ * TARGET DOM: Streamlit 1.64 data-testid attributes. Note that Streamlit paints
+ * some of its own surfaces with literals from config.toml, so this file styles
+ * what it can reach and config.toml supplies the matching ground colour.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
 /* ---------------------------------------------------------------------------
- * Tokens — Apple-aligned, semantic names
+ * 1. Tokens
  * ------------------------------------------------------------------------- */
+
 :root {
-  /* Light mode (default) */
-  --bg-base: #F5F5F7;
-  --bg-elevated: rgba(255, 255, 255, 0.72);
-  --bg-glass: rgba(255, 255, 255, 0.56);
-  --bg-glass-strong: rgba(255, 255, 255, 0.72);
-  --bg-card: rgba(255, 255, 255, 0.8);
-  --ink-primary: #1D1D1F;
-  --ink-secondary: #6E6E73;
-  --ink-tertiary: #86868B;
-  --accent: #0071E3;          /* Apple blue */
-  --accent-hover: #0077ED;
-  --accent-pressed: #005BBB;
-  --accent-focus: rgba(0, 113, 227, 0.4);
-  --divider: rgba(0, 0, 0, 0.08);
-  --divider-strong: rgba(0, 0, 0, 0.16);
-  --shadow-ambient: rgba(0, 0, 0, 0.04);
-  --shadow-elevation: rgba(0, 0, 0, 0.08);
-  --shadow-high: rgba(0, 0, 0, 0.12);
-  --surface-tint: rgba(0, 113, 227, 0.08);
-  --error: #D1242F;
-  --error-bg: rgba(209, 36, 47, 0.1);
+  /* Ground + surfaces ---------------------------------------------------- */
+  --ground:            #F5F5F7;   /* the neutral apple.com page               */
+  --surface:           #FFFFFF;   /* card                                     */
+  --surface-sunken:    #FBFBFD;   /* sidebar, table header, inset wells       */
+  --surface-quiet:     #F9F9FB;   /* zebra row, code, hover wash              */
+  --wash-blue:         rgba(0, 113, 227, 0.07);
+  --wash-violet:       rgba(94, 52, 214, 0.06);
 
-  /* Springs — Apple damping/response translated to cubic-bezier */
-  --spring-swift: cubic-bezier(0.25, 0.46, 0.45, 0.94);  /* ~0.35s response, critically damped */
-  --spring-smooth: cubic-bezier(0.32, 0.72, 0, 1);       /* Apple's --ease-premium */
-  --spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);    /* damping ~0.8, slight overshoot */
-  --duration-fast: 150ms;
-  --duration-base: 250ms;
-  --duration-slow: 400ms;
+  /* Ink ------------------------------------------------------------------- */
+  --ink:               #1D1D1F;   /* headings, answer text                     */
+  --ink-2:             #6E6E73;   /* body, captions                           */
+  --ink-3:             #86868B;   /* eyebrows, placeholders, disabled         */
+  --ink-on-accent:     #FFFFFF;
 
-  /* Border radii — Apple's rounded language */
-  --radius-pill: 999px;
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
-  --radius-xs: 8px;
+  /* Hairlines ------------------------------------------------------------- */
+  --line:              rgba(0, 0, 0, 0.08);
+  --line-2:            rgba(0, 0, 0, 0.16);
+  --line-3:            rgba(255, 255, 255, 0.60);
 
-  /* Spacing — 4pt grid */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
+  /* Accent - and nothing else gets one ------------------------------------ */
+  --accent:            #0071E3;
+  --accent-hi:         #0077ED;
+  --accent-down:       #0066CC;
+  --accent-ring:       rgba(0, 113, 227, 0.32);
+  --accent-wash:       rgba(0, 113, 227, 0.08);
 
-  /* Typography — SF Pro system font stack with Plus Jakarta Sans fallback */
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Plus Jakarta Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", monospace;
+  /* System colours, Apple-vendor ------------------------------------------ */
+  --green:             #248A3D;   /* success text on a green wash              */
+  --green-wash:        rgba(52, 199, 89, 0.14);
+  --red:               #D70015;
+  --red-wash:          rgba(215, 0, 21, 0.09);
+  --orange:            #B25000;
+  --orange-wash:       rgba(255, 149, 0, 0.14);
 
-  /* Blur strengths */
-  --blur-ultra: 40px;
-  --blur-strong: 20px;
-  --blur-medium: 12px;
-  --blur-light: 8px;
+  /* Elevation: wide + very faint. A tight dark shadow is the cheap look. --- */
+  --lift-0:            0 1px 2px rgba(0, 0, 0, 0.04);
+  --lift-1:            0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px -12px rgba(0, 0, 0, 0.10);
+  --lift-2:            0 2px 6px rgba(0, 0, 0, 0.05), 0 18px 44px -20px rgba(0, 0, 0, 0.16);
+  --lift-3:            0 4px 12px rgba(0, 0, 0, 0.07), 0 32px 72px -28px rgba(0, 0, 0, 0.22);
+
+  /* Spring curves. Apple ships damped springs; these are the two closest
+   * cubic-bezier approximations, plus one overshoot for the send button.   */
+  --spring:            cubic-bezier(0.32, 0.72, 0, 1);       /* the workhorse */
+  --spring-soft:       cubic-bezier(0.25, 0.46, 0.45, 0.94); /* quick, calm   */
+  --spring-pop:        cubic-bezier(0.34, 1.56, 0.64, 1);    /* slight overshoot */
+  --t-tap:             90ms;
+  --t-fast:            160ms;
+  --t-base:            260ms;
+  --t-slow:            420ms;
+
+  /* Geometry - Apple's radii run large ------------------------------------ */
+  --r-xs:              8px;
+  --r-sm:              12px;
+  --r-md:              16px;
+  --r-lg:              20px;
+  --r-xl:              28px;
+  --r-pill:            980px;
+
+  /* Type. No webfont: Apple's stack resolves to SF on Apple platforms and to
+   * Segoe UI Variable on Windows, which is the same idea. Shipping a
+   * Google-Fonts "Apple-alike" would look like an impersonation, not a copy. */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                  "Segoe UI Variable Display", "Segoe UI", Roboto,
+                  "Helvetica Neue", Arial, sans-serif;
+  --font-text:    -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                  "Segoe UI Variable Text", "Segoe UI", Roboto,
+                  "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+                  "Liberation Mono", monospace;
+
+  /* 8pt rhythm ------------------------------------------------------------ */
+  --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+  --s-5: 24px;  --s-6: 32px;  --s-7: 44px;  --s-8: 64px;
 }
 
-/* Dark mode — Apple system appearance */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-base: #1D1D1F;
-    --bg-elevated: rgba(28, 28, 30, 0.72);
-    --bg-glass: rgba(28, 28, 30, 0.56);
-    --bg-glass-strong: rgba(28, 28, 30, 0.72);
-    --bg-card: rgba(44, 44, 46, 0.8);
-    --ink-primary: #F5F5F7;
-    --ink-secondary: #98989D;
-    --ink-tertiary: #8E8E93;
-    --accent: #0A84FF;
-    --accent-hover: #409CFF;
-    --accent-pressed: #0060DF;
-    --accent-focus: rgba(10, 132, 255, 0.4);
-    --divider: rgba(255, 255, 255, 0.1);
-    --divider-strong: rgba(255, 255, 255, 0.18);
-    --shadow-ambient: rgba(0, 0, 0, 0.3);
-    --shadow-elevation: rgba(0, 0, 0, 0.4);
-    --shadow-high: rgba(0, 0, 0, 0.5);
-    --surface-tint: rgba(10, 132, 255, 0.15);
-  }
-}
+/* Honour the OS accessibility switches that do NOT split the palette. Dark
+ * mode is absent on purpose - see the note in .streamlit/config.toml. */
 
-/* High contrast */
-@media (prefers-contrast: more) {
-  :root {
-    --bg-glass: var(--bg-elevated);
-    --bg-glass-strong: var(--bg-elevated);
-    --divider: var(--divider-strong);
-    --shadow-ambient: transparent;
-    --shadow-elevation: transparent;
-  }
-}
-
-/* Reduced transparency — frostier, less blur */
 @media (prefers-reduced-transparency: reduce) {
   :root {
-    --bg-glass: var(--bg-elevated);
-    --bg-glass-strong: var(--bg-elevated);
-    --blur-ultra: 0;
-    --blur-strong: 0;
-    --blur-medium: 0;
-    --blur-light: 0;
+    --wash-blue: transparent;
+    --wash-violet: transparent;
+    --line: rgba(0, 0, 0, 0.20);
+    --line-2: rgba(0, 0, 0, 0.32);
+  }
+  .glass { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --ink-2: #3A3A3C;
+    --ink-3: #565659;
+    --line: rgba(0, 0, 0, 0.34);
+    --line-2: rgba(0, 0, 0, 0.56);
+    --lift-0: 0 0 0 1px rgba(0, 0, 0, 0.30);
+    --lift-1: 0 0 0 1px rgba(0, 0, 0, 0.34);
+    --lift-2: 0 0 0 1px rgba(0, 0, 0, 0.38);
+    --lift-3: 0 0 0 1px rgba(0, 0, 0, 0.42);
   }
 }
 
-/* ---------------------------------------------------------------------------
- * Global page ground
- * ------------------------------------------------------------------------- */
+/* =========================================================================
+ * 2. The page ground
+ * ====================================================================== */
+
 [data-testid="stAppViewContainer"] {
   background:
-    radial-gradient(800px 400px at 10% -10%, var(--surface-tint), transparent 55%),
-    radial-gradient(600px 300px at 110% 10%, var(--surface-tint), transparent 50%),
-    var(--bg-base);
-  color: var(--ink-primary);
-  font-family: var(--font-sans);
+    radial-gradient(1100px 620px at 12% -8%,  var(--wash-blue),   transparent 62%),
+    radial-gradient(900px  520px at 92% -4%,   var(--wash-violet), transparent 60%),
+    var(--ground);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-synthesis-weight: none;
 }
 
-[data-testid="stHeader"] { background: transparent; }
-[data-testid="stToolbar"] { display: none; }
-
-[data-testid="stAppViewContainer"] .main,
-[data-testid="stMainBlockContainer"] {
-  padding-top: var(--space-6);
-  max-width: 820px;
-  margin-inline: auto;
+/* The header bar is a fixed-height glass shelf. Let the ground show through. */
+[data-testid="stHeader"] {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
-/* ---------------------------------------------------------------------------
- * Typography — Apple system behavior
- * ------------------------------------------------------------------------- */
-html { font-size: 16px; }
+/* Reading measure. A chat transcript wants to be a column, not a 1920px
+ * ribbon - long lines are the fastest way to make an app feel unfinished. */
+[data-testid="stMainBlockContainer"],
+[data-testid="stAppViewContainer"] .main {
+  max-width: 780px;
+  padding-top: var(--s-4);
+  padding-bottom: 190px;   /* clear the fixed composer                 */
+}
 
+/* =========================================================================
+ * 3. Typography
+ * ====================================================================== */
+
+[data-testid="stAppViewContainer"] p,
+[data-testid="stAppViewContainer"] li {
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+/* The hero. Large, tight, and the darkest thing on the page. */
 [data-testid="stHeading"] h1,
-.stMarkdown h1 {
-  font-family: var(--font-sans);
+[data-testid="stAppViewContainer"] h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5.4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  margin: var(--s-2) 0 var(--s-3);
+  /* One-time settle on load, so the page arrives rather than assembles. */
+  animation: rise var(--t-slow) var(--spring) both;
+}
+
+/* The subtitle line Streamlit renders as <em>. Apple's deck line: same size as
+ * body, secondary ink, tight. Not italic - italic reads as a quotation. */
+[data-testid="stMainBlockContainer"] em,
+[data-testid="stChatMessage"] em {
+  font-family: var(--font-text);
+  font-style: normal;
+  font-size: 1.125rem;
+  line-height: 1.45;
+  letter-spacing: -0.012em;
+  color: var(--ink-2);
+}
+
+[data-testid="stAppViewContainer"] h2,
+[data-testid="stHeading"] h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
   font-weight: 600;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  line-height: 1.12;
   letter-spacing: -0.02em;
-  color: var(--ink-primary);
-  margin: var(--space-3) 0 var(--space-4);
+  color: var(--ink);
+  margin: var(--s-6) 0 var(--s-3);
 }
 
-[data-testid="stHeading"] h2 { color: var(--ink-primary); font-weight: 600; letter-spacing: -0.01em; }
-[data-testid="stHeading"] h3 { color: var(--ink-primary); font-weight: 600; }
-
-/* Italic welcome line */
-[data-testid="stMainBlockContainer"] p em,
-.stMarkdown em {
-  font-family: var(--font-sans);
-  font-style: italic;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--ink-secondary);
+[data-testid="stAppViewContainer"] h3,
+[data-testid="stHeading"] h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: var(--s-5) 0 var(--s-2);
 }
 
-.stMarkdown p { color: var(--ink-secondary); line-height: 1.6; }
-
-/* Captions — eyebrow style */
-[data-testid="stCaptionContainer"] p,
+/* Eyebrow / caption. Small, uppercase, wide-tracked, tertiary - Apple's
+ * metadata register. Used for the header note, the "Last updated" stamp and
+ * the disclaimer, so all three read as one family. */
+[data-testid="stCaptionContainer"],
+[data-testid="stCaption"],
 .stCaption,
-[data-testid="stCaption"] {
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
+[data-testid="stAppViewContainer"] small {
+  font-family: var(--font-text);
+  font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  line-height: 1.45;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-tertiary);
-  margin: var(--space-2) 0;
+  color: var(--ink-3);
 }
 
-/* Links — system blue */
-a { color: var(--accent); text-decoration: none; transition: color var(--duration-fast) var(--spring-swift); }
-a:hover { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 2px; }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+[data-testid="stCaptionContainer"] {
+  margin: var(--s-2) 0;
+}
 
-/* Code */
-code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-tint); padding: 0.1em 0.4em; border-radius: var(--radius-xs); }
-pre { background: var(--bg-card); border: 1px solid var(--divider); border-radius: var(--radius-md); padding: var(--space-4); overflow: auto; }
+/* The `p` inside the caption container carries Streamlit's own colour, so
+ * styling the container alone silently does nothing. Target the paragraph. */
+[data-testid="stCaptionContainer"] p,
+[data-testid="stCaptionContainer"] span,
+[data-testid="stCaptionContainer"] div {
+  font-family: var(--font-text);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3) !important;
+}
 
-/* ---------------------------------------------------------------------------
- * Sidebar — frosted glass panel
- * ------------------------------------------------------------------------- */
+/* The disclaimer is the one long uppercase run on the page. It is a legal
+ * line, not a headline - drop the tracking and the caps so it stays readable. */
+[data-testid="stMainBlockContainer"] > [data-testid="stCaptionContainer"] p {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+/* Links: Apple's underline-appears-on-hover. Never a permanently underlined
+ * paragraph. */
+[data-testid="stAppViewContainer"] a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--t-fast) var(--spring-soft);
+}
+[data-testid="stAppViewContainer"] a:hover {
+  color: var(--accent-hi);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+[data-testid="stAppViewContainer"] a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--r-xs);
+  text-decoration: none;
+}
+
+code, kbd {
+  font-family: var(--font-mono);
+  font-size: 0.8125em;
+  background: var(--surface-quiet);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs);
+  padding: 0.1em 0.38em;
+  color: var(--ink);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: var(--s-6) 0;
+}
+
+/* =========================================================================
+ * 4. Sidebar - a sunken surface, not a second page
+ * ====================================================================== */
+
 [data-testid="stSidebar"] {
-  background:
-    linear-gradient(180deg, rgba(0,0,0,0.02) 0%, transparent 100%),
-    var(--bg-glass-strong);
-  backdrop-filter: blur(var(--blur-strong)) saturate(180%);
-  -webkit-backdrop-filter: blur(var(--blur-strong)) saturate(180%);
-  border-right: 1px solid var(--divider);
+  background: var(--surface-sunken);
+  border-right: 1px solid var(--line);
+  box-shadow: none;
 }
 
-[data-testid="stSidebar"] * { color: var(--ink-primary); }
+[data-testid="stSidebarUserContent"],
+[data-testid="stSidebarContent"] {
+  padding: var(--s-5) var(--s-5) var(--s-6);
+}
+
+[data-testid="stSidebar"] [data-testid="stAppViewContainer"] p,
+[data-testid="stSidebar"] p {
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
 [data-testid="stSidebar"] h1,
-[data-testid="stSidebar"] h2,
-[data-testid="stSidebar"] h3 { font-family: var(--font-sans); color: var(--ink-primary); }
-
-[data-testid="stSidebar"] h2,
-[data-testid="stSidebar"] h3 {
-  font-size: 0.68rem;
+[data-testid="stSidebar"] [data-testid="stHeading"] h1 {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 var(--s-3);
+}
+
+/* Sidebar subheaders ("Sources", "Corpus", "Maintenance") become section
+ * labels: small, tracked, tertiary, with a hairline under them. This is the
+ * single biggest readability win in a long sidebar. */
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] [data-testid="stHeading"] h3,
+[data-testid="stSidebar"] h2 {
+  font-family: var(--font-text);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-tertiary);
-  margin-top: var(--space-6);
+  color: var(--ink-3);
+  margin: var(--s-6) 0 var(--s-2);
+  padding-bottom: var(--s-2);
+  border-bottom: 1px solid var(--line);
 }
+[data-testid="stSidebar"] h3:first-of-type { margin-top: var(--s-4); }
 
-[data-testid="stSidebar"] a { color: var(--accent); }
-[data-testid="stSidebar"] a:hover { color: var(--accent-hover); }
+[data-testid="stSidebar"] ul,
+[data-testid="stSidebar"] ol {
+  padding-left: 1.1em;
+  margin: 0 0 var(--s-2);
+}
+[data-testid="stSidebar"] li { margin-bottom: 2px; }
 
-/* ---------------------------------------------------------------------------
- * Buttons / Chips — tactile, spring-like
- * ------------------------------------------------------------------------- */
-[data-testid="stButton"] button {
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--ink-primary);
-  background: var(--bg-glass);
-  backdrop-filter: blur(var(--blur-medium));
-  -webkit-backdrop-filter: blur(var(--blur-medium));
-  border: 1px solid var(--divider);
-  border-radius: var(--radius-pill);
-  padding: var(--space-2) var(--space-5);
-  box-shadow:
-    0 1px 2px var(--shadow-ambient),
-    inset 0 1px 0 rgba(255,255,255,0.6);
-  transition:
-    transform 120ms var(--spring-swift),
-    background 120ms var(--spring-swift),
-    border-color 120ms var(--spring-swift),
-    color 120ms var(--spring-swift),
-    box-shadow 120ms var(--spring-swift);
+[data-testid="stSidebar"] strong { color: var(--ink); font-weight: 600; }
+
+/* =========================================================================
+ * 5. Buttons and chips
+ *
+ * One shape for every button in the app: a card with a hairline. Hover lifts,
+ * press compresses, focus shows a ring. The answer arrives on pointer-down,
+ * which is what makes it feel like it responds to you.
+ * ====================================================================== */
+
+[data-testid="stButton"] button,
+[data-testid="stDownloadButton"] button,
+[data-testid="stFormSubmitButton"] button {
+  font-family: var(--font-text);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--s-3) var(--s-5);
+  min-height: 44px;                       /* touch target                */
+  box-shadow: var(--lift-0);
   cursor: pointer;
+  transition:
+    transform    var(--t-fast) var(--spring),
+    box-shadow   var(--t-fast) var(--spring),
+    background   var(--t-fast) var(--spring),
+    border-color var(--t-fast) var(--spring),
+    color        var(--t-fast) var(--spring);
 }
 
-[data-testid="stButton"] button:hover {
-  background: var(--bg-glass-strong);
-  border-color: var(--divider-strong);
+[data-testid="stButton"] button:hover,
+[data-testid="stDownloadButton"] button:hover,
+[data-testid="stFormSubmitButton"] button:hover {
+  background: var(--surface);
+  border-color: var(--line-2);
+  color: var(--accent);
   transform: translateY(-1px);
-  box-shadow:
-    0 4px 12px -4px var(--shadow-elevation),
-    inset 0 1px 0 rgba(255,255,255,0.7);
+  box-shadow: var(--lift-1);
 }
 
-[data-testid="stButton"] button:active {
-  transform: scale(0.97);
-  transition-duration: 50ms;
-  background: var(--bg-elevated);
+[data-testid="stButton"] button:active,
+[data-testid="stDownloadButton"] button:active,
+[data-testid="stFormSubmitButton"] button:active {
+  transform: translateY(0) scale(0.975);
+  box-shadow: var(--lift-0);
+  border-color: var(--accent-ring);
+  background: var(--accent-wash);
+  color: var(--accent-down);
+  transition-duration: var(--t-tap);
 }
 
-[data-testid="stButton"] button:focus-visible {
+[data-testid="stButton"] button:focus-visible,
+[data-testid="stDownloadButton"] button:focus-visible,
+[data-testid="stFormSubmitButton"] button:focus-visible {
   outline: none;
-  box-shadow:
-    0 0 0 3px var(--accent-focus),
-    0 1px 2px var(--shadow-ambient),
-    inset 0 1px 0 rgba(255,255,255,0.6);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+  color: var(--accent);
 }
 
-/* Primary button variant */
+/* Primary: the one place the accent is a fill. */
 [data-testid="stButton"] button[kind="primary"],
-[data-testid="stButton"] button[data-kind="primary"] {
+[data-testid="stButton"] button[data-testid="stBaseButton-primary"],
+.stButton button[kind="primary"] {
   background: var(--accent);
   border-color: transparent;
-  color: white;
+  color: var(--ink-on-accent);
 }
 [data-testid="stButton"] button[kind="primary"]:hover {
-  background: var(--accent-hover);
-  color: white;
+  background: var(--accent-hi);
+  color: var(--ink-on-accent);
+  box-shadow: var(--lift-2);
 }
 [data-testid="stButton"] button[kind="primary"]:active {
-  background: var(--accent-pressed);
+  background: var(--accent-down);
+  color: var(--ink-on-accent);
 }
 
-/* Sidebar button — outline on glass */
-[data-testid="stSidebar"] [data-testid="stButton"] button {
-  background: transparent;
-  color: var(--ink-primary);
-  border-color: var(--divider-strong);
+/* -------------------------------------------------------------------------
+ * 5b. The three example-question chips
+ *
+ * These are the first thing a new visitor touches, so they get card treatment
+ * rather than button treatment: left-aligned, taller, and a real text block so
+ * the question is readable before it is clicked. Each one is a full-width cell
+ * in a 3-up grid, so they carry equal weight.
+ * ---------------------------------------------------------------------- */
+
+[data-testid="stHorizontalBlock"] {
+  gap: var(--s-3);
+  margin-top: var(--s-5);
+  margin-bottom: var(--s-5);
 }
-[data-testid="stSidebar"] [data-testid="stButton"] button:hover {
-  background: var(--surface-tint);
+
+[data-testid="stHorizontalBlock"] [data-testid="stButton"] { flex: 1 1 0; }
+
+[data-testid="stHorizontalBlock"] [data-testid="stButton"] button {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  white-space: normal;
+  height: 100%;
+  min-height: 76px;
+  padding: var(--s-4);
+  border-radius: var(--r-lg);
+  box-shadow: var(--lift-0);
+  color: var(--ink);
+}
+[data-testid="stHorizontalBlock"] [data-testid="stButton"] button:hover {
+  border-color: var(--accent);
   color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--lift-2);
+}
+[data-testid="stHorizontalBlock"] [data-testid="stButton"] button:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: var(--lift-0);
   border-color: var(--accent);
 }
 
-/* ---------------------------------------------------------------------------
- * Chat messages — Apple Messages-style bubbles
- * ------------------------------------------------------------------------- */
-[data-testid="stChatMessage"] {
+/* =========================================================================
+ * 6. The composer
+ *
+ * This is the bug the redesign had to fix. Streamlit puts the chat input in a
+ * FIXED bottom container and paints that container itself; a stylesheet that
+ * only styles the input therefore paints a floating light slab on top of
+ * whatever the ground behind it happens to be. Both are styled below, in the
+ * same palette, in the same file - the bar fades into the page instead of
+ * sitting on it, and the input is a white card on top of that fade.
+ * ====================================================================== */
+
+[data-testid="stBottom"],
+[data-testid="stBottom"] > div,
+[data-testid="stBottom"] > div > div {
   background: transparent;
-  padding: var(--space-1) 0;
 }
 
-/* Assistant bubble — glass card on elevated surface */
-[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
+/* The fade. Transparent at the top so the transcript shows through, opaque
+ * ground at the bottom where the card sits. */
+[data-testid="stBottom"]::before {
+  content: "";
+  position: absolute;
+  inset: -64px 0 0 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(245, 245, 247, 0)    0%,
+    rgba(245, 245, 247, 0.72) 42%,
+    rgba(245, 245, 247, 0.94) 78%,
+    var(--ground)               100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-testid="stChatInput"] {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--lift-3);
+  padding: var(--s-1);
+  transition:
+    border-color var(--t-base) var(--spring),
+    box-shadow   var(--t-base) var(--spring);
+}
+
+/* Focus: the whole card lights up, not just a 1px inner border. This is the
+ * spring moment - the ring expands from the current radius, so it reads as one
+ * object changing shape rather than one border switching colour. */
+[data-testid="stChatInput"]:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-ring), var(--lift-3);
+}
+
+[data-testid="stChatInput"] > div { background: transparent !important; }
+
+[data-testid="stChatInputTextArea"],
+[data-testid="stChatInputTextArea"] > div,
+[data-testid="stChatInputTextArea"] textarea {
+  background: transparent !important;
+  color: var(--ink) !important;
+}
+
+/* NOTE: in Streamlit 1.64 the textarea CARRIES the `stChatInputTextArea`
+ * testid, it is not wrapped by one. A `... stChatInputTextArea textarea`
+ * descendant selector therefore matches nothing and silently loses to
+ * Streamlit's own 14px rule without ever erroring. Both shapes are targeted
+ * here so a future version that nests the textarea still gets styled. */
+[data-testid="stChatInputTextArea"],
+[data-testid="stChatInput"] [data-testid="stChatInputTextArea"],
+[data-testid="stChatInput"] textarea {
+  font-family: var(--font-text) !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  letter-spacing: -0.01em !important;
+  background: transparent !important;
+  color: var(--ink) !important;
+  caret-color: var(--accent);
+  padding: var(--s-3) var(--s-4);
+}
+
+[data-testid="stChatInput"] textarea::placeholder {
+  color: var(--ink-3) !important;
+  opacity: 1 !important;
+}
+
+/* Send button: a circle that grows under the pointer and springs back on
+ * release. The only overshoot curve in the file, because it is the one
+ * element where a little bounce reads as "sent". */
+[data-testid="stChatInputSubmitButton"] {
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  box-shadow: var(--lift-1);
+  transition:
+    transform var(--t-fast) var(--spring-pop),
+    background var(--t-fast) var(--spring-soft),
+    box-shadow var(--t-fast) var(--spring);
+}
+[data-testid="stChatInputSubmitButton"]:hover {
+  background: var(--accent-hi);
+  transform: scale(1.08);
+  box-shadow: var(--lift-2);
+}
+[data-testid="stChatInputSubmitButton"]:active {
+  background: var(--accent-down);
+  transform: scale(0.92);
+  transition-duration: var(--t-tap);
+}
+[data-testid="stChatInputSubmitButton"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-ring), var(--lift-2);
+}
+[data-testid="stChatInputSubmitButton"] svg { fill: var(--ink-on-accent); }
+
+/* The "attach"/mic slot, if a future Streamlit version renders one. */
+[data-testid="stChatInput"] button[kind="tertiary"],
+[data-testid="stChatInput"] [data-testid="stInputActionButton"] {
+  color: var(--ink-3);
   background: transparent;
-  margin: var(--space-3) var(--space-2) var(--space-4) var(--space-1);
-  border-radius: var(--radius-lg);
+  border-radius: 50%;
+  transition: background var(--t-fast) var(--spring-soft),
+              color      var(--t-fast) var(--spring-soft);
+}
+[data-testid="stChatInput"] button[kind="tertiary"]:hover,
+[data-testid="stChatInput"] [data-testid="stInputActionButton"]:hover {
+  background: var(--accent-wash);
+  color: var(--accent);
+}
+
+/* =========================================================================
+ * 7. Chat transcript
+ *
+ * The transcript is a page, not a chat window. Assistant answers are white
+ * cards floating on the ground; the user's own turn is the only filled
+ * element, and it is right-aligned, so the eye can find the answer instantly.
+ * ====================================================================== */
+
+[data-testid="stChatMessage"] {
+  background: transparent;
+  padding: 0;
+  margin: 0 0 var(--s-4);
+  animation: rise var(--t-base) var(--spring) both;
+}
+
+[data-testid="stChatMessage"] [data-testid="stChatMessageContent"],
+[data-testid="stChatMessage"] [data-testid="stChatMessageContent"] > div {
+  background: transparent;
+}
+
+/* --- Assistant ---------------------------------------------------------- */
+
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
+  padding-left: 0;
 }
 
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"])
   [data-testid="stChatMessageContent"] {
-  background: var(--bg-card);
-  backdrop-filter: blur(var(--blur-strong)) saturate(180%);
-  -webkit-backdrop-filter: blur(var(--blur-strong)) saturate(180%);
-  border: 1px solid var(--divider);
-  border-radius: var(--radius-lg);
-  box-shadow:
-    0 2px 4px var(--shadow-ambient),
-    0 8px 24px -12px var(--shadow-elevation),
-    inset 0 1px 0 rgba(255,255,255,0.5);
-  padding: var(--space-4) var(--space-5);
-  animation: messageEnter var(--duration-base) var(--spring-smooth);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg) var(--r-lg) var(--r-lg) var(--r-xs);
+  box-shadow: var(--lift-1);
+  padding: var(--s-4) var(--s-5);
 }
 
-@keyframes messageEnter {
-  from { opacity: 0; transform: translateY(8px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
+/* --- User --------------------------------------------------------------- */
 
-/* User bubble — accent tinted */
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
   justify-content: flex-end;
-  margin: var(--space-3) var(--space-1) var(--space-4) var(--space-2);
+  padding-right: 0;
 }
 
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"])
   [data-testid="stChatMessageContent"] {
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-  color: white;
-  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-xs) var(--radius-lg);
-  box-shadow:
-    0 2px 4px var(--shadow-ambient),
-    0 8px 24px -12px var(--shadow-high);
-  max-width: 85%;
-  padding: var(--space-3) var(--space-5);
-  animation: messageEnter var(--duration-base) var(--spring-smooth);
+  background: linear-gradient(168deg, var(--accent) 0%, var(--accent-hi) 100%);
+  border: 1px solid transparent;
+  border-radius: var(--r-lg) var(--r-lg) var(--r-xs) var(--r-lg);
+  box-shadow: var(--lift-2);
+  padding: var(--s-3) var(--s-5);
+  max-width: min(88%, 560px);
+  animation: pop var(--t-base) var(--spring) both;
 }
 
-[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) p {
-  color: white;
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) p,
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) li {
+  color: var(--ink-on-accent);
 }
 
-/* Avatars — simple, clean */
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) a {
+  color: var(--ink-on-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Avatars ------------------------------------------------------------ */
+
 [data-testid="stChatMessageAvatarUser"],
 [data-testid="stChatMessageAvatarAssistant"] {
   border-radius: 50%;
-  font-size: 0.75rem;
+  width: 28px;
+  height: 28px;
+  font-family: var(--font-text);
+  font-size: 0.6875rem;
   font-weight: 600;
-  background: var(--bg-glass);
-  backdrop-filter: blur(var(--blur-medium));
-  border: 1px solid var(--divider);
+  flex: 0 0 auto;
 }
 
-/* Links inside chat — subtle */
-[data-testid="stChatMessage"] a {
+[data-testid="stChatMessageAvatarAssistant"] {
+  background: var(--surface);
+  border: 1px solid var(--line);
   color: var(--accent);
-  text-decoration: underline;
-  text-decoration-color: var(--accent-focus);
-  text-underline-offset: 2px;
-}
-[data-testid="stChatMessage"] a:hover { color: var(--accent-hover); }
-[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) a { color: white; text-decoration-color: rgba(255,255,255,0.5); }
-[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) a:hover { color: rgba(255,255,255,0.9); }
-
-/* ---------------------------------------------------------------------------
- * Chat Input — floating pill with spring focus
- * ------------------------------------------------------------------------- */
-[data-testid="stChatInput"] {
-  background: var(--bg-glass);
-  backdrop-filter: blur(var(--blur-strong)) saturate(180%);
-  -webkit-backdrop-filter: blur(var(--blur-strong)) saturate(180%);
-  border: 1px solid var(--divider);
-  border-radius: var(--radius-pill);
-  box-shadow:
-    0 1px 2px var(--shadow-ambient),
-    inset 0 1px 0 rgba(255,255,255,0.6),
-    0 8px 32px -16px var(--shadow-elevation);
-  transition:
-    box-shadow var(--duration-base) var(--spring-swift),
-    border-color var(--duration-base) var(--spring-swift),
-    background var(--duration-base) var(--spring-swift);
+  box-shadow: var(--lift-0);
 }
 
-[data-testid="stChatInput"]:focus-within {
-  border-color: var(--accent);
-  box-shadow:
-    0 0 0 4px var(--accent-focus),
-    inset 0 1px 0 rgba(255,255,255,0.7),
-    0 12px 40px -20px var(--shadow-elevation);
-  background: var(--bg-glass-strong);
+[data-testid="stChatMessageAvatarUser"] {
+  background: var(--accent-wash);
+  border: 1px solid var(--accent-ring);
+  color: var(--accent-down);
 }
 
-[data-testid="stChatInputTextArea"] textarea {
-  color: var(--ink-primary);
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  caret-color: var(--accent);
+/* The answer's own paragraphs: first line is the answer, so give it weight. */
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) p {
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.008em;
+  margin: 0 0 var(--s-2);
+}
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) p:last-child {
+  margin-bottom: 0;
+}
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) strong {
+  color: var(--ink);
+  font-weight: 600;
 }
 
-[data-testid="stChatInputTextArea"] textarea::placeholder {
-  color: var(--ink-tertiary);
+/* The assistant-card paragraph rule above is `:has()`-qualified, so it
+ * out-specifies the caption rule and was restyling the "Last updated from
+ * sources:" stamp and the disclaimer as 16px body text. Captions inside a
+ * transcript must keep caption metrics, so they are re-asserted here at
+ * matching weight. */
+[data-testid="stChatMessage"] [data-testid="stCaptionContainer"] p,
+[data-testid="stChatMessage"] [data-testid="stCaptionContainer"] span,
+[data-testid="stChatMessage"] [data-testid="stCaptionContainer"] div {
+  font-family: var(--font-text) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+  letter-spacing: 0.1em !important;
+  color: var(--ink-3) !important;
 }
 
-[data-testid="stChatInputSubmitButton"] {
-  background: var(--accent);
-  border-radius: 50%;
-  transition:
-    transform 100ms var(--spring-bouncy),
-    background 100ms var(--spring-swift);
-}
-[data-testid="stChatInputSubmitButton"]:hover {
-  background: var(--accent-hover);
-  transform: scale(1.08);
-}
-[data-testid="stChatInputSubmitButton"]:active {
-  transform: scale(0.92);
-  background: var(--accent-pressed);
-}
+/* =========================================================================
+ * 8. Disclosure, tables, status
+ * ====================================================================== */
 
-/* ---------------------------------------------------------------------------
- * Expander — quiet disclosure
- * ------------------------------------------------------------------------- */
 [data-testid="stExpander"] {
-  border: 1px solid var(--divider);
-  border-radius: var(--radius-md);
-  background: var(--bg-glass);
-  backdrop-filter: blur(var(--blur-medium));
-  -webkit-backdrop-filter: blur(var(--blur-medium));
+  background: var(--surface-quiet);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: none;
   overflow: hidden;
-  transition: border-color var(--duration-fast) var(--spring-swift), box-shadow var(--duration-fast) var(--spring-swift);
+  transition:
+    border-color var(--t-fast) var(--spring),
+    background   var(--t-fast) var(--spring);
 }
-[data-testid="stExpander"]:hover { border-color: var(--divider-strong); }
-[data-testid="stExpander"]:focus-within { box-shadow: 0 0 0 3px var(--accent-focus); }
+[data-testid="stExpander"]:hover { border-color: var(--line-2); }
+[data-testid="stExpander"]:focus-within { border-color: var(--accent); }
 
 [data-testid="stExpander"] summary {
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-family: var(--font-text);
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--ink-secondary);
-  padding: var(--space-3) var(--space-4);
+  letter-spacing: 0.01em;
+  color: var(--ink-2);
+  padding: var(--s-3) var(--s-4);
   cursor: pointer;
   list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  transition: color var(--t-fast) var(--spring-soft);
 }
+[data-testid="stExpander"] summary:hover { color: var(--accent); }
 [data-testid="stExpander"] summary::-webkit-details-marker { display: none; }
+[data-testid="stExpander"] summary::marker { content: ""; }
+
+/* Chevron drawn from two borders, rotated by the spring curve. */
 [data-testid="stExpander"] summary::before {
   content: "";
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-right: var(--space-2);
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: rotate(-45deg);
-  transition: transform var(--duration-fast) var(--spring-swift);
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-right: 1.75px solid currentColor;
+  border-bottom: 1.75px solid currentColor;
+  transform: rotate(-45deg) translate(-1px, -1px);
+  transform-origin: 50% 50%;
+  transition: transform var(--t-base) var(--spring);
 }
 [data-testid="stExpander"][open] summary::before { transform: rotate(45deg); }
-[data-testid="stExpander"] summary:hover { color: var(--accent); }
 
 [data-testid="stExpander"] > div:last-child {
-  border-top: 1px solid var(--divider);
-  background: var(--bg-card);
+  border-top: 1px solid var(--line);
+  background: var(--surface);
 }
 
-/* Dataframe inside expander */
-[data-testid="stDataFrame"] {
-  border: 1px solid var(--divider);
-  border-radius: var(--radius-md);
+/* --- Data table --------------------------------------------------------- */
+
+[data-testid="stDataFrame"],
+[data-testid="stDataFrame"] > div {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface);
   overflow: hidden;
-  background: var(--bg-card);
 }
-[data-testid="stDataFrame"] table { font-family: var(--font-sans); font-size: 0.8rem; }
 
-/* ---------------------------------------------------------------------------
- * Alerts / status messages
- * ------------------------------------------------------------------------- */
+[data-testid="stDataFrame"] * {
+  font-family: var(--font-text);
+  font-size: 0.8125rem;
+}
+
+/* --- Status blocks ------------------------------------------------------ */
+
 [data-testid="stAlert"] {
-  border-radius: var(--radius-md);
-  border: 1px solid;
-  backdrop-filter: blur(var(--blur-medium));
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: var(--surface-quiet);
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  box-shadow: none;
 }
-[data-testid="stAlert"][kind="info"] { background: var(--surface-tint); border-color: var(--accent); color: var(--accent-pressed); }
-[data-testid="stAlert"][kind="success"] { background: rgba(52, 199, 89, 0.12); border-color: #34C759; color: #1E8030; }
-[data-testid="stAlert"][kind="warning"] { background: rgba(255, 149, 0, 0.12); border-color: #FF9F0A; color: #B85C00; }
-[data-testid="stAlert"][kind="error"] { background: var(--error-bg); border-color: var(--error); color: var(--error); }
+[data-testid="stAlert"] [data-testid="stMarkdownContainer"] p { margin: 0; }
 
-/* ---------------------------------------------------------------------------
- * Spinner — Apple-style indeterminate
- * ------------------------------------------------------------------------- */
+[data-testid="stAlert"][kind="success"],
+[data-testid="stAlert"][data-kind="success"] {
+  background: var(--green-wash);
+  border-color: rgba(52, 199, 89, 0.36);
+  color: var(--green);
+}
+[data-testid="stAlert"][kind="error"],
+[data-testid="stAlert"][data-kind="error"] {
+  background: var(--red-wash);
+  border-color: rgba(215, 0, 21, 0.28);
+  color: var(--red);
+}
+[data-testid="stAlert"][kind="warning"],
+[data-testid="stAlert"][data-kind="warning"] {
+  background: var(--orange-wash);
+  border-color: rgba(255, 149, 0, 0.36);
+  color: var(--orange);
+}
+[data-testid="stAlert"][kind="info"],
+[data-testid="stAlert"][data-kind="info"] {
+  background: var(--accent-wash);
+  border-color: var(--accent-ring);
+  color: var(--accent-down);
+}
+
+/* =========================================================================
+ * 9. Widgets, spinner, scrollbars
+ * ====================================================================== */
+
+[data-testid="stWidgetLabel"] p,
+[data-testid="stWidgetLabel"] label {
+  font-family: var(--font-text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+[data-testid="stTextInput"] input,
+[data-testid="stTextArea"] textarea {
+  font-family: var(--font-text);
+  font-size: 0.9375rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  box-shadow: var(--lift-0);
+  transition:
+    border-color var(--t-fast) var(--spring),
+    box-shadow   var(--t-fast) var(--spring);
+}
+[data-testid="stTextInput"] input:focus,
+[data-testid="stTextArea"] textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+[data-testid="stTextInput"] input::placeholder,
+[data-testid="stTextArea"] textarea::placeholder { color: var(--ink-3); }
+
+/* Apple's indeterminate spinner: one blue arc, a soft track, and a fixed
+ * size so the page does not reflow when it appears. */
 [data-testid="stSpinner"] > div {
-  border-color: var(--divider) !important;
+  width: 18px;
+  height: 18px;
+  border-width: 2px;
+  border-color: var(--line-2) !important;
   border-top-color: var(--accent) !important;
 }
+[data-testid="stSpinner"] svg { fill: var(--accent); }
+[data-testid="stSpinner"] i { color: var(--ink-2); font-size: 0.875rem; }
 
-/* ---------------------------------------------------------------------------
- * Scrollbars — discrete
- * ------------------------------------------------------------------------- */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-thumb { background: var(--divider-strong); border-radius: var(--radius-pill); border: 2px solid transparent; background-clip: content-box; }
-::-webkit-scrollbar-thumb:hover { background: var(--ink-tertiary); border: 2px solid transparent; background-clip: content-box; }
+/* Progress */
+[data-testid="stProgress"] > div > div > div {
+  background: var(--accent);
+  border-radius: var(--r-pill);
+}
+
+/* Scrollbars: thin, inset, only visible against content. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.22) transparent;
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.20);
+  border: 3px solid transparent;
+  border-radius: var(--r-pill);
+  background-clip: content-box;
+  transition: background var(--t-fast) var(--spring-soft);
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.36); background-clip: content-box; }
+::-webkit-scrollbar-corner { background: transparent; }
 
-/* ---------------------------------------------------------------------------
- * Reduced motion — collapse all spring motion to instant or simple fade
- * ------------------------------------------------------------------------- */
+/* Selection - a real app sets this, and it costs one line. */
+[data-testid="stAppViewContainer"] ::selection {
+  background: var(--accent-ring);
+  color: var(--ink);
+}
+
+/* =========================================================================
+ * 10. Motion keyframes
+ * ====================================================================== */
+
+/* Arrival. A short rise with a touch of scale, on the spring curve so it
+ * decelerates instead of easing linearly. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: translateY(6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* =========================================================================
+ * 11. Reduced motion - every duration in the file collapses, nothing is
+ * removed, so no element is left mid-transition.
+ * ====================================================================== */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 1ms !important;
     scroll-behavior: auto !important;
   }
-  [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) [data-testid="stChatMessageContent"],
-  [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
-    animation: none;
+  [data-testid="stChatMessage"],
+  [data-testid="stAppViewContainer"] h1 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
-  [data-testid="stButton"] button,
-  [data-testid="stChatInputSubmitButton"],
-  [data-testid="stExpander"] summary::before {
-    transition: none;
+  [data-testid="stButton"] button:hover,
+  [data-testid="stHorizontalBlock"] [data-testid="stButton"] button:hover,
+  [data-testid="stChatInputSubmitButton"]:hover {
+    transform: none !important;
   }
 }
 
-/* ---------------------------------------------------------------------------
- * Print — clean output
- * ------------------------------------------------------------------------- */
+/* =========================================================================
+ * 12. Print - the answer is the artefact
+ * ====================================================================== */
+
 @media print {
   [data-testid="stSidebar"],
-  [data-testid="stChatInput"],
+  [data-testid="stBottom"],
+  [data-testid="stHeader"],
   [data-testid="stButton"],
-  [data-testid="stExpander"] summary { display: none !important; }
-  [data-testid="stAppViewContainer"] { background: white; color: black; }
+  [data-testid="stChatMessageAvatarUser"],
+  [data-testid="stChatMessageAvatarAssistant"],
+  [data-testid="stExpander"] summary {
+    display: none !important;
+  }
+  [data-testid="stAppViewContainer"],
+  [data-testid="stMainBlockContainer"] {
+    background: #FFFFFF !important;
+    max-width: none;
+    padding-bottom: 0;
+  }
   [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) [data-testid="stChatMessageContent"],
   [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
-    background: white !important;
-    color: black !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 1px solid #CCCCCC !important;
     box-shadow: none !important;
-    border: 1px solid #ddd !important;
+    border-radius: 0 !important;
+  }
+  [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) p {
+    color: #000000 !important;
+  }
+  [data-testid="stCaptionContainer"] p {
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    color: #444444 !important;
   }
 }

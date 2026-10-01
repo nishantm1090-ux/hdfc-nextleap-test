@@ -29,6 +29,7 @@ COLUMNS = ["source_id", "url", "title", "publisher", "page_type", "indexable",
 
 def gather() -> list[dict[str, object]]:
     import json
+    import yaml
 
     corpus = common.read_json(common.path_for("corpus_file"))
     docs = {d.get("source_url"): d for d in corpus.get("documents", [])}
@@ -36,6 +37,15 @@ def gather() -> list[dict[str, object]]:
     snap = json.loads((ROOT / "data" / "source_snapshot.json")
                       .read_text(encoding="utf-8"))
     by_url = {v.get("url"): (k, v) for k, v in snap.items() if not k.startswith("_")}
+
+    # Publisher and page_type come from config/sources.yaml, not the snapshot
+    cfg = yaml.safe_load((ROOT / "config" / "sources.yaml").read_text(encoding="utf-8"))
+    publisher_by_url = {}
+    page_type_by_url = {}
+    for s in cfg.get("schemes", []) + cfg.get("supplementary", []):
+        if s.get("url"):
+            publisher_by_url[s["url"]] = s.get("publisher", "")
+            page_type_by_url[s["url"]] = s.get("page_type", "")
 
     chunks = common.read_jsonl(common.path_for("chunks_file"))
     per = collections.Counter(c.get("source_url") for c in chunks)
@@ -54,8 +64,8 @@ def gather() -> list[dict[str, object]]:
             "source_id": sid,
             "url": url,
             "title": (docs.get(url) or {}).get("page_title") or "",
-            "publisher": s.get("publisher", ""),
-            "page_type": s.get("page_type", ""),
+            "publisher": publisher_by_url.get(url, s.get("publisher", "")),
+            "page_type": page_type_by_url.get(url, s.get("page_type", "")),
             "indexable": "yes" if url in indexable else "no",
             "nodes": (docs.get(url) or {}).get("node_count", ""),
             "chunks": per.get(url, 0),

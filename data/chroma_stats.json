@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-09-30T10:34:52.834Z",
+  "checked_at": "2026-10-01T06:10:59.072Z",
   "collection": "hdfc_mf_faq",
-  "count": 67,
-  "elapsed_seconds": 0.6,
+  "count": 68,
+  "elapsed_seconds": 0.73,
   "embedding_dim": 384,
   "exists": true,
-  "generated_at": "2026-09-30T10:34:52.826Z",
+  "generated_at": "2026-10-01T06:10:59.064Z",
   "hnsw": {
     "metadata": {
       "embedding_dim": 384,
@@ -17,7 +17,7 @@
   "per_doc_type": {
     "fact": 46,
     "faq": 6,
-    "prose": 15
+    "prose": 16
   },
   "per_fact_key": {
     "aum": 5,
@@ -35,11 +35,12 @@
   },
   "per_scheme": {
     "hdfc-balanced-advantage-fund-direct-growth": 13,
+    "hdfc-consolidated-account-statement": 1,
     "hdfc-elss-tax-saver-fund-direct-plan-growth": 13,
     "hdfc-equity-fund-direct-growth": 15,
     "hdfc-large-cap-fund-direct-growth": 12,
     "hdfc-small-cap-fund-direct-growth": 14
   },
   "rebuilt": true,
-  "written": 67
+  "written": 68
 }

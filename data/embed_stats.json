@@ -1,13 +1,13 @@
 {
-  "cache_hit_pct": 0.0,
-  "cached": 0,
+  "cache_hit_pct": 100.0,
+  "cached": 68,
   "chunks_sharing_a_vector": 0,
-  "computed": 67,
+  "computed": 0,
   "dimension": 384,
-  "elapsed_seconds": 1.4,
+  "elapsed_seconds": 0.02,
   "embed_lead_tokens": 200,
   "failed": 0,
-  "generated_at": "2026-09-30T10:34:52.065Z",
+  "generated_at": "2026-10-01T06:08:15.823Z",
   "join_surface": "E:\\nextleap cursor project class\\data\\embed_index.jsonl",
   "max_seq_length": 256,
   "model": "sentence-transformers/all-MiniLM-L6-v2",
@@ -15,7 +15,7 @@
   "norm_mean": 1.0,
   "norm_min": 1.0,
   "note": "vectors are NOT stored in chunks.jsonl - Stage 4 joins chunk_id -> vector via the embed index, never via content_hash",
-  "total_chunks": 67,
-  "unique_embed_texts": 67,
-  "vectors_on_disk": 265
+  "total_chunks": 68,
+  "unique_embed_texts": 68,
+  "vectors_on_disk": 266
 }

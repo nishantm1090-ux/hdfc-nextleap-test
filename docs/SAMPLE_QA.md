@@ -187,7 +187,7 @@ because nothing in the corpus was used to produce the account it is about.
 ## What the AMC publishes, and what it does not
 
 This corpus is five scheme pages and one statement page from
-`hdfcfund.com` - 67 chunks in total. That is enough for every keyed fact
+`hdfcfund.com` - 68 chunks in total. That is enough for every keyed fact
 above and not enough for a few things a reader might reasonably expect, and the
 honest response to those is the "I couldn't verify that from the available
 official sources" refusal rather than a guess:

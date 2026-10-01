@@ -1,17 +1,42 @@
 # .streamlit/config.toml - the app pins its own visual theme.
 #
-# The editorial-luxury palette lives in assets/style.css. This pins the streamlit
-# *base* theme so the page is not at the mercy of the viewer's browser dark-mode
-# preference (Streamlit's dark base would fight the ivory-paper design). The
-# token values match the CSS so the pre-paint frame (font metrics, sidebar) is
-# right even before style.css loads.
+# THE PALETTE HERE AND THE ONE IN assets/style.css MUST BE THE SAME PALETTE.
+# That is the whole reason this file exists and it is easy to break.
+#
+# Streamlit 1.64 paints its component surfaces with LITERAL colour values baked
+# in from this TOML at build time - it does not expose them as CSS custom
+# properties (checked: no `--background-color` / `--text-color` in
+# streamlit/static/static/css/index.*.css). So a stylesheet cannot retheme the
+# parts Streamlit paints itself. If these tokens disagree with assets/style.css,
+# Streamlit wins on its own components and you get the exact bug this file was
+# corrected for: a page ground in the stylesheet's colour, a chat input painted
+# in the TOML's colour, and a sidebar that matches neither.
+#
+# The design language is Apple's product site: a #F5F5F7 neutral ground, pure
+# white cards separated by hairlines rather than shadows, #1D1D1F ink and the
+# #0071E3 link blue. Do not reintroduce the editorial ivory/bronze/navy palette
+# here without rewriting assets/style.css in the same commit.
+#
+# Only `base = "light"` is pinned on purpose. A `prefers-color-scheme: dark`
+# branch in the stylesheet would repaint the page while Streamlit kept painting
+# its own widgets in the light literals below - reintroducing a half-dark page.
+# One coherent appearance, pinned here.
 [theme]
 base = "light"
-primaryColor = "#9C7A2C"
-backgroundColor = "#F6F1E7"
-secondaryBackgroundColor = "#FCFAF4"
-textColor = "#1B2541"
+primaryColor = "#0071E3"
+backgroundColor = "#F5F5F7"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#1D1D1F"
 font = "sans serif"
+
+[client]
+# "viewer" keeps the sidebar collapse control (the Scope panel holds the
+# Rebuild button) while dropping the "Deploy"/"Rerun"/debug menu, so the chrome
+# reads like a product page instead of a Streamlit demo.
+toolbarMode = "viewer"
 
 [server]
 headless = true
+
+[browser]
+gatherUsageStats = false

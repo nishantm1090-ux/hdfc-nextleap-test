@@ -375,6 +375,147 @@ def test_the_page_renders_with_no_exception():
     assert UI["title"] in [t.value for t in at.title]
 
 
+# ---------------------------------------------------------------------------
+# The theme actually reaches the page
+#
+# This is here because the theme silently did NOT reach the page for two
+# separate reasons, and neither raised an error, a warning, or a failed test:
+#
+#   1. `st.html(css_path)` looks like the correct API. It is not - it runs its
+#      input through DOMPurify, which strips `<style>`, so the tag never lands
+#      in the DOM and the page renders as raw Streamlit defaults. Confirmed in
+#      a real browser: zero `<style>` nodes, computed `font-family` still
+#      "Source Sans". `st.markdown(..., unsafe_allow_html=True)` applies fully.
+#   2. In Streamlit 1.64 the composer textarea CARRIES the `stChatInputTextArea`
+#      testid rather than sitting inside it, so a descendant selector matches
+#      nothing and quietly loses to Streamlit's own 14px rule.
+#
+# A regression test that only asserted "the file exists and is non-empty" would
+# have passed through both failures. These assert the contract that was
+# actually broken: the bytes are delivered by the API that survives the
+# sanitiser, and the selectors match the DOM Streamlit really ships.
+# ---------------------------------------------------------------------------
+
+
+def test_the_stylesheet_is_delivered_through_the_api_that_survives_the_sanitiser():
+    """Regression: `st.html` strips `<style>`. Assert we are not using it."""
+    markup = app.stylesheet_markup()
+    assert markup.startswith("<style>") and markup.rstrip().endswith("</style>")
+
+    css = (APP.parent / "assets" / "style.css").read_text(encoding="utf-8")
+    assert css.strip(), "assets/style.css is empty - the page would ship unthemed"
+    # The real stylesheet's body must be inlined, not a path or a repr.
+    assert css.strip()[:200] in markup
+    assert "WindowsPath" not in markup and "PosixPath" not in markup
+
+    # And it must actually be injected, through st.markdown + unsafe_allow_html.
+    at = _run()
+    assert not at.exception, [e.value for e in at.exception]
+    rendered = [m.value for m in at.markdown if m.value.startswith("<style>")]
+    assert rendered, "no <style> block was rendered - the theme is not reaching the page"
+    assert "--ground" in rendered[0], "the rendered block is not our stylesheet"
+
+    main_src = SRC.split("def main(")[-1]
+    assert "st.markdown(stylesheet_markup(), unsafe_allow_html=True)" in main_src, (
+        "main() must inject the sheet via st.markdown + unsafe_allow_html")
+    assert "st.html" not in main_src, (
+        "main() must not use st.html - DOMPurify strips <style>, so the theme "
+        "would silently never reach the page")
+
+
+def _css_rules() -> list[tuple[str, str]]:
+    """`assets/style.css` as (selector-list, declarations) pairs, comments out.
+
+    Comments are stripped first on purpose. Two of the regressions below were
+    originally caught by naive substring checks that matched prose *inside a
+    comment* and a selector inside a grouped list - both false positives, and
+    both would have trained everyone to ignore the assertion.
+    """
+    css = (APP.parent / "assets" / "style.css").read_text(encoding="utf-8")
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)          # drop comments
+    css = re.sub(r"@media[^{]*\{", "@media{", css)              # don't count at-rule heads
+    return [(sels.strip(), body.strip())
+            for sels, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css)]
+
+
+def _rule_for(testid: str) -> str | None:
+    """Declarations of the first rule whose selector list targets `testid` exactly.
+
+    Matches whole selector items, so `[data-testid="stBottom"]` never picks up
+    `[data-testid="stBottom"]::before` or `[data-testid="stBottom"] > div`.
+    """
+    want = f'[data-testid="{testid}"]'
+    for sels, body in _css_rules():
+        items = [s.strip() for s in sels.split(",")]
+        if any(i == want for i in items):
+            return body
+    return None
+
+
+def test_the_palette_in_css_and_the_streamlit_theme_are_the_same_palette():
+    """Streamlit paints some of its own widgets from `.streamlit/config.toml`,
+    and 1.64 does not expose those colours as CSS variables - so the TOML and
+    the stylesheet must agree by hand or the page renders half in each.
+
+    A disagreement is what produced a light composer sitting on a dark panel."""
+    import tomllib
+
+    root = APP.parent
+    css = (root / "assets" / "style.css").read_text(encoding="utf-8")
+    with (root / ".streamlit" / "config.toml").open("rb") as fh:
+        theme = tomllib.load(fh)["theme"]
+
+    toml_colors = {theme["backgroundColor"].upper(),
+                   theme["secondaryBackgroundColor"].upper(),
+                   theme["primaryColor"].upper()}
+
+    defs = dict(re.findall(r"(--[a-z0-9-]+)\s*:\s*(#[0-9A-Fa-f]{6})", css))
+    declared = {v.upper() for v in defs.values()}
+    missing = {c for c in toml_colors if c not in declared}
+    assert not missing, (f"config.toml paints {sorted(missing)} but assets/style.css "
+                         f"does not declare them - the page will render in two palettes")
+
+    # base must stay light: the stylesheet has no prefers-color-scheme branch,
+    # so a dark base would leave Streamlit's own widgets dark.
+    assert theme["base"] == "light"
+    live = re.sub(r"/\*.*?\*/", "", css, flags=re.S)   # comments are not code
+    assert "prefers-color-scheme" not in live, (
+        "the stylesheet must not branch on prefers-color-scheme - Streamlit "
+        "paints its own widgets from config.toml and would not follow")
+
+
+def test_the_composer_selectors_match_the_dom_streamlit_actually_ships():
+    """The textarea carries `stChatInputTextArea`; it is not wrapped by it.
+
+    Asserted against the file so the selector and the DOM shape cannot drift
+    apart silently again."""
+    selectors = {s.strip() for sels, _ in _css_rules() for s in sels.split(",")}
+    assert '[data-testid="stChatInput"] textarea' in selectors, (
+        "no selector matching a textarea inside stChatInput")
+    assert '[data-testid="stChatInputTextArea"]' in selectors, (
+        "no selector matching the textarea that itself carries the testid")
+
+
+def test_the_composer_is_not_a_light_slab_on_a_dark_panel():
+    """The original complaint, as an assertion.
+
+    `stBottom` is the fixed container Streamlit paints itself. If it is opaque,
+    the composer reads as a light rectangle floating on the page instead of a
+    card that belongs to it."""
+    bottom = _rule_for("stBottom")
+    assert bottom is not None, "assets/style.css no longer styles stBottom at all"
+    assert re.search(r"background:\s*transparent", bottom), (
+        f"stBottom must be transparent, otherwise the composer is a slab. Got: {bottom!r}")
+
+    fade = _rule_for("stBottom")  # sanity: the bare selector is not the ::before rule
+    assert fade is not None
+    selectors = {s.strip() for sels, _ in _css_rules() for s in sels.split(",")}
+    assert '[data-testid="stBottom"]::before' in selectors, (
+        "stBottom needs the ground fade that ties the composer to the page")
+    ground = re.findall(r"(--ground)\s*:\s*(#[0-9A-Fa-f]{6})", (APP.parent / "assets" / "style.css").read_text(encoding="utf-8"))
+    assert ground, "--ground is not declared, so the fade cannot resolve"
+
+
 def test_the_page_shows_exactly_three_chips_and_the_scope():
     at = _run()
     chips = [b.label for b in at.button if b.label in UI["example_questions"]]

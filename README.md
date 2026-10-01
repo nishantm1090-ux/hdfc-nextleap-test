@@ -353,7 +353,7 @@ columns are reported; the strict one is the number to quote.
 ## Testing
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -q          # 603 tests
+.\.venv\Scripts\python.exe -m pytest -q          # 607 tests
 ```
 
 | Suite | Tests | What it pins |
